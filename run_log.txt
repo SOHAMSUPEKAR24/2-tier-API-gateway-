@@ -1,0 +1,19 @@
+Loading Tier 1 Real Corpus (CIC-IDS)...
+Loading Tier 2 Real Corpus (EMBER)...
+
+Training Tier 2 on Tier-2 Training Set (3,000 rows)...
+Training Tier 1 on Tier-1 Seed Set (300 rows)...
+
+--- Cycle 0 (Baseline) ---
+Accuracy:        99.60%
+Escalation Rate: 1.20%
+Cycle 1 complete. Escalated 21 samples.
+Cycle 2 complete. Escalated 5 samples.
+Cycle 3 complete. Escalated 4 samples.
+Cycle 4 complete. Escalated 6 samples.
+Cycle 5 complete. Escalated 5 samples.
+Cycle 6 complete. Escalated 4 samples.
+
+--- Cycle 6 (Final) ---
+Accuracy:        99.30%
+Escalation Rate: 0.95%
