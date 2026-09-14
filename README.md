@@ -81,3 +81,12 @@ You might notice a *tiny* dip in accuracy (0.3%). This is actually a massive win
 
 ---
 *Built with Python, Scikit-Learn, and Pandas. Validated against CIC-IDS and EMBER.*
+
+## 🚀 Roadmap & Future Work
+
+While this repository contains the fully verified binary-classification and feedback loop pipeline, several architectural enhancements are scoped for future releases:
+
+1. **Inter-Tier Transport Hardening:** Implementation of an envelope-level encryption layer between Tier 1 and Tier 2, keyed to specific receiving nodes, alongside a tamper-evidence open-counter to detect in-path interception.
+2. **Subtype-Aware Multi-Class Detection:** Upgrading the classifiers from binary (Benign/Malicious) to multi-class outputs (SQLi, XSS, Malicious Upload, RCE) to provide instantly actionable ATT&CK-tactic mapping.
+3. **Adversarial Robustness Defenses:** Implementing randomized escalation-band thresholds and score-distribution monitoring to prevent attackers from intentionally crafting payloads that sit just outside the `[0.30, 0.70]` escalation boundary.
+4. **Feedback-Loop Ablation Study:** Automated benchmarking scripts to isolate and compare the two-tier architecture *with* and *without* Algorithm 2 active, further quantifying the distinct value of the continuous retraining loop.
