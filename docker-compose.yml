@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  vampi:
+    image: erev0s/vampi
+    container_name: vampi
+    networks:
+      - isolated_network
+    # Not exposing ports to the host explicitly if we don't want to route to the host,
+    # but we need to access them from the gateway which can run in a container on the same network
+    # For now we'll map to localhost for the gateway to reach it during development if gateway is on host
+    ports:
+      - "127.0.0.1:5000:5000"
+
+  juice-shop:
+    image: bkimminich/juice-shop
+    container_name: juice-shop
+    networks:
+      - isolated_network
+    ports:
+      - "127.0.0.1:3000:3000"
+
+networks:
+  isolated_network:
+    driver: bridge
+    internal: true # No route to the host's real network/internet

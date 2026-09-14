@@ -1,0 +1,11 @@
+data/raw/
+data/generated/
+data/processed/
+*.pyc
+__pycache__/
+*.pt
+*.pth
+*.pkl
+.env
+.venv
+venv/
