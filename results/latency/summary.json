@@ -1,0 +1,51 @@
+{
+  "modes": {
+    "no_inspection": {
+      "mode": "no_inspection",
+      "sample_count": 1500,
+      "concurrency": 20,
+      "throughput_rps": 22575.331171191592,
+      "latency_p50_ms": 0.038166499507497065,
+      "latency_p95_ms": 0.0452920012321556,
+      "latency_p99_ms": 0.05396717142502893,
+      "latency_mean_ms": 0.03970586669674958,
+      "cpu_percent": 99.9,
+      "memory_rss_mb": 533.765625,
+      "queue_depth_max": 0
+    },
+    "two_tier": {
+      "mode": "two_tier",
+      "sample_count": 1500,
+      "concurrency": 20,
+      "throughput_rps": 694.8461655734181,
+      "latency_p50_ms": 0.6066669993742835,
+      "latency_p95_ms": 65.63964375009164,
+      "latency_p99_ms": 78.1699187495542,
+      "latency_mean_ms": 19.600047541303258,
+      "cpu_percent": 98.4,
+      "memory_rss_mb": 533.9453125,
+      "queue_depth_max": 0
+    },
+    "pure_tier2": {
+      "mode": "pure_tier2",
+      "sample_count": 1500,
+      "concurrency": 20,
+      "throughput_rps": 517.1435828222532,
+      "latency_p50_ms": 1.8908544998339494,
+      "latency_p95_ms": 2.100295199852553,
+      "latency_p99_ms": 2.3041149996424792,
+      "latency_mean_ms": 1.9276918086798105,
+      "cpu_percent": 99.9,
+      "memory_rss_mb": 534.046875,
+      "queue_depth_max": 0
+    }
+  },
+  "blended_validation": {
+    "empirical_escalation_rate": 0.005,
+    "theoretical_blended_p50_ms": 0.6161212718734532,
+    "measured_blended_p50_ms": 0.6066669993742835,
+    "discrepancy_pct": 1.5344824031837008,
+    "validated": true
+  },
+  "timestamp": "2026-10-18 13:10:03 UTC"
+}

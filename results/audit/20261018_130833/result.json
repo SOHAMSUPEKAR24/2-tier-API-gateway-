@@ -1,0 +1,60 @@
+{
+  "experiment_meta": {
+    "git_commit": "f6a7015",
+    "git_dirty": true,
+    "python_version": "3.11.8 (main, Nov 17 2025, 20:09:31) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "timestamp_utc": "2026-10-18T13:08:34.955884+00:00",
+    "result_dir": "results/audit/20261018_130833",
+    "audit_targets": [
+      "src/dashboard/simulator.py",
+      "src/dashboard/app.py",
+      "src/evaluation/run_real_pipeline.py",
+      "src/evaluation/run_unseen_multi_attack_loop.py",
+      "src/evaluation/evaluate_unseen.py",
+      "src/evaluation/generate_visuals.py",
+      "src/evaluation/reproduce_tables.py",
+      "src/next-dashboard/src/app/page.tsx",
+      "src/next-dashboard/src/components/Charts.tsx",
+      "src/next-dashboard/src/app/api/telemetry/route.ts"
+    ]
+  },
+  "metrics": {
+    "dst_port_experiment": {
+      "with_dst_port": {
+        "accuracy_mean_pct": 99.95859213250517,
+        "accuracy_ci95_pct": 0.07664444734845861,
+        "escalation_rate_mean_pct": 0.13802622498274672,
+        "escalation_rate_ci95_pct": 0.1817782677194792
+      },
+      "without_dst_port": {
+        "accuracy_mean_pct": 99.84817115251897,
+        "accuracy_ci95_pct": 0.07169431564414165,
+        "escalation_rate_mean_pct": 0.041407867494824016,
+        "escalation_rate_ci95_pct": 0.07664444734845545
+      },
+      "delta_accuracy_pct": 0.11042097998620193,
+      "delta_escalation_rate_pct": 0.0966183574879227,
+      "seeds_used": [
+        42,
+        71,
+        137,
+        256,
+        512
+      ],
+      "interpretation": "A large positive delta indicates Dst Port provided leaky predictive signal (e.g., FTP is always on port 21). A near-zero delta suggests no significant leakage through this column."
+    },
+    "hardcoded_files": [
+      "src/evaluation/generate_visuals.py",
+      "src/next-dashboard/src/app/page.tsx",
+      "src/next-dashboard/src/components/Charts.tsx",
+      "src/next-dashboard/src/app/api/telemetry/route.ts"
+    ],
+    "simulated_files": [
+      "src/evaluation/run_unseen_multi_attack_loop.py",
+      "src/evaluation/reproduce_tables.py"
+    ],
+    "tier2_label_source": "In run_unseen_multi_attack_loop.py, the Tier 2 labels for escalated samples are produced by a TRAINED RandomForestClassifier (tier2_rf) fit on EMBER 2018 static PE features \u2014 NOT the CIC-IDS dataset ground-truth labels. The Tier 2 model serves as a proxy for deep verification. This introduces an impersonation risk: if the trained Tier 2 model is wrong on novel network flows (which it was not trained on), the pseudo-labels it generates may be noisy or incorrect. The CIC-IDS dataset ground-truth labels (column 'Label') are used ONLY in the evaluation function to compute reported accuracy \u2014 they are never fed back to Tier 1 during the adaptation loop. This is documented fully in docs/tier2_label_source.md.",
+    "audit_row_count": 20
+  }
+}

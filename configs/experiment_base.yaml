@@ -1,0 +1,82 @@
+# Base experiment configuration — every experiment MUST reference this.
+# Overriding fields in experiment-specific YAML files is allowed.
+
+meta:
+  project: "adaptive-two-tier-api-gateway"
+  version: "2.0.0"
+  # Auto-filled at runtime by experiments:
+  git_commit: null
+  timestamp: null
+
+# ── Random seeds ──────────────────────────────────────────────────────────────
+seeds: [42, 71, 137, 256, 512, 888, 1024, 2048, 4096, 9999]  # 10 seeds for 95% CI
+
+# ── Data paths ────────────────────────────────────────────────────────────────
+data:
+  cic_ids_path: "/Users/sohamsupekar/Desktop/MajorProject/DATASET/cic.csv"
+  ember_dir: "/Users/sohamsupekar/Desktop/MajorProject/DATASET/ember2018"
+  generated_dir: "data/generated"
+  results_dir: "results"
+
+# ── Feature allowlist (Rule 4: NEVER use identifier columns) ─────────────────
+# These are the ONLY CIC-IDS columns to be used as features.
+# Identifier columns Dst Port, Protocol, Flow ID, timestamp MUST be excluded.
+tier1_feature_allowlist:
+  - "Fwd Packet Length Max"
+  - "Fwd Packet Length Mean"
+  - "Bwd Packet Length Max"
+  - "Flow Bytes/s"
+  - "Flow Packets/s"
+  - "Fwd IAT Mean"
+  - "Bwd IAT Mean"
+  - "ACK Flag Count"
+  - "PSH Flag Count"
+
+# Columns that MUST be dropped (identifiers / leaky)
+identifier_columns:
+  - "Dst Port"
+  - "Protocol"         # acts as identifier in some CIC-IDS versions
+  - "Flow ID"
+  - "Timestamp"
+  - "Src IP"
+  - "Dst IP"
+  - "Src Port"
+
+# ── Tier 1 model ─────────────────────────────────────────────────────────────
+tier1:
+  model: "RandomForest"
+  n_estimators: 40
+  max_depth: 6
+  escalation_band: [0.30, 0.70]   # [low, high] on max probability
+
+# ── Tier 2 model ─────────────────────────────────────────────────────────────
+tier2:
+  model: "RandomForest"
+  n_estimators: 250
+  max_depth: null   # unlimited
+
+# ── Feedback loop ─────────────────────────────────────────────────────────────
+feedback_loop:
+  num_cycles: 6
+  validation_split: 0.15           # held-out for deployment gate
+  max_pseudo_label_fraction: 0.30  # poisoning bound per cycle
+  rollback_on_fpr_increase: true   # gate: if benign FPR rises, rollback
+
+# ── Latency benchmark ─────────────────────────────────────────────────────────
+latency:
+  warmup_runs: 20
+  measurement_runs: 200
+  tier2_overhead_ms: null   # MUST be measured, never hardcoded
+
+# ── Corpus sizes ──────────────────────────────────────────────────────────────
+corpus:
+  tier1_benign: 5000
+  tier1_attack: 5000
+  tier2_benign: 5000
+  tier2_malicious: 5000
+  seed_size: 300
+  test_size: 2000
+  tier2_train_size: 3000
+
+# ── Realistic prevalence subsampling ─────────────────────────────────────────
+prevalence_ratios: [1, 100, 1000]  # attack:benign ratios to evaluate

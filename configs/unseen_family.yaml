@@ -1,0 +1,23 @@
+# Config for: unseen-family adaptation experiment
+# Run with: make exp-unseen-family
+
+extends: experiment_base.yaml
+
+experiment:
+  name: "unseen_family"
+  description: >
+    Train on FTP-BruteForce + Benign. Test against completely unseen attack
+    families: DoS-GoldenEye, DoS-Hulk, DoS-Slowloris, SSH-BruteForce.
+    Report adaptation curve over 5 feedback cycles.
+
+  seeds: [42, 71, 137, 256, 512]
+  output_dir: "results/unseen_family"
+
+unseen_families:
+  - "DoS-GoldenEye"
+  - "DoS-Hulk"
+  - "DoS-Slowloris"
+  - "SSH-BruteForce"
+
+sample_per_attack: 1000
+num_cycles: 5

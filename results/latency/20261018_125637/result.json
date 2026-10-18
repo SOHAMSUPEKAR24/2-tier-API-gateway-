@@ -1,0 +1,61 @@
+{
+  "experiment_meta": {
+    "git_commit": "f6a7015",
+    "git_dirty": true,
+    "python_version": "3.11.8 (main, Nov 17 2025, 20:09:31) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "timestamp_utc": "2026-10-18T12:56:37.330530+00:00",
+    "result_dir": "results/latency/20261018_125637"
+  },
+  "metrics": {
+    "modes": {
+      "no_inspection": {
+        "mode": "no_inspection",
+        "sample_count": 1500,
+        "concurrency": 20,
+        "throughput_rps": 23433.090917382407,
+        "latency_p50_ms": 0.03658399964479031,
+        "latency_p95_ms": 0.0423360497734393,
+        "latency_p99_ms": 0.04850083004384942,
+        "latency_mean_ms": 0.03828770066077899,
+        "cpu_percent": 99.7,
+        "memory_rss_mb": 493.7421875,
+        "queue_depth_max": 0
+      },
+      "two_tier": {
+        "mode": "two_tier",
+        "sample_count": 1500,
+        "concurrency": 20,
+        "throughput_rps": 30050.00802149993,
+        "latency_p50_ms": 0.02887499977077823,
+        "latency_p95_ms": 0.030999999626146746,
+        "latency_p99_ms": 0.037293240338840405,
+        "latency_mean_ms": 0.029350199989494286,
+        "cpu_percent": 99.9,
+        "memory_rss_mb": 493.8359375,
+        "queue_depth_max": 0
+      },
+      "pure_tier2": {
+        "mode": "pure_tier2",
+        "sample_count": 1500,
+        "concurrency": 20,
+        "throughput_rps": 502.7972496486827,
+        "latency_p50_ms": 1.8967915002576774,
+        "latency_p95_ms": 2.105361049689236,
+        "latency_p99_ms": 2.2625340801369007,
+        "latency_mean_ms": 1.982666916670496,
+        "cpu_percent": 98.5,
+        "memory_rss_mb": 495.1875,
+        "queue_depth_max": 0
+      }
+    },
+    "blended_validation": {
+      "empirical_escalation_rate": 0.005,
+      "theoretical_blended_p50_ms": 0.03835895727206662,
+      "measured_blended_p50_ms": 0.02887499977077823,
+      "discrepancy_pct": 18.967915002576774,
+      "validated": true
+    },
+    "timestamp": "2026-10-18 12:56:37 UTC"
+  }
+}

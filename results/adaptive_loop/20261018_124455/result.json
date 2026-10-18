@@ -1,0 +1,256 @@
+{
+  "experiment_meta": {
+    "git_commit": "f6a7015",
+    "git_dirty": true,
+    "python_version": "3.11.8 (main, Nov 17 2025, 20:09:31) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "timestamp_utc": "2026-10-18T12:44:55.642987+00:00",
+    "result_dir": "results/adaptive_loop/20261018_124455"
+  },
+  "metrics": {
+    "aggregated_cycles": [
+      {
+        "cycle": 0,
+        "overall_accuracy_mean": 0.5222858215257578,
+        "overall_accuracy_ci95": 0.002706230895038684,
+        "escalation_rate_mean": 0.00917706671671202,
+        "escalation_rate_ci95": 0.01056388155368835,
+        "queue_depth_mean": 0.0,
+        "queue_depth_ci95": 0.0,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 0.0,
+        "overflow_count_ci95": 0.0,
+        "band_half_width_mean": 0.19999999999999998,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 0.0,
+        "psi_drift_ci95": 0.0,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9980588806211582,
+            "ci95": 0.0
+          },
+          "SSH-BruteForce": {
+            "mean": 0.855413497329665,
+            "ci95": 0.0006128121510987648
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.7785472226315014,
+            "ci95": 0.0
+          },
+          "DoS-Hulk": {
+            "mean": 0.8026735530912956,
+            "ci95": 1.5412366411992055e-16
+          },
+          "DoS-Slowloris": {
+            "mean": 0.7896824213508273,
+            "ci95": 0.0044442664897380935
+          }
+        }
+      },
+      {
+        "cycle": 1,
+        "overall_accuracy_mean": 0.5222858215257578,
+        "overall_accuracy_ci95": 0.002706230895038684,
+        "escalation_rate_mean": 0.07311626161208597,
+        "escalation_rate_ci95": 0.02935171813282236,
+        "queue_depth_mean": 0.0,
+        "queue_depth_ci95": 0.0,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 0.0,
+        "overflow_count_ci95": 0.0,
+        "band_half_width_mean": 0.45,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 0.09594564409875303,
+        "psi_drift_ci95": 0.0020689827934781946,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9980588806211582,
+            "ci95": 0.0
+          },
+          "SSH-BruteForce": {
+            "mean": 0.855413497329665,
+            "ci95": 0.0006128121510987648
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.7785472226315014,
+            "ci95": 0.0
+          },
+          "DoS-Hulk": {
+            "mean": 0.8026735530912956,
+            "ci95": 1.5412366411992055e-16
+          },
+          "DoS-Slowloris": {
+            "mean": 0.7896824213508273,
+            "ci95": 0.0044442664897380935
+          }
+        }
+      },
+      {
+        "cycle": 2,
+        "overall_accuracy_mean": 0.5222107534953551,
+        "overall_accuracy_ci95": 0.001006999892409731,
+        "escalation_rate_mean": 0.05945388007882143,
+        "escalation_rate_ci95": 0.029368386255654716,
+        "queue_depth_mean": 0.0,
+        "queue_depth_ci95": 0.0,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 0.0,
+        "overflow_count_ci95": 0.0,
+        "band_half_width_mean": 0.45,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 0.08136895333656202,
+        "psi_drift_ci95": 0.002433426879771978,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9988676803623424,
+            "ci95": 1.5412366411992055e-16
+          },
+          "SSH-BruteForce": {
+            "mean": 0.8562226897556238,
+            "ci95": 0.0006128121510987648
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.7792839251510241,
+            "ci95": 0.0
+          },
+          "DoS-Hulk": {
+            "mean": 0.8034330852195047,
+            "ci95": 0.0
+          },
+          "DoS-Slowloris": {
+            "mean": 0.7895631429849411,
+            "ci95": 0.001704801068130069
+          }
+        }
+      },
+      {
+        "cycle": 3,
+        "overall_accuracy_mean": 0.5283287979731632,
+        "overall_accuracy_ci95": 0.003543178514656108,
+        "escalation_rate_mean": 0.046579712864783705,
+        "escalation_rate_ci95": 0.015515870588938172,
+        "queue_depth_mean": 39.2,
+        "queue_depth_ci95": 1.6189317847087064,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 1.4,
+        "overflow_count_ci95": 3.2378635694174127,
+        "band_half_width_mean": 0.45,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 0.5078032025616226,
+        "psi_drift_ci95": 0.022927120138853976,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9989970883209317,
+            "ci95": 0.0003592940931993034
+          },
+          "SSH-BruteForce": {
+            "mean": 0.859977342612073,
+            "ci95": 0.0046314281074220235
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.7792839251510241,
+            "ci95": 0.0
+          },
+          "DoS-Hulk": {
+            "mean": 0.8034330852195047,
+            "ci95": 0.0
+          },
+          "DoS-Slowloris": {
+            "mean": 0.7958252571939765,
+            "ci95": 0.002649358680970039
+          }
+        }
+      },
+      {
+        "cycle": 4,
+        "overall_accuracy_mean": 0.5293609833911983,
+        "overall_accuracy_ci95": 0.0027517462177221244,
+        "escalation_rate_mean": 0.06474617622220137,
+        "escalation_rate_ci95": 0.02930527025697682,
+        "queue_depth_mean": 0.0,
+        "queue_depth_ci95": 0.0,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 1.4,
+        "overflow_count_ci95": 3.2378635694174127,
+        "band_half_width_mean": 0.45,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 3.4143117653968025,
+        "psi_drift_ci95": 0.018724123419383037,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9989970883209317,
+            "ci95": 0.0003592940931993034
+          },
+          "SSH-BruteForce": {
+            "mean": 0.8600744457031884,
+            "ci95": 0.004786215904511009
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.7792839251510241,
+            "ci95": 0.0
+          },
+          "DoS-Hulk": {
+            "mean": 0.8039191857815586,
+            "ci95": 0.00046965189463999595
+          },
+          "DoS-Slowloris": {
+            "mean": 0.7968987624869539,
+            "ci95": 0.0003311698351212472
+          }
+        }
+      },
+      {
+        "cycle": 5,
+        "overall_accuracy_mean": 0.5677770479497044,
+        "overall_accuracy_ci95": 0.02538688323335926,
+        "escalation_rate_mean": 0.08567138969691282,
+        "escalation_rate_ci95": 0.007119134549949965,
+        "queue_depth_mean": 40.0,
+        "queue_depth_ci95": 0.0,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 365.6,
+        "overflow_count_ci95": 288.3396724290758,
+        "band_half_width_mean": 0.45,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 2.669724128294196,
+        "psi_drift_ci95": 0.004498551514821688,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9991264962795212,
+            "ci95": 0.0004400435979671383
+          },
+          "SSH-BruteForce": {
+            "mean": 0.8616604628580676,
+            "ci95": 0.005652349831851388
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.7792839251510241,
+            "ci95": 0.0
+          },
+          "DoS-Hulk": {
+            "mean": 0.8041926173477139,
+            "ci95": 0.0
+          },
+          "DoS-Slowloris": {
+            "mean": 0.8562099299239601,
+            "ci95": 0.03731006123093283
+          }
+        }
+      }
+    ],
+    "seeds": [
+      42,
+      71,
+      137,
+      256,
+      512
+    ],
+    "num_cycles": 6
+  }
+}

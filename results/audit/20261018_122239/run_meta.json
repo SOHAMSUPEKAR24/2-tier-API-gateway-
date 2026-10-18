@@ -1,0 +1,20 @@
+{
+  "git_commit": "f6a7015",
+  "git_dirty": true,
+  "python_version": "3.11.8 (main, Nov 17 2025, 20:09:31) [Clang 17.0.0 (clang-1700.3.19.1)]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "timestamp_utc": "2026-10-18T12:22:41.059936+00:00",
+  "result_dir": "results/audit/20261018_122239",
+  "audit_targets": [
+    "src/dashboard/simulator.py",
+    "src/dashboard/app.py",
+    "src/evaluation/run_real_pipeline.py",
+    "src/evaluation/run_unseen_multi_attack_loop.py",
+    "src/evaluation/evaluate_unseen.py",
+    "src/evaluation/generate_visuals.py",
+    "src/evaluation/reproduce_tables.py",
+    "src/next-dashboard/src/app/page.tsx",
+    "src/next-dashboard/src/components/Charts.tsx",
+    "src/next-dashboard/src/app/api/telemetry/route.ts"
+  ]
+}

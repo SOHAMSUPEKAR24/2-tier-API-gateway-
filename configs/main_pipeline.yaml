@@ -1,0 +1,16 @@
+# Config for: main feedback-loop pipeline experiment
+# Extends: experiment_base.yaml
+# Run with: make exp-main-pipeline
+
+extends: experiment_base.yaml
+
+experiment:
+  name: "main_pipeline"
+  description: >
+    Train Tier 1 on FTP-BruteForce seed (CIC-IDS 2017), Tier 2 on EMBER 2018.
+    Run 6 feedback cycles. Report accuracy and escalation rate per cycle.
+
+  # Override seeds subset for faster CI; use all 10 for final results
+  seeds: [42, 71, 137, 256, 512]
+
+  output_dir: "results/main_pipeline"

@@ -1,0 +1,60 @@
+{
+  "experiment_meta": {
+    "git_commit": "f6a7015",
+    "git_dirty": true,
+    "python_version": "3.11.8 (main, Nov 17 2025, 20:09:31) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "timestamp_utc": "2026-10-18T12:35:10.374936+00:00",
+    "result_dir": "results/latency/20261018_123510"
+  },
+  "metrics": {
+    "modes": {
+      "no_inspection": {
+        "mode": "no_inspection",
+        "sample_count": 1500,
+        "concurrency": 20,
+        "throughput_rps": 7574.761303345495,
+        "latency_p50_ms": 0.10583300036159926,
+        "latency_p95_ms": 0.1826333508688549,
+        "latency_p99_ms": 0.773812090001229,
+        "latency_mean_ms": 0.12565184935798848,
+        "cpu_percent": 97.0,
+        "memory_rss_mb": 448.3515625,
+        "queue_depth_max": 0
+      },
+      "pure_tier2": {
+        "mode": "pure_tier2",
+        "sample_count": 1500,
+        "concurrency": 20,
+        "throughput_rps": 477.7364717552305,
+        "latency_p50_ms": 2.012457999626349,
+        "latency_p95_ms": 2.29185034963848,
+        "latency_p99_ms": 2.4928046703189466,
+        "latency_mean_ms": 2.0658539020017392,
+        "cpu_percent": 99.8,
+        "memory_rss_mb": 449.7890625,
+        "queue_depth_max": 0
+      },
+      "two_tier": {
+        "mode": "two_tier",
+        "sample_count": 1500,
+        "concurrency": 20,
+        "throughput_rps": 29121.50099845584,
+        "latency_p50_ms": 0.029290999918885063,
+        "latency_p95_ms": 0.034458050276953145,
+        "latency_p99_ms": 0.04296300044188683,
+        "latency_mean_ms": 0.030201663330444717,
+        "cpu_percent": 99.7,
+        "memory_rss_mb": 449.875,
+        "queue_depth_max": 0
+      }
+    },
+    "blended_validation": {
+      "theoretical_blended_p50_ms": 0.4226280002733692,
+      "measured_blended_p50_ms": 0.029290999918885063,
+      "discrepancy_pct": 93.06931866796835,
+      "validated": false
+    },
+    "timestamp": "2026-10-18 12:35:10 UTC"
+  }
+}

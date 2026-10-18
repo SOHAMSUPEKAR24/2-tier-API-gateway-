@@ -1,0 +1,1248 @@
+{
+  "experiment_meta": {
+    "git_commit": "f6a7015",
+    "git_dirty": true,
+    "python_version": "3.11.8 (main, Nov 17 2025, 20:09:31) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "timestamp_utc": "2026-10-18T13:09:51.905440+00:00",
+    "result_dir": "results/adaptive_loop/20261018_130951"
+  },
+  "metrics": {
+    "aggregated_cycles": [
+      {
+        "cycle": 0,
+        "overall_accuracy_mean": 0.5222858215257578,
+        "overall_accuracy_ci95": 0.002706230895038684,
+        "escalation_rate_mean": 0.00917706671671202,
+        "escalation_rate_ci95": 0.01056388155368835,
+        "queue_depth_mean": 0.0,
+        "queue_depth_ci95": 0.0,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 0.0,
+        "overflow_count_ci95": 0.0,
+        "band_half_width_mean": 0.19999999999999998,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 0.0,
+        "psi_drift_ci95": 0.0,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9980588806211582,
+            "ci95": 0.0
+          },
+          "SSH-BruteForce": {
+            "mean": 0.855413497329665,
+            "ci95": 0.0006128121510987648
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.7785472226315014,
+            "ci95": 0.0
+          },
+          "DoS-Hulk": {
+            "mean": 0.8026735530912956,
+            "ci95": 1.5412366411992055e-16
+          },
+          "DoS-Slowloris": {
+            "mean": 0.7896824213508273,
+            "ci95": 0.0044442664897380935
+          }
+        }
+      },
+      {
+        "cycle": 1,
+        "overall_accuracy_mean": 0.5295861874824059,
+        "overall_accuracy_ci95": 0.010845094924161955,
+        "escalation_rate_mean": 0.060410997466453974,
+        "escalation_rate_ci95": 0.02853967947699617,
+        "queue_depth_mean": 0.0,
+        "queue_depth_ci95": 0.0,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 0.0,
+        "overflow_count_ci95": 0.0,
+        "band_half_width_mean": 0.45,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 0.18411809033851848,
+        "psi_drift_ci95": 0.014661624244548295,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9980588806211582,
+            "ci95": 0.0
+          },
+          "SSH-BruteForce": {
+            "mean": 0.8567405729082376,
+            "ci95": 0.001131398307991776
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.7785472226315014,
+            "ci95": 0.0
+          },
+          "DoS-Hulk": {
+            "mean": 0.8029166033723227,
+            "ci95": 0.0004132385724795786
+          },
+          "DoS-Slowloris": {
+            "mean": 0.7998210824511703,
+            "ci95": 0.016368845916076454
+          }
+        }
+      },
+      {
+        "cycle": 2,
+        "overall_accuracy_mean": 0.572618935910669,
+        "overall_accuracy_ci95": 0.03314755715475924,
+        "escalation_rate_mean": 0.05797128647837102,
+        "escalation_rate_ci95": 0.031977857253610825,
+        "queue_depth_mean": 29.2,
+        "queue_depth_ci95": 19.363589817352572,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 33.4,
+        "overflow_count_ci95": 44.01869621011467,
+        "band_half_width_mean": 0.45,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 0.18213528156712863,
+        "psi_drift_ci95": 0.017005130536159777,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9987059204141054,
+            "ci95": 0.00034788500983795904
+          },
+          "SSH-BruteForce": {
+            "mean": 0.857776339213465,
+            "ci95": 0.0008454200181456967
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.7791365846471197,
+            "ci95": 0.0003168741904844643
+          },
+          "DoS-Hulk": {
+            "mean": 0.8039191857815584,
+            "ci95": 0.0003628115430806883
+          },
+          "DoS-Slowloris": {
+            "mean": 0.8674519159087521,
+            "ci95": 0.05260856550808354
+          }
+        }
+      },
+      {
+        "cycle": 3,
+        "overall_accuracy_mean": 0.6042788777329455,
+        "overall_accuracy_ci95": 0.009117506392444385,
+        "escalation_rate_mean": 0.124500328422633,
+        "escalation_rate_ci95": 0.08714176579088208,
+        "queue_depth_mean": 40.0,
+        "queue_depth_ci95": 0.0,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 79.6,
+        "overflow_count_ci95": 26.421489559681003,
+        "band_half_width_mean": 0.45,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 0.1751020693066367,
+        "psi_drift_ci95": 0.014649738108590833,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9980588806211582,
+            "ci95": 0.0005120728693114332
+          },
+          "SSH-BruteForce": {
+            "mean": 0.8576468684253115,
+            "ci95": 0.0007328442999935327
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.7793428613525859,
+            "ci95": 0.0004008176694611278
+          },
+          "DoS-Hulk": {
+            "mean": 0.804040710922072,
+            "ci95": 0.00013337217576868559
+          },
+          "DoS-Slowloris": {
+            "mean": 0.9182644997763532,
+            "ci95": 0.014063390348009266
+          }
+        }
+      },
+      {
+        "cycle": 4,
+        "overall_accuracy_mean": 0.633911982734353,
+        "overall_accuracy_ci95": 0.07896110780335587,
+        "escalation_rate_mean": 0.1331143849113259,
+        "escalation_rate_ci95": 0.1023279102651652,
+        "queue_depth_mean": 40.0,
+        "queue_depth_ci95": 0.0,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 267.4,
+        "overflow_count_ci95": 183.56607020542938,
+        "band_half_width_mean": 0.45,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 0.18388207511079635,
+        "psi_drift_ci95": 0.0069959797707502495,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9981882885797477,
+            "ci95": 0.000538941139798955
+          },
+          "SSH-BruteForce": {
+            "mean": 0.8575821330312348,
+            "ci95": 0.000550321557418897
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.8035951082952705,
+            "ci95": 0.06770326864780138
+          },
+          "DoS-Hulk": {
+            "mean": 0.8278292571775786,
+            "ci95": 0.06594233830327488
+          },
+          "DoS-Slowloris": {
+            "mean": 0.9172804532577903,
+            "ci95": 0.01541052133399157
+          }
+        }
+      },
+      {
+        "cycle": 5,
+        "overall_accuracy_mean": 0.642676175283851,
+        "overall_accuracy_ci95": 0.07481772397544802,
+        "escalation_rate_mean": 0.14026461480716898,
+        "escalation_rate_ci95": 0.1308255080595273,
+        "queue_depth_mean": 40.0,
+        "queue_depth_ci95": 0.0,
+        "dropped_count_mean": 0.0,
+        "dropped_count_ci95": 0.0,
+        "overflow_count_mean": 473.2,
+        "overflow_count_ci95": 378.7242103052986,
+        "band_half_width_mean": 0.45,
+        "band_half_width_ci95": 0.0,
+        "psi_drift_mean": 0.17994195603321245,
+        "psi_drift_ci95": 0.009588150260119811,
+        "forgetting": {
+          "FTP-BruteForce": {
+            "mean": 0.9981559365901003,
+            "ci95": 0.0009484785633773968
+          },
+          "SSH-BruteForce": {
+            "mean": 0.8571289852726979,
+            "ci95": 0.0012090386351406213
+          },
+          "DoS-GoldenEye": {
+            "mean": 0.812111389420952,
+            "ci95": 0.06555664206549067
+          },
+          "DoS-Hulk": {
+            "mean": 0.8287710770165578,
+            "ci95": 0.06887409406590544
+          },
+          "DoS-Slowloris": {
+            "mean": 0.9212762785149844,
+            "ci95": 0.015967357979106887
+          }
+        }
+      }
+    ],
+    "seed_runs": [
+      [
+        {
+          "cycle": 0,
+          "model_version": "v1.0",
+          "overall_accuracy": 0.5217228112977386,
+          "escalation_rate": 0.00713146288824247,
+          "queue_depth": 0,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.19999999999999998,
+          "psi_drift": 0.0,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model registered",
+          "gate_metrics": {},
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8553163942385499,
+            "DoS-GoldenEye": 0.7785472226315014,
+            "DoS-Hulk": 0.8026735530912957,
+            "DoS-Slowloris": 0.7888772923810944
+          }
+        },
+        {
+          "cycle": 1,
+          "model_version": "v1.1",
+          "overall_accuracy": 0.52735291357793,
+          "escalation_rate": 0.08811110068499578,
+          "queue_depth": 0,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.45,
+          "psi_drift": 0.17273565045361888,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9980588806211582,
+            "SSH-BruteForce_base_acc": 0.8553163942385499,
+            "SSH-BruteForce_cand_acc": 0.8572584560608513,
+            "DoS-GoldenEye_base_acc": 0.7785472226315014,
+            "DoS-GoldenEye_cand_acc": 0.7785472226315014,
+            "DoS-Hulk_base_acc": 0.8026735530912957,
+            "DoS-Hulk_cand_acc": 0.8026735530912957,
+            "DoS-Slowloris_base_acc": 0.7888772923810944,
+            "DoS-Slowloris_cand_acc": 0.7960339943342776,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8572584560608513,
+            "DoS-GoldenEye": 0.7785472226315014,
+            "DoS-Hulk": 0.8026735530912957,
+            "DoS-Slowloris": 0.7960339943342776
+          }
+        },
+        {
+          "cycle": 2,
+          "model_version": "v1.2",
+          "overall_accuracy": 0.5964155015482782,
+          "escalation_rate": 0.02852585155296988,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 85,
+          "band_half_width": 0.45,
+          "psi_drift": 0.1642095990397879,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9987059204141054,
+            "SSH-BruteForce_base_acc": 0.8572584560608513,
+            "SSH-BruteForce_cand_acc": 0.8579058100016184,
+            "DoS-GoldenEye_base_acc": 0.7785472226315014,
+            "DoS-GoldenEye_cand_acc": 0.7791365846471195,
+            "DoS-Hulk_base_acc": 0.8026735530912957,
+            "DoS-Hulk_cand_acc": 0.8038888044964302,
+            "DoS-Slowloris_base_acc": 0.7960339943342776,
+            "DoS-Slowloris_cand_acc": 0.9051736991203221,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9987059204141054,
+            "SSH-BruteForce": 0.8579058100016184,
+            "DoS-GoldenEye": 0.7791365846471195,
+            "DoS-Hulk": 0.8038888044964302,
+            "DoS-Slowloris": 0.9051736991203221
+          }
+        },
+        {
+          "cycle": 3,
+          "model_version": "v1.3",
+          "overall_accuracy": 0.5988552125363611,
+          "escalation_rate": 0.0889556160270245,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 87,
+          "band_half_width": 0.45,
+          "psi_drift": 0.19024081477790572,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9987059204141054,
+            "FTP-BruteForce_cand_acc": 0.9987059204141054,
+            "SSH-BruteForce_base_acc": 0.8579058100016184,
+            "SSH-BruteForce_cand_acc": 0.8570966175756595,
+            "DoS-GoldenEye_base_acc": 0.7791365846471195,
+            "DoS-GoldenEye_cand_acc": 0.7792839251510241,
+            "DoS-Hulk_base_acc": 0.8038888044964302,
+            "DoS-Hulk_cand_acc": 0.804040710922072,
+            "DoS-Slowloris_base_acc": 0.9051736991203221,
+            "DoS-Slowloris_cand_acc": 0.9100939317131356,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9987059204141054,
+            "SSH-BruteForce": 0.8570966175756595,
+            "DoS-GoldenEye": 0.7792839251510241,
+            "DoS-Hulk": 0.804040710922072,
+            "DoS-Slowloris": 0.9100939317131356
+          }
+        },
+        {
+          "cycle": 4,
+          "model_version": "v1.4",
+          "overall_accuracy": 0.5990428826123675,
+          "escalation_rate": 0.1141972412498827,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 213,
+          "band_half_width": 0.45,
+          "psi_drift": 0.18112775694144237,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9987059204141054,
+            "FTP-BruteForce_cand_acc": 0.9983824005176318,
+            "SSH-BruteForce_base_acc": 0.8570966175756595,
+            "SSH-BruteForce_cand_acc": 0.8575821330312349,
+            "DoS-GoldenEye_base_acc": 0.7792839251510241,
+            "DoS-GoldenEye_cand_acc": 0.7791365846471195,
+            "DoS-Hulk_base_acc": 0.804040710922072,
+            "DoS-Hulk_cand_acc": 0.8038888044964302,
+            "DoS-Slowloris_base_acc": 0.9100939317131356,
+            "DoS-Slowloris_cand_acc": 0.9099448337557775,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9983824005176318,
+            "SSH-BruteForce": 0.8575821330312349,
+            "DoS-GoldenEye": 0.7791365846471195,
+            "DoS-Hulk": 0.8038888044964302,
+            "DoS-Slowloris": 0.9099448337557775
+          }
+        },
+        {
+          "cycle": 5,
+          "model_version": "v1.5",
+          "overall_accuracy": 0.6270995589753214,
+          "escalation_rate": 0.16665102749366614,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 392,
+          "band_half_width": 0.45,
+          "psi_drift": 0.18901195671848875,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9983824005176318,
+            "FTP-BruteForce_cand_acc": 0.9987059204141054,
+            "SSH-BruteForce_base_acc": 0.8575821330312349,
+            "SSH-BruteForce_cand_acc": 0.8574202945460431,
+            "DoS-GoldenEye_base_acc": 0.7791365846471195,
+            "DoS-GoldenEye_cand_acc": 0.8233387358184765,
+            "DoS-Hulk_base_acc": 0.8038888044964302,
+            "DoS-Hulk_cand_acc": 0.8041926173477139,
+            "DoS-Slowloris_base_acc": 0.9099448337557775,
+            "DoS-Slowloris_cand_acc": 0.9099448337557775,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9987059204141054,
+            "SSH-BruteForce": 0.8574202945460431,
+            "DoS-GoldenEye": 0.8233387358184765,
+            "DoS-Hulk": 0.8041926173477139,
+            "DoS-Slowloris": 0.9099448337557775
+          }
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "model_version": "v1.0",
+          "overall_accuracy": 0.5261330580838885,
+          "escalation_rate": 0.02355259453880079,
+          "queue_depth": 0,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.19999999999999998,
+          "psi_drift": 0.0,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model registered",
+          "gate_metrics": {},
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8551545557533582,
+            "DoS-GoldenEye": 0.7785472226315014,
+            "DoS-Hulk": 0.8026735530912957,
+            "DoS-Slowloris": 0.7960339943342776
+          }
+        },
+        {
+          "cycle": 1,
+          "model_version": "v1.1",
+          "overall_accuracy": 0.5444308904945107,
+          "escalation_rate": 0.07290982452847894,
+          "queue_depth": 0,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.45,
+          "psi_drift": 0.1899091905810161,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9980588806211582,
+            "SSH-BruteForce_base_acc": 0.8551545557533582,
+            "SSH-BruteForce_cand_acc": 0.8572584560608513,
+            "DoS-GoldenEye_base_acc": 0.7785472226315014,
+            "DoS-GoldenEye_cand_acc": 0.7785472226315014,
+            "DoS-Hulk_base_acc": 0.8026735530912957,
+            "DoS-Hulk_cand_acc": 0.803281178793863,
+            "DoS-Slowloris_base_acc": 0.7960339943342776,
+            "DoS-Slowloris_cand_acc": 0.8225734307439988,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8572584560608513,
+            "DoS-GoldenEye": 0.7785472226315014,
+            "DoS-Hulk": 0.803281178793863,
+            "DoS-Slowloris": 0.8225734307439988
+          }
+        },
+        {
+          "cycle": 2,
+          "model_version": "v1.2",
+          "overall_accuracy": 0.6000750680304026,
+          "escalation_rate": 0.04316411748146758,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 38,
+          "band_half_width": 0.45,
+          "psi_drift": 0.19484073711927496,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9988676803623423,
+            "SSH-BruteForce_base_acc": 0.8572584560608513,
+            "SSH-BruteForce_cand_acc": 0.8583913254571938,
+            "DoS-GoldenEye_base_acc": 0.7785472226315014,
+            "DoS-GoldenEye_cand_acc": 0.7792839251510241,
+            "DoS-Hulk_base_acc": 0.803281178793863,
+            "DoS-Hulk_cand_acc": 0.804040710922072,
+            "DoS-Slowloris_base_acc": 0.8225734307439988,
+            "DoS-Slowloris_cand_acc": 0.9106903235425675,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9988676803623423,
+            "SSH-BruteForce": 0.8583913254571938,
+            "DoS-GoldenEye": 0.7792839251510241,
+            "DoS-Hulk": 0.804040710922072,
+            "DoS-Slowloris": 0.9106903235425675
+          }
+        },
+        {
+          "cycle": 3,
+          "model_version": "v1.3",
+          "overall_accuracy": 0.6124612930468237,
+          "escalation_rate": 0.08576522473491602,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 64,
+          "band_half_width": 0.45,
+          "psi_drift": 0.16357002823266298,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9988676803623423,
+            "FTP-BruteForce_cand_acc": 0.9980588806211582,
+            "SSH-BruteForce_base_acc": 0.8583913254571938,
+            "SSH-BruteForce_cand_acc": 0.8580676484868102,
+            "DoS-GoldenEye_base_acc": 0.7792839251510241,
+            "DoS-GoldenEye_cand_acc": 0.778989244143215,
+            "DoS-Hulk_base_acc": 0.804040710922072,
+            "DoS-Hulk_cand_acc": 0.8038888044964302,
+            "DoS-Slowloris_base_acc": 0.9106903235425675,
+            "DoS-Slowloris_cand_acc": 0.9306694498285374,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8580676484868102,
+            "DoS-GoldenEye": 0.778989244143215,
+            "DoS-Hulk": 0.8038888044964302,
+            "DoS-Slowloris": 0.9306694498285374
+          }
+        },
+        {
+          "cycle": 4,
+          "model_version": "v1.4",
+          "overall_accuracy": 0.6128366331988364,
+          "escalation_rate": 0.08473303931688092,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 163,
+          "band_half_width": 0.45,
+          "psi_drift": 0.18597270611732927,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9987059204141054,
+            "SSH-BruteForce_base_acc": 0.8580676484868102,
+            "SSH-BruteForce_cand_acc": 0.8579058100016184,
+            "DoS-GoldenEye_base_acc": 0.778989244143215,
+            "DoS-GoldenEye_cand_acc": 0.7791365846471195,
+            "DoS-Hulk_base_acc": 0.8038888044964302,
+            "DoS-Hulk_cand_acc": 0.804040710922072,
+            "DoS-Slowloris_base_acc": 0.9306694498285374,
+            "DoS-Slowloris_cand_acc": 0.9311167437006113,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9987059204141054,
+            "SSH-BruteForce": 0.8579058100016184,
+            "DoS-GoldenEye": 0.7791365846471195,
+            "DoS-Hulk": 0.804040710922072,
+            "DoS-Slowloris": 0.9311167437006113
+          }
+        },
+        {
+          "cycle": 5,
+          "model_version": "v1.5",
+          "overall_accuracy": 0.6125551280848269,
+          "escalation_rate": 0.06746739232429388,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 269,
+          "band_half_width": 0.45,
+          "psi_drift": 0.17614331106370656,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9987059204141054,
+            "FTP-BruteForce_cand_acc": 0.998220640569395,
+            "SSH-BruteForce_base_acc": 0.8579058100016184,
+            "SSH-BruteForce_cand_acc": 0.8574202945460431,
+            "DoS-GoldenEye_base_acc": 0.7791365846471195,
+            "DoS-GoldenEye_cand_acc": 0.778694563135406,
+            "DoS-Hulk_base_acc": 0.804040710922072,
+            "DoS-Hulk_cand_acc": 0.8035849916451466,
+            "DoS-Slowloris_base_acc": 0.9311167437006113,
+            "DoS-Slowloris_cand_acc": 0.9306694498285374,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.998220640569395,
+            "SSH-BruteForce": 0.8574202945460431,
+            "DoS-GoldenEye": 0.778694563135406,
+            "DoS-Hulk": 0.8035849916451466,
+            "DoS-Slowloris": 0.9306694498285374
+          }
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "model_version": "v1.0",
+          "overall_accuracy": 0.5216289762597354,
+          "escalation_rate": 0.007412968002252041,
+          "queue_depth": 0,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.19999999999999998,
+          "psi_drift": 0.0,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model registered",
+          "gate_metrics": {},
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8562874251497006,
+            "DoS-GoldenEye": 0.7785472226315014,
+            "DoS-Hulk": 0.8026735530912957,
+            "DoS-Slowloris": 0.7878336066795885
+          }
+        },
+        {
+          "cycle": 1,
+          "model_version": "v1.1",
+          "overall_accuracy": 0.5276344186919396,
+          "escalation_rate": 0.06784273247630665,
+          "queue_depth": 0,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.45,
+          "psi_drift": 0.17756916574157855,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9980588806211582,
+            "SSH-BruteForce_base_acc": 0.8562874251497006,
+            "SSH-BruteForce_cand_acc": 0.856772940605276,
+            "DoS-GoldenEye_base_acc": 0.7785472226315014,
+            "DoS-GoldenEye_cand_acc": 0.7785472226315014,
+            "DoS-Hulk_base_acc": 0.8026735530912957,
+            "DoS-Hulk_cand_acc": 0.803281178793863,
+            "DoS-Slowloris_base_acc": 0.7878336066795885,
+            "DoS-Slowloris_cand_acc": 0.7963321902489936,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.856772940605276,
+            "DoS-GoldenEye": 0.7785472226315014,
+            "DoS-Hulk": 0.803281178793863,
+            "DoS-Slowloris": 0.7963321902489936
+          }
+        },
+        {
+          "cycle": 2,
+          "model_version": "v1.2",
+          "overall_accuracy": 0.5764286384535986,
+          "escalation_rate": 0.04945106502768134,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 44,
+          "band_half_width": 0.45,
+          "psi_drift": 0.1968440304872615,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.998220640569395,
+            "SSH-BruteForce_base_acc": 0.856772940605276,
+            "SSH-BruteForce_cand_acc": 0.8566111021200842,
+            "DoS-GoldenEye_base_acc": 0.7785472226315014,
+            "DoS-GoldenEye_cand_acc": 0.778694563135406,
+            "DoS-Hulk_base_acc": 0.803281178793863,
+            "DoS-Hulk_cand_acc": 0.8034330852195047,
+            "DoS-Slowloris_base_acc": 0.7963321902489936,
+            "DoS-Slowloris_cand_acc": 0.8741613239898613,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.998220640569395,
+            "SSH-BruteForce": 0.8566111021200842,
+            "DoS-GoldenEye": 0.778694563135406,
+            "DoS-Hulk": 0.8034330852195047,
+            "DoS-Slowloris": 0.8741613239898613
+          }
+        },
+        {
+          "cycle": 3,
+          "model_version": "v1.3",
+          "overall_accuracy": 0.5991367176503707,
+          "escalation_rate": 0.24293891339025991,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 87,
+          "band_half_width": 0.45,
+          "psi_drift": 0.1710499906437849,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.998220640569395,
+            "FTP-BruteForce_cand_acc": 0.9978971206729214,
+            "SSH-BruteForce_base_acc": 0.8566111021200842,
+            "SSH-BruteForce_cand_acc": 0.8569347790904677,
+            "DoS-GoldenEye_base_acc": 0.778694563135406,
+            "DoS-GoldenEye_cand_acc": 0.7798732871666421,
+            "DoS-Hulk_base_acc": 0.8034330852195047,
+            "DoS-Hulk_cand_acc": 0.804040710922072,
+            "DoS-Slowloris_base_acc": 0.8741613239898613,
+            "DoS-Slowloris_cand_acc": 0.9096466378410616,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9978971206729214,
+            "SSH-BruteForce": 0.8569347790904677,
+            "DoS-GoldenEye": 0.7798732871666421,
+            "DoS-Hulk": 0.804040710922072,
+            "DoS-Slowloris": 0.9096466378410616
+          }
+        },
+        {
+          "cycle": 4,
+          "model_version": "v1.4",
+          "overall_accuracy": 0.7470207375433987,
+          "escalation_rate": 0.2757811766913766,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 501,
+          "band_half_width": 0.45,
+          "psi_drift": 0.1757339435152247,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9978971206729214,
+            "FTP-BruteForce_cand_acc": 0.9977353607246846,
+            "SSH-BruteForce_base_acc": 0.8569347790904677,
+            "SSH-BruteForce_cand_acc": 0.8569347790904677,
+            "DoS-GoldenEye_base_acc": 0.7798732871666421,
+            "DoS-GoldenEye_cand_acc": 0.9011345218800648,
+            "DoS-Hulk_base_acc": 0.804040710922072,
+            "DoS-Hulk_cand_acc": 0.9228315357739633,
+            "DoS-Slowloris_base_acc": 0.9096466378410616,
+            "DoS-Slowloris_cand_acc": 0.9048755032056061,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9977353607246846,
+            "SSH-BruteForce": 0.8569347790904677,
+            "DoS-GoldenEye": 0.9011345218800648,
+            "DoS-Hulk": 0.9228315357739633,
+            "DoS-Slowloris": 0.9048755032056061
+          }
+        },
+        {
+          "cycle": 5,
+          "model_version": "v1.5",
+          "overall_accuracy": 0.7498357886834944,
+          "escalation_rate": 0.31406587219667825,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 989,
+          "band_half_width": 0.45,
+          "psi_drift": 0.1856826900132577,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9977353607246846,
+            "FTP-BruteForce_cand_acc": 0.9969265609835005,
+            "SSH-BruteForce_base_acc": 0.8569347790904677,
+            "SSH-BruteForce_cand_acc": 0.8558019096941253,
+            "DoS-GoldenEye_base_acc": 0.9011345218800648,
+            "DoS-GoldenEye_cand_acc": 0.9001031383527331,
+            "DoS-Hulk_base_acc": 0.9228315357739633,
+            "DoS-Hulk_cand_acc": 0.9279963542457846,
+            "DoS-Slowloris_base_acc": 0.9048755032056061,
+            "DoS-Slowloris_cand_acc": 0.9047264052482481,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9969265609835005,
+            "SSH-BruteForce": 0.8558019096941253,
+            "DoS-GoldenEye": 0.9001031383527331,
+            "DoS-Hulk": 0.9279963542457846,
+            "DoS-Slowloris": 0.9047264052482481
+          }
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "model_version": "v1.0",
+          "overall_accuracy": 0.5209721309937131,
+          "escalation_rate": 0.0070376278502392794,
+          "queue_depth": 0,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.19999999999999998,
+          "psi_drift": 0.0,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model registered",
+          "gate_metrics": {},
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8551545557533582,
+            "DoS-GoldenEye": 0.7785472226315014,
+            "DoS-Hulk": 0.8026735530912957,
+            "DoS-Slowloris": 0.7878336066795885
+          }
+        },
+        {
+          "cycle": 1,
+          "model_version": "v1.1",
+          "overall_accuracy": 0.52735291357793,
+          "escalation_rate": 0.03631415970723468,
+          "queue_depth": 0,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.45,
+          "psi_drift": 0.17839751644361238,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.002544529262086514,
+            "cand_fpr": 0.002544529262086514,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9980588806211582,
+            "SSH-BruteForce_base_acc": 0.8551545557533582,
+            "SSH-BruteForce_cand_acc": 0.8572584560608513,
+            "DoS-GoldenEye_base_acc": 0.7785472226315014,
+            "DoS-GoldenEye_cand_acc": 0.7785472226315014,
+            "DoS-Hulk_base_acc": 0.8026735530912957,
+            "DoS-Hulk_cand_acc": 0.8026735530912957,
+            "DoS-Slowloris_base_acc": 0.7878336066795885,
+            "DoS-Slowloris_cand_acc": 0.7960339943342776,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8572584560608513,
+            "DoS-GoldenEye": 0.7785472226315014,
+            "DoS-Hulk": 0.8026735530912957,
+            "DoS-Slowloris": 0.7960339943342776
+          }
+        },
+        {
+          "cycle": 2,
+          "model_version": "v1.2",
+          "overall_accuracy": 0.5453692408745425,
+          "escalation_rate": 0.09148916205311063,
+          "queue_depth": 20,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.45,
+          "psi_drift": 0.17563917613379038,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.002544529262086514,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9988676803623423,
+            "SSH-BruteForce_base_acc": 0.8572584560608513,
+            "SSH-BruteForce_cand_acc": 0.8580676484868102,
+            "DoS-GoldenEye_base_acc": 0.7785472226315014,
+            "DoS-GoldenEye_cand_acc": 0.7792839251510241,
+            "DoS-Hulk_base_acc": 0.8026735530912957,
+            "DoS-Hulk_cand_acc": 0.8041926173477139,
+            "DoS-Slowloris_base_acc": 0.7960339943342776,
+            "DoS-Slowloris_cand_acc": 0.8239153123602206,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9988676803623423,
+            "SSH-BruteForce": 0.8580676484868102,
+            "DoS-GoldenEye": 0.7792839251510241,
+            "DoS-Hulk": 0.8041926173477139,
+            "DoS-Slowloris": 0.8239153123602206
+          }
+        },
+        {
+          "cycle": 3,
+          "model_version": "v1.3",
+          "overall_accuracy": 0.6121797879328141,
+          "escalation_rate": 0.13352725907853993,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 107,
+          "band_half_width": 0.45,
+          "psi_drift": 0.18476212032927183,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9988676803623423,
+            "FTP-BruteForce_cand_acc": 0.9980588806211582,
+            "SSH-BruteForce_base_acc": 0.8580676484868102,
+            "SSH-BruteForce_cand_acc": 0.858229486972002,
+            "DoS-GoldenEye_base_acc": 0.7792839251510241,
+            "DoS-GoldenEye_cand_acc": 0.7792839251510241,
+            "DoS-Hulk_base_acc": 0.8041926173477139,
+            "DoS-Hulk_cand_acc": 0.8041926173477139,
+            "DoS-Slowloris_base_acc": 0.8239153123602206,
+            "DoS-Slowloris_cand_acc": 0.9306694498285374,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.858229486972002,
+            "DoS-GoldenEye": 0.7792839251510241,
+            "DoS-Hulk": 0.8041926173477139,
+            "DoS-Slowloris": 0.9306694498285374
+          }
+        },
+        {
+          "cycle": 4,
+          "model_version": "v1.4",
+          "overall_accuracy": 0.6119921178568077,
+          "escalation_rate": 0.12067185887210284,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 320,
+          "band_half_width": 0.45,
+          "psi_drift": 0.18607316612407054,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9983824005176318,
+            "SSH-BruteForce_base_acc": 0.858229486972002,
+            "SSH-BruteForce_cand_acc": 0.8580676484868102,
+            "DoS-GoldenEye_base_acc": 0.7792839251510241,
+            "DoS-GoldenEye_cand_acc": 0.7792839251510241,
+            "DoS-Hulk_base_acc": 0.8041926173477139,
+            "DoS-Hulk_cand_acc": 0.8041926173477139,
+            "DoS-Slowloris_base_acc": 0.9306694498285374,
+            "DoS-Slowloris_cand_acc": 0.9302221559564634,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9983824005176318,
+            "SSH-BruteForce": 0.8580676484868102,
+            "DoS-GoldenEye": 0.7792839251510241,
+            "DoS-Hulk": 0.8041926173477139,
+            "DoS-Slowloris": 0.9302221559564634
+          }
+        },
+        {
+          "cycle": 5,
+          "model_version": "v1.5",
+          "overall_accuracy": 0.6127427981608332,
+          "escalation_rate": 0.08323167870882987,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 483,
+          "band_half_width": 0.45,
+          "psi_drift": 0.1793468414301228,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9983824005176318,
+            "FTP-BruteForce_cand_acc": 0.9988676803623423,
+            "SSH-BruteForce_base_acc": 0.8580676484868102,
+            "SSH-BruteForce_cand_acc": 0.8583913254571938,
+            "DoS-GoldenEye_base_acc": 0.7792839251510241,
+            "DoS-GoldenEye_cand_acc": 0.7792839251510241,
+            "DoS-Hulk_base_acc": 0.8041926173477139,
+            "DoS-Hulk_cand_acc": 0.8041926173477139,
+            "DoS-Slowloris_base_acc": 0.9302221559564634,
+            "DoS-Slowloris_cand_acc": 0.9306694498285374,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9988676803623423,
+            "SSH-BruteForce": 0.8583913254571938,
+            "DoS-GoldenEye": 0.7792839251510241,
+            "DoS-Hulk": 0.8041926173477139,
+            "DoS-Slowloris": 0.9306694498285374
+          }
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "model_version": "v1.0",
+          "overall_accuracy": 0.5209721309937131,
+          "escalation_rate": 0.0007506803040255232,
+          "queue_depth": 0,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.19999999999999998,
+          "psi_drift": 0.0,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model registered",
+          "gate_metrics": {},
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8551545557533582,
+            "DoS-GoldenEye": 0.7785472226315014,
+            "DoS-Hulk": 0.8026735530912957,
+            "DoS-Slowloris": 0.7878336066795885
+          }
+        },
+        {
+          "cycle": 1,
+          "model_version": "v1.1",
+          "overall_accuracy": 0.5211598010697195,
+          "escalation_rate": 0.03687716993525383,
+          "queue_depth": 0,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.45,
+          "psi_drift": 0.20197892847276644,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0024330900243309003,
+            "cand_fpr": 0.0024330900243309003,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9980588806211582,
+            "SSH-BruteForce_base_acc": 0.8551545557533582,
+            "SSH-BruteForce_cand_acc": 0.8551545557533582,
+            "DoS-GoldenEye_base_acc": 0.7785472226315014,
+            "DoS-GoldenEye_cand_acc": 0.7785472226315014,
+            "DoS-Hulk_base_acc": 0.8026735530912957,
+            "DoS-Hulk_cand_acc": 0.8026735530912957,
+            "DoS-Slowloris_base_acc": 0.7878336066795885,
+            "DoS-Slowloris_cand_acc": 0.7881318025943045,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8551545557533582,
+            "DoS-GoldenEye": 0.7785472226315014,
+            "DoS-Hulk": 0.8026735530912957,
+            "DoS-Slowloris": 0.7881318025943045
+          }
+        },
+        {
+          "cycle": 2,
+          "model_version": "v1.2",
+          "overall_accuracy": 0.5448062306465234,
+          "escalation_rate": 0.0772262362766257,
+          "queue_depth": 6,
+          "dropped_count": 0,
+          "overflow_count": 0,
+          "band_half_width": 0.45,
+          "psi_drift": 0.17914286505552834,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0024330900243309003,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9980588806211582,
+            "FTP-BruteForce_cand_acc": 0.9988676803623423,
+            "SSH-BruteForce_base_acc": 0.8551545557533582,
+            "SSH-BruteForce_cand_acc": 0.8579058100016184,
+            "DoS-GoldenEye_base_acc": 0.7785472226315014,
+            "DoS-GoldenEye_cand_acc": 0.7792839251510241,
+            "DoS-Hulk_base_acc": 0.8026735530912957,
+            "DoS-Hulk_cand_acc": 0.804040710922072,
+            "DoS-Slowloris_base_acc": 0.7881318025943045,
+            "DoS-Slowloris_cand_acc": 0.8233189205307887,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9988676803623423,
+            "SSH-BruteForce": 0.8579058100016184,
+            "DoS-GoldenEye": 0.7792839251510241,
+            "DoS-Hulk": 0.804040710922072,
+            "DoS-Slowloris": 0.8233189205307887
+          }
+        },
+        {
+          "cycle": 3,
+          "model_version": "v1.3",
+          "overall_accuracy": 0.5987613774983579,
+          "escalation_rate": 0.0713146288824247,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 53,
+          "band_half_width": 0.45,
+          "psi_drift": 0.16588739254955787,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9988676803623423,
+            "FTP-BruteForce_cand_acc": 0.9975736007764477,
+            "SSH-BruteForce_base_acc": 0.8579058100016184,
+            "SSH-BruteForce_cand_acc": 0.8579058100016184,
+            "DoS-GoldenEye_base_acc": 0.7792839251510241,
+            "DoS-GoldenEye_cand_acc": 0.7792839251510241,
+            "DoS-Hulk_base_acc": 0.804040710922072,
+            "DoS-Hulk_cand_acc": 0.804040710922072,
+            "DoS-Slowloris_base_acc": 0.8233189205307887,
+            "DoS-Slowloris_cand_acc": 0.9102430296704935,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9975736007764477,
+            "SSH-BruteForce": 0.8579058100016184,
+            "DoS-GoldenEye": 0.7792839251510241,
+            "DoS-Hulk": 0.804040710922072,
+            "DoS-Slowloris": 0.9102430296704935
+          }
+        },
+        {
+          "cycle": 4,
+          "model_version": "v1.4",
+          "overall_accuracy": 0.5986675424603547,
+          "escalation_rate": 0.07018860842638641,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 140,
+          "band_half_width": 0.45,
+          "psi_drift": 0.19050280285591487,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9975736007764477,
+            "FTP-BruteForce_cand_acc": 0.9977353607246846,
+            "SSH-BruteForce_base_acc": 0.8579058100016184,
+            "SSH-BruteForce_cand_acc": 0.8574202945460431,
+            "DoS-GoldenEye_base_acc": 0.7792839251510241,
+            "DoS-GoldenEye_cand_acc": 0.7792839251510241,
+            "DoS-Hulk_base_acc": 0.804040710922072,
+            "DoS-Hulk_cand_acc": 0.8041926173477139,
+            "DoS-Slowloris_base_acc": 0.9102430296704935,
+            "DoS-Slowloris_cand_acc": 0.9102430296704935,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9977353607246846,
+            "SSH-BruteForce": 0.8574202945460431,
+            "DoS-GoldenEye": 0.7792839251510241,
+            "DoS-Hulk": 0.8041926173477139,
+            "DoS-Slowloris": 0.9102430296704935
+          }
+        },
+        {
+          "cycle": 5,
+          "model_version": "v1.5",
+          "overall_accuracy": 0.6111476025147791,
+          "escalation_rate": 0.06990710331237684,
+          "queue_depth": 40,
+          "dropped_count": 0,
+          "overflow_count": 233,
+          "band_half_width": 0.45,
+          "psi_drift": 0.1695249809404865,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met.",
+          "gate_metrics": {
+            "base_fpr": 0.0,
+            "cand_fpr": 0.0,
+            "FTP-BruteForce_base_acc": 0.9977353607246846,
+            "FTP-BruteForce_cand_acc": 0.9980588806211582,
+            "SSH-BruteForce_base_acc": 0.8574202945460431,
+            "SSH-BruteForce_cand_acc": 0.8566111021200842,
+            "DoS-GoldenEye_base_acc": 0.7792839251510241,
+            "DoS-GoldenEye_cand_acc": 0.7791365846471195,
+            "DoS-Hulk_base_acc": 0.8041926173477139,
+            "DoS-Hulk_cand_acc": 0.8038888044964302,
+            "DoS-Slowloris_base_acc": 0.9102430296704935,
+            "DoS-Slowloris_cand_acc": 0.9303712539138214,
+            "rule": "NONE_PASSED"
+          },
+          "forgetting_scores": {
+            "FTP-BruteForce": 0.9980588806211582,
+            "SSH-BruteForce": 0.8566111021200842,
+            "DoS-GoldenEye": 0.7791365846471195,
+            "DoS-Hulk": 0.8038888044964302,
+            "DoS-Slowloris": 0.9303712539138214
+          }
+        }
+      ]
+    ],
+    "seeds": [
+      42,
+      71,
+      137,
+      256,
+      512
+    ],
+    "num_cycles": 6
+  }
+}

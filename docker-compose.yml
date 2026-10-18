@@ -1,26 +1,50 @@
 version: '3.8'
 
 services:
-  vampi:
-    image: erev0s/vampi
-    container_name: vampi
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: two_tier_gateway
+    environment:
+      - GATEWAY_INSPECTION_MODE=two_tier
+      - GATEWAY_ESCALATION_BEHAVIOR=hold_with_timeout
+      - GATEWAY_TIMEOUT_MS=60.0
+      - UPSTREAM_URL=http://upstream_vampi:5000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - upstream_vampi
     networks:
-      - isolated_network
-    # Not exposing ports to the host explicitly if we don't want to route to the host,
-    # but we need to access them from the gateway which can run in a container on the same network
-    # For now we'll map to localhost for the gateway to reach it during development if gateway is on host
+      - gateway_net
+
+  tier2_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tier2_deep_verifier
+    command: python -m src.gateway.tier2_worker
+    environment:
+      - WORKER_CONCURRENCY=4
+    networks:
+      - gateway_net
+
+  upstream_vampi:
+    image: erev0s/vampi
+    container_name: upstream_vampi
+    networks:
+      - gateway_net
     ports:
       - "127.0.0.1:5000:5000"
 
-  juice-shop:
+  juice_shop:
     image: bkimminich/juice-shop
-    container_name: juice-shop
+    container_name: upstream_juice_shop
     networks:
-      - isolated_network
+      - gateway_net
     ports:
       - "127.0.0.1:3000:3000"
 
 networks:
-  isolated_network:
+  gateway_net:
     driver: bridge
-    internal: true # No route to the host's real network/internet

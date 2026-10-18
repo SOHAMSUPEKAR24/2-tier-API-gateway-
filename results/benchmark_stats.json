@@ -1,0 +1,92 @@
+{
+  "dataset_name": "CSE-CIC-IDS2018 Cleaned Open-Set Benchmark",
+  "provenance": "Generated from cic.csv (processed traffic data for ML algorithms, CICFlowMeter-V3)",
+  "known_label_issues": "CSE-CIC-IDS2018 and CIC-IDS2017 contain documented label noise, including flow direction inversion on high-load DoS runs, short-duration timeout artifacts, and duplicate flows from mirrored switch ports. Our pipeline drops all duplicate rows on allowlist features, cleans non-finite flow rates, and excludes identifier columns (IP, Port, Timestamp, Flow ID) to eliminate trivial spurious correlations.",
+  "features": [
+    "Fwd Packet Length Max",
+    "Fwd Packet Length Mean",
+    "Bwd Packet Length Max",
+    "Flow Bytes/s",
+    "Flow Packets/s",
+    "Fwd IAT Mean",
+    "Bwd IAT Mean",
+    "ACK Flag Count",
+    "PSH Flag Count"
+  ],
+  "feature_count": 9,
+  "total_unique_flows": 19214,
+  "protocols": {
+    "ftp_only": {
+      "train_samples": 8557,
+      "train_attacks": 625,
+      "train_benign": 7932,
+      "test_samples": 10657,
+      "test_attacks": 5368,
+      "test_benign": 5289,
+      "attack_prevalence_pct": 50.37064840011261
+    },
+    "lofo_FTP-BruteForce": {
+      "train_samples": 13032,
+      "train_attacks": 5100,
+      "train_benign": 7932,
+      "test_samples": 6182,
+      "test_attacks": 893,
+      "test_benign": 5289,
+      "attack_prevalence_pct": 14.445163377547718
+    },
+    "lofo_SSH-BruteForce": {
+      "train_samples": 13035,
+      "train_attacks": 5103,
+      "train_benign": 7932,
+      "test_samples": 6179,
+      "test_attacks": 890,
+      "test_benign": 5289,
+      "attack_prevalence_pct": 14.403625182068296
+    },
+    "lofo_DoS-GoldenEye": {
+      "train_samples": 12427,
+      "train_attacks": 4495,
+      "train_benign": 7932,
+      "test_samples": 6787,
+      "test_attacks": 1498,
+      "test_benign": 5289,
+      "attack_prevalence_pct": 22.071607484897598
+    },
+    "lofo_DoS-Hulk": {
+      "train_samples": 12631,
+      "train_attacks": 4699,
+      "train_benign": 7932,
+      "test_samples": 6583,
+      "test_attacks": 1294,
+      "test_benign": 5289,
+      "attack_prevalence_pct": 19.65669147804952
+    },
+    "lofo_DoS-Slowloris": {
+      "train_samples": 12507,
+      "train_attacks": 4575,
+      "train_benign": 7932,
+      "test_samples": 6707,
+      "test_attacks": 1418,
+      "test_benign": 5289,
+      "attack_prevalence_pct": 21.142090353362157
+    },
+    "prevalence_1_100": {
+      "train_samples": 8557,
+      "train_attacks": 625,
+      "train_benign": 7932,
+      "test_samples": 5341,
+      "test_attacks": 52,
+      "test_benign": 5289,
+      "attack_prevalence_pct": 0.9736004493540537
+    },
+    "prevalence_1_1000": {
+      "train_samples": 8557,
+      "train_attacks": 625,
+      "train_benign": 7932,
+      "test_samples": 5294,
+      "test_attacks": 5,
+      "test_benign": 5289,
+      "attack_prevalence_pct": 0.09444654325651682
+    }
+  }
+}

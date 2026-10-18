@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software or empirical benchmark results in your research, please cite it as below."
+authors:
+  - family-names: "Supekar"
+    given-names: "Soham"
+    affiliation: "Department of Computer Engineering"
+title: "Adaptive Two-Tier Malware Detection Architecture for High-Throughput API Gateways"
+version: 2.0.0
+date-released: 2026-10-18
+url: "https://github.com/SOHAMSUPEKAR24/2-tier-API-gateway-"
+keywords:
+  - "API Gateway"
+  - "Malware Detection"
+  - "Two-Tier Architecture"
+  - "Open-Set Recognition"
+  - "Uncertainty Estimation"
+  - "Evidential Deep Learning"
+  - "Conformal Prediction"
+  - "Adversarial Robustness"
