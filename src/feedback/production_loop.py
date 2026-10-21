@@ -171,12 +171,15 @@ class RetrainingGate:
 
     def evaluate_gate(
         self,
-        candidate_model: RandomForestClassifier,
+        candidate_model: Optional[RandomForestClassifier],
         val_X: np.ndarray,
         val_y: np.ndarray,
         historical_subsets: Dict[str, Tuple[np.ndarray, np.ndarray]],
         candidate_version_name: str,
     ) -> Tuple[bool, str, Dict[str, float]]:
+        if candidate_model is None:
+            return False, "SKIPPED: Empty batch, no candidate model to evaluate.", {"rule": "EMPTY_BATCH_SKIP"}
+
         active_model = self.model_versions[self.active_version]
 
         # 1. Benign FPR check

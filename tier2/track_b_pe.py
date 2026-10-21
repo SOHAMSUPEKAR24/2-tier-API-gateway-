@@ -23,7 +23,13 @@ from typing import Dict, List, Tuple
 
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from sklearn.metrics import (
+    accuracy_score,
+    balanced_accuracy_score,
+    f1_score,
+    precision_score,
+    recall_score,
+)
 
 
 def extract_track_b_tier1_features(record: dict) -> List[float]:
@@ -166,3 +172,88 @@ class TrackBPEVerifier:
             "tier2_latency_p50_ms": t2_lat_ms,
             "blended_latency_p50_ms": blended_lat_ms,
         }
+
+    def evaluate_pareto(self, records_test: List[dict], budgets: List[float] = None) -> Dict[float, Dict[str, float]]:
+        """
+        Sweeps target escalation budgets from 0% to 100% to trace the complete
+        Pareto frontier: Accuracy and Silent-Failure Rate (SFR) vs Escalation Rate (%)
+        and vs Mean / Blended Latency (ms).
+        """
+        if budgets is None:
+            budgets = [0.00, 0.01, 0.02, 0.03, 0.05, 0.08, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 1.00]
+
+        X1 = np.array([extract_track_b_tier1_features(r) for r in records_test])
+        X2 = np.array([extract_track_b_tier2_features(r) for r in records_test])
+        y = np.array([int(r.get("label", 0)) for r in records_test])
+
+        # Measure Tier 1 latency
+        t0 = time.perf_counter()
+        probs1 = self.tier1_model.predict_proba(X1)
+        t1_lat_ms = (time.perf_counter() - t0) * 1000.0 / len(X1)
+
+        p1_class1 = probs1[:, 1]
+        preds1 = (p1_class1 >= 0.5).astype(int)
+        uncertainty = 1.0 - 2.0 * np.abs(p1_class1 - 0.5)
+
+        # Measure Tier 2 latency
+        sample_x2 = X2[:1]
+        t0 = time.perf_counter()
+        for _ in range(50):
+            _ = self.tier2_model.predict(sample_x2)
+        t2_lat_ms = ((time.perf_counter() - t0) * 1000.0) / 50.0
+
+        tier2_preds_all = self.tier2_model.predict(X2)
+        acc_t2_only = float(accuracy_score(y, tier2_preds_all) * 100.0)
+        bacc_t2_only = float(balanced_accuracy_score(y, tier2_preds_all) * 100.0)
+        acc_t1_only = float(accuracy_score(y, preds1) * 100.0)
+        bacc_t1_only = float(balanced_accuracy_score(y, preds1) * 100.0)
+
+        n_attacks = np.sum(y == 1)
+        pareto_results = {}
+
+        for b in budgets:
+            if b <= 0.0:
+                esc_mask = np.zeros(len(y), dtype=bool)
+            elif b >= 1.0:
+                esc_mask = np.ones(len(y), dtype=bool)
+            else:
+                tau_b = float(np.quantile(uncertainty, 1.0 - b))
+                esc_mask = uncertainty >= tau_b
+
+            final_preds = preds1.copy()
+            final_preds[esc_mask] = tier2_preds_all[esc_mask]
+
+            er = float(np.mean(esc_mask) * 100.0)
+            acc = float(accuracy_score(y, final_preds) * 100.0)
+            bacc = float(balanced_accuracy_score(y, final_preds) * 100.0)
+
+            # Silent-Failure Rate: attack flows classified as benign without escalation
+            silent_failures = np.sum((y == 1) & (preds1 == 0) & (~esc_mask))
+            sfr = float(silent_failures / n_attacks * 100.0) if n_attacks > 0 else 0.0
+
+            blended_lat_ms = (1.0 - er / 100.0) * t1_lat_ms + (er / 100.0) * (t1_lat_ms + t2_lat_ms)
+            fpr = float(np.mean(final_preds[y == 0] == 1) * 100.0) if np.sum(y == 0) > 0 else 0.0
+            rec = float(recall_score(y, final_preds, zero_division=0) * 100.0)
+            prec = float(precision_score(y, final_preds, zero_division=0) * 100.0)
+            f1 = float(f1_score(y, final_preds, zero_division=0) * 100.0)
+
+            pareto_results[b] = {
+                "budget": b,
+                "escalation_rate": er,
+                "two_tier_accuracy": acc,
+                "balanced_accuracy": bacc,
+                "silent_failure_rate": sfr,
+                "blended_latency_p50_ms": blended_lat_ms,
+                "fpr": fpr,
+                "recall": rec,
+                "precision": prec,
+                "f1": f1,
+                "tier1_only_accuracy": acc_t1_only,
+                "tier1_only_balanced_accuracy": bacc_t1_only,
+                "tier2_only_accuracy": acc_t2_only,
+                "tier2_only_balanced_accuracy": bacc_t2_only,
+                "tier1_latency_p50_ms": t1_lat_ms,
+                "tier2_latency_p50_ms": t2_lat_ms,
+            }
+
+        return pareto_results

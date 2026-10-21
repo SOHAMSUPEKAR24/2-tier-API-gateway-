@@ -9,7 +9,7 @@ This document explicitly defines the engineering boundaries, assumptions, and no
 - **What is NOT Implemented:** Tier 2 is **NOT** a dynamic virtualization sandbox (e.g., CAPE Sandbox, Cuckoo Sandbox, or FireEye MVX). Untrusted code is never executed inside hypervisor virtual machines. Dynamic behavioral traces (API call hooking, registry modifications, process injection) are not collected.
 
 ## 2. Ingress Kernel Bypass & Hardware Acceleration
-- **What is Implemented:** The gateway reverse proxy is implemented using asynchronous Python (FastAPI / Starlette) and Scikit-Learn / PyTorch inference backends. On standard hardware, it sustains ~30,000 req/sec in two-tier mode with p50 latency $< 0.05\text{ ms}$.
+- **What is Implemented:** The gateway reverse proxy is implemented using asynchronous Python (FastAPI / Starlette) deployed behind NGINX over loopback. Measured throughput and latency numbers across all operational modes are recorded directly via open-loop and closed-loop benchmarks into results/latency/.
 - **What is NOT Implemented:** Line-rate 100 Gbps packet processing using kernel bypass technologies (eBPF XDP, DPDK, PF_RING) or FPGA/SmartNIC offload is out of scope. In production line-rate deployments, Tier 1 feature extraction would be compiled to an Envoy C++ filter or eBPF kernel program.
 
 ## 3. Distributed State Synchronization

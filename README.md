@@ -1,6 +1,6 @@
 <div align="center">
   <h1>🛡️ Adaptive Two-Tier Malware Detection for API Gateways</h1>
-  <p><strong>Wire-speed edge screening with autonomous deep verification and adaptive feedback.</strong></p>
+  <p><strong>Low-latency edge screening with autonomous deep verification and adaptive feedback.</strong></p>
   <img src="docs/assets/architecture_flow.png" width="800" alt="Architecture Flow Chart">
 </div>
 
@@ -24,7 +24,7 @@ Every single result in this repository strictly adheres to the following princip
 The gateway integrates two complementary inspection tracks matching real API gateway workloads:
 
 * **Track A (HTTP Payloads):** Tested on the **CSIC 2010** HTTP dataset (61,065 genuine requests).
-  * *Tier 1:* Table I 9 fast payload features (request length, header counts, special character counts, SQL keywords, script tags, URL path depth, etc.) evaluated in $<0.05\text{ ms}$.
+  * *Tier 1:* Table I 9 fast payload features (request length, header counts, special character counts, SQL keywords, script tags, URL path depth, etc.) evaluated with low latency (see results/latency/REPORT.md for micro-profiled stages).
   * *Tier 2 Deep Verification Model:* Character 3-5 gram TF-IDF vectorizer (1,500 features) with deep multi-layer verification.
 * **Track B (File Uploads):** Tested on **EMBER 2018** Windows PE binaries.
   * *Static Analysis Only:* Samples are never executed in the gateway inspection plane.
@@ -89,12 +89,13 @@ All numbers below represent empirical measurements across 5 random seeds (Mean $
 | **Track A** | HTTP Payloads (CSIC 2010) | 82.97% | **86.06%** | 44.66% | 0.002 ms | 1.84 ms | **0.83 ms** | **55.0%** |
 | **Track B** | File Uploads (EMBER PE) | 76.41% | **88.25%** | 48.51% | 0.002 ms | 1.86 ms | **0.90 ms** | **51.4%** |
 
-### 3. Gateway Ingress Load Testing (Concurrency 20)
-| Operational Mode | Throughput | p50 Latency | p95 Latency | p99 Latency | CPU % | Validation |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **No Inspection (Passthrough)** | 7,473.3 req/s | 0.10 ms | 0.21 ms | 0.72 ms | 94.3% | Baseline |
-| **Pure Tier 2 (Monolithic Deep)** | 481.4 req/s | 2.01 ms | 2.24 ms | 2.40 ms | 99.8% | Heavy Bottleneck |
-| **Adaptive Two-Tier** | **30,053.9 req/s** | **0.03 ms** | **0.03 ms** | **0.03 ms** | 99.9% | **PASSED (20.1% SLA Error)** |
+### 3. Gateway Ingress Load Testing (Real Uvicorn + NGINX, 10 Repeated Runs, Mean ± 95% CI)
+| Operational Condition | Throughput (req/s) | p50 Latency (ms) | p95 Latency (ms) | p99 Latency (ms) | Mean Latency (ms) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **No Inspection (Passthrough)** | 5320.2 ± 95.4 | 2.69 ± 0.01 | 65.77 ± 2.26 | 102.63 ± 2.64 | 11.13 ± 0.40 |
+| **Benign Fast-Path (Tier 1 Edge)** | 4143.2 ± 122.0 | 3.90 ± 0.02 | 45.03 ± 8.01 | 78.35 ± 11.42 | 8.85 ± 0.94 |
+| **Escalated (Tier 2 Deep Verif)** | 334.1 ± 3.5 | 58.53 ± 0.56 | 66.07 ± 1.84 | 80.63 ± 7.69 | 59.45 ± 0.61 |
+| **Two-Tier Blended (10% Escalated)** | 1978.3 ± 17.9 | 7.35 ± 0.04 | 38.33 ± 0.40 | 50.77 ± 3.87 | 12.83 ± 0.16 |
 
 ---
 

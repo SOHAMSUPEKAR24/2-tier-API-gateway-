@@ -21,6 +21,9 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.utils.feature_guard import (
+    ALL_ALLOWLISTED_CIC_FEATURES,
+    FEATURES_9,
+    FEATURES_25,
     IDENTIFIER_COLUMNS,
     TIER1_ALLOWLIST,
     assert_no_leakage,
@@ -58,11 +61,11 @@ def extract_clean_raw_corpus(
         "DoS-Hulk",
         "DoS-Slowloris",
     ]
-    wanted_cols = set(TIER1_ALLOWLIST + ["Label"])
+    wanted_cols = set(ALL_ALLOWLISTED_CIC_FEATURES + ["Label"])
     collected = {att: [] for att in target_attacks}
     collected["Benign"] = []
 
-    print(f"[BenchmarkPipeline] Scanning {cic_path} with fast usecols...")
+    print(f"[BenchmarkPipeline] Scanning {cic_path} with fast usecols (76 allowlisted features)...")
     reader = pd.read_csv(
         cic_path,
         chunksize=100000,
@@ -113,15 +116,15 @@ def extract_clean_raw_corpus(
     # Clean: remove any stray identifiers
     df = strip_identifiers(df)
 
-    # Clean: drop duplicates on allowlist to strictly prevent data leakage
+    # Clean: drop duplicates on FEATURES_9 to strictly prevent data leakage across all feature subsets
     initial_len = len(df)
-    df = df.drop_duplicates(subset=TIER1_ALLOWLIST).reset_index(drop=True)
+    df = df.drop_duplicates(subset=FEATURES_9).reset_index(drop=True)
     print(f"[BenchmarkPipeline] Deduplicated: {initial_len} -> {len(df)} unique flow profiles.")
 
-    # Clean: inf / nan
-    for col in TIER1_ALLOWLIST:
+    # Clean: inf / nan across all 76 features
+    for col in ALL_ALLOWLISTED_CIC_FEATURES:
         df[col] = pd.to_numeric(df[col], errors="coerce")
-    df[TIER1_ALLOWLIST] = df[TIER1_ALLOWLIST].replace([np.inf, -np.inf], np.nan).fillna(0.0)
+    df[ALL_ALLOWLISTED_CIC_FEATURES] = df[ALL_ALLOWLISTED_CIC_FEATURES].replace([np.inf, -np.inf], np.nan).fillna(0.0)
 
     return df
 
@@ -131,8 +134,8 @@ def build_protocol_splits(
     seed: int = 42,
 ) -> Dict[str, Dict[str, np.ndarray]]:
     """
-    Constructs standardized benchmark splits:
-      1. 'ftp_only': Train on FTP-BruteForce + Benign, Test on 4 novel families + Benign.
+    Constructs standardized benchmark splits with 9, 25, and 76 features, plus family labels:
+      1. 'ftp_only': Train on FTP-BruteForce + Benign, Test on all 5 families + Benign.
       2. 'lofo_<family>': Leave-one-family-out for each attack family.
       3. 'prevalence_1_100': Novel attack prevalence 1:100 against benign.
       4. 'prevalence_1_1000': Novel attack prevalence 1:1000 against benign.
@@ -142,83 +145,75 @@ def build_protocol_splits(
 
     splits = {}
 
-    # Separate benign and attack pools
+    # Separate benign pool chronologically: 60% train, 40% test
     benign_df = df[df[lbl_col] == "Benign"].reset_index(drop=True)
+    b_split = int(len(benign_df) * 0.60)
+    benign_train = benign_df.iloc[:b_split]
+    benign_test = benign_df.iloc[b_split:]
 
-    # Chronological time-based split: early benign for train, late benign for test
-    split_point = int(len(benign_df) * 0.60)
-    benign_train = benign_df.iloc[:split_point]
-    benign_test = benign_df.iloc[split_point:]
+    # Partition each attack family chronologically: 70% train pool, 30% test pool
+    attack_train_pools = {}
+    attack_test_pools = {}
+    for fam in families:
+        fam_df = df[df[lbl_col] == fam].reset_index(drop=True)
+        split_idx = int(len(fam_df) * 0.70)
+        attack_train_pools[fam] = fam_df.iloc[:split_idx]
+        attack_test_pools[fam] = fam_df.iloc[split_idx:]
 
-    # ── Protocol 1: Train FTP only, test on 4 novel families ─────────────────
-    ftp_df = df[df[lbl_col] == "FTP-BruteForce"].reset_index(drop=True)
-    ftp_train_n = int(len(ftp_df) * 0.70)
-    p1_train_df = pd.concat([benign_train, ftp_df.iloc[:ftp_train_n]], ignore_index=True)
+    # Canonical all-family test attacks (30% held-out test portion of all 5 families)
+    all_test_attacks = pd.concat([attack_test_pools[fam] for fam in families], ignore_index=True)
+    all_test_df = pd.concat([benign_test, all_test_attacks], ignore_index=True)
 
-    novel_test_dfs = [ftp_df.iloc[ftp_train_n:]]
-    for f in ["SSH-BruteForce", "DoS-GoldenEye", "DoS-Hulk", "DoS-Slowloris"]:
-        fam_df = df[df[lbl_col] == f]
-        novel_test_dfs.append(fam_df)
+    def extract_split_matrices(tr_df: pd.DataFrame, te_df: pd.DataFrame) -> Dict[str, np.ndarray]:
+        # 9 features
+        X_tr_9 = enforce_allowlist(tr_df, FEATURES_9)
+        X_te_9 = enforce_allowlist(te_df, FEATURES_9)
+        assert_no_leakage(X_tr_9, X_te_9)
 
-    p1_test_attacks = pd.concat(novel_test_dfs, ignore_index=True)
-    p1_test_df = pd.concat([benign_test, p1_test_attacks], ignore_index=True)
+        # 25 features
+        X_tr_25 = enforce_allowlist(tr_df, FEATURES_25)
+        X_te_25 = enforce_allowlist(te_df, FEATURES_25)
 
-    X_tr_p1 = enforce_allowlist(p1_train_df, TIER1_ALLOWLIST)
-    y_tr_p1 = (p1_train_df[lbl_col] != "Benign").astype(int).values
-    X_te_p1 = enforce_allowlist(p1_test_df, TIER1_ALLOWLIST)
-    y_te_p1 = (p1_test_df[lbl_col] != "Benign").astype(int).values
+        # 76 features
+        X_tr_76 = enforce_allowlist(tr_df, ALL_ALLOWLISTED_CIC_FEATURES)
+        X_te_76 = enforce_allowlist(te_df, ALL_ALLOWLISTED_CIC_FEATURES)
+        assert_no_leakage(X_tr_76, X_te_76)
 
-    # Check leakage
-    assert_no_leakage(X_tr_p1, X_te_p1)
-
-    splits["ftp_only"] = {
-        "X_train": X_tr_p1,
-        "y_train": y_tr_p1,
-        "X_test": X_te_p1,
-        "y_test": y_te_p1,
-    }
-
-    # ── Protocol 2: Leave-One-Family-Out (LOFO) ──────────────────────────────
-    for held_out in families:
-        train_attacks = [df[df[lbl_col] == fam] for fam in families if fam != held_out]
-        train_attacks_df = pd.concat(train_attacks, ignore_index=True)
-        test_attacks_df = df[df[lbl_col] == held_out].reset_index(drop=True)
-
-        tr_df = pd.concat([benign_train, train_attacks_df], ignore_index=True)
-        te_df = pd.concat([benign_test, test_attacks_df], ignore_index=True)
-
-        X_tr = enforce_allowlist(tr_df, TIER1_ALLOWLIST)
         y_tr = (tr_df[lbl_col] != "Benign").astype(int).values
-        X_te = enforce_allowlist(te_df, TIER1_ALLOWLIST)
         y_te = (te_df[lbl_col] != "Benign").astype(int).values
+        y_fam_te = np.array(te_df[lbl_col].str.strip().values, dtype="U32")
 
-        assert_no_leakage(X_tr, X_te)
-
-        splits[f"lofo_{held_out}"] = {
-            "X_train": X_tr,
+        return {
+            "X_train": X_tr_9,
+            "X_test": X_te_9,
+            "X_train_25": X_tr_25,
+            "X_test_25": X_te_25,
+            "X_train_76": X_tr_76,
+            "X_test_76": X_te_76,
             "y_train": y_tr,
-            "X_test": X_te,
             "y_test": y_te,
+            "y_family_test": y_fam_te,
         }
+
+    # ── Protocol 1: Train FTP only (Regime B: Cold-start), test on all families ──
+    p1_train_df = pd.concat([benign_train, attack_train_pools["FTP-BruteForce"]], ignore_index=True)
+    splits["ftp_only"] = extract_split_matrices(p1_train_df, all_test_df)
+
+    # ── Protocol 2: Leave-One-Family-Out (LOFO) (Regime A) ────────────────────
+    for held_out in families:
+        # Train on benign + the other 4 families' train portions
+        train_attacks = [attack_train_pools[fam] for fam in families if fam != held_out]
+        tr_df = pd.concat([benign_train] + train_attacks, ignore_index=True)
+        # Test on benign_test + all 5 families test portions (with held_out labeled in y_family_test)
+        splits[f"lofo_{held_out}"] = extract_split_matrices(tr_df, all_test_df)
 
     # ── Protocol 3: Realistic Prevalence (1:100 and 1:1000) ──────────────────
     n_benign_eval = len(benign_test)
     for ratio_name, ratio_val in [("prevalence_1_100", 0.01), ("prevalence_1_1000", 0.001)]:
         target_attack_n = max(5, int(n_benign_eval * ratio_val))
-        sampled_attacks = p1_test_attacks.sample(n=min(target_attack_n, len(p1_test_attacks)), random_state=seed)
+        sampled_attacks = all_test_attacks.sample(n=min(target_attack_n, len(all_test_attacks)), random_state=seed)
         prev_test_df = pd.concat([benign_test, sampled_attacks], ignore_index=True)
-
-        X_prev = enforce_allowlist(prev_test_df, TIER1_ALLOWLIST)
-        y_prev = (prev_test_df[lbl_col] != "Benign").astype(int).values
-
-        assert_no_leakage(X_tr_p1, X_prev)
-
-        splits[ratio_name] = {
-            "X_train": X_tr_p1,
-            "y_train": y_tr_p1,
-            "X_test": X_prev,
-            "y_test": y_prev,
-        }
+        splits[ratio_name] = extract_split_matrices(p1_train_df, prev_test_df)
 
     return splits
 
@@ -239,17 +234,17 @@ def generate_benchmark_artifacts():
         "dataset_name": "CSE-CIC-IDS2018 Cleaned Open-Set Benchmark",
         "provenance": "Generated from cic.csv (processed traffic data for ML algorithms, CICFlowMeter-V3)",
         "known_label_issues": KNOWN_LABEL_ISSUES,
-        "features": TIER1_ALLOWLIST,
-        "feature_count": len(TIER1_ALLOWLIST),
+        "features": FEATURES_9,
+        "feature_count": len(FEATURES_9),
+        "features_25_count": len(FEATURES_25),
+        "features_76_count": len(ALL_ALLOWLISTED_CIC_FEATURES),
         "total_unique_flows": len(df),
         "protocols": {},
     }
 
     for name, data in splits.items():
-        npz_dict[f"{name}_X_train"] = data["X_train"]
-        npz_dict[f"{name}_y_train"] = data["y_train"]
-        npz_dict[f"{name}_X_test"] = data["X_test"]
-        npz_dict[f"{name}_y_test"] = data["y_test"]
+        for k, v in data.items():
+            npz_dict[f"{name}_{k}"] = v
 
         stats_dict["protocols"][name] = {
             "train_samples": int(len(data["y_train"])),
@@ -259,6 +254,9 @@ def generate_benchmark_artifacts():
             "test_attacks": int(np.sum(data["y_test"])),
             "test_benign": int(np.sum(data["y_test"] == 0)),
             "attack_prevalence_pct": float(np.mean(data["y_test"]) * 100),
+            "features_9_shape": list(data["X_train"].shape),
+            "features_25_shape": list(data["X_train_25"].shape),
+            "features_76_shape": list(data["X_train_76"].shape),
         }
 
     np.savez_compressed(BENCHMARK_PROCESSED_PATH, **npz_dict)
@@ -274,3 +272,4 @@ def generate_benchmark_artifacts():
 
 if __name__ == "__main__":
     generate_benchmark_artifacts()
+

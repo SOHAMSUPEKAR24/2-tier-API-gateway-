@@ -41,7 +41,7 @@ Network-layer flow features (CICFlowMeter statistics) cannot inspect HTTP reques
      │ Fast Payload Features │                       │ Full-Text TF-IDF Char │
      │       (Table I)       │                       │     3-5 Grams (1500)  │
      └───────────┬───────────┘                       └───────────┬───────────┘
-                 │ (0.35 ms)                                     │ (12-40 ms)
+                 │ (Fast Path)                                   │ (Deep Verification)
                  ▼                                               ▼
      ┌───────────────────────┐                       ┌───────────────────────┐
      │  Lightweight Edge RF  │                       │   Deep Verification   │
@@ -51,7 +51,7 @@ Network-layer flow features (CICFlowMeter statistics) cannot inspect HTTP reques
 ```
 
 #### Tier 1 (Table I: 9 Fast Payload Features)
-Extracted via lightweight regex in $<0.4$ ms:
+Extracted via optimized precompiled regular expressions:
 1. `req_len`: Total byte length of URI, headers, and body.
 2. `num_headers`: Count of structured HTTP header fields.
 3. `special_chars`: Count of non-alphanumeric punctuation marks.
@@ -92,7 +92,7 @@ When API endpoints receive multipart file uploads (e.g., `/api/v1/upload`), the 
      │ Fast PE Header Fields │                       │ Full EMBER Static PE  │
      │      (6 Features)     │                       │ Vector (525 Features) │
      └───────────┬───────────┘                       └───────────┬───────────┘
-                 │ (0.28 ms)                                     │ (15-60 ms)
+                 │ (Edge Screening)                              │ (Deep Verification)
                  ▼                                               ▼
      ┌───────────────────────┐                       ┌───────────────────────┐
      │  Lightweight Edge RF  │                       │   Deep Verification   │
@@ -102,7 +102,7 @@ When API endpoints receive multipart file uploads (e.g., `/api/v1/upload`), the 
 ```
 
 #### Tier 1 Fast Features (6 Header/Entropy Dimensions)
-Parsed directly from the COFF and Optional headers in $<0.3$ ms without unpacking:
+Parsed directly from the COFF and Optional headers without unpacking:
 1. `size`: Raw binary size in bytes.
 2. `vsize`: Total virtual size of allocated sections in memory.
 3. `has_signature`: Authenticode certificate table flag.
@@ -126,8 +126,8 @@ For both Track A and Track B, total gateway latency is bounded by the blended la
 $$L_{\text{blended}} = (1 - \text{ER}) \cdot L_{\text{Tier 1}} + \text{ER} \cdot (L_{\text{Tier 1}} + L_{\text{Tier 2}})$$
 
 Where:
-- $\text{ER}$ is the empirical Escalation Rate ($\approx 1\% - 15\%$).
-- $L_{\text{Tier 1}}$ is sub-millisecond wire-speed inspection ($0.25 - 0.45\text{ ms}$).
-- $L_{\text{Tier 2}}$ is deep verification inference ($15 - 50\text{ ms}$).
+- $\text{ER}$ is the empirical Escalation Rate (evaluated across $\text{ER} \in [1\%, 45\%]$).
+- $L_{\text{Tier 1}}$ is edge inspection latency (measured in Table \ref{tab:tier1_profiling} at $56.75\,\mu\text{s}$ total pipeline).
+- $L_{\text{Tier 2}}$ is deep verification inference latency (measured at $1.84 - 59.45\text{ ms}$ depending on execution queue).
 
-By routing $>90\%$ of traffic solely through Tier 1, the two-tier gateway cuts compute load and latency by **$>85\%$** compared to a monolithic deep inspection gateway, while matching or exceeding its accuracy through the adaptive feedback loop.
+By routing low-risk traffic solely through Tier 1, the two-tier gateway significantly cuts latency and resource load compared to a monolithic deep inspection gateway, with all measured values recorded in `results/latency/`.

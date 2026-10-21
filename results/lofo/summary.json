@@ -1,0 +1,823 @@
+{
+  "execution_timestamp": "2026-10-21 20:56:53 UTC",
+  "window_size_ablation": {
+    "t2_standalone_evals": {
+      "features_76": {
+        "FTP-BruteForce": {
+          "mean": 100.0,
+          "ci95": 0.0
+        },
+        "SSH-BruteForce": {
+          "mean": 0.149812734082397,
+          "ci95": 0.22471910112359553
+        },
+        "DoS-GoldenEye": {
+          "mean": 0.0,
+          "ci95": 0.0
+        },
+        "DoS-Hulk": {
+          "mean": 0.0,
+          "ci95": 0.0
+        },
+        "DoS-Slowloris": {
+          "mean": 7.464788732394365,
+          "ci95": 3.52112676056338
+        },
+        "Benign": {
+          "mean": 0.09453582907922103,
+          "ci95": 0.0
+        }
+      },
+      "features_74": {
+        "FTP-BruteForce": {
+          "mean": 100.0,
+          "ci95": 0.0
+        },
+        "SSH-BruteForce": {
+          "mean": 0.7490636704119851,
+          "ci95": 0.0
+        },
+        "DoS-GoldenEye": {
+          "mean": 0.0,
+          "ci95": 0.0
+        },
+        "DoS-Hulk": {
+          "mean": 0.0,
+          "ci95": 0.0
+        },
+        "DoS-Slowloris": {
+          "mean": 6.478873239436619,
+          "ci95": 2.136150234741784
+        },
+        "Benign": {
+          "mean": 0.07941009642654567,
+          "ci95": 0.02268859897901305
+        }
+      }
+    },
+    "lofo_comparison": {
+      "FTP-BruteForce": {
+        "76_features": {
+          "held_out_rec": {
+            "mean": 3.432835820895522,
+            "ci95": 1.0447761194029854
+          },
+          "held_out_esc": {
+            "mean": 17.61194029850746,
+            "ci95": 20.0
+          },
+          "bacc": {
+            "mean": 91.42579567656142,
+            "ci95": 0.10602193231235191
+          },
+          "sfr": {
+            "mean": 14.633333333333335,
+            "ci95": 3.233611111111112
+          }
+        },
+        "74_features": {
+          "held_out_rec": {
+            "mean": 2.9104477611940296,
+            "ci95": 1.0074626865671639
+          },
+          "held_out_esc": {
+            "mean": 17.61194029850746,
+            "ci95": 20.0
+          },
+          "bacc": {
+            "mean": 91.3905716266465,
+            "ci95": 0.11252284615869002
+          },
+          "sfr": {
+            "mean": 14.633333333333335,
+            "ci95": 3.233611111111112
+          }
+        }
+      },
+      "SSH-BruteForce": {
+        "76_features": {
+          "held_out_rec": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "held_out_esc": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "bacc": {
+            "mean": 91.10842944475957,
+            "ci95": 0.12434612718219284
+          },
+          "sfr": {
+            "mean": 17.244444444444444,
+            "ci95": 0.16666666666666607
+          }
+        },
+        "74_features": {
+          "held_out_rec": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "held_out_esc": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "bacc": {
+            "mean": 90.79152958971449,
+            "ci95": 0.24473592991743942
+          },
+          "sfr": {
+            "mean": 17.244444444444444,
+            "ci95": 0.16666666666666607
+          }
+        }
+      },
+      "DoS-GoldenEye": {
+        "76_features": {
+          "held_out_rec": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "held_out_esc": {
+            "mean": 0.6666666666666667,
+            "ci95": 0.3777777777777779
+          },
+          "bacc": {
+            "mean": 80.79871746391883,
+            "ci95": 0.24625189071658582
+          },
+          "sfr": {
+            "mean": 37.87777777777778,
+            "ci95": 0.5722222222222229
+          }
+        },
+        "74_features": {
+          "held_out_rec": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "held_out_esc": {
+            "mean": 0.6666666666666667,
+            "ci95": 0.3777777777777779
+          },
+          "bacc": {
+            "mean": 80.7668084704103,
+            "ci95": 0.299941702905393
+          },
+          "sfr": {
+            "mean": 37.87777777777778,
+            "ci95": 0.5722222222222229
+          }
+        }
+      },
+      "DoS-Hulk": {
+        "76_features": {
+          "held_out_rec": {
+            "mean": 8.226221079691516,
+            "ci95": 7.737789203084832
+          },
+          "held_out_esc": {
+            "mean": 33.933161953727506,
+            "ci95": 16.503856041131108
+          },
+          "bacc": {
+            "mean": 89.25947879246235,
+            "ci95": 0.8500000000000014
+          },
+          "sfr": {
+            "mean": 15.711111111111114,
+            "ci95": 3.638888888888891
+          }
+        },
+        "74_features": {
+          "held_out_rec": {
+            "mean": 6.478149100257069,
+            "ci95": 3.3161953727506424
+          },
+          "held_out_esc": {
+            "mean": 33.933161953727506,
+            "ci95": 16.503856041131108
+          },
+          "bacc": {
+            "mean": 89.00558076510998,
+            "ci95": 0.3480509863238126
+          },
+          "sfr": {
+            "mean": 15.711111111111114,
+            "ci95": 3.638888888888891
+          }
+        }
+      },
+      "DoS-Slowloris": {
+        "76_features": {
+          "held_out_rec": {
+            "mean": 12.535211267605634,
+            "ci95": 0.14084507042253502
+          },
+          "held_out_esc": {
+            "mean": 7.934272300469483,
+            "ci95": 4.976525821596244
+          },
+          "bacc": {
+            "mean": 87.9670668683431,
+            "ci95": 0.15294006428437257
+          },
+          "sfr": {
+            "mean": 23.48888888888889,
+            "ci95": 0.3168055555555558
+          }
+        },
+        "74_features": {
+          "held_out_rec": {
+            "mean": 12.488262910798122,
+            "ci95": 0.2112676056338021
+          },
+          "held_out_esc": {
+            "mean": 7.934272300469483,
+            "ci95": 4.976525821596244
+          },
+          "bacc": {
+            "mean": 87.9560723514212,
+            "ci95": 0.13747912333774792
+          },
+          "sfr": {
+            "mean": 23.48888888888889,
+            "ci95": 0.3168055555555558
+          }
+        }
+      }
+    }
+  },
+  "prototype_knn": {
+    "features_9": {
+      "SSH-BruteForce": {
+        "auroc_mean": 0.5775654793391414,
+        "auroc_ci95": 0.04201222698796092,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.4634146341463417,
+            "achieved_benign_esc_ci95": 0.3176403857061826
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.8285120060502935,
+            "achieved_benign_esc_ci95": 0.2329362828512005
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.101153337114766,
+            "achieved_benign_esc_ci95": 0.3951597655511443
+          },
+          "budget_10pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 8.99981092834184,
+            "achieved_benign_esc_ci95": 0.5520892418226504
+          }
+        }
+      },
+      "DoS-GoldenEye": {
+        "auroc_mean": 0.80067065817945,
+        "auroc_ci95": 0.022902704775109806,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.4634146341463417,
+            "achieved_benign_esc_ci95": 0.3176403857061826
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.8285120060502935,
+            "achieved_benign_esc_ci95": 0.2329362828512005
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.101153337114766,
+            "achieved_benign_esc_ci95": 0.3951597655511443
+          },
+          "budget_10pct": {
+            "coverage_mean": 17.37777777777778,
+            "coverage_ci95": 11.666666666666664,
+            "sfr_mean": 82.62222222222222,
+            "sfr_ci95": 11.666666666666664,
+            "achieved_benign_esc_mean": 8.99981092834184,
+            "achieved_benign_esc_ci95": 0.5520892418226504
+          }
+        }
+      },
+      "DoS-Hulk": {
+        "auroc_mean": 0.5113904251973709,
+        "auroc_ci95": 0.046127409023238364,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.4634146341463417,
+            "achieved_benign_esc_ci95": 0.3176403857061826
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.5141388174807198,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 99.48586118251929,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.8285120060502935,
+            "achieved_benign_esc_ci95": 0.2329362828512005
+          },
+          "budget_5pct": {
+            "coverage_mean": 3.8046272493573268,
+            "coverage_ci95": 0.591259640102828,
+            "sfr_mean": 96.19537275064269,
+            "sfr_ci95": 0.5912596401028338,
+            "achieved_benign_esc_mean": 5.101153337114766,
+            "achieved_benign_esc_ci95": 0.3951597655511443
+          },
+          "budget_10pct": {
+            "coverage_mean": 5.964010282776349,
+            "coverage_ci95": 1.028277634961439,
+            "sfr_mean": 94.03598971722366,
+            "sfr_ci95": 1.0282776349614267,
+            "achieved_benign_esc_mean": 8.99981092834184,
+            "achieved_benign_esc_ci95": 0.5520892418226504
+          }
+        }
+      },
+      "DoS-Slowloris": {
+        "auroc_mean": 0.8313683195790359,
+        "auroc_ci95": 0.022485768585166988,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 18.779342723004696,
+            "coverage_ci95": 12.300469483568074,
+            "sfr_mean": 81.2206572769953,
+            "sfr_ci95": 12.300469483568072,
+            "achieved_benign_esc_mean": 1.4634146341463417,
+            "achieved_benign_esc_ci95": 0.3176403857061826
+          },
+          "budget_2pct": {
+            "coverage_mean": 33.755868544600936,
+            "coverage_ci95": 10.563380281690144,
+            "sfr_mean": 66.24413145539907,
+            "sfr_ci95": 10.56338028169014,
+            "achieved_benign_esc_mean": 2.8285120060502935,
+            "achieved_benign_esc_ci95": 0.2329362828512005
+          },
+          "budget_5pct": {
+            "coverage_mean": 65.02347417840375,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 34.976525821596255,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.101153337114766,
+            "achieved_benign_esc_ci95": 0.3951597655511443
+          },
+          "budget_10pct": {
+            "coverage_mean": 65.02347417840375,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 34.976525821596255,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 8.99981092834184,
+            "achieved_benign_esc_ci95": 0.5520892418226504
+          }
+        }
+      }
+    },
+    "features_76": {
+      "SSH-BruteForce": {
+        "auroc_mean": 0.8400977790807435,
+        "auroc_ci95": 0.012037962331543861,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 8.239700374531836,
+            "coverage_ci95": 8.689138576779026,
+            "sfr_mean": 91.76029962546815,
+            "sfr_ci95": 8.68913857677903,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-GoldenEye": {
+        "auroc_mean": 0.7706288523350351,
+        "auroc_ci95": 0.013468960736118973,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.08888888888888888,
+            "coverage_ci95": 0.08888888888888888,
+            "sfr_mean": 99.91111111111111,
+            "sfr_ci95": 0.08888888888888857,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 1.0222222222222221,
+            "coverage_ci95": 0.4888888888888888,
+            "sfr_mean": 98.97777777777779,
+            "sfr_ci95": 0.48888888888888715,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-Hulk": {
+        "auroc_mean": 0.7063303038123943,
+        "auroc_ci95": 0.006330255207854796,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 6.426735218508997,
+            "coverage_ci95": 1.028277634961439,
+            "sfr_mean": 93.573264781491,
+            "sfr_ci95": 1.028277634961448,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 7.455012853470436,
+            "coverage_ci95": 0.7712082262210793,
+            "sfr_mean": 92.54498714652955,
+            "sfr_ci95": 0.7712082262210842,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 7.969151670951156,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 92.03084832904884,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 7.969151670951156,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 92.03084832904884,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-Slowloris": {
+        "auroc_mean": 0.7856850563264886,
+        "auroc_ci95": 0.04513402340050249,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 32.629107981220656,
+            "coverage_ci95": 3.4037558685446037,
+            "sfr_mean": 67.37089201877934,
+            "sfr_ci95": 3.4037558685446037,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 41.26760563380281,
+            "coverage_ci95": 11.056338028169012,
+            "sfr_mean": 58.7323943661972,
+            "sfr_ci95": 11.056338028169009,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 50.8450704225352,
+            "coverage_ci95": 14.178403755868544,
+            "sfr_mean": 49.1549295774648,
+            "sfr_ci95": 14.178403755868548,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 59.812206572769945,
+            "coverage_ci95": 7.816901408450697,
+            "sfr_mean": 40.187793427230055,
+            "sfr_ci95": 7.816901408450697,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      }
+    },
+    "features_74_no_win": {
+      "SSH-BruteForce": {
+        "auroc_mean": 0.8407399145849309,
+        "auroc_ci95": 0.011900426862904656,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 8.239700374531836,
+            "coverage_ci95": 8.689138576779026,
+            "sfr_mean": 91.76029962546815,
+            "sfr_ci95": 8.68913857677903,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-GoldenEye": {
+        "auroc_mean": 0.7716648809898952,
+        "auroc_ci95": 0.01319673956429479,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.08888888888888888,
+            "coverage_ci95": 0.08888888888888888,
+            "sfr_mean": 99.91111111111111,
+            "sfr_ci95": 0.08888888888888857,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 1.0222222222222221,
+            "coverage_ci95": 0.4888888888888888,
+            "sfr_mean": 98.97777777777779,
+            "sfr_ci95": 0.48888888888888715,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-Hulk": {
+        "auroc_mean": 0.7063303038123941,
+        "auroc_ci95": 0.006330546835090989,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 6.426735218508997,
+            "coverage_ci95": 1.028277634961439,
+            "sfr_mean": 93.573264781491,
+            "sfr_ci95": 1.028277634961448,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 7.455012853470436,
+            "coverage_ci95": 0.7712082262210793,
+            "sfr_mean": 92.54498714652955,
+            "sfr_ci95": 0.7712082262210842,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 7.969151670951156,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 92.03084832904884,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 7.969151670951156,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 92.03084832904884,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-Slowloris": {
+        "auroc_mean": 0.7869120692517112,
+        "auroc_ci95": 0.04508835327462357,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 32.629107981220656,
+            "coverage_ci95": 3.4037558685446037,
+            "sfr_mean": 67.37089201877934,
+            "sfr_ci95": 3.4037558685446037,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 41.26760563380281,
+            "coverage_ci95": 11.056338028169012,
+            "sfr_mean": 58.7323943661972,
+            "sfr_ci95": 11.056338028169009,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 50.8450704225352,
+            "coverage_ci95": 14.178403755868544,
+            "sfr_mean": 49.1549295774648,
+            "sfr_ci95": 14.178403755868548,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 59.812206572769945,
+            "coverage_ci95": 7.816901408450697,
+            "sfr_mean": 40.187793427230055,
+            "sfr_ci95": 7.816901408450697,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      }
+    }
+  },
+  "label_audit": {
+    "benign_test_set_size": 5289,
+    "benign_false_positives_count": 5,
+    "benign_fpr_percent": 0.09453582907922103,
+    "benign_fpr_formula": "5 / 5289 = 0.0945%",
+    "hulk_test_flows_count": 389,
+    "hulk_features": {
+      "flow_packets_per_sec": {
+        "mean": 7.71088874525707,
+        "median": 8.06159646,
+        "min": 0.118180818,
+        "max": 32.22347861
+      },
+      "flow_duration_ms": {
+        "mean": 8335.472215938304,
+        "median": 1358.599
+      },
+      "total_fwd_packets": {
+        "mean": 4.933161953727506,
+        "median": 5.0
+      },
+      "fwd_packet_length_mean": {
+        "mean": 111.75172909825193,
+        "median": 88.5
+      },
+      "fwd_init_win_bytes": {
+        "median": 29200.0,
+        "unique_values": [
+          0.0,
+          251.0,
+          274.0,
+          29200.0
+        ]
+      }
+    }
+  },
+  "dataset_version": "CSE-CIC-IDS2018",
+  "hulk_audit": {
+    "test_count": 389,
+    "test_duration_ms": {
+      "median": 1358.599,
+      "mean": 8335.472215938304,
+      "min": 341.366,
+      "max": 84646.388,
+      "hist_counts": [
+        358,
+        0,
+        0,
+        0,
+        31
+      ],
+      "hist_bin_edges": [
+        341.37,
+        17202.37,
+        34063.37,
+        50924.38,
+        67785.38,
+        84646.39
+      ]
+    },
+    "test_packets_per_sec": {
+      "median": 8.06159646,
+      "mean": 7.71088874525707,
+      "min": 0.118180818,
+      "max": 32.22347861
+    },
+    "test_fwd_packets": {
+      "median": 5.0,
+      "mean": 4.933161953727506,
+      "min": 2.0,
+      "max": 10.0
+    },
+    "train_count": 903,
+    "train_duration_ms": {
+      "median": 146.6,
+      "mean": 159.5,
+      "min": 10.2,
+      "max": 1240.0
+    },
+    "train_packets_per_sec": {
+      "median": 61.8,
+      "mean": 8536.6,
+      "min": 2.4,
+      "max": 100000.0
+    },
+    "train_fwd_packets": {
+      "median": 3.0,
+      "mean": 3.14,
+      "min": 1.0,
+      "max": 8.0
+    },
+    "capture_sessions": {
+      "date": "2018-02-16 (Friday)",
+      "morning_session": "10:12 - 11:30 UTC (training partition source)",
+      "afternoon_session": "13:45 - 14:19 UTC (test partition source)",
+      "victim_ip": "18.218.115.60 / 172.31.69.25 (Ubuntu 16.04 Apache Web Server)",
+      "attacker_ip": "18.219.211.138 (Kali Linux instance)"
+    }
+  },
+  "feature_ablation_74": {
+    "num_features_original": 76,
+    "num_features_ablated": 74,
+    "ablated_columns": [
+      "FWD Init Win Bytes",
+      "Bwd Init Win Bytes"
+    ],
+    "verified_assertion": true
+  }
+}

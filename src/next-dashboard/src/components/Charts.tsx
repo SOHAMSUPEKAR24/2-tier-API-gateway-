@@ -51,14 +51,14 @@ export function SystemVitalsCharts({ data }: { data: any[] }) {
 }
 
 export function LatencyComparisonChart({ latency }: { latency?: { tier1: number; tier2: number; blended: number; savings: string } }) {
-  const t1 = latency?.tier1 ?? 0.03;
-  const blended = latency?.blended ?? 0.03;
-  const t2 = latency?.tier2 ?? 2.01;
+  const t1 = latency?.tier1 ?? 8.85;
+  const blended = latency?.blended ?? 12.83;
+  const t2 = latency?.tier2 ?? 59.45;
 
   const data = [
     { name: 'Tier 1 Edge', latency: Number(t1.toFixed(2)), fill: '#66fcf1' },
     { name: 'Two-Tier Gateway', latency: Number(blended.toFixed(2)), fill: '#f2a900' },
-    { name: 'Naive Sandbox (All)', latency: Number(t2.toFixed(2)), fill: '#ff4b4b' },
+    { name: 'Monolithic Deep Verif', latency: Number(t2.toFixed(2)), fill: '#ff4b4b' },
   ];
 
   return (
@@ -79,7 +79,7 @@ export function LatencyComparisonChart({ latency }: { latency?: { tier1: number;
         </BarChart>
       </ResponsiveContainer>
       <div style={{ textAlign: 'center', fontSize: '0.8em', color: '#66fcf1', marginTop: '4px', fontWeight: 600 }}>
-        ⚡ {latency?.savings || '98.5'}% Latency Overhead Reduction vs Pure Sandbox
+        ⚡ {latency?.savings || '78.4'}% Latency Overhead Reduction vs Monolithic Verification
       </div>
     </div>
   );

@@ -1,0 +1,815 @@
+{
+  "oracle_tier2_upper_bound": {
+    "condition": "Oracle Tier 2 (Upper Bound)",
+    "oracle_tier2": true,
+    "seeds": [
+      42,
+      71,
+      137,
+      256,
+      512
+    ],
+    "aggregated_cycles": [
+      {
+        "cycle": 0,
+        "held_out_recall_mean": 1.7232375979112269,
+        "held_out_recall_ci95": 1.2010443864229763,
+        "escalation_rate_mean": 1.3429256594724222,
+        "escalation_rate_ci95": 0.6432501057977147,
+        "benign_fpr_mean": 0.09453582907922103,
+        "benign_fpr_ci95": 0.0,
+        "prev_learned_acc_mean": 99.91002339391758,
+        "prev_learned_acc_ci95": 0.0,
+        "active_version": "v1.0",
+        "gate_status": "DEPLOYED"
+      },
+      {
+        "cycle": 1,
+        "held_out_recall_mean": 5.848563968668406,
+        "held_out_recall_ci95": 3.061357702349871,
+        "escalation_rate_mean": 3.791790097333897,
+        "escalation_rate_ci95": 0.9342643532233033,
+        "benign_fpr_mean": 0.037814331631688416,
+        "benign_fpr_ci95": 0.037814331631688416,
+        "prev_learned_acc_mean": 99.96400935756704,
+        "prev_learned_acc_ci95": 0.03599064243296368,
+        "active_version": "v1.1",
+        "gate_status": "PASSED"
+      },
+      {
+        "cycle": 2,
+        "held_out_recall_mean": 20.33942558746736,
+        "held_out_recall_ci95": 2.5065274151436068,
+        "escalation_rate_mean": 0.5868246579207222,
+        "escalation_rate_ci95": 0.07194244604316541,
+        "benign_fpr_mean": 0.0,
+        "benign_fpr_ci95": 0.0,
+        "prev_learned_acc_mean": 100.0,
+        "prev_learned_acc_ci95": 0.0,
+        "active_version": "v1.2",
+        "gate_status": "PASSED"
+      },
+      {
+        "cycle": 3,
+        "held_out_recall_mean": 20.313315926892948,
+        "held_out_recall_ci95": 2.506527415143603,
+        "escalation_rate_mean": 0.43447594865284234,
+        "escalation_rate_ci95": 0.08181689942163917,
+        "benign_fpr_mean": 0.0,
+        "benign_fpr_ci95": 0.0,
+        "prev_learned_acc_mean": 100.0,
+        "prev_learned_acc_ci95": 0.0,
+        "active_version": "v1.3",
+        "gate_status": "PASSED"
+      },
+      {
+        "cycle": 4,
+        "held_out_recall_mean": 20.339425587467364,
+        "held_out_recall_ci95": 2.480417754569192,
+        "escalation_rate_mean": 0.4316546762589928,
+        "escalation_rate_ci95": 0.11144025955706022,
+        "benign_fpr_mean": 0.0,
+        "benign_fpr_ci95": 0.0,
+        "prev_learned_acc_mean": 100.0,
+        "prev_learned_acc_ci95": 0.0,
+        "active_version": "v1.4",
+        "gate_status": "PASSED"
+      },
+      {
+        "cycle": 5,
+        "held_out_recall_mean": 20.378590078328983,
+        "held_out_recall_ci95": 2.5,
+        "escalation_rate_mean": 0.3441952320496544,
+        "escalation_rate_ci95": 0.08467343772041191,
+        "benign_fpr_mean": 0.0,
+        "benign_fpr_ci95": 0.0,
+        "prev_learned_acc_mean": 100.0,
+        "prev_learned_acc_ci95": 0.0,
+        "active_version": "v1.5",
+        "gate_status": "PASSED"
+      }
+    ],
+    "seed_runs": [
+      [
+        {
+          "cycle": 0,
+          "version": "v1.0",
+          "held_out_recall": 2.3498694516971277,
+          "escalation_rate": 0.9310198899703767,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model initialization"
+        },
+        {
+          "cycle": 1,
+          "version": "v1.1",
+          "held_out_recall": 3.981723237597911,
+          "escalation_rate": 4.37297221046692,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 2,
+          "version": "v1.2",
+          "held_out_recall": 21.93211488250653,
+          "escalation_rate": 0.6347862886161659,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 3,
+          "version": "v1.3",
+          "held_out_recall": 21.93211488250653,
+          "escalation_rate": 0.5501481168006771,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 4,
+          "version": "v1.4",
+          "held_out_recall": 21.93211488250653,
+          "escalation_rate": 0.3667654112004514,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 5,
+          "version": "v1.5",
+          "held_out_recall": 21.93211488250653,
+          "escalation_rate": 0.29623360135421073,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "version": "v1.0",
+          "held_out_recall": 3.1331592689295036,
+          "escalation_rate": 3.046974185357596,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model initialization"
+        },
+        {
+          "cycle": 1,
+          "version": "v1.1",
+          "held_out_recall": 13.838120104438643,
+          "escalation_rate": 2.4262942587106786,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 2,
+          "version": "v1.2",
+          "held_out_recall": 22.06266318537859,
+          "escalation_rate": 0.4514035830159402,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 3,
+          "version": "v1.3",
+          "held_out_recall": 22.06266318537859,
+          "escalation_rate": 0.31033996332345887,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 4,
+          "version": "v1.4",
+          "held_out_recall": 22.06266318537859,
+          "escalation_rate": 0.3808717731696995,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 5,
+          "version": "v1.5",
+          "held_out_recall": 22.06266318537859,
+          "escalation_rate": 0.33855268726195514,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "version": "v1.0",
+          "held_out_recall": 0.13054830287206268,
+          "escalation_rate": 0.9028071660318804,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model initialization"
+        },
+        {
+          "cycle": 1,
+          "version": "v1.1",
+          "held_out_recall": 3.981723237597911,
+          "escalation_rate": 4.246014952743687,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 2,
+          "version": "v1.2",
+          "held_out_recall": 22.06266318537859,
+          "escalation_rate": 0.6347862886161659,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 3,
+          "version": "v1.3",
+          "held_out_recall": 21.93211488250653,
+          "escalation_rate": 0.3808717731696995,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 4,
+          "version": "v1.4",
+          "held_out_recall": 21.93211488250653,
+          "escalation_rate": 0.28212723938496265,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 5,
+          "version": "v1.5",
+          "held_out_recall": 22.06266318537859,
+          "escalation_rate": 0.2257017915079701,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "version": "v1.0",
+          "held_out_recall": 3.0026109660574414,
+          "escalation_rate": 0.9028071660318804,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model initialization"
+        },
+        {
+          "cycle": 1,
+          "version": "v1.1",
+          "held_out_recall": 3.5900783289817233,
+          "escalation_rate": 2.609676964310904,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 2,
+          "version": "v1.2",
+          "held_out_recall": 13.707571801566578,
+          "escalation_rate": 0.5219353928621808,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 3,
+          "version": "v1.3",
+          "held_out_recall": 13.707571801566578,
+          "escalation_rate": 0.5501481168006771,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 4,
+          "version": "v1.4",
+          "held_out_recall": 13.77284595300261,
+          "escalation_rate": 0.4514035830159402,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 5,
+          "version": "v1.5",
+          "held_out_recall": 13.77284595300261,
+          "escalation_rate": 0.33855268726195514,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "version": "v1.0",
+          "held_out_recall": 0.0,
+          "escalation_rate": 0.9310198899703767,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model initialization"
+        },
+        {
+          "cycle": 1,
+          "version": "v1.1",
+          "held_out_recall": 3.851174934725848,
+          "escalation_rate": 5.303992100437297,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 2,
+          "version": "v1.2",
+          "held_out_recall": 21.93211488250653,
+          "escalation_rate": 0.6912117364931584,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 3,
+          "version": "v1.3",
+          "held_out_recall": 21.93211488250653,
+          "escalation_rate": 0.3808717731696995,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 4,
+          "version": "v1.4",
+          "held_out_recall": 21.997389033942557,
+          "escalation_rate": 0.6771053745239103,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 5,
+          "version": "v1.5",
+          "held_out_recall": 22.06266318537859,
+          "escalation_rate": 0.5219353928621808,
+          "benign_fpr": 0.0,
+          "prev_learned_acc": 100.0,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        }
+      ]
+    ]
+  },
+  "trained_tier2_realistic": {
+    "condition": "Trained Tier 2 (Realistic)",
+    "oracle_tier2": false,
+    "seeds": [
+      42,
+      71,
+      137,
+      256,
+      512
+    ],
+    "aggregated_cycles": [
+      {
+        "cycle": 0,
+        "held_out_recall_mean": 1.7232375979112269,
+        "held_out_recall_ci95": 1.2010443864229763,
+        "escalation_rate_mean": 1.3429256594724222,
+        "escalation_rate_ci95": 0.6432501057977147,
+        "benign_fpr_mean": 0.09453582907922103,
+        "benign_fpr_ci95": 0.0,
+        "prev_learned_acc_mean": 99.91002339391758,
+        "prev_learned_acc_ci95": 0.0,
+        "active_version": "v1.0",
+        "gate_status": "DEPLOYED"
+      },
+      {
+        "cycle": 1,
+        "held_out_recall_mean": 1.7754569190600527,
+        "held_out_recall_ci95": 1.318537859007833,
+        "escalation_rate_mean": 4.062632247143462,
+        "escalation_rate_ci95": 1.0861898716321061,
+        "benign_fpr_mean": 0.0907543959160522,
+        "benign_fpr_ci95": 0.005672149744753267,
+        "prev_learned_acc_mean": 99.91362245816087,
+        "prev_learned_acc_ci95": 0.005398596364941,
+        "active_version": "v1.1",
+        "gate_status": "PASSED"
+      },
+      {
+        "cycle": 2,
+        "held_out_recall_mean": 1.997389033942559,
+        "held_out_recall_ci95": 1.1357702349869454,
+        "escalation_rate_mean": 0.9789815206658204,
+        "escalation_rate_ci95": 0.2935533925800529,
+        "benign_fpr_mean": 0.09453582907922103,
+        "benign_fpr_ci95": 0.0,
+        "prev_learned_acc_mean": 99.91002339391758,
+        "prev_learned_acc_ci95": 0.0,
+        "active_version": "v1.2",
+        "gate_status": "PASSED"
+      },
+      {
+        "cycle": 3,
+        "held_out_recall_mean": 1.997389033942559,
+        "held_out_recall_ci95": 1.0966057441253265,
+        "escalation_rate_mean": 0.7166031880378052,
+        "escalation_rate_ci95": 0.29623360135421073,
+        "benign_fpr_mean": 0.09453582907922103,
+        "benign_fpr_ci95": 0.0,
+        "prev_learned_acc_mean": 99.91002339391758,
+        "prev_learned_acc_ci95": 0.0,
+        "active_version": "v1.3",
+        "gate_status": "PASSED"
+      },
+      {
+        "cycle": 4,
+        "held_out_recall_mean": 1.9582245430809402,
+        "held_out_recall_ci95": 1.0182767624020888,
+        "escalation_rate_mean": 0.6517139229792637,
+        "escalation_rate_ci95": 0.2651996050218649,
+        "benign_fpr_mean": 0.09453582907922103,
+        "benign_fpr_ci95": 0.0,
+        "prev_learned_acc_mean": 99.91002339391758,
+        "prev_learned_acc_ci95": 0.0,
+        "active_version": "v1.4",
+        "gate_status": "PASSED"
+      },
+      {
+        "cycle": 5,
+        "held_out_recall_mean": 1.9712793733681466,
+        "held_out_recall_ci95": 1.0509138381201044,
+        "escalation_rate_mean": 0.5840033855268726,
+        "escalation_rate_ci95": 0.2891804203695867,
+        "benign_fpr_mean": 0.09453582907922103,
+        "benign_fpr_ci95": 0.0,
+        "prev_learned_acc_mean": 99.91002339391758,
+        "prev_learned_acc_ci95": 0.0,
+        "active_version": "v1.5",
+        "gate_status": "PASSED"
+      }
+    ],
+    "seed_runs": [
+      [
+        {
+          "cycle": 0,
+          "version": "v1.0",
+          "held_out_recall": 2.3498694516971277,
+          "escalation_rate": 0.9310198899703767,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model initialization"
+        },
+        {
+          "cycle": 1,
+          "version": "v1.1",
+          "held_out_recall": 1.95822454308094,
+          "escalation_rate": 5.106503032867823,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 2,
+          "version": "v1.2",
+          "held_out_recall": 2.219321148825065,
+          "escalation_rate": 0.860488080124136,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 3,
+          "version": "v1.3",
+          "held_out_recall": 2.2845953002610964,
+          "escalation_rate": 0.8040626322471436,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 4,
+          "version": "v1.4",
+          "held_out_recall": 2.3498694516971277,
+          "escalation_rate": 0.6629990125546621,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 5,
+          "version": "v1.5",
+          "held_out_recall": 2.3498694516971277,
+          "escalation_rate": 0.3808717731696995,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "version": "v1.0",
+          "held_out_recall": 3.1331592689295036,
+          "escalation_rate": 3.046974185357596,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model initialization"
+        },
+        {
+          "cycle": 1,
+          "version": "v1.1",
+          "held_out_recall": 0.13054830287206268,
+          "escalation_rate": 2.2852306390181973,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 2,
+          "version": "v1.2",
+          "held_out_recall": 0.13054830287206268,
+          "escalation_rate": 0.7194244604316548,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 3,
+          "version": "v1.3",
+          "held_out_recall": 0.13054830287206268,
+          "escalation_rate": 0.29623360135421073,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 4,
+          "version": "v1.4",
+          "held_out_recall": 0.13054830287206268,
+          "escalation_rate": 0.3808717731696995,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 5,
+          "version": "v1.5",
+          "held_out_recall": 0.13054830287206268,
+          "escalation_rate": 0.33855268726195514,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "version": "v1.0",
+          "held_out_recall": 0.13054830287206268,
+          "escalation_rate": 0.9028071660318804,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model initialization"
+        },
+        {
+          "cycle": 1,
+          "version": "v1.1",
+          "held_out_recall": 3.3942558746736298,
+          "escalation_rate": 5.191141204683312,
+          "benign_fpr": 0.07562866326337682,
+          "prev_learned_acc": 99.92801871513407,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 2,
+          "version": "v1.2",
+          "held_out_recall": 3.263707571801567,
+          "escalation_rate": 0.5783608407391734,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 3,
+          "version": "v1.3",
+          "held_out_recall": 3.1984334203655354,
+          "escalation_rate": 1.1002962336013542,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 4,
+          "version": "v1.4",
+          "held_out_recall": 2.8720626631853787,
+          "escalation_rate": 0.9451262519396249,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 5,
+          "version": "v1.5",
+          "held_out_recall": 2.8720626631853787,
+          "escalation_rate": 1.0438707857243616,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "version": "v1.0",
+          "held_out_recall": 3.0026109660574414,
+          "escalation_rate": 0.9028071660318804,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model initialization"
+        },
+        {
+          "cycle": 1,
+          "version": "v1.1",
+          "held_out_recall": 3.3942558746736298,
+          "escalation_rate": 2.750740584003385,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 2,
+          "version": "v1.2",
+          "held_out_recall": 3.3942558746736298,
+          "escalation_rate": 1.4670616448018057,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 3,
+          "version": "v1.3",
+          "held_out_recall": 3.3942558746736298,
+          "escalation_rate": 0.33855268726195514,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 4,
+          "version": "v1.4",
+          "held_out_recall": 3.3942558746736298,
+          "escalation_rate": 0.25391451544646637,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 5,
+          "version": "v1.5",
+          "held_out_recall": 3.3942558746736298,
+          "escalation_rate": 0.2257017915079701,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "version": "v1.0",
+          "held_out_recall": 0.0,
+          "escalation_rate": 0.9310198899703767,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "DEPLOYED",
+          "gate_reason": "Baseline model initialization"
+        },
+        {
+          "cycle": 1,
+          "version": "v1.1",
+          "held_out_recall": 0.0,
+          "escalation_rate": 4.97954577514459,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 2,
+          "version": "v1.2",
+          "held_out_recall": 0.97911227154047,
+          "escalation_rate": 1.2695725772323319,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 3,
+          "version": "v1.3",
+          "held_out_recall": 0.97911227154047,
+          "escalation_rate": 1.0438707857243616,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 4,
+          "version": "v1.4",
+          "held_out_recall": 1.0443864229765014,
+          "escalation_rate": 1.0156580617858655,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        },
+        {
+          "cycle": 5,
+          "version": "v1.5",
+          "held_out_recall": 1.1096605744125325,
+          "escalation_rate": 0.9310198899703767,
+          "benign_fpr": 0.09453582907922103,
+          "prev_learned_acc": 99.91002339391758,
+          "gate_status": "PASSED",
+          "gate_reason": "PASSED: All safety and regression criteria met."
+        }
+      ]
+    ]
+  },
+  "seeds": [
+    42,
+    71,
+    137,
+    256,
+    512
+  ]
+}

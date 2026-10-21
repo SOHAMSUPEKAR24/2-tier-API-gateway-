@@ -1,0 +1,158 @@
+{
+  "Legacy 9-Feature Fast RF": {
+    "standalone_acc_mean": 83.34400000000001,
+    "standalone_acc_ci95": 0.9734307872299391,
+    "budgets": {
+      "budget_1pct": {
+        "target_budget": 1.0,
+        "achieved_benign_esc_mean": 0.632713643716093,
+        "achieved_benign_esc_ci95": 1.0244435857705327,
+        "system_acc_mean": 83.81333333333335,
+        "system_acc_ci95": 0.7543215241011446,
+        "sfr_mean": 6.316817442368011,
+        "sfr_ci95": 1.057874622749464,
+        "fpr_mean": 23.249241427341083,
+        "fpr_ci95": 1.8666092112402688
+      },
+      "budget_5pct": {
+        "target_budget": 5.0,
+        "achieved_benign_esc_mean": 5.522755169368294,
+        "achieved_benign_esc_ci95": 1.92797895191076,
+        "system_acc_mean": 86.13333333333333,
+        "system_acc_ci95": 1.2987380710838905,
+        "sfr_mean": 6.265515355034054,
+        "sfr_ci95": 1.0988291031668458,
+        "fpr_mean": 19.306525751591572,
+        "fpr_ci95": 1.9706545114531726
+      },
+      "budget_10pct": {
+        "target_budget": 10.0,
+        "achieved_benign_esc_mean": 10.358757542344636,
+        "achieved_benign_esc_ci95": 0.698199772696043,
+        "system_acc_mean": 88.864,
+        "system_acc_ci95": 0.5523691619155414,
+        "sfr_mean": 6.122846376805836,
+        "sfr_ci95": 0.9918312955975839,
+        "fpr_mean": 14.724288070692527,
+        "fpr_ci95": 0.9735094646761222
+      }
+    }
+  },
+  "Plain TF-IDF Logistic Regression": {
+    "standalone_acc_mean": 93.44,
+    "standalone_acc_ci95": 0.37824925136158866,
+    "budgets": {
+      "budget_1pct": {
+        "target_budget": 1.0,
+        "achieved_benign_esc_mean": 1.0055645287738313,
+        "achieved_benign_esc_ci95": 0.21903589158086956,
+        "system_acc_mean": 94.32533333333333,
+        "system_acc_ci95": 0.33880215349742276,
+        "sfr_mean": 9.34708467185699,
+        "sfr_ci95": 0.4220032397004707,
+        "fpr_mean": 3.056645001810651,
+        "fpr_ci95": 0.6726603498908124
+      },
+      "budget_5pct": {
+        "target_budget": 5.0,
+        "achieved_benign_esc_mean": 5.185313525514033,
+        "achieved_benign_esc_ci95": 0.84798349349476,
+        "system_acc_mean": 96.61866666666666,
+        "system_acc_ci95": 0.21381631909606882,
+        "sfr_mean": 5.596570891560956,
+        "sfr_ci95": 0.7168704574036828,
+        "fpr_mean": 1.8021882794680386,
+        "fpr_ci95": 0.2573914141833891
+      },
+      "budget_10pct": {
+        "target_budget": 10.0,
+        "achieved_benign_esc_mean": 9.783051436150503,
+        "achieved_benign_esc_ci95": 0.8999385994680316,
+        "system_acc_mean": 97.744,
+        "system_acc_ci95": 0.07974194383707608,
+        "sfr_mean": 3.727274402190998,
+        "sfr_ci95": 0.5420890824862544,
+        "fpr_mean": 1.2081272445258473,
+        "fpr_ci95": 0.3169112173446442
+      }
+    }
+  },
+  "Hashed n-grams Logistic Regression": {
+    "standalone_acc_mean": 88.08533333333332,
+    "standalone_acc_ci95": 0.6249133158622552,
+    "budgets": {
+      "budget_1pct": {
+        "target_budget": 1.0,
+        "achieved_benign_esc_mean": 0.7953876302543476,
+        "achieved_benign_esc_ci95": 0.2891379332294238,
+        "system_acc_mean": 88.54400000000001,
+        "system_acc_ci95": 0.43839316995613403,
+        "sfr_mean": 15.398255208800848,
+        "sfr_ci95": 0.7985929049351714,
+        "fpr_mean": 8.642377497552546,
+        "fpr_ci95": 0.5633191016920704
+      },
+      "budget_5pct": {
+        "target_budget": 5.0,
+        "achieved_benign_esc_mean": 4.982938171951512,
+        "achieved_benign_esc_ci95": 0.24865379931150444,
+        "system_acc_mean": 90.88,
+        "system_acc_ci95": 0.5297766392336123,
+        "sfr_mean": 12.555917958757785,
+        "sfr_ci95": 0.9003762906062208,
+        "fpr_mean": 6.666992817321339,
+        "fpr_ci95": 0.42544706926524606
+      },
+      "budget_10pct": {
+        "target_budget": 10.0,
+        "achieved_benign_esc_mean": 9.798225306482893,
+        "achieved_benign_esc_ci95": 0.9629355542771921,
+        "system_acc_mean": 93.16266666666665,
+        "system_acc_ci95": 0.8312783597069378,
+        "sfr_mean": 9.581801834131214,
+        "sfr_ci95": 1.2038545005242622,
+        "fpr_mean": 4.875471308229718,
+        "fpr_ci95": 0.6576232481885329
+      }
+    }
+  },
+  "Hashed n-grams Small GBM": {
+    "standalone_acc_mean": 88.73066666666666,
+    "standalone_acc_ci95": 0.6170568999194803,
+    "budgets": {
+      "budget_1pct": {
+        "target_budget": 1.0,
+        "achieved_benign_esc_mean": 1.0156142877139211,
+        "achieved_benign_esc_ci95": 0.29510232926214075,
+        "system_acc_mean": 89.36,
+        "system_acc_ci95": 0.4955606688821786,
+        "sfr_mean": 14.410073973089187,
+        "sfr_ci95": 0.9234855063996494,
+        "fpr_mean": 7.946174638391467,
+        "fpr_ci95": 0.8815836762604754
+      },
+      "budget_5pct": {
+        "target_budget": 5.0,
+        "achieved_benign_esc_mean": 5.447435575071397,
+        "achieved_benign_esc_ci95": 0.695261329268204,
+        "system_acc_mean": 91.54133333333334,
+        "system_acc_ci95": 0.5655109724746209,
+        "sfr_mean": 11.64553463001057,
+        "sfr_ci95": 0.7421026781273075,
+        "fpr_mean": 6.18235465412381,
+        "fpr_ci95": 0.6217291688719832
+      },
+      "budget_10pct": {
+        "target_budget": 10.0,
+        "achieved_benign_esc_mean": 10.668493494629375,
+        "achieved_benign_esc_ci95": 1.0294170249065187,
+        "system_acc_mean": 94.10133333333333,
+        "system_acc_ci95": 0.588315258335371,
+        "sfr_mean": 7.981411006551899,
+        "sfr_ci95": 0.8360770013011067,
+        "fpr_mean": 4.408171104060499,
+        "fpr_ci95": 0.4401870103608658
+      }
+    }
+  }
+}

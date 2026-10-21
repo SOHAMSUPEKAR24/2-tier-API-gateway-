@@ -1,0 +1,3548 @@
+{
+  "execution_timestamp": "2026-10-19 20:02:13 UTC",
+  "duration_seconds": 119.21440601348877,
+  "item4_prototype_knn": {
+    "features_9": {
+      "SSH-BruteForce": {
+        "auroc_mean": 0.5775654793391414,
+        "auroc_ci95": 0.04201222698796092,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.4634146341463417,
+            "achieved_benign_esc_ci95": 0.3176403857061826
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.8285120060502935,
+            "achieved_benign_esc_ci95": 0.2329362828512005
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.101153337114766,
+            "achieved_benign_esc_ci95": 0.3951597655511443
+          },
+          "budget_10pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 8.99981092834184,
+            "achieved_benign_esc_ci95": 0.5520892418226504
+          }
+        }
+      },
+      "DoS-GoldenEye": {
+        "auroc_mean": 0.80067065817945,
+        "auroc_ci95": 0.022902704775109806,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.4634146341463417,
+            "achieved_benign_esc_ci95": 0.3176403857061826
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.8285120060502935,
+            "achieved_benign_esc_ci95": 0.2329362828512005
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.101153337114766,
+            "achieved_benign_esc_ci95": 0.3951597655511443
+          },
+          "budget_10pct": {
+            "coverage_mean": 17.37777777777778,
+            "coverage_ci95": 11.666666666666664,
+            "sfr_mean": 82.62222222222222,
+            "sfr_ci95": 11.666666666666664,
+            "achieved_benign_esc_mean": 8.99981092834184,
+            "achieved_benign_esc_ci95": 0.5520892418226504
+          }
+        }
+      },
+      "DoS-Hulk": {
+        "auroc_mean": 0.5113904251973709,
+        "auroc_ci95": 0.046127409023238364,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.4634146341463417,
+            "achieved_benign_esc_ci95": 0.3176403857061826
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.5141388174807198,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 99.48586118251929,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.8285120060502935,
+            "achieved_benign_esc_ci95": 0.2329362828512005
+          },
+          "budget_5pct": {
+            "coverage_mean": 3.8046272493573268,
+            "coverage_ci95": 0.591259640102828,
+            "sfr_mean": 96.19537275064269,
+            "sfr_ci95": 0.5912596401028338,
+            "achieved_benign_esc_mean": 5.101153337114766,
+            "achieved_benign_esc_ci95": 0.3951597655511443
+          },
+          "budget_10pct": {
+            "coverage_mean": 5.964010282776349,
+            "coverage_ci95": 1.028277634961439,
+            "sfr_mean": 94.03598971722366,
+            "sfr_ci95": 1.0282776349614267,
+            "achieved_benign_esc_mean": 8.99981092834184,
+            "achieved_benign_esc_ci95": 0.5520892418226504
+          }
+        }
+      },
+      "DoS-Slowloris": {
+        "auroc_mean": 0.8313683195790359,
+        "auroc_ci95": 0.022485768585166988,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 18.779342723004696,
+            "coverage_ci95": 12.300469483568074,
+            "sfr_mean": 81.2206572769953,
+            "sfr_ci95": 12.300469483568072,
+            "achieved_benign_esc_mean": 1.4634146341463417,
+            "achieved_benign_esc_ci95": 0.3176403857061826
+          },
+          "budget_2pct": {
+            "coverage_mean": 33.755868544600936,
+            "coverage_ci95": 10.563380281690144,
+            "sfr_mean": 66.24413145539907,
+            "sfr_ci95": 10.56338028169014,
+            "achieved_benign_esc_mean": 2.8285120060502935,
+            "achieved_benign_esc_ci95": 0.2329362828512005
+          },
+          "budget_5pct": {
+            "coverage_mean": 65.02347417840375,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 34.976525821596255,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.101153337114766,
+            "achieved_benign_esc_ci95": 0.3951597655511443
+          },
+          "budget_10pct": {
+            "coverage_mean": 65.02347417840375,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 34.976525821596255,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 8.99981092834184,
+            "achieved_benign_esc_ci95": 0.5520892418226504
+          }
+        }
+      }
+    },
+    "features_76": {
+      "SSH-BruteForce": {
+        "auroc_mean": 0.8400977790807435,
+        "auroc_ci95": 0.012037962331543861,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 8.239700374531836,
+            "coverage_ci95": 8.689138576779026,
+            "sfr_mean": 91.76029962546815,
+            "sfr_ci95": 8.68913857677903,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-GoldenEye": {
+        "auroc_mean": 0.7706288523350351,
+        "auroc_ci95": 0.013468960736118973,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.08888888888888888,
+            "coverage_ci95": 0.08888888888888888,
+            "sfr_mean": 99.91111111111111,
+            "sfr_ci95": 0.08888888888888857,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 1.0222222222222221,
+            "coverage_ci95": 0.4888888888888888,
+            "sfr_mean": 98.97777777777779,
+            "sfr_ci95": 0.48888888888888715,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-Hulk": {
+        "auroc_mean": 0.7063303038123943,
+        "auroc_ci95": 0.006330255207854796,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 6.426735218508997,
+            "coverage_ci95": 1.028277634961439,
+            "sfr_mean": 93.573264781491,
+            "sfr_ci95": 1.028277634961448,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 7.455012853470436,
+            "coverage_ci95": 0.7712082262210793,
+            "sfr_mean": 92.54498714652955,
+            "sfr_ci95": 0.7712082262210842,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 7.969151670951156,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 92.03084832904884,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 7.969151670951156,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 92.03084832904884,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-Slowloris": {
+        "auroc_mean": 0.7856850563264886,
+        "auroc_ci95": 0.04513402340050249,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 32.629107981220656,
+            "coverage_ci95": 3.4037558685446037,
+            "sfr_mean": 67.37089201877934,
+            "sfr_ci95": 3.4037558685446037,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 41.26760563380281,
+            "coverage_ci95": 11.056338028169012,
+            "sfr_mean": 58.7323943661972,
+            "sfr_ci95": 11.056338028169009,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 50.8450704225352,
+            "coverage_ci95": 14.178403755868544,
+            "sfr_mean": 49.1549295774648,
+            "sfr_ci95": 14.178403755868548,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 59.812206572769945,
+            "coverage_ci95": 7.816901408450697,
+            "sfr_mean": 40.187793427230055,
+            "sfr_ci95": 7.816901408450697,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      }
+    },
+    "features_74_no_win": {
+      "SSH-BruteForce": {
+        "auroc_mean": 0.8407399145849309,
+        "auroc_ci95": 0.011900426862904656,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 8.239700374531836,
+            "coverage_ci95": 8.689138576779026,
+            "sfr_mean": 91.76029962546815,
+            "sfr_ci95": 8.68913857677903,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-GoldenEye": {
+        "auroc_mean": 0.7716648809898952,
+        "auroc_ci95": 0.01319673956429479,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 0.0,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 100.0,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 0.08888888888888888,
+            "coverage_ci95": 0.08888888888888888,
+            "sfr_mean": 99.91111111111111,
+            "sfr_ci95": 0.08888888888888857,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 1.0222222222222221,
+            "coverage_ci95": 0.4888888888888888,
+            "sfr_mean": 98.97777777777779,
+            "sfr_ci95": 0.48888888888888715,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-Hulk": {
+        "auroc_mean": 0.7063303038123941,
+        "auroc_ci95": 0.006330546835090989,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 6.426735218508997,
+            "coverage_ci95": 1.028277634961439,
+            "sfr_mean": 93.573264781491,
+            "sfr_ci95": 1.028277634961448,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 7.455012853470436,
+            "coverage_ci95": 0.7712082262210793,
+            "sfr_mean": 92.54498714652955,
+            "sfr_ci95": 0.7712082262210842,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 7.969151670951156,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 92.03084832904884,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 7.969151670951156,
+            "coverage_ci95": 0.0,
+            "sfr_mean": 92.03084832904884,
+            "sfr_ci95": 0.0,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      },
+      "DoS-Slowloris": {
+        "auroc_mean": 0.7869120692517112,
+        "auroc_ci95": 0.04508835327462357,
+        "budgets": {
+          "budget_1pct": {
+            "coverage_mean": 32.629107981220656,
+            "coverage_ci95": 3.4037558685446037,
+            "sfr_mean": 67.37089201877934,
+            "sfr_ci95": 3.4037558685446037,
+            "achieved_benign_esc_mean": 1.6071090943467574,
+            "achieved_benign_esc_ci95": 0.20419739081111732
+          },
+          "budget_2pct": {
+            "coverage_mean": 41.26760563380281,
+            "coverage_ci95": 11.056338028169012,
+            "sfr_mean": 58.7323943661972,
+            "sfr_ci95": 11.056338028169009,
+            "achieved_benign_esc_mean": 2.786916241255436,
+            "achieved_benign_esc_ci95": 0.22121384004537714
+          },
+          "budget_5pct": {
+            "coverage_mean": 50.8450704225352,
+            "coverage_ci95": 14.178403755868544,
+            "sfr_mean": 49.1549295774648,
+            "sfr_ci95": 14.178403755868548,
+            "achieved_benign_esc_mean": 5.6872754774059375,
+            "achieved_benign_esc_ci95": 0.21554169030062464
+          },
+          "budget_10pct": {
+            "coverage_mean": 59.812206572769945,
+            "coverage_ci95": 7.816901408450697,
+            "sfr_mean": 40.187793427230055,
+            "sfr_ci95": 7.816901408450697,
+            "achieved_benign_esc_mean": 11.393458120627717,
+            "achieved_benign_esc_ci95": 0.4708356967290621
+          }
+        }
+      }
+    }
+  },
+  "item2_window_size_ablation": {
+    "t2_standalone_evals": {
+      "features_76": {
+        "FTP-BruteForce": {
+          "mean": 100.0,
+          "ci95": 0.0
+        },
+        "SSH-BruteForce": {
+          "mean": 0.149812734082397,
+          "ci95": 0.22471910112359553
+        },
+        "DoS-GoldenEye": {
+          "mean": 0.0,
+          "ci95": 0.0
+        },
+        "DoS-Hulk": {
+          "mean": 0.0,
+          "ci95": 0.0
+        },
+        "DoS-Slowloris": {
+          "mean": 7.464788732394365,
+          "ci95": 3.52112676056338
+        },
+        "Benign": {
+          "mean": 0.09453582907922103,
+          "ci95": 0.0
+        }
+      },
+      "features_74": {
+        "FTP-BruteForce": {
+          "mean": 100.0,
+          "ci95": 0.0
+        },
+        "SSH-BruteForce": {
+          "mean": 0.7490636704119851,
+          "ci95": 0.0
+        },
+        "DoS-GoldenEye": {
+          "mean": 0.0,
+          "ci95": 0.0
+        },
+        "DoS-Hulk": {
+          "mean": 0.0,
+          "ci95": 0.0
+        },
+        "DoS-Slowloris": {
+          "mean": 6.478873239436619,
+          "ci95": 2.136150234741784
+        },
+        "Benign": {
+          "mean": 0.07941009642654567,
+          "ci95": 0.02268859897901305
+        }
+      }
+    },
+    "lofo_comparison": {
+      "FTP-BruteForce": {
+        "76_features": {
+          "held_out_rec": {
+            "mean": 3.432835820895522,
+            "ci95": 1.0447761194029854
+          },
+          "held_out_esc": {
+            "mean": 17.61194029850746,
+            "ci95": 20.0
+          },
+          "bacc": {
+            "mean": 91.42579567656142,
+            "ci95": 0.10602193231235191
+          },
+          "sfr": {
+            "mean": 14.633333333333335,
+            "ci95": 3.233611111111112
+          }
+        },
+        "74_features": {
+          "held_out_rec": {
+            "mean": 2.9104477611940296,
+            "ci95": 1.0074626865671639
+          },
+          "held_out_esc": {
+            "mean": 17.61194029850746,
+            "ci95": 20.0
+          },
+          "bacc": {
+            "mean": 91.3905716266465,
+            "ci95": 0.11252284615869002
+          },
+          "sfr": {
+            "mean": 14.633333333333335,
+            "ci95": 3.233611111111112
+          }
+        }
+      },
+      "SSH-BruteForce": {
+        "76_features": {
+          "held_out_rec": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "held_out_esc": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "bacc": {
+            "mean": 91.10842944475957,
+            "ci95": 0.12434612718219284
+          },
+          "sfr": {
+            "mean": 17.244444444444444,
+            "ci95": 0.16666666666666607
+          }
+        },
+        "74_features": {
+          "held_out_rec": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "held_out_esc": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "bacc": {
+            "mean": 90.79152958971449,
+            "ci95": 0.24473592991743942
+          },
+          "sfr": {
+            "mean": 17.244444444444444,
+            "ci95": 0.16666666666666607
+          }
+        }
+      },
+      "DoS-GoldenEye": {
+        "76_features": {
+          "held_out_rec": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "held_out_esc": {
+            "mean": 0.6666666666666667,
+            "ci95": 0.3777777777777779
+          },
+          "bacc": {
+            "mean": 80.79871746391883,
+            "ci95": 0.24625189071658582
+          },
+          "sfr": {
+            "mean": 37.87777777777778,
+            "ci95": 0.5722222222222229
+          }
+        },
+        "74_features": {
+          "held_out_rec": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "held_out_esc": {
+            "mean": 0.6666666666666667,
+            "ci95": 0.3777777777777779
+          },
+          "bacc": {
+            "mean": 80.7668084704103,
+            "ci95": 0.299941702905393
+          },
+          "sfr": {
+            "mean": 37.87777777777778,
+            "ci95": 0.5722222222222229
+          }
+        }
+      },
+      "DoS-Hulk": {
+        "76_features": {
+          "held_out_rec": {
+            "mean": 8.226221079691516,
+            "ci95": 7.737789203084832
+          },
+          "held_out_esc": {
+            "mean": 33.933161953727506,
+            "ci95": 16.503856041131108
+          },
+          "bacc": {
+            "mean": 89.25947879246235,
+            "ci95": 0.8500000000000014
+          },
+          "sfr": {
+            "mean": 15.711111111111114,
+            "ci95": 3.638888888888891
+          }
+        },
+        "74_features": {
+          "held_out_rec": {
+            "mean": 6.478149100257069,
+            "ci95": 3.3161953727506424
+          },
+          "held_out_esc": {
+            "mean": 33.933161953727506,
+            "ci95": 16.503856041131108
+          },
+          "bacc": {
+            "mean": 89.00558076510998,
+            "ci95": 0.3480509863238126
+          },
+          "sfr": {
+            "mean": 15.711111111111114,
+            "ci95": 3.638888888888891
+          }
+        }
+      },
+      "DoS-Slowloris": {
+        "76_features": {
+          "held_out_rec": {
+            "mean": 12.535211267605634,
+            "ci95": 0.14084507042253502
+          },
+          "held_out_esc": {
+            "mean": 7.934272300469483,
+            "ci95": 4.976525821596244
+          },
+          "bacc": {
+            "mean": 87.9670668683431,
+            "ci95": 0.15294006428437257
+          },
+          "sfr": {
+            "mean": 23.48888888888889,
+            "ci95": 0.3168055555555558
+          }
+        },
+        "74_features": {
+          "held_out_rec": {
+            "mean": 12.488262910798122,
+            "ci95": 0.2112676056338021
+          },
+          "held_out_esc": {
+            "mean": 7.934272300469483,
+            "ci95": 4.976525821596244
+          },
+          "bacc": {
+            "mean": 87.9560723514212,
+            "ci95": 0.13747912333774792
+          },
+          "sfr": {
+            "mean": 23.48888888888889,
+            "ci95": 0.3168055555555558
+          }
+        }
+      }
+    }
+  },
+  "item1_3_adaptation_diagnostics": {
+    "sweeps": {
+      "baseline_L50_withCap_withRehearsal": {
+        "config": {
+          "name": "baseline_L50_withCap_withRehearsal",
+          "L_max": 50,
+          "with_cap": true,
+          "with_rehearsal": true
+        },
+        "cycles": [
+          {
+            "cycle": 1,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.0,
+            "rec_t1_DoS-Hulk_ci95": 0.0,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.197943444730077,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.0,
+            "rec_sys_trained_DoS-Hulk_mean": 0.0,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.0,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 63.84976525821596,
+            "rec_t1_DoS-Slowloris_ci95": 11.971830985915503,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.68075117370891,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.2394366197183118,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.657276995305164,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.2394366197183095,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 2,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_t1_DoS-Hulk_ci95": 0.4113110539845758,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.6092544987146535,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.41131105398457546,
+            "rec_sys_trained_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.4113110539845758,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 77.69953051643192,
+            "rec_t1_DoS-Slowloris_ci95": 0.35211267605634333,
+            "rec_sys_oracle_DoS-Slowloris_mean": 77.69953051643192,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 0.35211267605634333,
+            "rec_sys_trained_DoS-Slowloris_mean": 12.67605633802817,
+            "rec_sys_trained_DoS-Slowloris_ci95": 0.352112676056338,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 3,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_t1_DoS-Hulk_ci95": 0.4113110539845758,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.609254498714653,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.41131105398457546,
+            "rec_sys_trained_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.4113110539845758,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 4,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_t1_DoS-Hulk_ci95": 0.4113110539845758,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.609254498714653,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.41131105398457546,
+            "rec_sys_trained_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.4113110539845758,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 5,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_t1_DoS-Hulk_ci95": 0.4113110539845758,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.609254498714653,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.41131105398457546,
+            "rec_sys_trained_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.4113110539845758,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          }
+        ]
+      },
+      "L100_withCap_withRehearsal": {
+        "config": {
+          "name": "L100_withCap_withRehearsal",
+          "L_max": 100,
+          "with_cap": true,
+          "with_rehearsal": true
+        },
+        "cycles": [
+          {
+            "cycle": 1,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.13333333333333333,
+            "rec_t1_DoS-GoldenEye_ci95": 0.15555555555555556,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 6.580976863753213,
+            "rec_t1_DoS-Hulk_ci95": 0.565552699228792,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.300771208226221,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.15424164524421613,
+            "rec_sys_trained_DoS-Hulk_mean": 0.10282776349614395,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.15424164524421594,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 77.93427230046949,
+            "rec_t1_DoS-Slowloris_ci95": 0.0,
+            "rec_sys_oracle_DoS-Slowloris_mean": 77.93427230046949,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 0.0,
+            "rec_sys_trained_DoS-Slowloris_mean": 12.910798122065728,
+            "rec_sys_trained_DoS-Slowloris_ci95": 0.0,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 2,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.08888888888888888,
+            "rec_t1_DoS-GoldenEye_ci95": 0.08888888888888888,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 7.4035989717223645,
+            "rec_t1_DoS-Hulk_ci95": 0.5398457583547556,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.712082262210797,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.41131105398457546,
+            "rec_sys_trained_DoS-Hulk_mean": 0.5141388174807198,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.4113110539845758,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 77.88732394366198,
+            "rec_t1_DoS-Slowloris_ci95": 0.07042253521127151,
+            "rec_sys_oracle_DoS-Slowloris_mean": 77.88732394366198,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 0.07042253521127151,
+            "rec_sys_trained_DoS-Slowloris_mean": 12.863849765258214,
+            "rec_sys_trained_DoS-Slowloris_ci95": 0.07042253521126796,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 3,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.5333333333333334,
+            "rec_t1_DoS-GoldenEye_ci95": 0.3777777777777779,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.3111111111111113,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.13333333333333353,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.08888888888888888,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.13333333333333333,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 7.814910025706941,
+            "rec_t1_DoS-Hulk_ci95": 0.5912596401028289,
+            "rec_sys_oracle_DoS-Hulk_mean": 8.020565552699228,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.4627249357326475,
+            "rec_sys_trained_DoS-Hulk_mean": 0.8226221079691516,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.46272493573264784,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.44600938967137,
+            "rec_t1_DoS-Slowloris_ci95": 3.732394366197191,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.44600938967137,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.732394366197191,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.422535211267606,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.732394366197183,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 4,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 2.2666666666666666,
+            "rec_t1_DoS-GoldenEye_ci95": 2.844444444444444,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 4.044444444444444,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 2.5555555555555554,
+            "rec_sys_trained_DoS-GoldenEye_mean": 1.8222222222222224,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 2.555555555555556,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 7.660668380462726,
+            "rec_t1_DoS-Hulk_ci95": 0.3084832904884318,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.763496143958868,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.28277634961439535,
+            "rec_sys_trained_DoS-Hulk_mean": 0.5655526992287918,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.28277634961439585,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 5,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 1.4666666666666668,
+            "rec_t1_DoS-GoldenEye_ci95": 1.7999999999999998,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 3.2444444444444445,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 1.5333333333333332,
+            "rec_sys_trained_DoS-GoldenEye_mean": 1.0222222222222224,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 1.5333333333333337,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 7.609254498714653,
+            "rec_t1_DoS-Hulk_ci95": 0.30848329048843093,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.712082262210797,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.30848329048843137,
+            "rec_sys_trained_DoS-Hulk_mean": 0.5141388174807198,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.3084832904884318,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          }
+        ]
+      },
+      "L200_withCap_withRehearsal": {
+        "config": {
+          "name": "L200_withCap_withRehearsal",
+          "L_max": 200,
+          "with_cap": true,
+          "with_rehearsal": true
+        },
+        "cycles": [
+          {
+            "cycle": 1,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.22222222222222224,
+            "rec_t1_DoS-GoldenEye_ci95": 0.17777777777777778,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 6.940874035989718,
+            "rec_t1_DoS-Hulk_ci95": 0.3598971722365043,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.300771208226221,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.15424164524421613,
+            "rec_sys_trained_DoS-Hulk_mean": 0.10282776349614395,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.15424164524421594,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 77.93427230046949,
+            "rec_t1_DoS-Slowloris_ci95": 0.0,
+            "rec_sys_oracle_DoS-Slowloris_mean": 77.93427230046949,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 0.0,
+            "rec_sys_trained_DoS-Slowloris_mean": 12.910798122065728,
+            "rec_sys_trained_DoS-Slowloris_ci95": 0.0,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 2,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 1.288888888888889,
+            "rec_t1_DoS-GoldenEye_ci95": 1.1555555555555557,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.9333333333333327,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 1.0222222222222221,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.7111111111111111,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 1.0222222222222224,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 7.866323907455012,
+            "rec_t1_DoS-Hulk_ci95": 0.5141388174807195,
+            "rec_sys_oracle_DoS-Hulk_mean": 8.020565552699228,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.46272493573264795,
+            "rec_sys_trained_DoS-Hulk_mean": 0.8226221079691516,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.46272493573264784,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 77.69953051643192,
+            "rec_t1_DoS-Slowloris_ci95": 0.35211267605634333,
+            "rec_sys_oracle_DoS-Slowloris_mean": 77.69953051643192,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 0.35211267605634333,
+            "rec_sys_trained_DoS-Slowloris_mean": 12.67605633802817,
+            "rec_sys_trained_DoS-Slowloris_ci95": 0.352112676056338,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 3,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 1.6888888888888889,
+            "rec_t1_DoS-GoldenEye_ci95": 0.9777777777777776,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 3.155555555555555,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 1.1333333333333333,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.9333333333333333,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 1.1333333333333333,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 7.969151670951156,
+            "rec_t1_DoS-Hulk_ci95": 0.4627249357326475,
+            "rec_sys_oracle_DoS-Hulk_mean": 8.0719794344473,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.38560411311053944,
+            "rec_sys_trained_DoS-Hulk_mean": 0.8740359897172236,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.3856041131105399,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 4,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 4.533333333333333,
+            "rec_t1_DoS-GoldenEye_ci95": 3.4666666666666663,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 5.9111111111111105,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 3.5555555555555554,
+            "rec_sys_trained_DoS-GoldenEye_mean": 3.6888888888888887,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 3.555555555555556,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 9.151670951156813,
+            "rec_t1_DoS-Hulk_ci95": 1.8508997429305918,
+            "rec_sys_oracle_DoS-Hulk_mean": 9.203084832904883,
+            "rec_sys_oracle_DoS-Hulk_ci95": 1.8251928020565553,
+            "rec_sys_trained_DoS-Hulk_mean": 2.005141388174807,
+            "rec_sys_trained_DoS-Hulk_ci95": 1.8251928020565553,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 5,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 6.044444444444446,
+            "rec_t1_DoS-GoldenEye_ci95": 3.2444444444444436,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 7.288888888888889,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 2.933333333333334,
+            "rec_sys_trained_DoS-GoldenEye_mean": 5.066666666666667,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 2.9333333333333336,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 9.871465295629822,
+            "rec_t1_DoS-Hulk_ci95": 2.23714652956298,
+            "rec_sys_oracle_DoS-Hulk_mean": 9.922879177377894,
+            "rec_sys_oracle_DoS-Hulk_ci95": 2.2107969151670943,
+            "rec_sys_trained_DoS-Hulk_mean": 2.724935732647815,
+            "rec_sys_trained_DoS-Hulk_ci95": 2.210796915167095,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          }
+        ]
+      },
+      "unlimited_withCap_withRehearsal": {
+        "config": {
+          "name": "unlimited_withCap_withRehearsal",
+          "L_max": 10000,
+          "with_cap": true,
+          "with_rehearsal": true
+        },
+        "cycles": [
+          {
+            "cycle": 1,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.22222222222222224,
+            "rec_t1_DoS-GoldenEye_ci95": 0.17777777777777778,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 6.940874035989718,
+            "rec_t1_DoS-Hulk_ci95": 0.3598971722365043,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.300771208226221,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.15424164524421613,
+            "rec_sys_trained_DoS-Hulk_mean": 0.10282776349614395,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.15424164524421594,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 77.93427230046949,
+            "rec_t1_DoS-Slowloris_ci95": 0.0,
+            "rec_sys_oracle_DoS-Slowloris_mean": 77.93427230046949,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 0.0,
+            "rec_sys_trained_DoS-Slowloris_mean": 12.910798122065728,
+            "rec_sys_trained_DoS-Slowloris_ci95": 0.0,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 2,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 1.288888888888889,
+            "rec_t1_DoS-GoldenEye_ci95": 1.1555555555555557,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.9333333333333327,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 1.0222222222222221,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.7111111111111111,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 1.0222222222222224,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 7.866323907455012,
+            "rec_t1_DoS-Hulk_ci95": 0.5141388174807195,
+            "rec_sys_oracle_DoS-Hulk_mean": 8.020565552699228,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.46272493573264795,
+            "rec_sys_trained_DoS-Hulk_mean": 0.8226221079691516,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.46272493573264784,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 77.69953051643192,
+            "rec_t1_DoS-Slowloris_ci95": 0.35211267605634333,
+            "rec_sys_oracle_DoS-Slowloris_mean": 77.69953051643192,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 0.35211267605634333,
+            "rec_sys_trained_DoS-Slowloris_mean": 12.67605633802817,
+            "rec_sys_trained_DoS-Slowloris_ci95": 0.352112676056338,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 3,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 1.6888888888888889,
+            "rec_t1_DoS-GoldenEye_ci95": 0.9777777777777776,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 3.155555555555555,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 1.1333333333333333,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.9333333333333333,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 1.1333333333333333,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 7.969151670951156,
+            "rec_t1_DoS-Hulk_ci95": 0.4627249357326475,
+            "rec_sys_oracle_DoS-Hulk_mean": 8.0719794344473,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.38560411311053944,
+            "rec_sys_trained_DoS-Hulk_mean": 0.8740359897172236,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.3856041131105399,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 4,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 4.533333333333333,
+            "rec_t1_DoS-GoldenEye_ci95": 3.4666666666666663,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 5.9111111111111105,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 3.5555555555555554,
+            "rec_sys_trained_DoS-GoldenEye_mean": 3.6888888888888887,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 3.555555555555556,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 9.151670951156813,
+            "rec_t1_DoS-Hulk_ci95": 1.8508997429305918,
+            "rec_sys_oracle_DoS-Hulk_mean": 9.203084832904883,
+            "rec_sys_oracle_DoS-Hulk_ci95": 1.8251928020565553,
+            "rec_sys_trained_DoS-Hulk_mean": 2.005141388174807,
+            "rec_sys_trained_DoS-Hulk_ci95": 1.8251928020565553,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 5,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 6.044444444444446,
+            "rec_t1_DoS-GoldenEye_ci95": 3.2444444444444436,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 7.288888888888889,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 2.933333333333334,
+            "rec_sys_trained_DoS-GoldenEye_mean": 5.066666666666667,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 2.9333333333333336,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 9.871465295629822,
+            "rec_t1_DoS-Hulk_ci95": 2.23714652956298,
+            "rec_sys_oracle_DoS-Hulk_mean": 9.922879177377894,
+            "rec_sys_oracle_DoS-Hulk_ci95": 2.2107969151670943,
+            "rec_sys_trained_DoS-Hulk_mean": 2.724935732647815,
+            "rec_sys_trained_DoS-Hulk_ci95": 2.210796915167095,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          }
+        ]
+      },
+      "L50_noCap_withRehearsal": {
+        "config": {
+          "name": "L50_noCap_withRehearsal",
+          "L_max": 50,
+          "with_cap": false,
+          "with_rehearsal": true
+        },
+        "cycles": [
+          {
+            "cycle": 1,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_t1_DoS-Hulk_ci95": 0.4113110539845758,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.609254498714653,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.41131105398457546,
+            "rec_sys_trained_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.4113110539845758,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 63.52112676056338,
+            "rec_t1_DoS-Slowloris_ci95": 15.704225352112676,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 2,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_t1_DoS-Hulk_ci95": 0.4113110539845758,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.609254498714653,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.41131105398457546,
+            "rec_sys_trained_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.4113110539845758,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 3,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_t1_DoS-Hulk_ci95": 0.4113110539845758,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.609254498714653,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.41131105398457546,
+            "rec_sys_trained_DoS-Hulk_mean": 0.4113110539845758,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.4113110539845758,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 4,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.2056555269922879,
+            "rec_t1_DoS-Hulk_ci95": 0.30848329048843187,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.4035989717223645,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.3084832904884318,
+            "rec_sys_trained_DoS-Hulk_mean": 0.2056555269922879,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.30848329048843187,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 5,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.2056555269922879,
+            "rec_t1_DoS-Hulk_ci95": 0.30848329048843187,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.4035989717223645,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.3084832904884318,
+            "rec_sys_trained_DoS-Hulk_mean": 0.2056555269922879,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.30848329048843187,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_t1_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_oracle_DoS-Slowloris_mean": 75.35211267605635,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 3.873239436619727,
+            "rec_sys_trained_DoS-Slowloris_mean": 10.328638497652582,
+            "rec_sys_trained_DoS-Slowloris_ci95": 3.8732394366197185,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          }
+        ]
+      },
+      "L50_withCap_noRehearsal": {
+        "config": {
+          "name": "L50_withCap_noRehearsal",
+          "L_max": 50,
+          "with_cap": true,
+          "with_rehearsal": false
+        },
+        "cycles": [
+          {
+            "cycle": 1,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.0,
+            "rec_t1_DoS-Hulk_ci95": 0.0,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.197943444730077,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.0,
+            "rec_sys_trained_DoS-Hulk_mean": 0.0,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.0,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 2.910798122065728,
+            "rec_t1_DoS-Slowloris_ci95": 4.03755868544601,
+            "rec_sys_oracle_DoS-Slowloris_mean": 67.93427230046947,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 4.037558685446015,
+            "rec_sys_trained_DoS-Slowloris_mean": 2.910798122065728,
+            "rec_sys_trained_DoS-Slowloris_ci95": 4.03755868544601,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 2,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.0,
+            "rec_t1_DoS-Hulk_ci95": 0.0,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.197943444730077,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.0,
+            "rec_sys_trained_DoS-Hulk_mean": 0.0,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.0,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 2.910798122065728,
+            "rec_t1_DoS-Slowloris_ci95": 4.03755868544601,
+            "rec_sys_oracle_DoS-Slowloris_mean": 67.93427230046947,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 4.037558685446015,
+            "rec_sys_trained_DoS-Slowloris_mean": 2.910798122065728,
+            "rec_sys_trained_DoS-Slowloris_ci95": 4.03755868544601,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 3,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.0,
+            "rec_t1_DoS-Hulk_ci95": 0.0,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.197943444730077,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.0,
+            "rec_sys_trained_DoS-Hulk_mean": 0.0,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.0,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 2.910798122065728,
+            "rec_t1_DoS-Slowloris_ci95": 4.03755868544601,
+            "rec_sys_oracle_DoS-Slowloris_mean": 67.93427230046947,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 4.037558685446015,
+            "rec_sys_trained_DoS-Slowloris_mean": 2.910798122065728,
+            "rec_sys_trained_DoS-Slowloris_ci95": 4.03755868544601,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 4,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.0,
+            "rec_t1_DoS-Hulk_ci95": 0.0,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.197943444730077,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.0,
+            "rec_sys_trained_DoS-Hulk_mean": 0.0,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.0,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 2.910798122065728,
+            "rec_t1_DoS-Slowloris_ci95": 4.03755868544601,
+            "rec_sys_oracle_DoS-Slowloris_mean": 67.93427230046947,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 4.037558685446015,
+            "rec_sys_trained_DoS-Slowloris_mean": 2.910798122065728,
+            "rec_sys_trained_DoS-Slowloris_ci95": 4.03755868544601,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          },
+          {
+            "cycle": 5,
+            "rec_t1_SSH-BruteForce_mean": 0.0,
+            "rec_t1_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_mean": 0.0,
+            "rec_sys_oracle_SSH-BruteForce_ci95": 0.0,
+            "rec_sys_trained_SSH-BruteForce_mean": 0.0,
+            "rec_sys_trained_SSH-BruteForce_ci95": 0.0,
+            "esc_SSH-BruteForce_mean": 0.0,
+            "esc_SSH-BruteForce_ci95": 0.0,
+            "rec_t1_DoS-GoldenEye_mean": 0.0,
+            "rec_t1_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_oracle_DoS-GoldenEye_mean": 2.2222222222222223,
+            "rec_sys_oracle_DoS-GoldenEye_ci95": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_mean": 0.0,
+            "rec_sys_trained_DoS-GoldenEye_ci95": 0.0,
+            "esc_DoS-GoldenEye_mean": 2.2222222222222223,
+            "esc_DoS-GoldenEye_ci95": 0.0,
+            "rec_t1_DoS-Hulk_mean": 0.0,
+            "rec_t1_DoS-Hulk_ci95": 0.0,
+            "rec_sys_oracle_DoS-Hulk_mean": 7.197943444730077,
+            "rec_sys_oracle_DoS-Hulk_ci95": 0.0,
+            "rec_sys_trained_DoS-Hulk_mean": 0.0,
+            "rec_sys_trained_DoS-Hulk_ci95": 0.0,
+            "esc_DoS-Hulk_mean": 7.197943444730077,
+            "esc_DoS-Hulk_ci95": 0.0,
+            "rec_t1_DoS-Slowloris_mean": 2.910798122065728,
+            "rec_t1_DoS-Slowloris_ci95": 4.03755868544601,
+            "rec_sys_oracle_DoS-Slowloris_mean": 67.93427230046947,
+            "rec_sys_oracle_DoS-Slowloris_ci95": 4.037558685446015,
+            "rec_sys_trained_DoS-Slowloris_mean": 2.910798122065728,
+            "rec_sys_trained_DoS-Slowloris_ci95": 4.03755868544601,
+            "esc_DoS-Slowloris_mean": 65.02347417840375,
+            "esc_DoS-Slowloris_ci95": 0.0,
+            "rec_FTP_mean": 100.0,
+            "rec_FTP_ci95": 0.0,
+            "benign_fpr_mean": 0.09453582907922103,
+            "benign_fpr_ci95": 0.0
+          }
+        ]
+      }
+    },
+    "detailed_cycle_logs": [
+      {
+        "cycle": 1,
+        "seed": 42,
+        "batch_size": 1257,
+        "total_escalated": 101,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 51,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 58,
+            "escalated": 2,
+            "escalation_rate": 3.4482758620689653,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 64,
+            "escalated": 7,
+            "escalation_rate": 10.9375,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 84,
+            "escalated": 57,
+            "escalation_rate": 67.85714285714286,
+            "labeled_by_oracle": 34,
+            "share_in_training_batch_pct": 68.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 49,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 951,
+            "escalated": 35,
+            "escalation_rate": 3.680336487907466,
+            "labeled_by_oracle": 16,
+            "share_in_training_batch_pct": 32.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 2,
+        "seed": 42,
+        "batch_size": 1257,
+        "total_escalated": 123,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 44,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 77,
+            "escalated": 2,
+            "escalation_rate": 2.5974025974025974,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 68,
+            "escalated": 7,
+            "escalation_rate": 10.294117647058822,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 82,
+            "escalated": 53,
+            "escalation_rate": 64.63414634146342,
+            "labeled_by_oracle": 33,
+            "share_in_training_batch_pct": 66.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 48,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 938,
+            "escalated": 61,
+            "escalation_rate": 6.50319829424307,
+            "labeled_by_oracle": 17,
+            "share_in_training_batch_pct": 34.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 3,
+        "seed": 42,
+        "batch_size": 1257,
+        "total_escalated": 112,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 46,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 78,
+            "escalated": 1,
+            "escalation_rate": 1.282051282051282,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 75,
+            "escalated": 3,
+            "escalation_rate": 4.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 79,
+            "escalated": 54,
+            "escalation_rate": 68.35443037974683,
+            "labeled_by_oracle": 29,
+            "share_in_training_batch_pct": 57.99999999999999,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 46,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 933,
+            "escalated": 54,
+            "escalation_rate": 5.787781350482315,
+            "labeled_by_oracle": 21,
+            "share_in_training_batch_pct": 42.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 4,
+        "seed": 42,
+        "batch_size": 1257,
+        "total_escalated": 103,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 45,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 88,
+            "escalated": 2,
+            "escalation_rate": 2.272727272727273,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 70,
+            "escalated": 6,
+            "escalation_rate": 8.571428571428571,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 73,
+            "escalated": 46,
+            "escalation_rate": 63.013698630136986,
+            "labeled_by_oracle": 31,
+            "share_in_training_batch_pct": 62.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 50,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 931,
+            "escalated": 49,
+            "escalation_rate": 5.263157894736842,
+            "labeled_by_oracle": 19,
+            "share_in_training_batch_pct": 38.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 5,
+        "seed": 42,
+        "batch_size": 1261,
+        "total_escalated": 101,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 47,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 93,
+            "escalated": 1,
+            "escalation_rate": 1.0752688172043012,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 68,
+            "escalated": 2,
+            "escalation_rate": 2.941176470588235,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 68,
+            "escalated": 38,
+            "escalation_rate": 55.88235294117647,
+            "labeled_by_oracle": 24,
+            "share_in_training_batch_pct": 48.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 54,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 931,
+            "escalated": 60,
+            "escalation_rate": 6.44468313641246,
+            "labeled_by_oracle": 26,
+            "share_in_training_batch_pct": 52.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 1,
+        "seed": 71,
+        "batch_size": 1257,
+        "total_escalated": 101,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 47,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 88,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 66,
+            "escalated": 5,
+            "escalation_rate": 7.575757575757576,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 77,
+            "escalated": 50,
+            "escalation_rate": 64.93506493506493,
+            "labeled_by_oracle": 30,
+            "share_in_training_batch_pct": 60.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 53,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 926,
+            "escalated": 46,
+            "escalation_rate": 4.967602591792657,
+            "labeled_by_oracle": 20,
+            "share_in_training_batch_pct": 40.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 2,
+        "seed": 71,
+        "batch_size": 1257,
+        "total_escalated": 103,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 53,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 78,
+            "escalated": 2,
+            "escalation_rate": 2.564102564102564,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 58,
+            "escalated": 2,
+            "escalation_rate": 3.4482758620689653,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 75,
+            "escalated": 45,
+            "escalation_rate": 60.0,
+            "labeled_by_oracle": 27,
+            "share_in_training_batch_pct": 54.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 43,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 950,
+            "escalated": 54,
+            "escalation_rate": 5.684210526315789,
+            "labeled_by_oracle": 23,
+            "share_in_training_batch_pct": 46.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 3,
+        "seed": 71,
+        "batch_size": 1257,
+        "total_escalated": 93,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 52,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 88,
+            "escalated": 3,
+            "escalation_rate": 3.4090909090909087,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 70,
+            "escalated": 5,
+            "escalation_rate": 7.142857142857142,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 60,
+            "escalated": 40,
+            "escalation_rate": 66.66666666666666,
+            "labeled_by_oracle": 33,
+            "share_in_training_batch_pct": 66.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 50,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 937,
+            "escalated": 45,
+            "escalation_rate": 4.8025613660619,
+            "labeled_by_oracle": 17,
+            "share_in_training_batch_pct": 34.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 4,
+        "seed": 71,
+        "batch_size": 1257,
+        "total_escalated": 126,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 49,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 77,
+            "escalated": 2,
+            "escalation_rate": 2.5974025974025974,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 65,
+            "escalated": 6,
+            "escalation_rate": 9.230769230769232,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 75,
+            "escalated": 54,
+            "escalation_rate": 72.0,
+            "labeled_by_oracle": 28,
+            "share_in_training_batch_pct": 56.00000000000001,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 46,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 945,
+            "escalated": 64,
+            "escalation_rate": 6.772486772486773,
+            "labeled_by_oracle": 22,
+            "share_in_training_batch_pct": 44.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 5,
+        "seed": 71,
+        "batch_size": 1261,
+        "total_escalated": 105,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 45,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 80,
+            "escalated": 1,
+            "escalation_rate": 1.25,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 89,
+            "escalated": 8,
+            "escalation_rate": 8.98876404494382,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 86,
+            "escalated": 49,
+            "escalation_rate": 56.97674418604651,
+            "labeled_by_oracle": 29,
+            "share_in_training_batch_pct": 57.99999999999999,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 48,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 913,
+            "escalated": 47,
+            "escalation_rate": 5.147864184008762,
+            "labeled_by_oracle": 21,
+            "share_in_training_batch_pct": 42.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 1,
+        "seed": 137,
+        "batch_size": 1257,
+        "total_escalated": 110,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 43,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 84,
+            "escalated": 1,
+            "escalation_rate": 1.1904761904761905,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 62,
+            "escalated": 7,
+            "escalation_rate": 11.29032258064516,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 91,
+            "escalated": 58,
+            "escalation_rate": 63.73626373626373,
+            "labeled_by_oracle": 36,
+            "share_in_training_batch_pct": 72.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 49,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 928,
+            "escalated": 44,
+            "escalation_rate": 4.741379310344827,
+            "labeled_by_oracle": 14,
+            "share_in_training_batch_pct": 28.000000000000004,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 2,
+        "seed": 137,
+        "batch_size": 1257,
+        "total_escalated": 102,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 48,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 79,
+            "escalated": 2,
+            "escalation_rate": 2.5316455696202533,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 72,
+            "escalated": 8,
+            "escalation_rate": 11.11111111111111,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 70,
+            "escalated": 45,
+            "escalation_rate": 64.28571428571429,
+            "labeled_by_oracle": 30,
+            "share_in_training_batch_pct": 60.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 39,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 949,
+            "escalated": 47,
+            "escalation_rate": 4.952581664910432,
+            "labeled_by_oracle": 20,
+            "share_in_training_batch_pct": 40.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 3,
+        "seed": 137,
+        "batch_size": 1257,
+        "total_escalated": 98,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 58,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 83,
+            "escalated": 2,
+            "escalation_rate": 2.4096385542168677,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 56,
+            "escalated": 3,
+            "escalation_rate": 5.357142857142857,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 64,
+            "escalated": 44,
+            "escalation_rate": 68.75,
+            "labeled_by_oracle": 31,
+            "share_in_training_batch_pct": 62.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 52,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 944,
+            "escalated": 49,
+            "escalation_rate": 5.190677966101695,
+            "labeled_by_oracle": 19,
+            "share_in_training_batch_pct": 38.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 4,
+        "seed": 137,
+        "batch_size": 1257,
+        "total_escalated": 96,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 50,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 81,
+            "escalated": 4,
+            "escalation_rate": 4.938271604938271,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 61,
+            "escalated": 4,
+            "escalation_rate": 6.557377049180328,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 73,
+            "escalated": 45,
+            "escalation_rate": 61.64383561643836,
+            "labeled_by_oracle": 33,
+            "share_in_training_batch_pct": 66.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 50,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 942,
+            "escalated": 43,
+            "escalation_rate": 4.564755838641188,
+            "labeled_by_oracle": 17,
+            "share_in_training_batch_pct": 34.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 5,
+        "seed": 137,
+        "batch_size": 1261,
+        "total_escalated": 114,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 42,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 75,
+            "escalated": 1,
+            "escalation_rate": 1.3333333333333335,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 80,
+            "escalated": 2,
+            "escalation_rate": 2.5,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 70,
+            "escalated": 46,
+            "escalation_rate": 65.71428571428571,
+            "labeled_by_oracle": 29,
+            "share_in_training_batch_pct": 57.99999999999999,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 51,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 943,
+            "escalated": 65,
+            "escalation_rate": 6.892895015906681,
+            "labeled_by_oracle": 21,
+            "share_in_training_batch_pct": 42.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 1,
+        "seed": 256,
+        "batch_size": 1257,
+        "total_escalated": 99,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 45,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 75,
+            "escalated": 2,
+            "escalation_rate": 2.666666666666667,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 61,
+            "escalated": 4,
+            "escalation_rate": 6.557377049180328,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 71,
+            "escalated": 43,
+            "escalation_rate": 60.56338028169014,
+            "labeled_by_oracle": 32,
+            "share_in_training_batch_pct": 64.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 47,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 958,
+            "escalated": 50,
+            "escalation_rate": 5.219206680584551,
+            "labeled_by_oracle": 18,
+            "share_in_training_batch_pct": 36.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 2,
+        "seed": 256,
+        "batch_size": 1257,
+        "total_escalated": 108,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 40,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 79,
+            "escalated": 1,
+            "escalation_rate": 1.2658227848101267,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 71,
+            "escalated": 5,
+            "escalation_rate": 7.042253521126761,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 66,
+            "escalated": 46,
+            "escalation_rate": 69.6969696969697,
+            "labeled_by_oracle": 26,
+            "share_in_training_batch_pct": 52.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 42,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 959,
+            "escalated": 56,
+            "escalation_rate": 5.839416058394161,
+            "labeled_by_oracle": 24,
+            "share_in_training_batch_pct": 48.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 3,
+        "seed": 256,
+        "batch_size": 1257,
+        "total_escalated": 121,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 57,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 74,
+            "escalated": 3,
+            "escalation_rate": 4.054054054054054,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 65,
+            "escalated": 6,
+            "escalation_rate": 9.230769230769232,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 88,
+            "escalated": 62,
+            "escalation_rate": 70.45454545454545,
+            "labeled_by_oracle": 37,
+            "share_in_training_batch_pct": 74.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 45,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 928,
+            "escalated": 50,
+            "escalation_rate": 5.387931034482758,
+            "labeled_by_oracle": 13,
+            "share_in_training_batch_pct": 26.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 4,
+        "seed": 256,
+        "batch_size": 1257,
+        "total_escalated": 88,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 47,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 84,
+            "escalated": 1,
+            "escalation_rate": 1.1904761904761905,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 75,
+            "escalated": 6,
+            "escalation_rate": 8.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 67,
+            "escalated": 38,
+            "escalation_rate": 56.71641791044776,
+            "labeled_by_oracle": 29,
+            "share_in_training_batch_pct": 57.99999999999999,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 55,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 929,
+            "escalated": 43,
+            "escalation_rate": 4.628632938643703,
+            "labeled_by_oracle": 21,
+            "share_in_training_batch_pct": 42.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 5,
+        "seed": 256,
+        "batch_size": 1261,
+        "total_escalated": 114,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 52,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 80,
+            "escalated": 2,
+            "escalation_rate": 2.5,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 74,
+            "escalated": 5,
+            "escalation_rate": 6.756756756756757,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 82,
+            "escalated": 51,
+            "escalation_rate": 62.19512195121951,
+            "labeled_by_oracle": 24,
+            "share_in_training_batch_pct": 48.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 51,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 922,
+            "escalated": 56,
+            "escalation_rate": 6.073752711496746,
+            "labeled_by_oracle": 26,
+            "share_in_training_batch_pct": 52.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 1,
+        "seed": 512,
+        "batch_size": 1257,
+        "total_escalated": 131,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 47,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 82,
+            "escalated": 4,
+            "escalation_rate": 4.878048780487805,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 69,
+            "escalated": 8,
+            "escalation_rate": 11.594202898550725,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 75,
+            "escalated": 59,
+            "escalation_rate": 78.66666666666666,
+            "labeled_by_oracle": 32,
+            "share_in_training_batch_pct": 64.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 41,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 943,
+            "escalated": 60,
+            "escalation_rate": 6.362672322375397,
+            "labeled_by_oracle": 18,
+            "share_in_training_batch_pct": 36.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 2,
+        "seed": 512,
+        "batch_size": 1257,
+        "total_escalated": 103,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 44,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 89,
+            "escalated": 1,
+            "escalation_rate": 1.1235955056179776,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 68,
+            "escalated": 2,
+            "escalation_rate": 2.941176470588235,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 83,
+            "escalated": 54,
+            "escalation_rate": 65.06024096385542,
+            "labeled_by_oracle": 32,
+            "share_in_training_batch_pct": 64.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 37,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 936,
+            "escalated": 46,
+            "escalation_rate": 4.914529914529915,
+            "labeled_by_oracle": 18,
+            "share_in_training_batch_pct": 36.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 3,
+        "seed": 512,
+        "batch_size": 1257,
+        "total_escalated": 108,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 50,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 79,
+            "escalated": 1,
+            "escalation_rate": 1.2658227848101267,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 76,
+            "escalated": 7,
+            "escalation_rate": 9.210526315789473,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 66,
+            "escalated": 34,
+            "escalation_rate": 51.515151515151516,
+            "labeled_by_oracle": 21,
+            "share_in_training_batch_pct": 42.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 42,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 944,
+            "escalated": 66,
+            "escalation_rate": 6.991525423728813,
+            "labeled_by_oracle": 29,
+            "share_in_training_batch_pct": 57.99999999999999,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 4,
+        "seed": 512,
+        "batch_size": 1257,
+        "total_escalated": 104,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 55,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 68,
+            "escalated": 1,
+            "escalation_rate": 1.4705882352941175,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 81,
+            "escalated": 6,
+            "escalation_rate": 7.4074074074074066,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 81,
+            "escalated": 53,
+            "escalation_rate": 65.4320987654321,
+            "labeled_by_oracle": 31,
+            "share_in_training_batch_pct": 62.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 59,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 913,
+            "escalated": 44,
+            "escalation_rate": 4.819277108433735,
+            "labeled_by_oracle": 19,
+            "share_in_training_batch_pct": 38.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      },
+      {
+        "cycle": 5,
+        "seed": 512,
+        "batch_size": 1261,
+        "total_escalated": 106,
+        "families": {
+          "SSH-BruteForce": {
+            "arrived": 36,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-GoldenEye": {
+            "arrived": 81,
+            "escalated": 2,
+            "escalation_rate": 2.4691358024691357,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Hulk": {
+            "arrived": 54,
+            "escalated": 4,
+            "escalation_rate": 7.4074074074074066,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "DoS-Slowloris": {
+            "arrived": 82,
+            "escalated": 49,
+            "escalation_rate": 59.756097560975604,
+            "labeled_by_oracle": 31,
+            "share_in_training_batch_pct": 62.0,
+            "avg_sample_weight": 0.5
+          },
+          "FTP-BruteForce": {
+            "arrived": 52,
+            "escalated": 0,
+            "escalation_rate": 0.0,
+            "labeled_by_oracle": 0,
+            "share_in_training_batch_pct": 0.0,
+            "avg_sample_weight": 0.0
+          },
+          "Benign": {
+            "arrived": 956,
+            "escalated": 51,
+            "escalation_rate": 5.334728033472803,
+            "labeled_by_oracle": 19,
+            "share_in_training_batch_pct": 38.0,
+            "avg_sample_weight": 0.5
+          }
+        }
+      }
+    ]
+  },
+  "item5_poisoning_injection_sweep": {
+    "rate_0.005": {
+      "injection_pct": 0.5,
+      "rejection_rate_mean": 0.0,
+      "delta_acc_mean": 0.1550421359597287,
+      "delta_acc_ci95": 0.32011134307585065,
+      "atk_rec_drop_mean": -2.220446049250313e-15,
+      "atk_rec_drop_ci95": 0.4932735426008972,
+      "nocap_atk_succ_mean": 8.071748878923767,
+      "nocap_atk_succ_ci95": 1.0538116591928253,
+      "cap_atk_succ_mean": 8.251121076233185,
+      "cap_atk_succ_ci95": 1.076233183856501
+    },
+    "rate_0.010": {
+      "injection_pct": 1.0,
+      "rejection_rate_mean": 0.0,
+      "delta_acc_mean": 0.23854944284908086,
+      "delta_acc_ci95": 0.36894129227266903,
+      "atk_rec_drop_mean": 0.4484304932735417,
+      "atk_rec_drop_ci95": 0.5381165919282538,
+      "nocap_atk_succ_mean": 8.699551569506728,
+      "nocap_atk_succ_ci95": 1.1883408071748875,
+      "cap_atk_succ_mean": 8.161434977578475,
+      "cap_atk_succ_ci95": 0.964686098654707
+    },
+    "rate_0.015": {
+      "injection_pct": 1.5,
+      "rejection_rate_mean": 0.0,
+      "delta_acc_mean": 0.1132884825150482,
+      "delta_acc_ci95": 0.3549592868003637,
+      "atk_rec_drop_mean": 0.17937219730941534,
+      "atk_rec_drop_ci95": 0.33632286995515903,
+      "nocap_atk_succ_mean": 8.11659192825112,
+      "nocap_atk_succ_ci95": 1.1664798206278024,
+      "cap_atk_succ_mean": 7.937219730941703,
+      "cap_atk_succ_ci95": 1.1681614349775766
+    },
+    "rate_0.020": {
+      "injection_pct": 2.0,
+      "rejection_rate_mean": 20.0,
+      "delta_acc_mean": 0.37772828766466704,
+      "delta_acc_ci95": 0.3688771712819272,
+      "atk_rec_drop_mean": 0.7623318385650202,
+      "atk_rec_drop_ci95": 0.6278026905829603,
+      "nocap_atk_succ_mean": 8.834080717488789,
+      "nocap_atk_succ_ci95": 1.143497757847535,
+      "cap_atk_succ_mean": 8.29596412556054,
+      "cap_atk_succ_ci95": 1.1434977578475323
+    },
+    "rate_0.025": {
+      "injection_pct": 2.5,
+      "rejection_rate_mean": 20.0,
+      "delta_acc_mean": 0.2942209807753171,
+      "delta_acc_ci95": 0.5149036539770013,
+      "atk_rec_drop_mean": 0.7174887892376636,
+      "atk_rec_drop_ci95": 1.0992152466367722,
+      "nocap_atk_succ_mean": 8.834080717488789,
+      "nocap_atk_succ_ci95": 1.0336322869955152,
+      "cap_atk_succ_mean": 8.026905829596412,
+      "cap_atk_succ_ci95": 1.3452914798206272
+    },
+    "rate_0.030": {
+      "injection_pct": 3.0,
+      "rejection_rate_mean": 0.0,
+      "delta_acc_mean": 0.11328848251505041,
+      "delta_acc_ci95": 0.35485766107918426,
+      "atk_rec_drop_mean": 0.2242152466367675,
+      "atk_rec_drop_ci95": 0.6053811659192798,
+      "nocap_atk_succ_mean": 8.699551569506728,
+      "nocap_atk_succ_ci95": 0.9417040358744382,
+      "cap_atk_succ_mean": 8.29596412556054,
+      "cap_atk_succ_ci95": 1.0773542600896846
+    },
+    "rate_0.040": {
+      "injection_pct": 4.0,
+      "rejection_rate_mean": 20.0,
+      "delta_acc_mean": 0.47515347903557936,
+      "delta_acc_ci95": 0.42454870920815796,
+      "atk_rec_drop_mean": 1.1210762331838553,
+      "atk_rec_drop_ci95": 0.8071748878923746,
+      "nocap_atk_succ_mean": 9.103139013452914,
+      "nocap_atk_succ_ci95": 1.3228699551569507,
+      "cap_atk_succ_mean": 8.116591928251122,
+      "cap_atk_succ_ci95": 1.0095291479820618
+    },
+    "rate_0.050": {
+      "injection_pct": 5.0,
+      "rejection_rate_mean": 20.0,
+      "delta_acc_mean": 0.34989251870155336,
+      "delta_acc_ci95": 0.4244482933169925,
+      "atk_rec_drop_mean": 1.0313901345291465,
+      "atk_rec_drop_ci95": 0.8525784753363217,
+      "nocap_atk_succ_mean": 10.08968609865471,
+      "nocap_atk_succ_ci95": 0.9641255605381165,
+      "cap_atk_succ_mean": 8.11659192825112,
+      "cap_atk_succ_ci95": 1.0986547085201792
+    },
+    "rate_0.075": {
+      "injection_pct": 7.5,
+      "rejection_rate_mean": 40.0,
+      "delta_acc_mean": 0.5725786704064917,
+      "delta_acc_ci95": 0.34795679067907925,
+      "atk_rec_drop_mean": 1.5695067264573992,
+      "atk_rec_drop_ci95": 0.6065022421524648,
+      "nocap_atk_succ_mean": 10.269058295964125,
+      "nocap_atk_succ_ci95": 0.8968609865470851,
+      "cap_atk_succ_mean": 8.251121076233185,
+      "cap_atk_succ_ci95": 1.143497757847534
+    },
+    "rate_0.100": {
+      "injection_pct": 10.0,
+      "rejection_rate_mean": 20.0,
+      "delta_acc_mean": 0.41948194110934756,
+      "delta_acc_ci95": 0.38279505576348405,
+      "atk_rec_drop_mean": 0.9865470852017921,
+      "atk_rec_drop_ci95": 0.5829596412556105,
+      "nocap_atk_succ_mean": 9.641255605381165,
+      "nocap_atk_succ_ci95": 1.143497757847534,
+      "cap_atk_succ_mean": 8.565022421524663,
+      "cap_atk_succ_ci95": 1.1883408071748884
+    }
+  },
+  "item6_real_benign_drift": {
+    "target_budget_pct": 5.0,
+    "seeds": {
+      "42": {
+        "early_chunk_achieved_esc": 6.52,
+        "late_chunk_static_esc": 7.20688418788096,
+        "late_chunk_recal_esc": 3.101791175185671
+      },
+      "71": {
+        "early_chunk_achieved_esc": 4.72,
+        "late_chunk_static_esc": 5.844388669774113,
+        "late_chunk_recal_esc": 3.2328527741371778
+      },
+      "137": {
+        "early_chunk_achieved_esc": 6.16,
+        "late_chunk_static_esc": 6.920043026174256,
+        "late_chunk_recal_esc": 2.6649191786806465
+      },
+      "256": {
+        "early_chunk_achieved_esc": 4.92,
+        "late_chunk_static_esc": 5.987809250627465,
+        "late_chunk_recal_esc": 3.101791175185671
+      },
+      "512": {
+        "early_chunk_achieved_esc": 6.88,
+        "late_chunk_static_esc": 7.529580494801004,
+        "late_chunk_recal_esc": 2.8833551769331587
+      }
+    },
+    "summary": {
+      "early_chunk_esc_mean": 5.84,
+      "early_chunk_esc_ci95": 0.7519999999999993,
+      "late_chunk_static_esc_mean": 6.69774112585156,
+      "late_chunk_static_esc_ci95": 0.5808533524560775,
+      "late_chunk_recal_esc_mean": 2.9969418960244645,
+      "late_chunk_recal_esc_ci95": 0.15727391874180885
+    }
+  },
+  "item7_label_audit": {
+    "benign_test_set_size": 5289,
+    "benign_false_positives_count": 5,
+    "benign_fpr_percent": 0.09453582907922103,
+    "benign_fpr_formula": "5 / 5289 = 0.0945%",
+    "hulk_test_flows_count": 389,
+    "hulk_features": {
+      "flow_packets_per_sec": {
+        "mean": 7.71088874525707,
+        "median": 8.06159646,
+        "min": 0.118180818,
+        "max": 32.22347861
+      },
+      "flow_duration_ms": {
+        "mean": 8335.472215938304,
+        "median": 1358.599
+      },
+      "total_fwd_packets": {
+        "mean": 4.933161953727506,
+        "median": 5.0
+      },
+      "fwd_packet_length_mean": {
+        "mean": 111.75172909825193,
+        "median": 88.5
+      },
+      "fwd_init_win_bytes": {
+        "median": 29200.0,
+        "unique_values": [
+          0.0,
+          251.0,
+          274.0,
+          29200.0
+        ]
+      }
+    }
+  }
+}

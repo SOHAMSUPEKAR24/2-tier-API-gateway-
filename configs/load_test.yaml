@@ -1,0 +1,83 @@
+# ==============================================================================
+# Config for: Phase 6 Gateway Load Test & Open-Loop Latency Benchmark
+# Run with: make exp-latency
+# ==============================================================================
+
+extends: experiment_base.yaml
+
+experiment:
+  name: "load_test_latency"
+  description: >
+    Production-grade HTTP Gateway Service Benchmark: Uvicorn ASGI behind NGINX Reverse Proxy
+    over local loopback interface (127.0.0.1:8080 -> 127.0.0.1:8000).
+    Evaluates:
+      1. Open-loop constant-arrival-rate load testing (k6) sweeping offered load up to ~1.2x closed-loop capacity
+         (500..5000 req/s) with 5x repetitions and randomized order, with automatic knee detection.
+      2. Open-loop testing for the BLENDED stream at measured empirical ER (37.7%) and HOLD vs ASYNC below saturation.
+      3. Per-stage micro-profiling (parse, features, predict, enqueue) without reused timing arrays, plus ONNX-vs-sklearn parity and ablation.
+      4. Escalation modes under realistic mixed stream: timeout rates, fail-open forwarded unverified, fail-closed 504, and ASYNC exposure window.
+      5. Blended validation: linear mean validation in closed-loop, empirical mixture quantile validation in open-loop.
+      6. System telemetry recording memory pressure and swap usage (zero isolated cores claims).
+      7. Empirical ER reported separately for benign-only and attack-only held-out traffic.
+  seeds: [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+  output_dir: "results/latency"
+
+service:
+  uvicorn_host: "127.0.0.1"
+  uvicorn_port: 8000
+  nginx_host: "127.0.0.1"
+  nginx_port: 8080
+  workers: 4
+  escalation_timeout_ms: 60.0
+
+open_loop:
+  tool: "k6"
+  fast_path_offered_rates: [1000, 2500, 5000, 7000, 8000, 9000, 9500]  # up to ~1.2x closed-loop capacity (7779 * 1.2 = 9335)
+  blended_offered_rates: [250, 500, 1000, 2000, 3000, 3800, 4200]       # up to ~1.2x blended capacity (3550 * 1.2 = 4260)
+  escalation_modes_rates: [100, 200, 300, 470]  # 100, 200, 300 req/s + 80% measured pure Tier 2 capacity (587 * 0.80 = 470)
+  repetitions_per_level: 5
+  randomize_order: true
+  duration_per_step_sec: 3
+  warmup_sec: 1
+  knee_threshold_factor: 2.0  # knee detected if p95 > 2.0x baseline (minimum p95 across levels)
+  knee_achieved_ratio_threshold: 0.98  # or if achieved/offered ratio < 0.98
+
+closed_loop:
+  tool: "aiohttp"
+  connections: 20
+  duration_sec: 4
+  repeated_runs: 10
+  warmup_sec: 1
+  strict_littles_law_tolerance: 0.15
+
+traffic_splits:
+  er_sweep: [0.01, 0.05, 0.10, 0.25, 0.45]
+  csic_dataset_path: "/Users/sohamsupekar/Desktop/MajorProject/DATASET/csic_database.csv"
+  train_benign_count: 2000
+  train_attack_count: 2000
+  test_benign_range: [2000, 7000]
+  test_attack_range: [2000, 7000]
+
+escalation_modes_benchmark:
+  duration_sec: 60  # >= 60s per run mandated by requirement 2
+  repeats: 5        # 5+ repeats per mode mandated by requirement 2
+  offered_rates: [100, 200, 300, 470]
+  empirical_er: 0.377
+
+escalation_modes:
+  - name: "hold_fail_open"
+    behavior: "hold_with_timeout"
+    timeout_action: "fail_open"
+    timeout_ms: 60.0
+  - name: "hold_fail_closed"
+    behavior: "hold_with_timeout"
+    timeout_action: "fail_closed"
+    timeout_ms: 60.0
+  - name: "async_quarantine"
+    behavior: "async_quarantine"
+    timeout_action: "fail_open"
+    timeout_ms: 60.0
+
+validation:
+  closed_loop_mean_max_error_pct: 20.0
+  open_loop_quantile_max_error_pct: 25.0

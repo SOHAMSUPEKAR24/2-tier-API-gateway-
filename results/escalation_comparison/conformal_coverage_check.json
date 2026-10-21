@@ -1,0 +1,38 @@
+{
+  "alpha_0.01": {
+    "nominal_alpha": 0.01,
+    "nominal_coverage_pct": 99.0,
+    "set_coverage_mean": 77.86147552546198,
+    "set_coverage_ci95": 0.3586588435911925,
+    "non_escalated_share_mean": 95.83015940189026,
+    "non_escalated_share_ci95": 1.183395708012074,
+    "escalated_share_mean": 4.169840598109747,
+    "escalated_share_ci95": 1.1833957080120734,
+    "err_on_non_escalated_mean": 18.744813681270266,
+    "err_on_non_escalated_ci95": 0.96529961984327
+  },
+  "alpha_0.05": {
+    "nominal_alpha": 0.05,
+    "nominal_coverage_pct": 95.0,
+    "set_coverage_mean": 75.24615601636337,
+    "set_coverage_ci95": 0.8372086436716939,
+    "non_escalated_share_mean": 92.0411905769502,
+    "non_escalated_share_ci95": 0.8511096212113763,
+    "escalated_share_mean": 7.958809423049796,
+    "escalated_share_ci95": 0.8511096212113725,
+    "err_on_non_escalated_mean": 18.248039294005075,
+    "err_on_non_escalated_ci95": 0.15491340249888633
+  },
+  "alpha_0.1": {
+    "nominal_alpha": 0.1,
+    "nominal_coverage_pct": 90.0,
+    "set_coverage_mean": 72.88757229510509,
+    "set_coverage_ci95": 1.1251489970544457,
+    "non_escalated_share_mean": 88.60488080124136,
+    "non_escalated_share_ci95": 1.3424927823837014,
+    "escalated_share_mean": 11.395119198758639,
+    "escalated_share_ci95": 1.3424927823836965,
+    "err_on_non_escalated_mean": 17.737231182529996,
+    "err_on_non_escalated_ci95": 0.709006892782988
+  }
+}

@@ -2,15 +2,16 @@
 \begin{table}[t]
 \centering
 \small
-\caption{Gateway Performance and Resource Utilization under Concurrent Load}
-\label{tab:load_latency}
-\begin{tabular}{lcccc}
+\caption{Production HTTP Gateway Performance under Real Loopback Load (Single Run, Sharded Load Client $\ge 4$ Processes, Total Concurrency $C=20$, Client CPU $<60\%$, 4 Workers, NGINX Reverse Proxy in Path)}
+\label{tab:real_gateway_load}
+\begin{tabular}{lccccccc}
 \toprule
-Inspection Mode & Throughput (req/s) & p50 Lat (ms) & p95 Lat (ms) & CPU (\%) \\
+Operational Condition & Exec Type & Throughput (req/s) & Mean Lat (ms) & $p50$ (ms) & $p95$ (ms) & $p99$ (ms) & $N_{\text{est}}$ \\
 \midrule
-no_inspection & 22575.3 & 0.04 & 0.05 & 99.9\% \\
-two_tier & 694.8 & 0.61 & 65.64 & 98.4\% \\
-pure_tier2 & 517.1 & 1.89 & 2.10 & 99.9\% \\
+Passthrough (No Inspection) & Single Run & 9729.7 & 2.05 & 1.04 & 3.70 & 7.98 & 19.95 \\
+Benign Fast-Path (Tier 1) & Single Run & 6443.8 & 3.10 & 2.15 & 5.80 & 8.95 & 19.98 \\
+Escalated (Tier 2 Deep Verif) & Single Run & 806.8 & 24.73 & 24.12 & 34.07 & 43.60 & 19.95 \\
+Two-Tier Blended (10\% Escalated) & Single Run & 3891.4 & 5.10 & 2.55 & 20.61 & 31.31 & 19.85 \\
 \bottomrule
 \end{tabular}
 \end{table}

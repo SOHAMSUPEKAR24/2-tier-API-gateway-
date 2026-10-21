@@ -9,3 +9,7 @@ __pycache__/
 .env
 .venv
 venv/
+load_test/run/
+*.db
+*.db-shm
+*.db-wal

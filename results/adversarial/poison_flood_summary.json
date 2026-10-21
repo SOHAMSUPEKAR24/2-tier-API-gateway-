@@ -1,0 +1,237 @@
+{
+  "flood_simulation": {
+    "flood_rates": [
+      50,
+      100,
+      150,
+      200,
+      250,
+      300,
+      400,
+      500
+    ],
+    "baseline_max_q_mean": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      50.0,
+      80.0,
+      80.0,
+      80.0
+    ],
+    "baseline_max_q_ci95": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "baseline_overflows_mean": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      170.0,
+      620.0,
+      1020.0
+    ],
+    "baseline_overflows_ci95": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "baseline_malicious_unverified_mean": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      170.0,
+      620.0,
+      1020.0
+    ],
+    "baseline_malicious_unverified_ci95": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "baseline_p99_lat_mean": [
+      25.0,
+      45.0,
+      65.0,
+      90.0,
+      352.55,
+      505.0,
+      505.0,
+      505.0
+    ],
+    "baseline_p99_lat_ci95": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "controller_max_q_mean": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      50.0,
+      79.4,
+      80.0,
+      80.0
+    ],
+    "controller_max_q_ci95": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.1105780420791194,
+      0.0,
+      0.0
+    ],
+    "controller_overflows_mean": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      16.4,
+      31.2
+    ],
+    "controller_overflows_ci95": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.4157147769822749,
+      2.2211560841582387
+    ],
+    "controller_malicious_unverified_mean": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      16.4,
+      31.2
+    ],
+    "controller_malicious_unverified_ci95": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.4157147769822749,
+      2.2211560841582387
+    ],
+    "controller_p99_lat_mean": [
+      25.0,
+      45.0,
+      65.0,
+      90.0,
+      352.55,
+      494.65,
+      505.0,
+      505.0
+    ],
+    "controller_p99_lat_ci95": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      4.071304351130694,
+      0.0,
+      0.0
+    ]
+  },
+  "poisoning_audit": {
+    "clean_run": {
+      "acc_final_mean": 97.19054242002781,
+      "acc_final_ci95": 0.3486093292092318,
+      "atk_succ_final_mean": 7.668161434977579,
+      "atk_succ_final_ci95": 1.7319075793244945,
+      "acceptance_rate_mean": 100.0,
+      "acceptance_rate_ci95": 0.0
+    },
+    "rates": {
+      "rate_5": {
+        "naive_acc_final_mean": 83.46314325452018,
+        "naive_acc_final_ci95": 1.5342018211110247,
+        "naive_atk_succ_final_mean": 53.318385650224215,
+        "naive_atk_succ_final_ci95": 4.946596903044065,
+        "protected_acc_final_mean": 96.66203059805285,
+        "protected_acc_final_ci95": 0.3560161207316321,
+        "protected_atk_succ_final_mean": 9.865470852017939,
+        "protected_atk_succ_final_ci95": 1.349594070352338,
+        "gate_acceptance_rate_mean": 100.0,
+        "gate_acceptance_rate_ci95": 0.0
+      },
+      "rate_10": {
+        "naive_acc_final_mean": 80.93184979137692,
+        "naive_acc_final_ci95": 1.4985549988946227,
+        "naive_atk_succ_final_mean": 61.43497757847533,
+        "naive_atk_succ_final_ci95": 4.945029788509867,
+        "protected_acc_final_mean": 96.6759388038943,
+        "protected_acc_final_ci95": 0.5508614837948073,
+        "protected_atk_succ_final_mean": 9.730941704035875,
+        "protected_atk_succ_final_ci95": 1.8943478343792495,
+        "gate_acceptance_rate_mean": 100.0,
+        "gate_acceptance_rate_ci95": 0.0
+      },
+      "rate_20": {
+        "naive_acc_final_mean": 80.65368567454797,
+        "naive_acc_final_ci95": 1.3256381508018347,
+        "naive_atk_succ_final_mean": 62.331838565022416,
+        "naive_atk_succ_final_ci95": 4.34874701325378,
+        "protected_acc_final_mean": 96.57858136300419,
+        "protected_acc_final_ci95": 0.4975242398428534,
+        "protected_atk_succ_final_mean": 10.22421524663677,
+        "protected_atk_succ_final_ci95": 1.7229339045393857,
+        "gate_acceptance_rate_mean": 100.0,
+        "gate_acceptance_rate_ci95": 0.0
+      }
+    },
+    "adaptive_stealth": {
+      "acc_final_mean": 96.8289290681502,
+      "acc_final_ci95": 0.4511557808058951,
+      "atk_succ_final_mean": 8.609865470852018,
+      "atk_succ_final_ci95": 1.7891397147060897,
+      "acceptance_rate_mean": 100.0,
+      "acceptance_rate_ci95": 0.0
+    }
+  },
+  "seeds": [
+    42,
+    71,
+    137,
+    256,
+    512
+  ]
+}

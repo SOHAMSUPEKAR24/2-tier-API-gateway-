@@ -1,0 +1,2264 @@
+{
+  "lofo": {
+    "features_9": {
+      "RF Margin": {
+        "per_fold": {
+          "FTP-BruteForce": {
+            "auroc_mean": 0.94073062086053,
+            "auroc_ci95": 0.042277665971993277,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.1646814142560031,
+                "achieved_benign_esc_ci95": 0.2750842912548003,
+                "held_out_coverage_mean": 2.835820895522388,
+                "held_out_coverage_ci95": 2.4863687509234014,
+                "held_out_sfr_mean": 97.1641791044776,
+                "held_out_sfr_ci95": 2.4863687509234067
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 5.059557572319909,
+                "achieved_benign_esc_ci95": 1.5752436474925462,
+                "held_out_coverage_mean": 65.8955223880597,
+                "held_out_coverage_ci95": 43.82677991313885,
+                "held_out_sfr_mean": 34.1044776119403,
+                "held_out_sfr_ci95": 43.82677991313884
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 10.63717148799395,
+                "achieved_benign_esc_ci95": 2.153089502190042,
+                "held_out_coverage_mean": 80.82089552238806,
+                "held_out_coverage_ci95": 29.77016337613257,
+                "held_out_sfr_mean": 19.17910447761194,
+                "held_out_sfr_ci95": 29.77016337613257
+              }
+            }
+          },
+          "SSH-BruteForce": {
+            "auroc_mean": 0.4660571053058322,
+            "auroc_ci95": 0.05812724893260278,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2214029117035359,
+                "achieved_benign_esc_ci95": 0.4051285678020768,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 4.859141614671961,
+                "achieved_benign_esc_ci95": 3.162648232242106,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 11.02287767063717,
+                "achieved_benign_esc_ci95": 2.233339831457834,
+                "held_out_coverage_mean": 0.149812734082397,
+                "held_out_coverage_ci95": 0.2547143747783734,
+                "held_out_sfr_mean": 99.85018726591761,
+                "held_out_sfr_ci95": 0.2547143747783782
+              }
+            }
+          },
+          "DoS-GoldenEye": {
+            "auroc_mean": 0.586760026049873,
+            "auroc_ci95": 0.18787518617174603,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 0.15503875968992248,
+                "achieved_benign_esc_ci95": 0.24977774210324266,
+                "held_out_coverage_mean": 0.13333333333333336,
+                "held_out_coverage_ci95": 0.3701926806930399,
+                "held_out_sfr_mean": 99.86666666666666,
+                "held_out_sfr_ci95": 0.37019268069304245
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 4.152013613159387,
+                "achieved_benign_esc_ci95": 1.006968370395825,
+                "held_out_coverage_mean": 2.533333333333333,
+                "held_out_coverage_ci95": 0.8855440871886487,
+                "held_out_sfr_mean": 97.46666666666667,
+                "held_out_sfr_ci95": 0.8855440871886511
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 11.075817734921534,
+                "achieved_benign_esc_ci95": 2.848407551714825,
+                "held_out_coverage_mean": 4.577777777777778,
+                "held_out_coverage_ci95": 2.9628265579699757,
+                "held_out_sfr_mean": 95.42222222222222,
+                "held_out_sfr_ci95": 2.9628265579699753
+              }
+            }
+          },
+          "DoS-Hulk": {
+            "auroc_mean": 0.8519427477409826,
+            "auroc_ci95": 0.031856218978667826,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 0.4915863112119493,
+                "achieved_benign_esc_ci95": 0.2974185420484172,
+                "held_out_coverage_mean": 2.056555269922879,
+                "held_out_coverage_ci95": 1.5473494996841706,
+                "held_out_sfr_mean": 97.37789203084833,
+                "held_out_sfr_ci95": 0.6541526919001824
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 3.6755530346001137,
+                "achieved_benign_esc_ci95": 1.217786713714905,
+                "held_out_coverage_mean": 56.65809768637532,
+                "held_out_coverage_ci95": 17.054631174450495,
+                "held_out_sfr_mean": 43.290488431876604,
+                "held_out_sfr_ci95": 17.094908246622012
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 10.361126867082625,
+                "achieved_benign_esc_ci95": 1.2736864894341202,
+                "held_out_coverage_mean": 67.81491002570695,
+                "held_out_coverage_ci95": 2.777169758561301,
+                "held_out_sfr_mean": 32.185089974293064,
+                "held_out_sfr_ci95": 2.7771697585613047
+              }
+            }
+          },
+          "DoS-Slowloris": {
+            "auroc_mean": 0.8373756498783461,
+            "auroc_ci95": 0.038656166694781016,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2403100775193798,
+                "achieved_benign_esc_ci95": 0.2509883925817136,
+                "held_out_coverage_mean": 5.539906103286386,
+                "held_out_coverage_ci95": 8.068520424393544,
+                "held_out_sfr_mean": 87.08920187793427,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 5.275099262620533,
+                "achieved_benign_esc_ci95": 1.209088855814844,
+                "held_out_coverage_mean": 27.089201877934272,
+                "held_out_coverage_ci95": 24.10638368060958,
+                "held_out_sfr_mean": 72.91079812206573,
+                "held_out_sfr_ci95": 24.10638368060958
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 10.56532425789374,
+                "achieved_benign_esc_ci95": 1.7792841020017236,
+                "held_out_coverage_mean": 41.267605633802816,
+                "held_out_coverage_ci95": 19.682779853749654,
+                "held_out_sfr_mean": 58.732394366197184,
+                "held_out_sfr_ci95": 19.682779853749654
+              }
+            }
+          }
+        },
+        "macro_average": {
+          "auroc_mean": 0.7365732299671127,
+          "budgets": {
+            "budget_1pct": {
+              "target_budget": 1.0,
+              "achieved_benign_esc_mean": 0.8546038948761581,
+              "held_out_coverage_mean": 2.113123120412997,
+              "held_out_sfr_mean": 96.29958793598537
+            },
+            "budget_5pct": {
+              "target_budget": 5.0,
+              "achieved_benign_esc_mean": 4.60427301947438,
+              "held_out_coverage_mean": 30.435231057140527,
+              "held_out_sfr_mean": 69.55448616650986
+            },
+            "budget_10pct": {
+              "target_budget": 10.0,
+              "achieved_benign_esc_mean": 10.732463603705805,
+              "held_out_coverage_mean": 38.9262003387516,
+              "held_out_sfr_mean": 61.0737996612484
+            }
+          }
+        }
+      },
+      "Platt-Calibrated RF": {
+        "per_fold": {
+          "FTP-BruteForce": {
+            "auroc_mean": 0.8550063070918803,
+            "auroc_ci95": 0.15921099962243715,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.1835885800718473,
+                "achieved_benign_esc_ci95": 0.6381076708095318,
+                "held_out_coverage_mean": 3.5820895522388057,
+                "held_out_coverage_ci95": 1.5225836880408736,
+                "held_out_sfr_mean": 96.4179104477612,
+                "held_out_sfr_ci95": 1.522583688040879
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 3.8835318585743996,
+                "achieved_benign_esc_ci95": 0.679923000691592,
+                "held_out_coverage_mean": 18.582089552238806,
+                "held_out_coverage_ci95": 38.388035866560905,
+                "held_out_sfr_mean": 81.4179104477612,
+                "held_out_sfr_ci95": 38.388035866560905
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 10.633390054830782,
+                "achieved_benign_esc_ci95": 1.9797257055550785,
+                "held_out_coverage_mean": 41.11940298507462,
+                "held_out_coverage_ci95": 54.766783172679986,
+                "held_out_sfr_mean": 58.880597014925364,
+                "held_out_sfr_ci95": 54.766783172679986
+              }
+            }
+          },
+          "SSH-BruteForce": {
+            "auroc_mean": 0.4977371592372835,
+            "auroc_ci95": 0.05085912070678696,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 0.6995651351862355,
+                "achieved_benign_esc_ci95": 0.5209951008101733,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 4.121762147854037,
+                "achieved_benign_esc_ci95": 0.5955315818045899,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 9.555681603327661,
+                "achieved_benign_esc_ci95": 1.9535226898965419,
+                "held_out_coverage_mean": 0.5243445692883896,
+                "held_out_coverage_ci95": 0.7052721679207647,
+                "held_out_sfr_mean": 99.47565543071161,
+                "held_out_sfr_ci95": 0.7052721679207689
+              }
+            }
+          },
+          "DoS-GoldenEye": {
+            "auroc_mean": 0.5786423814625744,
+            "auroc_ci95": 0.15143028546743,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 0.23066742295329928,
+                "achieved_benign_esc_ci95": 0.2563118290083459,
+                "held_out_coverage_mean": 0.04444444444444444,
+                "held_out_coverage_ci95": 0.12339756023101324,
+                "held_out_sfr_mean": 99.95555555555555,
+                "held_out_sfr_ci95": 0.12339756023101679
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 4.6322556248818305,
+                "achieved_benign_esc_ci95": 2.4520142675196333,
+                "held_out_coverage_mean": 3.0666666666666673,
+                "held_out_coverage_ci95": 1.6017934951977624,
+                "held_out_sfr_mean": 96.93333333333334,
+                "held_out_sfr_ci95": 1.601793495197759
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 9.052750992626205,
+                "achieved_benign_esc_ci95": 1.2296990389907094,
+                "held_out_coverage_mean": 4.5777777777777775,
+                "held_out_coverage_ci95": 2.449371633942228,
+                "held_out_sfr_mean": 95.42222222222222,
+                "held_out_sfr_ci95": 2.449371633942229
+              }
+            }
+          },
+          "DoS-Hulk": {
+            "auroc_mean": 0.8823989353661694,
+            "auroc_ci95": 0.030912961139683528,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 0.3403289846851957,
+                "achieved_benign_esc_ci95": 0.5262578111539552,
+                "held_out_coverage_mean": 12.904884318766069,
+                "held_out_coverage_ci95": 33.52857327324885,
+                "held_out_sfr_mean": 85.24421593830334,
+                "held_out_sfr_ci95": 33.337499669750684
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 4.102854982038193,
+                "achieved_benign_esc_ci95": 0.2812266493581507,
+                "held_out_coverage_mean": 64.52442159383034,
+                "held_out_coverage_ci95": 3.6603057502434284,
+                "held_out_sfr_mean": 35.26992287917738,
+                "held_out_sfr_ci95": 3.635167908558499
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 9.215352618642466,
+                "achieved_benign_esc_ci95": 1.366537172630848,
+                "held_out_coverage_mean": 67.81491002570695,
+                "held_out_coverage_ci95": 1.4345978393885737,
+                "held_out_sfr_mean": 32.08226221079691,
+                "held_out_sfr_ci95": 1.342892105944028
+              }
+            }
+          },
+          "DoS-Slowloris": {
+            "auroc_mean": 0.8047953188342888,
+            "auroc_ci95": 0.04297937326106531,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.8075250519947061,
+                "achieved_benign_esc_ci95": 0.5444285867088033,
+                "held_out_coverage_mean": 7.089201877934272,
+                "held_out_coverage_ci95": 19.682779853749654,
+                "held_out_sfr_mean": 80.0,
+                "held_out_sfr_ci95": 19.682779853749654
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 5.581395348837209,
+                "achieved_benign_esc_ci95": 1.162897008877633,
+                "held_out_coverage_mean": 21.267605633802816,
+                "held_out_coverage_ci95": 24.10638368060958,
+                "held_out_sfr_mean": 65.82159624413146,
+                "held_out_sfr_ci95": 24.10638368060958
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 10.107770845150313,
+                "achieved_benign_esc_ci95": 1.1096889584333092,
+                "held_out_coverage_mean": 43.286384976525824,
+                "held_out_coverage_ci95": 8.105288821974524,
+                "held_out_sfr_mean": 51.64319248826291,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          }
+        },
+        "macro_average": {
+          "auroc_mean": 0.7237160203984392,
+          "budgets": {
+            "budget_1pct": {
+              "target_budget": 1.0,
+              "achieved_benign_esc_mean": 0.8523350349782568,
+              "held_out_coverage_mean": 4.7241240386767185,
+              "held_out_sfr_mean": 92.32353638832402
+            },
+            "budget_5pct": {
+              "target_budget": 5.0,
+              "achieved_benign_esc_mean": 4.464359992437133,
+              "held_out_coverage_mean": 21.488156689307726,
+              "held_out_sfr_mean": 75.88855258088067
+            },
+            "budget_10pct": {
+              "target_budget": 10.0,
+              "achieved_benign_esc_mean": 9.712989222915485,
+              "held_out_coverage_mean": 31.464564066874708,
+              "held_out_sfr_mean": 67.5007858733838
+            }
+          }
+        }
+      },
+      "Isolation Forest": {
+        "per_fold": {
+          "FTP-BruteForce": {
+            "auroc_mean": 0.49302382020696295,
+            "auroc_ci95": 0.03793505718959552,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2289657780298735,
+                "achieved_benign_esc_ci95": 0.1275092026499673,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.77611940298507,
+                "held_out_sfr_ci95": 0.6215921877308517
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.604462091132538,
+                "achieved_benign_esc_ci95": 0.725946961276951,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.77611940298507,
+                "held_out_sfr_ci95": 0.6215921877308517
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 15.103044053696351,
+                "achieved_benign_esc_ci95": 0.7496641308197011,
+                "held_out_coverage_mean": 0.3731343283582089,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.40298507462687,
+                "held_out_sfr_ci95": 0.6215921877308517
+              }
+            }
+          },
+          "SSH-BruteForce": {
+            "auroc_mean": 0.31358844552647247,
+            "auroc_ci95": 0.09132598870133365,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2289657780298735,
+                "achieved_benign_esc_ci95": 0.1275092026499673,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.604462091132538,
+                "achieved_benign_esc_ci95": 0.725946961276951,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 15.103044053696351,
+                "achieved_benign_esc_ci95": 0.7496641308197011,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-GoldenEye": {
+            "auroc_mean": 0.775635974034159,
+            "auroc_ci95": 0.017303715002916418,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2289657780298735,
+                "achieved_benign_esc_ci95": 0.1275092026499673,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.604462091132538,
+                "achieved_benign_esc_ci95": 0.725946961276951,
+                "held_out_coverage_mean": 0.3111111111111111,
+                "held_out_coverage_ci95": 0.24679512046202653,
+                "held_out_sfr_mean": 99.6888888888889,
+                "held_out_sfr_ci95": 0.2467951204620247
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 15.103044053696351,
+                "achieved_benign_esc_ci95": 0.7496641308197011,
+                "held_out_coverage_mean": 30.666666666666668,
+                "held_out_coverage_ci95": 21.357939751284075,
+                "held_out_sfr_mean": 69.33333333333333,
+                "held_out_sfr_ci95": 21.35793975128407
+              }
+            }
+          },
+          "DoS-Hulk": {
+            "auroc_mean": 0.8279481933935738,
+            "auroc_ci95": 0.026913322795711896,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2289657780298735,
+                "achieved_benign_esc_ci95": 0.1275092026499673,
+                "held_out_coverage_mean": 1.1825192802056554,
+                "held_out_coverage_ci95": 2.5892109469264932,
+                "held_out_sfr_mean": 97.5835475578406,
+                "held_out_sfr_ci95": 2.0010169290701207
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.604462091132538,
+                "achieved_benign_esc_ci95": 0.725946961276951,
+                "held_out_coverage_mean": 7.969151670951156,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 90.79691516709511,
+                "held_out_sfr_ci95": 0.7947862268418517
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 15.103044053696351,
+                "achieved_benign_esc_ci95": 0.7496641308197011,
+                "held_out_coverage_mean": 24.781491002570696,
+                "held_out_coverage_ci95": 17.904184841717452,
+                "held_out_sfr_mean": 75.21850899742931,
+                "held_out_sfr_ci95": 17.90418484171745
+              }
+            }
+          },
+          "DoS-Slowloris": {
+            "auroc_mean": 0.8058317510787292,
+            "auroc_ci95": 0.011775914294017456,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2289657780298735,
+                "achieved_benign_esc_ci95": 0.1275092026499673,
+                "held_out_coverage_mean": 35.44600938967136,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 51.64319248826291,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.604462091132538,
+                "achieved_benign_esc_ci95": 0.725946961276951,
+                "held_out_coverage_mean": 65.02347417840375,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 15.103044053696351,
+                "achieved_benign_esc_ci95": 0.7496641308197011,
+                "held_out_coverage_mean": 65.49295774647888,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          }
+        },
+        "macro_average": {
+          "auroc_mean": 0.6432056368479795,
+          "budgets": {
+            "budget_1pct": {
+              "target_budget": 1.0,
+              "achieved_benign_esc_mean": 1.2289657780298735,
+              "held_out_coverage_mean": 7.325705733975402,
+              "held_out_sfr_mean": 89.8005718898177
+            },
+            "budget_5pct": {
+              "target_budget": 5.0,
+              "achieved_benign_esc_mean": 7.604462091132538,
+              "held_out_coverage_mean": 14.660747392093203,
+              "held_out_sfr_mean": 82.46553023169992
+            },
+            "budget_10pct": {
+              "target_budget": 10.0,
+              "achieved_benign_esc_mean": 15.103044053696351,
+              "held_out_coverage_mean": 24.262849948814893,
+              "held_out_sfr_mean": 73.204111020984
+            }
+          }
+        }
+      },
+      "Mahalanobis": {
+        "per_fold": {
+          "FTP-BruteForce": {
+            "auroc_mean": 0.7090554036397705,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.1722442805823408,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.77611940298507,
+                "held_out_sfr_ci95": 0.6215921877308517
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.4116089998109285,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.77611940298507,
+                "held_out_sfr_ci95": 0.6215921877308517
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 14.653053507279258,
+                "achieved_benign_esc_ci95": 2.465978625918729e-15,
+                "held_out_coverage_mean": 0.3731343283582089,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.40298507462687,
+                "held_out_sfr_ci95": 0.6215921877308517
+              }
+            }
+          },
+          "SSH-BruteForce": {
+            "auroc_mean": 0.1083281462550711,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.1722442805823408,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.4116089998109285,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 14.653053507279258,
+                "achieved_benign_esc_ci95": 2.465978625918729e-15,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-GoldenEye": {
+            "auroc_mean": 0.8725362912543855,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.1722442805823408,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 27.555555555555554,
+                "held_out_coverage_ci95": 4.931957251837458e-15,
+                "held_out_sfr_mean": 72.44444444444444,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.4116089998109285,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 55.333333333333336,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 44.666666666666664,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 14.653053507279258,
+                "achieved_benign_esc_ci95": 2.465978625918729e-15,
+                "held_out_coverage_mean": 88.88888888888889,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 11.11111111111111,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-Hulk": {
+            "auroc_mean": 0.9628000297459781,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.1722442805823408,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 27.76349614395887,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 71.31105398457585,
+                "held_out_sfr_ci95": 0.699318643350396
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.4116089998109285,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 84.83290488431876,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 15.167095115681231,
+                "held_out_sfr_ci95": 2.465978625918729e-15
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 14.653053507279258,
+                "achieved_benign_esc_ci95": 2.465978625918729e-15,
+                "held_out_coverage_mean": 98.45758354755783,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 1.5424164524421593,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-Slowloris": {
+            "auroc_mean": 0.8461981950314099,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.1722442805823408,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 35.44600938967136,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 51.64319248826291,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.4116089998109285,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 65.02347417840375,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 14.653053507279258,
+                "achieved_benign_esc_ci95": 2.465978625918729e-15,
+                "held_out_coverage_mean": 65.49295774647888,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          }
+        },
+        "macro_average": {
+          "auroc_mean": 0.699783613185323,
+          "budgets": {
+            "budget_1pct": {
+              "target_budget": 1.0,
+              "achieved_benign_esc_mean": 1.1722442805823408,
+              "held_out_coverage_mean": 18.15301221783716,
+              "held_out_sfr_mean": 79.03496206405364
+            },
+            "budget_5pct": {
+              "target_budget": 5.0,
+              "achieved_benign_esc_mean": 7.4116089998109285,
+              "held_out_coverage_mean": 41.03794247921117,
+              "held_out_sfr_mean": 56.335121776972684
+            },
+            "budget_10pct": {
+              "target_budget": 10.0,
+              "achieved_benign_esc_mean": 14.653053507279258,
+              "held_out_coverage_mean": 50.64251290225676,
+              "held_out_sfr_mean": 46.824448067542136
+            }
+          }
+        }
+      },
+      "kNN Distance": {
+        "per_fold": {
+          "FTP-BruteForce": {
+            "auroc_mean": 0.5964096138705226,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.833995084136888,
+                "achieved_benign_esc_ci95": 3.082473282398411e-16,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.77611940298507,
+                "held_out_sfr_ci95": 0.6215921877308517
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.789752316127813,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.77611940298507,
+                "held_out_sfr_ci95": 0.6215921877308517
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 14.52070334656835,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.77611940298507,
+                "held_out_sfr_ci95": 0.6215921877308517
+              }
+            }
+          },
+          "SSH-BruteForce": {
+            "auroc_mean": 0.8295338427646101,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.833995084136888,
+                "achieved_benign_esc_ci95": 3.082473282398411e-16,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.789752316127813,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 14.52070334656835,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-GoldenEye": {
+            "auroc_mean": 0.8887409928362848,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.833995084136888,
+                "achieved_benign_esc_ci95": 3.082473282398411e-16,
+                "held_out_coverage_mean": 36.888888888888886,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 63.11111111111111,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.789752316127813,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 61.55555555555556,
+                "held_out_coverage_ci95": 9.863914503674915e-15,
+                "held_out_sfr_mean": 38.44444444444444,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 14.52070334656835,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 72.66666666666667,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 27.333333333333332,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-Hulk": {
+            "auroc_mean": 0.9461942888694146,
+            "auroc_ci95": 1.5412366411992055e-16,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.833995084136888,
+                "achieved_benign_esc_ci95": 3.082473282398411e-16,
+                "held_out_coverage_mean": 70.95115681233933,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 29.04884318766067,
+                "held_out_sfr_ci95": 4.931957251837458e-15
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.789752316127813,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 81.49100257069408,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 18.50899742930591,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 14.52070334656835,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 85.08997429305913,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 14.910025706940875,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-Slowloris": {
+            "auroc_mean": 0.8239982530843978,
+            "auroc_ci95": 1.5412366411992055e-16,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.833995084136888,
+                "achieved_benign_esc_ci95": 3.082473282398411e-16,
+                "held_out_coverage_mean": 65.02347417840375,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 7.789752316127813,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 65.02347417840375,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 14.52070334656835,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 65.02347417840375,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          }
+        },
+        "macro_average": {
+          "auroc_mean": 0.8169753982850458,
+          "budgets": {
+            "budget_1pct": {
+              "target_budget": 1.0,
+              "achieved_benign_esc_mean": 1.833995084136888,
+              "held_out_coverage_mean": 34.57270397592639,
+              "held_out_sfr_mean": 62.80036028025747
+            },
+            "budget_5pct": {
+              "target_budget": 5.0,
+              "achieved_benign_esc_mean": 7.789752316127813,
+              "held_out_coverage_mean": 41.614006460930675,
+              "held_out_sfr_mean": 55.759057795253185
+            },
+            "budget_10pct": {
+              "target_budget": 10.0,
+              "achieved_benign_esc_mean": 14.52070334656835,
+              "held_out_coverage_mean": 44.55602302762591,
+              "held_out_sfr_mean": 52.817041228557954
+            }
+          }
+        }
+      }
+    },
+    "features_76": {
+      "RF Margin": {
+        "per_fold": {
+          "FTP-BruteForce": {
+            "auroc_mean": 0.990846391976589,
+            "auroc_ci95": 0.002869562831268363,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 7.20741160899981,
+                "achieved_benign_esc_ci95": 1.7748646308236817,
+                "held_out_coverage_mean": 100.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 0.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 16.800907543959163,
+                "achieved_benign_esc_ci95": 3.1459881846215203,
+                "held_out_coverage_mean": 100.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 0.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 22.805823407071284,
+                "achieved_benign_esc_ci95": 3.014969927551241,
+                "held_out_coverage_mean": 100.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 0.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "SSH-BruteForce": {
+            "auroc_mean": 0.6029949092279008,
+            "auroc_ci95": 0.2222449614515608,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 4.099073548875024,
+                "achieved_benign_esc_ci95": 2.4590507061611544,
+                "held_out_coverage_mean": 0.37453183520599254,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.625468164794,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 13.390054830780866,
+                "achieved_benign_esc_ci95": 2.185028768042247,
+                "held_out_coverage_mean": 2.322097378277154,
+                "held_out_coverage_ci95": 0.8318936644787414,
+                "held_out_sfr_mean": 97.67790262172286,
+                "held_out_sfr_ci95": 0.8318936644787334
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.68784269238041,
+                "achieved_benign_esc_ci95": 1.5664723442512067,
+                "held_out_coverage_mean": 2.6217228464419478,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 97.37827715355806,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-GoldenEye": {
+            "auroc_mean": 0.9319085313333755,
+            "auroc_ci95": 0.017703090225710844,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 5.6683683115900925,
+                "achieved_benign_esc_ci95": 1.1826348204785282,
+                "held_out_coverage_mean": 71.77777777777779,
+                "held_out_coverage_ci95": 5.296760319030481,
+                "held_out_sfr_mean": 28.22222222222222,
+                "held_out_sfr_ci95": 5.296760319030481
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 13.287956135375307,
+                "achieved_benign_esc_ci95": 3.3781639594574284,
+                "held_out_coverage_mean": 82.04444444444444,
+                "held_out_coverage_ci95": 5.844799396344879,
+                "held_out_sfr_mean": 17.955555555555556,
+                "held_out_sfr_ci95": 5.844799396344879
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 23.90622045755341,
+                "achieved_benign_esc_ci95": 4.791723155674701,
+                "held_out_coverage_mean": 92.8,
+                "held_out_coverage_ci95": 4.852678677539833,
+                "held_out_sfr_mean": 7.2,
+                "held_out_sfr_ci95": 4.852678677539836
+              }
+            }
+          },
+          "DoS-Hulk": {
+            "auroc_mean": 0.9914745693759324,
+            "auroc_ci95": 0.003098995950442248,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 5.150311968235961,
+                "achieved_benign_esc_ci95": 0.7067511307474621,
+                "held_out_coverage_mean": 99.02313624678662,
+                "held_out_coverage_ci95": 1.6647113467441732,
+                "held_out_sfr_mean": 0.9768637532133676,
+                "held_out_sfr_ci95": 1.6647113467441708
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 12.864435621100398,
+                "achieved_benign_esc_ci95": 2.2280648942274945,
+                "held_out_coverage_mean": 100.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 0.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 20.40461334845907,
+                "achieved_benign_esc_ci95": 2.6919806281814354,
+                "held_out_coverage_mean": 100.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 0.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-Slowloris": {
+            "auroc_mean": 0.9399730328780522,
+            "auroc_ci95": 0.041144797575519684,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 2.7717905086027605,
+                "achieved_benign_esc_ci95": 0.6752460217041321,
+                "held_out_coverage_mean": 51.12676056338028,
+                "held_out_coverage_ci95": 20.438707401849385,
+                "held_out_sfr_mean": 48.87323943661972,
+                "held_out_sfr_ci95": 20.438707401849378
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 5.819625638116846,
+                "achieved_benign_esc_ci95": 1.2100457200136014,
+                "held_out_coverage_mean": 71.03286384976526,
+                "held_out_coverage_ci95": 19.883752448250046,
+                "held_out_sfr_mean": 28.96713615023474,
+                "held_out_sfr_ci95": 19.883752448250043
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.377765173000565,
+                "achieved_benign_esc_ci95": 1.3204271375122125,
+                "held_out_coverage_mean": 95.5868544600939,
+                "held_out_coverage_ci95": 12.252856332797794,
+                "held_out_sfr_mean": 4.413145539906103,
+                "held_out_sfr_ci95": 12.252856332797796
+              }
+            }
+          }
+        },
+        "macro_average": {
+          "auroc_mean": 0.8914394869583699,
+          "budgets": {
+            "budget_1pct": {
+              "target_budget": 1.0,
+              "achieved_benign_esc_mean": 4.979391189260729,
+              "held_out_coverage_mean": 64.46044128463015,
+              "held_out_sfr_mean": 35.539558715369864
+            },
+            "budget_5pct": {
+              "target_budget": 5.0,
+              "achieved_benign_esc_mean": 12.432595953866516,
+              "held_out_coverage_mean": 71.07988113449737,
+              "held_out_sfr_mean": 28.920118865502634
+            },
+            "budget_10pct": {
+              "target_budget": 10.0,
+              "achieved_benign_esc_mean": 20.836453015692946,
+              "held_out_coverage_mean": 78.20171546130716,
+              "held_out_sfr_mean": 21.798284538692833
+            }
+          }
+        }
+      },
+      "Platt-Calibrated RF": {
+        "per_fold": {
+          "FTP-BruteForce": {
+            "auroc_mean": 0.9839187499823628,
+            "auroc_ci95": 0.008440547556848081,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 6.541879372282095,
+                "achieved_benign_esc_ci95": 1.6523746481975081,
+                "held_out_coverage_mean": 100.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 0.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 19.12270750614483,
+                "achieved_benign_esc_ci95": 2.9341489585616096,
+                "held_out_coverage_mean": 100.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 0.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 25.123841936093775,
+                "achieved_benign_esc_ci95": 4.211482622163427,
+                "held_out_coverage_mean": 100.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 0.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "SSH-BruteForce": {
+            "auroc_mean": 0.4780837622852319,
+            "auroc_ci95": 0.17376824262804008,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 4.454528266212895,
+                "achieved_benign_esc_ci95": 1.3668396220814507,
+                "held_out_coverage_mean": 0.37453183520599254,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 99.625468164794,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 13.034600113442997,
+                "achieved_benign_esc_ci95": 2.3572169802926313,
+                "held_out_coverage_mean": 1.4232209737827717,
+                "held_out_coverage_ci95": 1.4105443358415295,
+                "held_out_sfr_mean": 98.57677902621724,
+                "held_out_sfr_ci95": 1.4105443358415202
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.279447910758176,
+                "achieved_benign_esc_ci95": 3.833961338666161,
+                "held_out_coverage_mean": 2.471910112359551,
+                "held_out_coverage_ci95": 0.4159468322393706,
+                "held_out_sfr_mean": 97.52808988764045,
+                "held_out_sfr_ci95": 0.41594683223936274
+              }
+            }
+          },
+          "DoS-GoldenEye": {
+            "auroc_mean": 0.9160624356631164,
+            "auroc_ci95": 0.02966378398065551,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 5.789374172811496,
+                "achieved_benign_esc_ci95": 1.23137860467199,
+                "held_out_coverage_mean": 69.42222222222222,
+                "held_out_coverage_ci95": 2.6364950726478162,
+                "held_out_sfr_mean": 30.53333333333334,
+                "held_out_sfr_ci95": 2.5928173672728514
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 14.747589336358478,
+                "achieved_benign_esc_ci95": 2.833936424971347,
+                "held_out_coverage_mean": 81.6,
+                "held_out_coverage_ci95": 7.412589121041505,
+                "held_out_sfr_mean": 18.400000000000002,
+                "held_out_sfr_ci95": 7.412589121041501
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 22.416335791264892,
+                "achieved_benign_esc_ci95": 1.6880620001310847,
+                "held_out_coverage_mean": 87.15555555555557,
+                "held_out_coverage_ci95": 9.922575753989975,
+                "held_out_sfr_mean": 12.844444444444445,
+                "held_out_sfr_ci95": 9.922575753989971
+              }
+            }
+          },
+          "DoS-Hulk": {
+            "auroc_mean": 0.9836317409028099,
+            "auroc_ci95": 0.007889335961353754,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 5.173000567214975,
+                "achieved_benign_esc_ci95": 0.917471744029051,
+                "held_out_coverage_mean": 97.32647814910025,
+                "held_out_coverage_ci95": 2.78815399296463,
+                "held_out_sfr_mean": 1.9023136246786634,
+                "held_out_sfr_ci95": 3.124188592025608
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 15.012289657780297,
+                "achieved_benign_esc_ci95": 3.2500965592456867,
+                "held_out_coverage_mean": 99.38303341902314,
+                "held_out_coverage_ci95": 0.9195885050051757,
+                "held_out_sfr_mean": 0.2570694087403599,
+                "held_out_sfr_ci95": 0.5528599308015513
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 22.52221591983362,
+                "achieved_benign_esc_ci95": 2.776290217172031,
+                "held_out_coverage_mean": 99.74293059125964,
+                "held_out_coverage_ci95": 0.39093100611610104,
+                "held_out_sfr_mean": 0.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-Slowloris": {
+            "auroc_mean": 0.9122528198750708,
+            "auroc_ci95": 0.06843245451872723,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 2.4465872565702402,
+                "achieved_benign_esc_ci95": 0.8212695982836005,
+                "held_out_coverage_mean": 16.24413145539906,
+                "held_out_coverage_ci95": 36.297957470772324,
+                "held_out_sfr_mean": 74.08450704225352,
+                "held_out_sfr_ci95": 36.10682132111692
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 5.713745509548119,
+                "achieved_benign_esc_ci95": 0.7607930366869313,
+                "held_out_coverage_mean": 62.582159624413144,
+                "held_out_coverage_ci95": 27.54711615998747,
+                "held_out_sfr_mean": 32.347417840375584,
+                "held_out_sfr_ci95": 26.38765294798672
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 17.49669124598223,
+                "achieved_benign_esc_ci95": 2.3589698970691493,
+                "held_out_coverage_mean": 93.09859154929578,
+                "held_out_coverage_ci95": 12.471392334269973,
+                "held_out_sfr_mean": 4.413145539906103,
+                "held_out_sfr_ci95": 12.252856332797796
+              }
+            }
+          }
+        },
+        "macro_average": {
+          "auroc_mean": 0.8547899017417183,
+          "budgets": {
+            "budget_1pct": {
+              "target_budget": 1.0,
+              "achieved_benign_esc_mean": 4.88107392701834,
+              "held_out_coverage_mean": 56.673472732385505,
+              "held_out_sfr_mean": 41.229124433011904
+            },
+            "budget_5pct": {
+              "target_budget": 5.0,
+              "achieved_benign_esc_mean": 13.526186424654943,
+              "held_out_coverage_mean": 68.99768280344381,
+              "held_out_sfr_mean": 29.916253255066636
+            },
+            "budget_10pct": {
+              "target_budget": 10.0,
+              "achieved_benign_esc_mean": 21.167706560786538,
+              "held_out_coverage_mean": 76.4937975616941,
+              "held_out_sfr_mean": 22.9571359743982
+            }
+          }
+        }
+      },
+      "Isolation Forest": {
+        "per_fold": {
+          "FTP-BruteForce": {
+            "auroc_mean": 0.44398088965270077,
+            "auroc_ci95": 0.03676353849099096,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.754584987710342,
+                "achieved_benign_esc_ci95": 0.13928419988595067,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 8.28512006050293,
+                "achieved_benign_esc_ci95": 0.4285317637723935,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 16.5778029873322,
+                "achieved_benign_esc_ci95": 1.3256758748216768,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "SSH-BruteForce": {
+            "auroc_mean": 0.6094746144743914,
+            "auroc_ci95": 0.05254177920680905,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.754584987710342,
+                "achieved_benign_esc_ci95": 0.13928419988595067,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 8.28512006050293,
+                "achieved_benign_esc_ci95": 0.4285317637723935,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 16.5778029873322,
+                "achieved_benign_esc_ci95": 1.3256758748216768,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-GoldenEye": {
+            "auroc_mean": 0.8226588517047961,
+            "auroc_ci95": 0.033952541772796364,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.754584987710342,
+                "achieved_benign_esc_ci95": 0.13928419988595067,
+                "held_out_coverage_mean": 0.08888888888888888,
+                "held_out_coverage_ci95": 0.24679512046202648,
+                "held_out_sfr_mean": 92.62222222222222,
+                "held_out_sfr_ci95": 20.022561282357028
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 8.28512006050293,
+                "achieved_benign_esc_ci95": 0.4285317637723935,
+                "held_out_coverage_mean": 22.4,
+                "held_out_coverage_ci95": 21.57111476256921,
+                "held_out_sfr_mean": 75.28888888888889,
+                "held_out_sfr_ci95": 26.478338972296736
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 16.5778029873322,
+                "achieved_benign_esc_ci95": 1.3256758748216768,
+                "held_out_coverage_mean": 61.333333333333336,
+                "held_out_coverage_ci95": 11.145129377105034,
+                "held_out_sfr_mean": 38.666666666666664,
+                "held_out_sfr_ci95": 11.145129377105032
+              }
+            }
+          },
+          "DoS-Hulk": {
+            "auroc_mean": 0.8849661785312778,
+            "auroc_ci95": 0.040458426787155874,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.754584987710342,
+                "achieved_benign_esc_ci95": 0.13928419988595067,
+                "held_out_coverage_mean": 7.352185089974293,
+                "held_out_coverage_ci95": 1.3654633018957214,
+                "held_out_sfr_mean": 76.91516709511568,
+                "held_out_sfr_ci95": 31.257698530990297
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 8.28512006050293,
+                "achieved_benign_esc_ci95": 0.4285317637723935,
+                "held_out_coverage_mean": 29.56298200514139,
+                "held_out_coverage_ci95": 28.084522659521113,
+                "held_out_sfr_mean": 57.634961439588686,
+                "held_out_sfr_ci95": 28.98554159615283
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 16.5778029873322,
+                "achieved_benign_esc_ci95": 1.3256758748216768,
+                "held_out_coverage_mean": 85.08997429305911,
+                "held_out_coverage_ci95": 20.81011585076355,
+                "held_out_sfr_mean": 14.910025706940875,
+                "held_out_sfr_ci95": 20.810115850763555
+              }
+            }
+          },
+          "DoS-Slowloris": {
+            "auroc_mean": 0.8326270219793583,
+            "auroc_ci95": 0.023227277243044086,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.754584987710342,
+                "achieved_benign_esc_ci95": 0.13928419988595067,
+                "held_out_coverage_mean": 35.44600938967136,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 51.64319248826291,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 8.28512006050293,
+                "achieved_benign_esc_ci95": 0.4285317637723935,
+                "held_out_coverage_mean": 65.02347417840375,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 16.5778029873322,
+                "achieved_benign_esc_ci95": 1.3256758748216768,
+                "held_out_coverage_mean": 65.11737089201877,
+                "held_out_coverage_ci95": 0.26069907091060057,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          }
+        },
+        "macro_average": {
+          "auroc_mean": 0.7187415112685048,
+          "budgets": {
+            "budget_1pct": {
+              "target_budget": 1.0,
+              "achieved_benign_esc_mean": 1.754584987710342,
+              "held_out_coverage_mean": 8.577416673706908,
+              "held_out_sfr_mean": 84.23611636112017
+            },
+            "budget_5pct": {
+              "target_budget": 5.0,
+              "achieved_benign_esc_mean": 8.28512006050293,
+              "held_out_coverage_mean": 23.397291236709027,
+              "held_out_sfr_mean": 70.9979156056016
+            },
+            "budget_10pct": {
+              "target_budget": 10.0,
+              "achieved_benign_esc_mean": 16.5778029873322,
+              "held_out_coverage_mean": 42.30813570368224,
+              "held_out_sfr_mean": 55.12848401462761
+            }
+          }
+        }
+      },
+      "Mahalanobis": {
+        "per_fold": {
+          "FTP-BruteForce": {
+            "auroc_mean": 0.5314028270445842,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.7961807525051996,
+                "achieved_benign_esc_ci95": 3.082473282398411e-16,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 11.96823596142938,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.396672338816412,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "SSH-BruteForce": {
+            "auroc_mean": 0.4570449728537003,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.7961807525051996,
+                "achieved_benign_esc_ci95": 3.082473282398411e-16,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 11.96823596142938,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 2.6217228464419478,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 97.37827715355806,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.396672338816412,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 2.6217228464419478,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 97.37827715355806,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-GoldenEye": {
+            "auroc_mean": 0.9265368374613978,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.7961807525051996,
+                "achieved_benign_esc_ci95": 3.082473282398411e-16,
+                "held_out_coverage_mean": 47.11111111111111,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 50.93333333333333,
+                "held_out_sfr_ci95": 5.2765985698233955
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 11.96823596142938,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 86.8888888888889,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 13.11111111111111,
+                "held_out_sfr_ci95": 2.465978625918729e-15
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.396672338816412,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 94.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 6.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-Hulk": {
+            "auroc_mean": 0.9745142097801083,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.7961807525051996,
+                "achieved_benign_esc_ci95": 3.082473282398411e-16,
+                "held_out_coverage_mean": 46.52956298200514,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 47.86632390745501,
+                "held_out_sfr_ci95": 11.81965744217912
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 11.96823596142938,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 98.7146529562982,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 1.2853470437017995,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.396672338816412,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 100.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 0.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-Slowloris": {
+            "auroc_mean": 0.8178090411759016,
+            "auroc_ci95": 1.5412366411992055e-16,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.7961807525051996,
+                "achieved_benign_esc_ci95": 3.082473282398411e-16,
+                "held_out_coverage_mean": 29.577464788732392,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 57.51173708920187,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 11.96823596142938,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 65.25821596244131,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.396672338816412,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 65.49295774647888,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          }
+        },
+        "macro_average": {
+          "auroc_mean": 0.7414615776631385,
+          "budgets": {
+            "budget_1pct": {
+              "target_budget": 1.0,
+              "achieved_benign_esc_mean": 1.7961807525051996,
+              "held_out_coverage_mean": 24.643627776369726,
+              "held_out_sfr_mean": 71.26227886599804
+            },
+            "budget_5pct": {
+              "target_budget": 5.0,
+              "achieved_benign_esc_mean": 11.96823596142938,
+              "held_out_coverage_mean": 50.69669613081407,
+              "held_out_sfr_mean": 46.7680926015803
+            },
+            "budget_10pct": {
+              "target_budget": 10.0,
+              "achieved_benign_esc_mean": 18.396672338816412,
+              "held_out_coverage_mean": 52.42293611858416,
+              "held_out_sfr_mean": 45.08880097061772
+            }
+          }
+        }
+      },
+      "kNN Distance": {
+        "per_fold": {
+          "FTP-BruteForce": {
+            "auroc_mean": 0.5440812105101267,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2289657780298733,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 10.79599168084704,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.150879183210435,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "SSH-BruteForce": {
+            "auroc_mean": 0.6504050877979385,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2289657780298733,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 10.79599168084704,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.150879183210435,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 0.0,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 100.0,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-GoldenEye": {
+            "auroc_mean": 0.9222928089746013,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2289657780298733,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 51.777777777777786,
+                "held_out_coverage_ci95": 9.863914503674915e-15,
+                "held_out_sfr_mean": 46.66666666666667,
+                "held_out_sfr_ci95": 4.166381160299892
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 10.79599168084704,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 72.22222222222221,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 27.77777777777778,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.150879183210435,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 89.11111111111111,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 10.888888888888888,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-Hulk": {
+            "auroc_mean": 0.9802121199307287,
+            "auroc_ci95": 1.5412366411992055e-16,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2289657780298733,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 54.4987146529563,
+                "held_out_coverage_ci95": 9.863914503674915e-15,
+                "held_out_sfr_mean": 41.95372750642673,
+                "held_out_sfr_ci95": 6.8288086560398575
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 10.79599168084704,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 98.97172236503856,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 1.0282776349614395,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.150879183210435,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 98.97172236503856,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 1.0282776349614395,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          },
+          "DoS-Slowloris": {
+            "auroc_mean": 0.8915940338571418,
+            "auroc_ci95": 0.0,
+            "budgets": {
+              "budget_1pct": {
+                "target_budget": 1.0,
+                "achieved_benign_esc_mean": 1.2289657780298733,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 65.02347417840375,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_5pct": {
+                "target_budget": 5.0,
+                "achieved_benign_esc_mean": 10.79599168084704,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 65.72769953051643,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              },
+              "budget_10pct": {
+                "target_budget": 10.0,
+                "achieved_benign_esc_mean": 18.150879183210435,
+                "achieved_benign_esc_ci95": 0.0,
+                "held_out_coverage_mean": 66.19718309859155,
+                "held_out_coverage_ci95": 0.0,
+                "held_out_sfr_mean": 22.065727699530516,
+                "held_out_sfr_ci95": 0.0
+              }
+            }
+          }
+        },
+        "macro_average": {
+          "auroc_mean": 0.7977170522141075,
+          "budgets": {
+            "budget_1pct": {
+              "target_budget": 1.0,
+              "achieved_benign_esc_mean": 1.2289657780298733,
+              "held_out_coverage_mean": 34.259993321827565,
+              "held_out_sfr_mean": 62.137224374524784
+            },
+            "budget_5pct": {
+              "target_budget": 5.0,
+              "achieved_benign_esc_mean": 10.79599168084704,
+              "held_out_coverage_mean": 47.384328823555435,
+              "held_out_sfr_mean": 50.17435662245394
+            },
+            "budget_10pct": {
+              "target_budget": 10.0,
+              "achieved_benign_esc_mean": 18.150879183210435,
+              "held_out_coverage_mean": 50.856003314948246,
+              "held_out_sfr_mean": 46.79657884467617
+            }
+          }
+        }
+      }
+    }
+  },
+  "cold_start": {
+    "features_9": {
+      "RF Margin": {
+        "auroc_mean": 0.5793457232040291,
+        "auroc_ci95": 0.017517206536993193,
+        "budgets": {
+          "budget_1pct": {
+            "target_budget": 1.0,
+            "achieved_benign_esc_mean": 2.1402911703535636,
+            "achieved_benign_esc_ci95": 0.8373523001278952,
+            "held_out_coverage_mean": 22.219321148825067,
+            "held_out_coverage_ci95": 0.15799273676038303,
+            "held_out_sfr_mean": 77.78067885117494,
+            "held_out_sfr_ci95": 0.1579927367603768
+          },
+          "budget_5pct": {
+            "target_budget": 5.0,
+            "achieved_benign_esc_mean": 5.475515220268481,
+            "achieved_benign_esc_ci95": 1.7699048357730114,
+            "held_out_coverage_mean": 28.511749347258483,
+            "held_out_coverage_ci95": 0.03624601965010427,
+            "held_out_sfr_mean": 71.48825065274153,
+            "held_out_sfr_ci95": 0.03624601965010033
+          },
+          "budget_10pct": {
+            "target_budget": 10.0,
+            "achieved_benign_esc_mean": 10.512384193609378,
+            "achieved_benign_esc_ci95": 1.8874749472749526,
+            "held_out_coverage_mean": 28.524804177545697,
+            "held_out_coverage_ci95": 4.931957251837458e-15,
+            "held_out_sfr_mean": 71.47519582245431,
+            "held_out_sfr_ci95": 0.0
+          }
+        }
+      },
+      "Platt-Calibrated RF": {
+        "auroc_mean": 0.5740307979465733,
+        "auroc_ci95": 0.012092265768421427,
+        "budgets": {
+          "budget_1pct": {
+            "target_budget": 1.0,
+            "achieved_benign_esc_mean": 3.006239364719229,
+            "achieved_benign_esc_ci95": 0.8125665327439009,
+            "held_out_coverage_mean": 22.297650130548305,
+            "held_out_coverage_ci95": 0.16806587910764278,
+            "held_out_sfr_mean": 77.7023498694517,
+            "held_out_sfr_ci95": 0.16806587910763557
+          },
+          "budget_5pct": {
+            "target_budget": 5.0,
+            "achieved_benign_esc_mean": 6.52297220646625,
+            "achieved_benign_esc_ci95": 1.2095445998400058,
+            "held_out_coverage_mean": 26.03133159268929,
+            "held_out_coverage_ci95": 4.202584915118703,
+            "held_out_sfr_mean": 73.9686684073107,
+            "held_out_sfr_ci95": 4.202584915118705
+          },
+          "budget_10pct": {
+            "target_budget": 10.0,
+            "achieved_benign_esc_mean": 11.121194932879561,
+            "achieved_benign_esc_ci95": 3.0702628464267128,
+            "held_out_coverage_mean": 27.54569190600522,
+            "held_out_coverage_ci95": 2.6281488717441954,
+            "held_out_sfr_mean": 72.45430809399478,
+            "held_out_sfr_ci95": 2.6281488717441994
+          }
+        }
+      },
+      "Isolation Forest": {
+        "auroc_mean": 0.7167888227549468,
+        "auroc_ci95": 0.017360152780258528,
+        "budgets": {
+          "budget_1pct": {
+            "target_budget": 1.0,
+            "achieved_benign_esc_mean": 1.2289657780298735,
+            "achieved_benign_esc_ci95": 0.1275092026499673,
+            "held_out_coverage_mean": 10.156657963446477,
+            "held_out_coverage_ci95": 0.6574432495785942,
+            "held_out_sfr_mean": 89.03394255874674,
+            "held_out_sfr_ci95": 2.5910200377129695
+          },
+          "budget_5pct": {
+            "target_budget": 5.0,
+            "achieved_benign_esc_mean": 7.604462091132538,
+            "achieved_benign_esc_ci95": 0.725946961276951,
+            "held_out_coverage_mean": 20.195822454308093,
+            "held_out_coverage_ci95": 0.07249203930020238,
+            "held_out_sfr_mean": 78.99477806788511,
+            "held_out_sfr_ci95": 1.9781495599945145
+          },
+          "budget_10pct": {
+            "target_budget": 10.0,
+            "achieved_benign_esc_mean": 15.103044053696351,
+            "achieved_benign_esc_ci95": 0.7496641308197011,
+            "held_out_coverage_mean": 33.51174934725849,
+            "held_out_coverage_ci95": 8.933118145720263,
+            "held_out_sfr_mean": 65.70496083550913,
+            "held_out_sfr_ci95": 9.294047708739615
+          }
+        }
+      },
+      "Mahalanobis": {
+        "auroc_mean": 0.7549442485438274,
+        "auroc_ci95": 0.0,
+        "budgets": {
+          "budget_1pct": {
+            "target_budget": 1.0,
+            "achieved_benign_esc_mean": 1.1722442805823408,
+            "achieved_benign_esc_ci95": 0.0,
+            "held_out_coverage_mean": 25.0,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 74.19060052219321,
+            "held_out_sfr_ci95": 1.9456720200178563
+          },
+          "budget_5pct": {
+            "target_budget": 5.0,
+            "achieved_benign_esc_mean": 7.4116089998109285,
+            "achieved_benign_esc_ci95": 0.0,
+            "held_out_coverage_mean": 55.87467362924282,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 43.315926892950394,
+            "held_out_sfr_ci95": 1.9456720200178519
+          },
+          "budget_10pct": {
+            "target_budget": 10.0,
+            "achieved_benign_esc_mean": 14.653053507279258,
+            "achieved_benign_esc_ci95": 2.465978625918729e-15,
+            "held_out_coverage_mean": 69.32114882506526,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 29.89556135770235,
+            "held_out_sfr_ci95": 1.8737824996303456
+          }
+        }
+      },
+      "kNN Distance": {
+        "auroc_mean": 0.8750077134325294,
+        "auroc_ci95": 0.0,
+        "budgets": {
+          "budget_1pct": {
+            "target_budget": 1.0,
+            "achieved_benign_esc_mean": 1.833995084136888,
+            "achieved_benign_esc_ci95": 3.082473282398411e-16,
+            "held_out_coverage_mean": 46.932114882506525,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 52.25848563968668,
+            "held_out_sfr_ci95": 1.9456720200178517
+          },
+          "budget_5pct": {
+            "target_budget": 5.0,
+            "achieved_benign_esc_mean": 7.789752316127813,
+            "achieved_benign_esc_ci95": 0.0,
+            "held_out_coverage_mean": 56.85378590078329,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 42.33681462140992,
+            "held_out_sfr_ci95": 1.9456720200178517
+          },
+          "budget_10pct": {
+            "target_budget": 10.0,
+            "achieved_benign_esc_mean": 14.52070334656835,
+            "achieved_benign_esc_ci95": 0.0,
+            "held_out_coverage_mean": 61.0313315926893,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 38.15926892950391,
+            "held_out_sfr_ci95": 1.9456720200178486
+          }
+        }
+      }
+    },
+    "features_76": {
+      "RF Margin": {
+        "auroc_mean": 0.5827807923929017,
+        "auroc_ci95": 0.05877701102925354,
+        "budgets": {
+          "budget_1pct": {
+            "target_budget": 1.0,
+            "achieved_benign_esc_mean": 3.565891472868217,
+            "achieved_benign_esc_ci95": 1.3500022318549194,
+            "held_out_coverage_mean": 24.151436031331592,
+            "held_out_coverage_ci95": 11.506470061938039,
+            "held_out_sfr_mean": 75.84856396866842,
+            "held_out_sfr_ci95": 11.506470061938039
+          },
+          "budget_5pct": {
+            "target_budget": 5.0,
+            "achieved_benign_esc_mean": 8.145207033465685,
+            "achieved_benign_esc_ci95": 0.9640178255866115,
+            "held_out_coverage_mean": 26.879895561357706,
+            "held_out_coverage_ci95": 12.183246429785038,
+            "held_out_sfr_mean": 73.1201044386423,
+            "held_out_sfr_ci95": 12.183246429785045
+          },
+          "budget_10pct": {
+            "target_budget": 10.0,
+            "achieved_benign_esc_mean": 12.20268481754585,
+            "achieved_benign_esc_ci95": 1.9102304185395595,
+            "held_out_coverage_mean": 29.60835509138381,
+            "held_out_coverage_ci95": 9.120862709844038,
+            "held_out_sfr_mean": 70.39164490861619,
+            "held_out_sfr_ci95": 9.120862709844042
+          }
+        }
+      },
+      "Platt-Calibrated RF": {
+        "auroc_mean": 0.5556443196801875,
+        "auroc_ci95": 0.0913854878479874,
+        "budgets": {
+          "budget_1pct": {
+            "target_budget": 1.0,
+            "achieved_benign_esc_mean": 3.702023066742295,
+            "achieved_benign_esc_ci95": 1.5451110824765133,
+            "held_out_coverage_mean": 21.93211488250653,
+            "held_out_coverage_ci95": 11.717895860127955,
+            "held_out_sfr_mean": 78.06788511749349,
+            "held_out_sfr_ci95": 11.717895860127957
+          },
+          "budget_5pct": {
+            "target_budget": 5.0,
+            "achieved_benign_esc_mean": 27.093968614104746,
+            "achieved_benign_esc_ci95": 50.61568217703952,
+            "held_out_coverage_mean": 38.02872062663185,
+            "held_out_coverage_ci95": 44.39987982256437,
+            "held_out_sfr_mean": 61.97127937336815,
+            "held_out_sfr_ci95": 44.39987982256437
+          },
+          "budget_10pct": {
+            "target_budget": 10.0,
+            "achieved_benign_esc_mean": 31.472868217054263,
+            "achieved_benign_esc_ci95": 47.71251372458759,
+            "held_out_coverage_mean": 41.17493472584856,
+            "held_out_coverage_ci95": 43.48443905227842,
+            "held_out_sfr_mean": 58.82506527415144,
+            "held_out_sfr_ci95": 43.48443905227842
+          }
+        }
+      },
+      "Isolation Forest": {
+        "auroc_mean": 0.8040973630180772,
+        "auroc_ci95": 0.023693592166260772,
+        "budgets": {
+          "budget_1pct": {
+            "target_budget": 1.0,
+            "achieved_benign_esc_mean": 1.754584987710342,
+            "achieved_benign_esc_ci95": 0.13928419988595067,
+            "held_out_coverage_mean": 11.749347258485638,
+            "held_out_coverage_ci95": 0.37580673038295,
+            "held_out_sfr_mean": 88.25065274151436,
+            "held_out_sfr_ci95": 0.37580673038295387
+          },
+          "budget_5pct": {
+            "target_budget": 5.0,
+            "achieved_benign_esc_mean": 8.28512006050293,
+            "achieved_benign_esc_ci95": 0.4285317637723935,
+            "held_out_coverage_mean": 32.16710182767624,
+            "held_out_coverage_ci95": 13.061573919296494,
+            "held_out_sfr_mean": 67.83289817232375,
+            "held_out_sfr_ci95": 13.06157391929649
+          },
+          "budget_10pct": {
+            "target_budget": 10.0,
+            "achieved_benign_esc_mean": 16.5778029873322,
+            "achieved_benign_esc_ci95": 1.3256758748216768,
+            "held_out_coverage_mean": 57.728459530026115,
+            "held_out_coverage_ci95": 8.359718355881213,
+            "held_out_sfr_mean": 42.271540469973885,
+            "held_out_sfr_ci95": 8.359718355881215
+          }
+        }
+      },
+      "Mahalanobis": {
+        "auroc_mean": 0.8266613993178609,
+        "auroc_ci95": 1.5412366411992055e-16,
+        "budgets": {
+          "budget_1pct": {
+            "target_budget": 1.0,
+            "achieved_benign_esc_mean": 1.7961807525051996,
+            "achieved_benign_esc_ci95": 3.082473282398411e-16,
+            "held_out_coverage_mean": 33.87728459530026,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 66.12271540469973,
+            "held_out_sfr_ci95": 0.0
+          },
+          "budget_5pct": {
+            "target_budget": 5.0,
+            "achieved_benign_esc_mean": 11.96823596142938,
+            "achieved_benign_esc_ci95": 0.0,
+            "held_out_coverage_mean": 69.19060052219321,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 30.809399477806785,
+            "held_out_sfr_ci95": 0.0
+          },
+          "budget_10pct": {
+            "target_budget": 10.0,
+            "achieved_benign_esc_mean": 18.396672338816412,
+            "achieved_benign_esc_ci95": 0.0,
+            "held_out_coverage_mean": 71.6710182767624,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 28.328981723237597,
+            "held_out_sfr_ci95": 4.931957251837458e-15
+          }
+        }
+      },
+      "kNN Distance": {
+        "auroc_mean": 0.8810779997107157,
+        "auroc_ci95": 1.5412366411992055e-16,
+        "budgets": {
+          "budget_1pct": {
+            "target_budget": 1.0,
+            "achieved_benign_esc_mean": 1.2289657780298733,
+            "achieved_benign_esc_ci95": 0.0,
+            "held_out_coverage_mean": 47.127937336814625,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 52.87206266318539,
+            "held_out_sfr_ci95": 9.863914503674915e-15
+          },
+          "budget_5pct": {
+            "target_budget": 5.0,
+            "achieved_benign_esc_mean": 10.79599168084704,
+            "achieved_benign_esc_ci95": 0.0,
+            "held_out_coverage_mean": 64.62140992167102,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 35.37859007832898,
+            "held_out_sfr_ci95": 0.0
+          },
+          "budget_10pct": {
+            "target_budget": 10.0,
+            "achieved_benign_esc_mean": 18.150879183210435,
+            "achieved_benign_esc_ci95": 0.0,
+            "held_out_coverage_mean": 69.71279373368147,
+            "held_out_coverage_ci95": 0.0,
+            "held_out_sfr_mean": 30.287206266318538,
+            "held_out_sfr_ci95": 0.0
+          }
+        }
+      }
+    }
+  }
+}

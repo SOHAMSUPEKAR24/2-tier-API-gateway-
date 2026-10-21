@@ -33,14 +33,15 @@ function loadMeasuredLatency() {
     const p = path.join(process.cwd(), '../../results/latency/summary.json');
     if (fs.existsSync(p)) {
       const data = JSON.parse(fs.readFileSync(p, 'utf8'));
-      const t1 = data.modes?.two_tier?.latency_p50_ms || 0.03;
-      const t2 = data.modes?.pure_tier2?.latency_p50_ms || 2.01;
-      const blended = data.modes?.two_tier?.latency_p50_ms || 0.03;
-      const savings = t2 > 0 ? (((t2 - blended) / t2) * 100).toFixed(1) : '98.5';
+      const stats = data.closed_loop?.summary_stats;
+      const t1 = stats?.benign_fast_path?.latency_mean_ms?.mean ?? 8.85;
+      const t2 = stats?.escalated?.latency_mean_ms?.mean ?? 59.45;
+      const blended = stats?.two_tier_blended?.latency_mean_ms?.mean ?? 12.83;
+      const savings = t2 > 0 ? (((t2 - blended) / t2) * 100).toFixed(1) : '78.4';
       return { t1, t2, blended, savings };
     }
   } catch (e) {}
-  return { t1: 0.03, t2: 2.01, blended: 0.03, savings: '98.5' };
+  return { t1: 8.85, t2: 59.45, blended: 12.83, savings: '78.4' };
 }
 
 export async function GET() {
@@ -74,7 +75,7 @@ export async function GET() {
     if (escalated.length > 0) {
       logs.push(`[Deep Verification] Ingesting escalated zero-day payload from ${escalated[0].ip_source}`);
     }
-    logs.push(`[Latency Guard] Tier 1 wire-speed screening: ${tier1Lat.toFixed(2)}ms | Blended Gateway SLA: ${avgLat.toFixed(2)}ms`);
+    logs.push(`[Latency Guard] Tier 1 low-latency screening: ${tier1Lat.toFixed(2)}ms | Blended Gateway SLA: ${avgLat.toFixed(2)}ms`);
     logs.push(`[Optimization] Two-tier routing achieved ${latencySavings}% latency reduction over pure deep verification`);
     logs.push(`[Telemetry] Total real-time gateway requests screened: ${totalCount}`);
 

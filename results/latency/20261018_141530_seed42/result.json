@@ -1,0 +1,873 @@
+{
+  "experiment_meta": {
+    "git_commit": "6a896a2",
+    "git_dirty": true,
+    "python_version": "3.11.8 (main, Nov 17 2025, 20:09:31) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "timestamp_utc": "2026-10-18T14:15:30.819350+00:00",
+    "result_dir": "results/latency/20261018_141530_seed42"
+  },
+  "metrics": {
+    "config": {
+      "extends": "experiment_base.yaml",
+      "experiment": {
+        "name": "load_test_latency",
+        "description": "Real HTTP Gateway Service Benchmark: Uvicorn ASGI behind NGINX Reverse Proxy over local loopback interface (127.0.0.1:8080 -> 127.0.0.1:8000). A separate load generator process (wrk) evaluates high-concurrency throughput and latency percentiles (p50, p95, p99) across 10 repeated runs split by:\n  1. no_inspection (pure passthrough baseline)\n  2. benign_fast_path (Tier 1 edge screening wire-speed requests)\n  3. escalated (uncertain payloads routed to Tier 2 deep verification)\n  4. two_tier_blended (realistic mixed traffic stream with 10% escalation)\nValidates theoretical blended latency against measured end-to-end latency and verifies the throughput invariant: throughput(no_inspection) >= throughput(two_tier).\n",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51
+        ],
+        "output_dir": "results/latency"
+      },
+      "service": {
+        "uvicorn_host": "127.0.0.1",
+        "uvicorn_port": 8000,
+        "nginx_host": "127.0.0.1",
+        "nginx_port": 8080,
+        "workers": 8,
+        "escalation_timeout_ms": 60.0
+      },
+      "load_generator": {
+        "tool": "wrk",
+        "threads": 2,
+        "connections": 20,
+        "duration_sec": 4,
+        "repeated_runs": 10,
+        "warmup_sec": 1
+      },
+      "traffic_splits": {
+        "escalation_rate": 0.1
+      },
+      "validation": {
+        "max_discrepancy_pct": 25.0
+      }
+    },
+    "raw_runs": {
+      "no_inspection": [
+        {
+          "throughput_rps": 5886.708437,
+          "latency_p50_ms": 3.265,
+          "latency_p90_ms": 3.46,
+          "latency_p95_ms": 3.623,
+          "latency_p99_ms": 24.906,
+          "latency_mean_ms": 3.816396208,
+          "requests": 24177,
+          "run_idx": 1,
+          "seed": 42,
+          "cpu_percent": 45.0,
+          "memory_mb": 82.734375
+        },
+        {
+          "throughput_rps": 5774.23267,
+          "latency_p50_ms": 3.242,
+          "latency_p90_ms": 3.451,
+          "latency_p95_ms": 6.715,
+          "latency_p99_ms": 27.281,
+          "latency_mean_ms": 4.092420905,
+          "requests": 23692,
+          "run_idx": 2,
+          "seed": 43,
+          "cpu_percent": 0.1,
+          "memory_mb": 46.46875
+        },
+        {
+          "throughput_rps": 5959.706834,
+          "latency_p50_ms": 3.23,
+          "latency_p90_ms": 3.413,
+          "latency_p95_ms": 3.546,
+          "latency_p99_ms": 23.799,
+          "latency_mean_ms": 3.7467473570000003,
+          "requests": 24449,
+          "run_idx": 3,
+          "seed": 44,
+          "cpu_percent": 0.1,
+          "memory_mb": 46.484375
+        },
+        {
+          "throughput_rps": 5907.759701,
+          "latency_p50_ms": 3.235,
+          "latency_p90_ms": 3.428,
+          "latency_p95_ms": 3.592,
+          "latency_p99_ms": 27.063,
+          "latency_mean_ms": 3.9256304,
+          "requests": 24243,
+          "run_idx": 4,
+          "seed": 45,
+          "cpu_percent": 0.1,
+          "memory_mb": 46.46875
+        },
+        {
+          "throughput_rps": 5692.520573,
+          "latency_p50_ms": 3.289,
+          "latency_p90_ms": 3.528,
+          "latency_p95_ms": 6.326,
+          "latency_p99_ms": 28.872,
+          "latency_mean_ms": 4.145022285,
+          "requests": 23367,
+          "run_idx": 5,
+          "seed": 46,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.6875
+        },
+        {
+          "throughput_rps": 5842.377632,
+          "latency_p50_ms": 3.244,
+          "latency_p90_ms": 3.432,
+          "latency_p95_ms": 4.173,
+          "latency_p99_ms": 27.208,
+          "latency_mean_ms": 3.962860472,
+          "requests": 23978,
+          "run_idx": 6,
+          "seed": 47,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.671875
+        },
+        {
+          "throughput_rps": 5914.136795,
+          "latency_p50_ms": 3.239,
+          "latency_p90_ms": 3.427,
+          "latency_p95_ms": 3.713,
+          "latency_p99_ms": 24.171,
+          "latency_mean_ms": 3.786373849,
+          "requests": 24264,
+          "run_idx": 7,
+          "seed": 48,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.75
+        },
+        {
+          "throughput_rps": 5847.217825,
+          "latency_p50_ms": 3.259,
+          "latency_p90_ms": 3.503,
+          "latency_p95_ms": 3.786,
+          "latency_p99_ms": 26.895,
+          "latency_mean_ms": 3.926555106,
+          "requests": 23993,
+          "run_idx": 8,
+          "seed": 49,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.25
+        },
+        {
+          "throughput_rps": 5862.754204,
+          "latency_p50_ms": 3.238,
+          "latency_p90_ms": 3.422,
+          "latency_p95_ms": 4.132,
+          "latency_p99_ms": 26.741,
+          "latency_mean_ms": 3.925260145,
+          "requests": 24086,
+          "run_idx": 9,
+          "seed": 50,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.71875
+        },
+        {
+          "throughput_rps": 5914.994074,
+          "latency_p50_ms": 3.229,
+          "latency_p90_ms": 3.401,
+          "latency_p95_ms": 3.596,
+          "latency_p99_ms": 24.225,
+          "latency_mean_ms": 3.823186839,
+          "requests": 24274,
+          "run_idx": 10,
+          "seed": 51,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.765625
+        }
+      ],
+      "benign_fast_path": [
+        {
+          "throughput_rps": 1010.974661,
+          "latency_p50_ms": 19.049,
+          "latency_p90_ms": 20.233,
+          "latency_p95_ms": 27.477,
+          "latency_p99_ms": 74.246,
+          "latency_mean_ms": 20.424244332999997,
+          "requests": 4063,
+          "run_idx": 1,
+          "seed": 42,
+          "cpu_percent": 0.1,
+          "memory_mb": 81.203125
+        },
+        {
+          "throughput_rps": 1049.603028,
+          "latency_p50_ms": 18.973,
+          "latency_p90_ms": 19.565,
+          "latency_p95_ms": 19.813,
+          "latency_p99_ms": 40.784,
+          "latency_mean_ms": 19.083885573,
+          "requests": 4211,
+          "run_idx": 2,
+          "seed": 43,
+          "cpu_percent": 0.1,
+          "memory_mb": 46.484375
+        },
+        {
+          "throughput_rps": 1042.044253,
+          "latency_p50_ms": 19.027,
+          "latency_p90_ms": 19.222,
+          "latency_p95_ms": 19.304,
+          "latency_p99_ms": 38.2,
+          "latency_mean_ms": 19.214631429,
+          "requests": 4177,
+          "run_idx": 3,
+          "seed": 44,
+          "cpu_percent": 0.1,
+          "memory_mb": 46.5
+        },
+        {
+          "throughput_rps": 1034.98741,
+          "latency_p50_ms": 19.004,
+          "latency_p90_ms": 19.234,
+          "latency_p95_ms": 19.352,
+          "latency_p99_ms": 46.571,
+          "latency_mean_ms": 19.392033238,
+          "requests": 4152,
+          "run_idx": 4,
+          "seed": 45,
+          "cpu_percent": 0.1,
+          "memory_mb": 46.46875
+        },
+        {
+          "throughput_rps": 1056.910063,
+          "latency_p50_ms": 19.02,
+          "latency_p90_ms": 19.363,
+          "latency_p95_ms": 20.434,
+          "latency_p99_ms": 48.292,
+          "latency_mean_ms": 19.006867656999997,
+          "requests": 4245,
+          "run_idx": 5,
+          "seed": 46,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.734375
+        },
+        {
+          "throughput_rps": 1035.605293,
+          "latency_p50_ms": 18.976,
+          "latency_p90_ms": 19.221,
+          "latency_p95_ms": 19.373,
+          "latency_p99_ms": 46.539,
+          "latency_mean_ms": 19.176888709,
+          "requests": 4253,
+          "run_idx": 6,
+          "seed": 47,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.6875
+        },
+        {
+          "throughput_rps": 1030.000185,
+          "latency_p50_ms": 19.002,
+          "latency_p90_ms": 19.217,
+          "latency_p95_ms": 19.347,
+          "latency_p99_ms": 46.066,
+          "latency_mean_ms": 19.255924528,
+          "requests": 4233,
+          "run_idx": 7,
+          "seed": 48,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.765625
+        },
+        {
+          "throughput_rps": 1048.116434,
+          "latency_p50_ms": 18.957,
+          "latency_p90_ms": 19.202,
+          "latency_p95_ms": 19.32,
+          "latency_p99_ms": 37.087,
+          "latency_mean_ms": 18.895703405,
+          "requests": 4304,
+          "run_idx": 8,
+          "seed": 49,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.671875
+        },
+        {
+          "throughput_rps": 1045.790897,
+          "latency_p50_ms": 18.987,
+          "latency_p90_ms": 19.245,
+          "latency_p95_ms": 19.34,
+          "latency_p99_ms": 40.607,
+          "latency_mean_ms": 19.137582705,
+          "requests": 4199,
+          "run_idx": 9,
+          "seed": 50,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.734375
+        },
+        {
+          "throughput_rps": 1053.179856,
+          "latency_p50_ms": 18.924,
+          "latency_p90_ms": 19.204,
+          "latency_p95_ms": 19.321,
+          "latency_p99_ms": 43.163,
+          "latency_mean_ms": 19.001722937,
+          "requests": 4230,
+          "run_idx": 10,
+          "seed": 51,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.765625
+        }
+      ],
+      "escalated": [
+        {
+          "throughput_rps": 274.369561,
+          "latency_p50_ms": 71.186,
+          "latency_p90_ms": 77.568,
+          "latency_p95_ms": 80.469,
+          "latency_p99_ms": 95.571,
+          "latency_mean_ms": 72.29539153900001,
+          "requests": 1111,
+          "run_idx": 1,
+          "seed": 42,
+          "cpu_percent": 0.2,
+          "memory_mb": 81.265625
+        },
+        {
+          "throughput_rps": 265.489991,
+          "latency_p50_ms": 73.299,
+          "latency_p90_ms": 79.244,
+          "latency_p95_ms": 85.006,
+          "latency_p99_ms": 105.222,
+          "latency_mean_ms": 74.566578358,
+          "requests": 1072,
+          "run_idx": 2,
+          "seed": 43,
+          "cpu_percent": 0.1,
+          "memory_mb": 46.484375
+        },
+        {
+          "throughput_rps": 270.960166,
+          "latency_p50_ms": 72.023,
+          "latency_p90_ms": 78.51,
+          "latency_p95_ms": 82.889,
+          "latency_p99_ms": 102.153,
+          "latency_mean_ms": 73.135315693,
+          "requests": 1096,
+          "run_idx": 3,
+          "seed": 44,
+          "cpu_percent": 0.1,
+          "memory_mb": 46.515625
+        },
+        {
+          "throughput_rps": 265.949756,
+          "latency_p50_ms": 73.115,
+          "latency_p90_ms": 80.14,
+          "latency_p95_ms": 87.989,
+          "latency_p99_ms": 99.775,
+          "latency_mean_ms": 74.289104089,
+          "requests": 1076,
+          "run_idx": 4,
+          "seed": 45,
+          "cpu_percent": 0.1,
+          "memory_mb": 15.953125
+        },
+        {
+          "throughput_rps": 266.332461,
+          "latency_p50_ms": 71.621,
+          "latency_p90_ms": 80.045,
+          "latency_p95_ms": 99.053,
+          "latency_p99_ms": 120.796,
+          "latency_mean_ms": 74.297330548,
+          "requests": 1077,
+          "run_idx": 5,
+          "seed": 46,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.734375
+        },
+        {
+          "throughput_rps": 264.354629,
+          "latency_p50_ms": 72.098,
+          "latency_p90_ms": 80.874,
+          "latency_p95_ms": 95.963,
+          "latency_p99_ms": 168.258,
+          "latency_mean_ms": 75.198434223,
+          "requests": 1071,
+          "run_idx": 6,
+          "seed": 47,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.703125
+        },
+        {
+          "throughput_rps": 271.465203,
+          "latency_p50_ms": 71.843,
+          "latency_p90_ms": 77.634,
+          "latency_p95_ms": 80.016,
+          "latency_p99_ms": 98.325,
+          "latency_mean_ms": 72.8544495,
+          "requests": 1099,
+          "run_idx": 7,
+          "seed": 48,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.796875
+        },
+        {
+          "throughput_rps": 274.071659,
+          "latency_p50_ms": 70.602,
+          "latency_p90_ms": 76.82,
+          "latency_p95_ms": 83.01,
+          "latency_p99_ms": 108.868,
+          "latency_mean_ms": 72.27039945899999,
+          "requests": 1109,
+          "run_idx": 8,
+          "seed": 49,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.703125
+        },
+        {
+          "throughput_rps": 271.110674,
+          "latency_p50_ms": 71.093,
+          "latency_p90_ms": 77.865,
+          "latency_p95_ms": 81.726,
+          "latency_p99_ms": 107.263,
+          "latency_mean_ms": 72.765196901,
+          "requests": 1097,
+          "run_idx": 9,
+          "seed": 50,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.734375
+        },
+        {
+          "throughput_rps": 267.764245,
+          "latency_p50_ms": 72.922,
+          "latency_p90_ms": 77.891,
+          "latency_p95_ms": 80.445,
+          "latency_p99_ms": 139.371,
+          "latency_mean_ms": 74.00899632400001,
+          "requests": 1085,
+          "run_idx": 10,
+          "seed": 51,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.78125
+        }
+      ],
+      "two_tier_blended": [
+        {
+          "throughput_rps": 897.590237,
+          "latency_p50_ms": 18.342,
+          "latency_p90_ms": 46.05,
+          "latency_p95_ms": 58.993,
+          "latency_p99_ms": 66.833,
+          "latency_mean_ms": 23.786447205,
+          "requests": 3602,
+          "run_idx": 1,
+          "seed": 42,
+          "cpu_percent": 0.1,
+          "memory_mb": 80.0625
+        },
+        {
+          "throughput_rps": 914.126617,
+          "latency_p50_ms": 17.723,
+          "latency_p90_ms": 45.659,
+          "latency_p95_ms": 58.393,
+          "latency_p99_ms": 67.172,
+          "latency_mean_ms": 23.439915977000002,
+          "requests": 3672,
+          "run_idx": 2,
+          "seed": 43,
+          "cpu_percent": 0.1,
+          "memory_mb": 46.4375
+        },
+        {
+          "throughput_rps": 919.27754,
+          "latency_p50_ms": 17.69,
+          "latency_p90_ms": 42.464,
+          "latency_p95_ms": 58.095,
+          "latency_p99_ms": 64.095,
+          "latency_mean_ms": 22.971313068,
+          "requests": 3773,
+          "run_idx": 3,
+          "seed": 44,
+          "cpu_percent": 0.1,
+          "memory_mb": 46.453125
+        },
+        {
+          "throughput_rps": 912.54465,
+          "latency_p50_ms": 17.824,
+          "latency_p90_ms": 47.555,
+          "latency_p95_ms": 58.141,
+          "latency_p99_ms": 64.97,
+          "latency_mean_ms": 23.443628117,
+          "requests": 3664,
+          "run_idx": 4,
+          "seed": 45,
+          "cpu_percent": 0.2,
+          "memory_mb": 20.65625
+        },
+        {
+          "throughput_rps": 922.311056,
+          "latency_p50_ms": 17.748,
+          "latency_p90_ms": 43.007,
+          "latency_p95_ms": 57.935,
+          "latency_p99_ms": 64.0,
+          "latency_mean_ms": 23.12444642,
+          "requests": 3701,
+          "run_idx": 5,
+          "seed": 46,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.71875
+        },
+        {
+          "throughput_rps": 931.999937,
+          "latency_p50_ms": 17.443,
+          "latency_p90_ms": 43.102,
+          "latency_p95_ms": 58.13,
+          "latency_p99_ms": 63.85,
+          "latency_mean_ms": 22.961548193,
+          "requests": 3735,
+          "run_idx": 6,
+          "seed": 47,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.75
+        },
+        {
+          "throughput_rps": 922.353433,
+          "latency_p50_ms": 17.544,
+          "latency_p90_ms": 44.824,
+          "latency_p95_ms": 58.37,
+          "latency_p99_ms": 63.904,
+          "latency_mean_ms": 23.204924982,
+          "requests": 3703,
+          "run_idx": 7,
+          "seed": 48,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.796875
+        },
+        {
+          "throughput_rps": 918.565272,
+          "latency_p50_ms": 17.523,
+          "latency_p90_ms": 45.081,
+          "latency_p95_ms": 58.922,
+          "latency_p99_ms": 65.02,
+          "latency_mean_ms": 23.350621109,
+          "requests": 3682,
+          "run_idx": 8,
+          "seed": 49,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.703125
+        },
+        {
+          "throughput_rps": 925.45297,
+          "latency_p50_ms": 17.658,
+          "latency_p90_ms": 44.18,
+          "latency_p95_ms": 57.759,
+          "latency_p99_ms": 63.895,
+          "latency_mean_ms": 23.111366578000002,
+          "requests": 3716,
+          "run_idx": 9,
+          "seed": 50,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.75
+        },
+        {
+          "throughput_rps": 917.285075,
+          "latency_p50_ms": 17.636,
+          "latency_p90_ms": 44.833,
+          "latency_p95_ms": 58.167,
+          "latency_p99_ms": 64.493,
+          "latency_mean_ms": 23.324755230999997,
+          "requests": 3686,
+          "run_idx": 10,
+          "seed": 51,
+          "cpu_percent": 0.1,
+          "memory_mb": 20.796875
+        }
+      ]
+    },
+    "summary_stats": {
+      "no_inspection": {
+        "runs_count": 10,
+        "throughput_rps": {
+          "mean": 5860.240874499999,
+          "ci95": 55.808666708937004,
+          "min": 5692.520573,
+          "max": 5959.706834,
+          "std": 78.01513655876647
+        },
+        "latency_p50_ms": {
+          "mean": 3.247,
+          "ci95": 0.01342128522298498,
+          "min": 3.229,
+          "max": 3.289,
+          "std": 0.018761663039293764
+        },
+        "latency_p90_ms": {
+          "mean": 3.4465000000000003,
+          "ci95": 0.028972200012787535,
+          "min": 3.401,
+          "max": 3.528,
+          "std": 0.04050034293407628
+        },
+        "latency_p95_ms": {
+          "mean": 4.3202,
+          "ci95": 0.8467462262039654,
+          "min": 3.546,
+          "max": 6.715,
+          "std": 1.1836696048025113
+        },
+        "latency_p99_ms": {
+          "mean": 26.1161,
+          "ci95": 1.2212621598577955,
+          "min": 23.799,
+          "max": 28.872,
+          "std": 1.7072067797688972
+        },
+        "latency_mean_ms": {
+          "mean": 3.9150453566000003,
+          "ci95": 0.09236351735921047,
+          "min": 3.7467473570000003,
+          "max": 4.145022285,
+          "std": 0.12911529417836637
+        },
+        "cpu_percent": {
+          "mean": 4.590000000000001,
+          "ci95": 10.157085661214902,
+          "min": 0.1,
+          "max": 45.0,
+          "std": 14.198626694156022
+        },
+        "memory_mb": {
+          "mean": 34.6,
+          "ci95": 14.90901968183137,
+          "min": 20.25,
+          "max": 82.734375,
+          "std": 20.84137240729229
+        }
+      },
+      "benign_fast_path": {
+        "runs_count": 10,
+        "throughput_rps": {
+          "mean": 1040.7212080000002,
+          "ci95": 9.648251737424152,
+          "min": 1010.974661,
+          "max": 1056.910063,
+          "std": 13.487325916137051
+        },
+        "latency_p50_ms": {
+          "mean": 18.991899999999998,
+          "ci95": 0.02611341229090196,
+          "min": 18.924,
+          "max": 19.049,
+          "std": 0.036504033262702025
+        },
+        "latency_p90_ms": {
+          "mean": 19.370600000000003,
+          "ci95": 0.23121936632664253,
+          "min": 19.202,
+          "max": 20.233,
+          "std": 0.3232223864634241
+        },
+        "latency_p95_ms": {
+          "mean": 20.308100000000003,
+          "ci95": 1.820103420564803,
+          "min": 19.304,
+          "max": 27.477,
+          "std": 2.5443291388235654
+        },
+        "latency_p99_ms": {
+          "mean": 46.155499999999996,
+          "ci95": 7.5709643744990505,
+          "min": 37.087,
+          "max": 74.246,
+          "std": 10.583478416328388
+        },
+        "latency_mean_ms": {
+          "mean": 19.2589484514,
+          "ci95": 0.3101132746692704,
+          "min": 18.895703405,
+          "max": 20.424244332999997,
+          "std": 0.43350846559706685
+        },
+        "cpu_percent": {
+          "mean": 0.1,
+          "ci95": 0.0,
+          "min": 0.1,
+          "max": 0.1,
+          "std": 0.0
+        },
+        "memory_mb": {
+          "mean": 34.5015625,
+          "ci95": 14.602767683705792,
+          "min": 20.671875,
+          "max": 81.203125,
+          "std": 20.413261634107734
+        }
+      },
+      "escalated": {
+        "runs_count": 10,
+        "throughput_rps": {
+          "mean": 269.1868345,
+          "ci95": 2.6167436472184846,
+          "min": 264.354629,
+          "max": 274.369561,
+          "std": 3.6579553860645007
+        },
+        "latency_p50_ms": {
+          "mean": 71.9802,
+          "ci95": 0.6484351436844972,
+          "min": 70.602,
+          "max": 73.299,
+          "std": 0.9064498270113388
+        },
+        "latency_p90_ms": {
+          "mean": 78.6591,
+          "ci95": 0.9605838679038513,
+          "min": 76.82,
+          "max": 80.874,
+          "std": 1.342803654878686
+        },
+        "latency_p95_ms": {
+          "mean": 85.6566,
+          "ci95": 4.813848463482623,
+          "min": 80.016,
+          "max": 99.053,
+          "std": 6.729296136215798
+        },
+        "latency_p99_ms": {
+          "mean": 114.56020000000001,
+          "ci95": 16.360467985423252,
+          "min": 95.571,
+          "max": 168.258,
+          "std": 22.87035722793445
+        },
+        "latency_mean_ms": {
+          "mean": 73.5681196634,
+          "ci95": 0.7367376834390383,
+          "min": 72.27039945899999,
+          "max": 75.198434223,
+          "std": 1.0298882659434996
+        },
+        "cpu_percent": {
+          "mean": 0.11000000000000001,
+          "ci95": 0.022621571628540987,
+          "min": 0.1,
+          "max": 0.2,
+          "std": 0.03162277660168379
+        },
+        "memory_mb": {
+          "mean": 31.4671875,
+          "ci95": 14.81996565763675,
+          "min": 15.953125,
+          "max": 81.265625,
+          "std": 20.71688346554987
+        }
+      },
+      "two_tier_blended": {
+        "runs_count": 10,
+        "throughput_rps": {
+          "mean": 918.1506787000001,
+          "ci95": 6.541771324574342,
+          "min": 897.590237,
+          "max": 931.999937,
+          "std": 9.144765738350154
+        },
+        "latency_p50_ms": {
+          "mean": 17.7131,
+          "ci95": 0.17785583203990454,
+          "min": 17.443,
+          "max": 18.342,
+          "std": 0.24862530934006744
+        },
+        "latency_p90_ms": {
+          "mean": 44.6755,
+          "ci95": 1.1122049950167023,
+          "min": 42.464,
+          "max": 47.555,
+          "std": 1.5547553755423325
+        },
+        "latency_p95_ms": {
+          "mean": 58.290499999999994,
+          "ci95": 0.2841067368161151,
+          "min": 57.759,
+          "max": 58.993,
+          "std": 0.3971538324965105
+        },
+        "latency_p99_ms": {
+          "mean": 64.8232,
+          "ci95": 0.8789484338455165,
+          "min": 63.85,
+          "max": 67.172,
+          "std": 1.2286851870552056
+        },
+        "latency_mean_ms": {
+          "mean": 23.271896687999998,
+          "ci95": 0.18004954755327315,
+          "min": 22.961548193,
+          "max": 23.786447205,
+          "std": 0.25169191217147197
+        },
+        "cpu_percent": {
+          "mean": 0.11000000000000001,
+          "ci95": 0.022621571628540987,
+          "min": 0.1,
+          "max": 0.2,
+          "std": 0.03162277660168379
+        },
+        "memory_mb": {
+          "mean": 31.8125,
+          "ci95": 14.336315282685238,
+          "min": 20.65625,
+          "max": 80.0625,
+          "std": 20.040786861319425
+        }
+      }
+    },
+    "blended_validation": {
+      "configured_escalation_rate": 0.1,
+      "metrics": {
+        "latency_p50_ms": {
+          "fast_mean_ms": 18.991899999999998,
+          "escalated_mean_ms": 71.9802,
+          "measured_blended_mean_ms": 17.7131,
+          "predicted_linear_mean_ms": 24.290729999999996,
+          "absolute_error_ms": 6.577629999999996,
+          "relative_error_pct": 37.134267858251775
+        },
+        "latency_p95_ms": {
+          "fast_mean_ms": 20.308100000000003,
+          "escalated_mean_ms": 85.6566,
+          "measured_blended_mean_ms": 58.290499999999994,
+          "predicted_linear_mean_ms": 26.842950000000002,
+          "absolute_error_ms": 31.447549999999993,
+          "relative_error_pct": 53.949700208438756
+        },
+        "latency_p99_ms": {
+          "fast_mean_ms": 46.155499999999996,
+          "escalated_mean_ms": 114.56020000000001,
+          "measured_blended_mean_ms": 64.8232,
+          "predicted_linear_mean_ms": 52.99597,
+          "absolute_error_ms": 11.82723,
+          "relative_error_pct": 18.2453658566686
+        },
+        "latency_mean_ms": {
+          "fast_mean_ms": 19.2589484514,
+          "escalated_mean_ms": 73.5681196634,
+          "measured_blended_mean_ms": 23.271896687999998,
+          "predicted_linear_mean_ms": 24.6898655726,
+          "absolute_error_ms": 1.4179688846000005,
+          "relative_error_pct": 6.093052507109001
+        }
+      },
+      "mixture_percentile_analysis": {
+        "p50_conforms_to_fast_path": true,
+        "p50_fast_discrepancy_pct": 7.219515499827793,
+        "mean_conforms_to_linear_blend": true,
+        "mean_linear_discrepancy_pct": 6.093052507109001,
+        "validated": true
+      }
+    },
+    "throughput_invariant": {
+      "satisfied": true,
+      "no_inspection_rps": 5860.240874499999,
+      "two_tier_blended_rps": 918.1506787000001,
+      "speedup_ratio": 6.382657019648946
+    },
+    "timestamp": "2026-10-18 14:15:30 UTC"
+  }
+}

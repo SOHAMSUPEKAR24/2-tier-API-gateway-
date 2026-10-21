@@ -274,7 +274,7 @@ def run_adaptation_loop():
     print(f"Unseen Dataset Attacks:       DoS-Hulk, DoS-GoldenEye, DoS-Slowloris, SSH-BruteForce, Benign")
     print(f"Accuracy Recovery:            {acc_0:.2f}% ---> {final_acc:.2f}%")
     print(f"Escalation Rate Collapse:     {esc_0:.2f}% ---> {final_esc:.2f}% (Narrowed down by {((esc_0 - final_esc)/esc_0)*100:.1f}%)")
-    print(f"Tier 1 Edge Latency:          {t1_lat:.3f} ms (sub-millisecond inline wire-speed)")
+    print(f"Tier 1 Edge Latency:          {t1_lat:.3f} ms (sub-millisecond inline edge screening)")
     print(f"Tier 2 Sandbox Latency:       {t2_lat:.2f} ms (deep static inspection)")
     print(f"Effective Gateway Latency:    {final_blended_lat:.2f} ms")
     print(f"Gateway Latency Overhead Cut: {latency_reduction:.2f}% FASTER than pure deep inspection")

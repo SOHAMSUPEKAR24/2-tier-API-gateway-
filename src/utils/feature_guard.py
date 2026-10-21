@@ -17,8 +17,8 @@ from typing import List
 import numpy as np
 import pandas as pd
 
-# ── Canonical ordered allowlist ───────────────────────────────────────────────
-TIER1_ALLOWLIST: List[str] = [
+# ── Canonical ordered allowlists ───────────────────────────────────────────────
+FEATURES_9: List[str] = [
     "Fwd Packet Length Max",
     "Fwd Packet Length Mean",
     "Bwd Packet Length Max",
@@ -29,6 +29,58 @@ TIER1_ALLOWLIST: List[str] = [
     "ACK Flag Count",
     "PSH Flag Count",
 ]
+
+TIER1_ALLOWLIST: List[str] = FEATURES_9
+
+FEATURES_25: List[str] = [
+    "Fwd Packet Length Max",
+    "Fwd Packet Length Mean",
+    "Bwd Packet Length Max",
+    "Flow Bytes/s",
+    "Flow Packets/s",
+    "Fwd IAT Mean",
+    "Bwd IAT Mean",
+    "ACK Flag Count",
+    "PSH Flag Count",
+    "Flow Duration",
+    "Total Fwd Packet",
+    "Total Bwd packets",
+    "Total Length of Fwd Packet",
+    "Total Length of Bwd Packet",
+    "Fwd Packet Length Std",
+    "Bwd Packet Length Mean",
+    "Bwd Packet Length Std",
+    "Packet Length Mean",
+    "Packet Length Std",
+    "Flow IAT Mean",
+    "Flow IAT Max",
+    "Fwd IAT Max",
+    "Bwd IAT Max",
+    "SYN Flag Count",
+    "RST Flag Count",
+]
+
+ALL_ALLOWLISTED_CIC_FEATURES: List[str] = [
+    "Flow Duration", "Flow Bytes/s", "Flow Packets/s", "Fwd Packets/s", "Bwd Packets/s",
+    "Total Fwd Packet", "Total Bwd packets", "Total Length of Fwd Packet", "Total Length of Bwd Packet",
+    "Fwd Packet Length Max", "Fwd Packet Length Min", "Fwd Packet Length Mean", "Fwd Packet Length Std",
+    "Bwd Packet Length Max", "Bwd Packet Length Min", "Bwd Packet Length Mean", "Bwd Packet Length Std",
+    "Packet Length Max", "Packet Length Min", "Packet Length Mean", "Packet Length Std", "Packet Length Variance",
+    "Fwd Header Length", "Bwd Header Length", "Fwd Seg Size Min", "Fwd Act Data Pkts",
+    "Flow IAT Mean", "Flow IAT Max", "Flow IAT Min", "Flow IAT Std",
+    "Fwd IAT Total", "Fwd IAT Max", "Fwd IAT Min", "Fwd IAT Mean", "Fwd IAT Std",
+    "Bwd IAT Total", "Bwd IAT Max", "Bwd IAT Min", "Bwd IAT Mean", "Bwd IAT Std",
+    "Fwd PSH Flags", "Bwd PSH Flags", "Fwd URG Flags", "Bwd URG Flags",
+    "FIN Flag Count", "SYN Flag Count", "RST Flag Count", "PSH Flag Count", "ACK Flag Count", "URG Flag Count",
+    "CWR Flag Count", "ECE Flag Count", "Down/Up Ratio", "Average Packet Size",
+    "Fwd Segment Size Avg", "Bwd Segment Size Avg", "Fwd Bytes/Bulk Avg", "Fwd Packet/Bulk Avg", "Fwd Bulk Rate Avg",
+    "Bwd Bytes/Bulk Avg", "Bwd Packet/Bulk Avg", "Bwd Bulk Rate Avg",
+    "Subflow Fwd Packets", "Subflow Fwd Bytes", "Subflow Bwd Packets", "Subflow Bwd Bytes",
+    "FWD Init Win Bytes", "Bwd Init Win Bytes",
+    "Active Mean", "Active Std", "Active Max", "Active Min",
+    "Idle Mean", "Idle Std", "Idle Max", "Idle Min"
+]
+
 
 # Columns that are STRICTLY FORBIDDEN from appearing in any feature matrix
 IDENTIFIER_COLUMNS: List[str] = [

@@ -1,0 +1,38 @@
+autoencoder:
+  batch_size: 128
+  bottleneck_dim: 8
+  epochs: 25
+  hidden_dim: 16
+  lr: 0.005
+budgets:
+- 0.01
+- 0.05
+- 0.1
+experiment:
+  description: 'Comprehensive evaluation of Two-Signal Escalation Gates combining
+    discriminative uncertainty with benign-only novelty detectors (Isolation Forest,
+    Mahalanobis, kNN, Autoencoder) calibrated with split-conformal prediction at fixed
+    escalation budgets (1%, 5%, 10%). Compared against Round 2 baselines on Silent-Failure
+    Rate (SFR), Balanced Accuracy, Per-Family Recalls, FPR, and Latency.
+
+    '
+  name: two_signal_gate
+  output_dir: results/two_signal_gate
+  seeds:
+  - 42
+  - 71
+  - 137
+  - 256
+  - 512
+extends: experiment_base.yaml
+novelty_detectors:
+- isolation_forest
+- mahalanobis
+- knn
+- autoencoder
+tier1:
+  max_depth: 6
+  n_estimators: 40
+tier2:
+  max_depth: null
+  n_estimators: 250

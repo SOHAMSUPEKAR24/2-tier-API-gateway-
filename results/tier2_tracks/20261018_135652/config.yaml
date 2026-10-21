@@ -1,0 +1,56 @@
+budgets:
+- 0.0
+- 0.01
+- 0.02
+- 0.03
+- 0.05
+- 0.08
+- 0.1
+- 0.15
+- 0.2
+- 0.25
+- 0.3
+- 0.4
+- 0.5
+- 0.6
+- 0.7
+- 0.8
+- 0.9
+- 1.0
+experiment:
+  description: 'Pareto curve evaluation for application-layer deep verification: Track
+    A: HTTP Payloads (CSIC 2010 Dataset) with char n-gram deep verification. Track
+    B: Static PE Binaries (EMBER 2018 Static PE Dataset) with full byte histogram/entropy.
+    Sweeps escalation budgets from 0% to 100% to map Accuracy and Silent-Failure Rate
+    (SFR) against Escalation Rate (%) and Mean/Blended Latency (ms), identifying the
+    exact budget at which Two-Tier matches Tier-2-only accuracy.
+
+    '
+  name: tier2_tracks
+  output_dir: results/tier2_tracks
+  seeds:
+  - 42
+  - 71
+  - 137
+  - 256
+  - 512
+extends: experiment_base.yaml
+track_a:
+  dataset_path: /Users/sohamsupekar/Desktop/MajorProject/DATASET/csic_database.csv
+  max_samples: 8000
+  n_features_deep: 1500
+  tier1:
+    max_depth: 6
+    n_estimators: 30
+  tier2:
+    max_depth: 12
+    n_estimators: 100
+track_b:
+  dataset_path: data/generated/tier2_real_corpus.jsonl
+  max_samples: 5000
+  tier1:
+    max_depth: 6
+    n_estimators: 30
+  tier2:
+    max_depth: 16
+    n_estimators: 120

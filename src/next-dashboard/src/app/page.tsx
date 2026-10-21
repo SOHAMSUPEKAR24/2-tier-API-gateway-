@@ -16,7 +16,7 @@ export default function Dashboard() {
     metrics: [], 
     logs: [], 
     totalCount: 0,
-    latency: { tier1: 0.03, tier2: 2.01, blended: 0.03, savings: '98.5' }
+    latency: { tier1: 8.85, tier2: 59.45, blended: 12.83, savings: '78.4' }
   });
   const [isOnline, setIsOnline] = useState(false);
   const [lastUpdate, setLastUpdate] = useState<number | null>(null);
@@ -96,7 +96,7 @@ export default function Dashboard() {
       <div className="main-content">
         <h1 style={{textAlign: 'center', marginBottom: '5px', color: '#ffffff'}}>Adaptive Two-Tier Malware Detection</h1>
         <p style={{textAlign: 'center', color: '#45a29e', fontSize: '1.05em', marginBottom: '30px', fontWeight: 500}}>
-          Live Edge Telemetry, Zero-Day Adaptation & Wire-Speed Latency Benchmark
+          Live Edge Telemetry, Zero-Day Adaptation & Low-Latency Benchmark
         </p>
 
         {/* Top Metric Cards: Latency & SLA */}
@@ -107,42 +107,42 @@ export default function Dashboard() {
               <Zap size={14} color="#66fcf1" />
             </div>
             <div style={{fontSize: '1.8em', fontWeight: 700, color: '#ffffff', marginTop: '6px'}}>
-              {(data.latency?.tier1 || 0.35).toFixed(2)} <span style={{fontSize: '0.5em', color: '#66fcf1'}}>ms</span>
+              {(data.latency?.tier1 ?? 8.85).toFixed(2)} <span style={{fontSize: '0.5em', color: '#66fcf1'}}>ms</span>
             </div>
-            <div style={{fontSize: '0.75em', color: '#8a8d91', marginTop: '4px'}}>Wire-speed inline flow screening</div>
+            <div style={{fontSize: '0.75em', color: '#8a8d91', marginTop: '4px'}}>Low-latency inline flow screening</div>
           </div>
 
           <div className="tactile-panel" style={{padding: '16px', borderLeft: '4px solid #f2a900'}}>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: '#8a8d91', fontSize: '0.8em'}}>
-              <span>BLENDED GATEWAY SLA</span>
+              <span>BLENDED GATEWAY LATENCY</span>
               <Clock size={14} color="#f2a900" />
             </div>
             <div style={{fontSize: '1.8em', fontWeight: 700, color: '#ffffff', marginTop: '6px'}}>
-              {(data.latency?.blended || 1.15).toFixed(2)} <span style={{fontSize: '0.5em', color: '#f2a900'}}>ms</span>
+              {(data.latency?.blended ?? 12.83).toFixed(2)} <span style={{fontSize: '0.5em', color: '#f2a900'}}>ms</span>
             </div>
-            <div style={{fontSize: '0.75em', color: '#66fcf1', marginTop: '4px'}}>✅ Compliant with &lt; 2ms SLA</div>
+            <div style={{fontSize: '0.75em', color: '#66fcf1', marginTop: '4px'}}>Empirical mixture under live traffic</div>
           </div>
 
           <div className="tactile-panel" style={{padding: '16px', borderLeft: '4px solid #ff4b4b'}}>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: '#8a8d91', fontSize: '0.8em'}}>
-              <span>TIER 2 SANDBOX OVERHEAD</span>
+              <span>TIER 2 VERIFICATION OVERHEAD</span>
               <Cpu size={14} color="#ff4b4b" />
             </div>
             <div style={{fontSize: '1.8em', fontWeight: 700, color: '#ffffff', marginTop: '6px'}}>
-              {(data.latency?.tier2 || 78.5).toFixed(1)} <span style={{fontSize: '0.5em', color: '#ff4b4b'}}>ms</span>
+              {(data.latency?.tier2 ?? 59.45).toFixed(1)} <span style={{fontSize: '0.5em', color: '#ff4b4b'}}>ms</span>
             </div>
             <div style={{fontSize: '0.75em', color: '#8a8d91', marginTop: '4px'}}>Isolated to escalated zero-days only</div>
           </div>
 
           <div className="tactile-panel" style={{padding: '16px', borderLeft: '4px solid #45a29e'}}>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: '#8a8d91', fontSize: '0.8em'}}>
-              <span>LATENCY OVERHEAD CUT</span>
+              <span>LATENCY SAVINGS</span>
               <TrendingUp size={14} color="#45a29e" />
             </div>
             <div style={{fontSize: '1.8em', fontWeight: 700, color: '#66fcf1', marginTop: '6px'}}>
-              {data.latency?.savings || '98.5'}%
+              {data.latency?.savings || '78.4'}%
             </div>
-            <div style={{fontSize: '0.75em', color: '#8a8d91', marginTop: '4px'}}>Faster than pure deep inspection</div>
+            <div style={{fontSize: '0.75em', color: '#8a8d91', marginTop: '4px'}}>Saved vs pure deep inspection</div>
           </div>
         </div>
 

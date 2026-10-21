@@ -4,20 +4,21 @@
 \small
 \caption{Comparison of Tier 1 Escalation Triggers on Novel Attack Stream (Mean $\pm$ 95\% CI across 5 Seeds)}
 \label{tab:escalation_triggers}
-\begin{tabular}{lcccccc}
+\begin{tabular}{lccccccccccc}
 \toprule
-Method & Accuracy (\%) & F1 Score & Silent Failure (\%) & Escalation (\%) & Novelty AUROC \\
+Method & BAcc (\%) & Rec(FTP) & Rec(SSH) & Rec(Gold) & Rec(Hulk) & Rec(Slow) & FPR (\%) & SFR (\%) & Esc (\%) & Novelty AUROC \\
 \midrule
-Single-Tier RF (No Escalation) & 52.32 $\pm$ 0.34 & 0.103 & \textbf{94.56} & 0.00 & 0.595 \\
-Single-Tier XGBoost (No Escalation) & 53.07 $\pm$ 0.10 & 0.130 & \textbf{93.06} & 0.00 & 0.640 \\
-RF Prob Band [0.30, 0.70] & 53.71 $\pm$ 1.29 & 0.150 & \textbf{91.87} & 1.62 & 0.576 \\
-Calibrated RF (Isotonic) & 53.95 $\pm$ 1.66 & 0.158 & \textbf{91.35} & 0.18 & 0.521 \\
-Bagged RF Tree Variance & 65.43 $\pm$ 1.89 & 0.477 & \textbf{68.64} & 21.61 & 0.574 \\
-Split-Conformal Prediction & 64.48 $\pm$ 2.35 & 0.454 & \textbf{70.51} & 15.76 & 0.576 \\
-Isolation Forest Novelty & 62.66 $\pm$ 6.34 & 0.404 & \textbf{74.05} & 16.17 & 0.642 \\
-Evidential Deep Learning (EDL) & 74.99 $\pm$ 6.48 & 0.665 & \textbf{49.65} & 64.77 & 0.315 \\
-EDL Ensemble (Warm-Start Prior) & 79.82 $\pm$ 3.56 & 0.748 & \textbf{40.05} & 73.20 & 0.283 \\
-Oracle Tier 2 & 100.00 $\pm$ 0.00 & 1.000 & \textbf{0.00} & 100.00 & 0.595 \\
+Single-Tier RF (No Escalation) & 58.04 $\pm$ 1.01 & 100.00 & 0.00 & 0.00 & 0.21 & 5.21 & 0.09 & \textbf{83.83} & 0.00 & 0.637 \\
+Single-Tier XGBoost (No Escalation) & 58.92 $\pm$ 0.14 & 100.00 & 0.60 & 0.00 & 0.00 & 12.49 & 0.10 & \textbf{82.07} & 0.00 & 0.693 \\
+RF Prob Band [0.30, 0.70] & 58.04 $\pm$ 0.52 & 100.00 & 0.00 & 0.00 & 0.00 & 5.40 & 0.09 & \textbf{77.32} & 2.03 & 0.581 \\
+Calibrated RF (Isotonic) & 61.14 $\pm$ 3.65 & 100.00 & 0.45 & 0.00 & 0.62 & 30.85 & 0.11 & \textbf{77.39} & 0.19 & 0.513 \\
+Bagged RF Tree Variance & 58.19 $\pm$ 0.50 & 100.00 & 0.30 & 0.00 & 0.00 & 6.53 & 0.09 & \textbf{61.18} & 18.60 & 0.576 \\
+Split-Conformal Prediction & 58.19 $\pm$ 0.50 & 100.00 & 0.30 & 0.00 & 0.00 & 6.53 & 0.09 & \textbf{61.90} & 11.04 & 0.581 \\
+Isolation Forest Novelty & 58.02 $\pm$ 0.97 & 100.00 & 0.00 & 0.00 & 0.21 & 5.02 & 0.09 & \textbf{64.20} & 13.76 & 0.609 \\
+Evidential Deep Learning (EDL) & 57.93 $\pm$ 0.75 & 99.10 & 0.15 & 0.00 & 0.00 & 4.93 & 0.08 & \textbf{49.89} & 71.97 & 0.308 \\
+EDL Ensemble (Warm-Start Prior) & 57.92 $\pm$ 0.77 & 99.10 & 0.15 & 0.00 & 0.00 & 4.93 & 0.10 & \textbf{41.60} & 79.48 & 0.269 \\
+Tier-2-Only Baseline & 58.19 $\pm$ 0.50 & 100.00 & 0.30 & 0.00 & 0.00 & 6.53 & 0.09 & \textbf{83.52} & 100.00 & 0.500 \\
+Oracle Tier 2 & 100.00 $\pm$ 0.00 & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 & 0.00 & \textbf{0.00} & 100.00 & 0.637 \\
 \bottomrule
 \end{tabular}
 \end{table*}

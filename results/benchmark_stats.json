@@ -14,61 +14,135 @@
     "PSH Flag Count"
   ],
   "feature_count": 9,
+  "features_25_count": 25,
+  "features_76_count": 76,
   "total_unique_flows": 19214,
   "protocols": {
     "ftp_only": {
       "train_samples": 8557,
       "train_attacks": 625,
       "train_benign": 7932,
-      "test_samples": 10657,
-      "test_attacks": 5368,
+      "test_samples": 7089,
+      "test_attacks": 1800,
       "test_benign": 5289,
-      "attack_prevalence_pct": 50.37064840011261
+      "attack_prevalence_pct": 25.391451544646635,
+      "features_9_shape": [
+        8557,
+        9
+      ],
+      "features_25_shape": [
+        8557,
+        25
+      ],
+      "features_76_shape": [
+        8557,
+        76
+      ]
     },
     "lofo_FTP-BruteForce": {
-      "train_samples": 13032,
-      "train_attacks": 5100,
+      "train_samples": 11500,
+      "train_attacks": 3568,
       "train_benign": 7932,
-      "test_samples": 6182,
-      "test_attacks": 893,
+      "test_samples": 7089,
+      "test_attacks": 1800,
       "test_benign": 5289,
-      "attack_prevalence_pct": 14.445163377547718
+      "attack_prevalence_pct": 25.391451544646635,
+      "features_9_shape": [
+        11500,
+        9
+      ],
+      "features_25_shape": [
+        11500,
+        25
+      ],
+      "features_76_shape": [
+        11500,
+        76
+      ]
     },
     "lofo_SSH-BruteForce": {
-      "train_samples": 13035,
-      "train_attacks": 5103,
+      "train_samples": 11502,
+      "train_attacks": 3570,
       "train_benign": 7932,
-      "test_samples": 6179,
-      "test_attacks": 890,
+      "test_samples": 7089,
+      "test_attacks": 1800,
       "test_benign": 5289,
-      "attack_prevalence_pct": 14.403625182068296
+      "attack_prevalence_pct": 25.391451544646635,
+      "features_9_shape": [
+        11502,
+        9
+      ],
+      "features_25_shape": [
+        11502,
+        25
+      ],
+      "features_76_shape": [
+        11502,
+        76
+      ]
     },
     "lofo_DoS-GoldenEye": {
-      "train_samples": 12427,
-      "train_attacks": 4495,
+      "train_samples": 11077,
+      "train_attacks": 3145,
       "train_benign": 7932,
-      "test_samples": 6787,
-      "test_attacks": 1498,
+      "test_samples": 7089,
+      "test_attacks": 1800,
       "test_benign": 5289,
-      "attack_prevalence_pct": 22.071607484897598
+      "attack_prevalence_pct": 25.391451544646635,
+      "features_9_shape": [
+        11077,
+        9
+      ],
+      "features_25_shape": [
+        11077,
+        25
+      ],
+      "features_76_shape": [
+        11077,
+        76
+      ]
     },
     "lofo_DoS-Hulk": {
-      "train_samples": 12631,
-      "train_attacks": 4699,
+      "train_samples": 11220,
+      "train_attacks": 3288,
       "train_benign": 7932,
-      "test_samples": 6583,
-      "test_attacks": 1294,
+      "test_samples": 7089,
+      "test_attacks": 1800,
       "test_benign": 5289,
-      "attack_prevalence_pct": 19.65669147804952
+      "attack_prevalence_pct": 25.391451544646635,
+      "features_9_shape": [
+        11220,
+        9
+      ],
+      "features_25_shape": [
+        11220,
+        25
+      ],
+      "features_76_shape": [
+        11220,
+        76
+      ]
     },
     "lofo_DoS-Slowloris": {
-      "train_samples": 12507,
-      "train_attacks": 4575,
+      "train_samples": 11133,
+      "train_attacks": 3201,
       "train_benign": 7932,
-      "test_samples": 6707,
-      "test_attacks": 1418,
+      "test_samples": 7089,
+      "test_attacks": 1800,
       "test_benign": 5289,
-      "attack_prevalence_pct": 21.142090353362157
+      "attack_prevalence_pct": 25.391451544646635,
+      "features_9_shape": [
+        11133,
+        9
+      ],
+      "features_25_shape": [
+        11133,
+        25
+      ],
+      "features_76_shape": [
+        11133,
+        76
+      ]
     },
     "prevalence_1_100": {
       "train_samples": 8557,
@@ -77,7 +151,19 @@
       "test_samples": 5341,
       "test_attacks": 52,
       "test_benign": 5289,
-      "attack_prevalence_pct": 0.9736004493540537
+      "attack_prevalence_pct": 0.9736004493540537,
+      "features_9_shape": [
+        8557,
+        9
+      ],
+      "features_25_shape": [
+        8557,
+        25
+      ],
+      "features_76_shape": [
+        8557,
+        76
+      ]
     },
     "prevalence_1_1000": {
       "train_samples": 8557,
@@ -86,7 +172,19 @@
       "test_samples": 5294,
       "test_attacks": 5,
       "test_benign": 5289,
-      "attack_prevalence_pct": 0.09444654325651682
+      "attack_prevalence_pct": 0.09444654325651682,
+      "features_9_shape": [
+        8557,
+        9
+      ],
+      "features_25_shape": [
+        8557,
+        25
+      ],
+      "features_76_shape": [
+        8557,
+        76
+      ]
     }
   }
 }

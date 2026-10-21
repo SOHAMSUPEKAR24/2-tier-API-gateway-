@@ -1,4 +1,4 @@
-# Config for: unseen-family adaptation experiment
+# Config for: unseen-family adaptation and multi-regime benchmark experiment
 # Run with: make exp-unseen-family
 
 extends: experiment_base.yaml
@@ -6,18 +6,38 @@ extends: experiment_base.yaml
 experiment:
   name: "unseen_family"
   description: >
-    Train on FTP-BruteForce + Benign. Test against completely unseen attack
-    families: DoS-GoldenEye, DoS-Hulk, DoS-Slowloris, SSH-BruteForce.
-    Report adaptation curve over 5 feedback cycles.
+    Comprehensive open-set benchmark evaluating two operational regimes:
+    A. Known-families regime: Leave-One-Family-Out (LOFO) across all 5 families
+       (FTP-BruteForce, SSH-BruteForce, DoS-GoldenEye, DoS-Hulk, DoS-Slowloris).
+    B. Cold-start stress test: FTP-only trained protocol against novel families.
+    Includes feature ablation (9 vs 25 vs 76 allowlisted features), realistic prevalence
+    (1:100, 1:1000), balanced accuracy, per-family recalls, FPR, SFR, ER, and Tier-2-only baselines.
 
   seeds: [42, 71, 137, 256, 512]
   output_dir: "results/unseen_family"
 
-unseen_families:
+families:
+  - "FTP-BruteForce"
+  - "SSH-BruteForce"
   - "DoS-GoldenEye"
   - "DoS-Hulk"
   - "DoS-Slowloris"
-  - "SSH-BruteForce"
 
-sample_per_attack: 1000
-num_cycles: 5
+feature_ablation_sets:
+  - 9
+  - 25
+  - 76
+
+prevalence_ratios:
+  - "1:100"
+  - "1:1000"
+
+tier1:
+  n_estimators: 40
+  max_depth: 6
+  escalation_band: [0.30, 0.70]
+
+tier2:
+  n_estimators: 250
+  max_depth: null
+

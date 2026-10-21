@@ -11,6 +11,10 @@ Automated Sanity and Invariant Tests for the Adaptive Two-Tier Gateway:
 """
 
 import asyncio
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -179,3 +183,192 @@ def test_sanity_escalation_flood_baseline_queue_growth():
         f"Controller failure: controller max overflows ({max(ctrl_overflows)}) "
         f"not less than baseline max overflows ({max(baseline_overflows)})"
     )
+
+
+def test_sanity_littles_law_closed_loop():
+    """
+    Sanity Check 5: |concurrency - throughput * mean_latency| / concurrency < 15%
+    strictly enforced for ALL four closed-loop benchmark rows:
+      - no_inspection
+      - benign_fast_path
+      - escalated
+      - two_tier_blended
+    Fails if ANY closed-loop row deviates by >= 15%. No violations documented as acceptable.
+    """
+    import json
+    from pathlib import Path
+
+    summary_path = Path("results/latency/summary.json")
+    if not summary_path.exists():
+        pytest.skip("results/latency/summary.json not yet generated.")
+
+    with open(summary_path) as f:
+        data = json.load(f)
+
+    cl = data.get("closed_loop", {})
+    summary_stats = cl.get("summary_stats", {})
+    assert summary_stats, "No closed loop summary stats found in results/latency/summary.json"
+
+    concurrency = 20.0
+    # Evaluate Little's Law on ALL 4 closed-loop rows
+    tested_conditions = ["no_inspection", "benign_fast_path", "escalated", "two_tier_blended"]
+
+    for cond_name in tested_conditions:
+        assert cond_name in summary_stats, f"Missing closed-loop condition: {cond_name}"
+        st = summary_stats[cond_name]
+        tp = st["throughput_rps"]["mean"]
+        mean_s = st["latency_mean_ms"]["mean"] / 1000.0
+        n_est = tp * mean_s
+        err = abs(concurrency - n_est) / concurrency
+        assert err < 0.15, (
+            f"Little's Law violation for {cond_name}: Estimated N={n_est:.2f} vs C={concurrency} "
+            f"(Relative Error = {err*100:.2f}% >= 15%). Closed-loop invariance failed."
+        )
+
+
+def test_sanity_mean_latency_not_derived_from_throughput():
+    """
+    Sanity Check 5b: Verifies that closed-loop mean latency is independently measured
+    from individual per-request timestamps and is NOT tautologically derived from
+    concurrency / throughput (C / X). Fails if mean == C/X to within 1e-6.
+    """
+    import json
+    from pathlib import Path
+
+    summary_path = Path("results/latency/summary.json")
+    if not summary_path.exists():
+        pytest.skip("results/latency/summary.json not yet generated.")
+
+    with open(summary_path) as f:
+        data = json.load(f)
+
+    summary_stats = data.get("closed_loop", {}).get("summary_stats", {})
+    assert summary_stats, "No closed loop summary stats found in results/latency/summary.json"
+
+    concurrency = 20.0
+    for cond_name in ["no_inspection", "benign_fast_path", "escalated", "two_tier_blended"]:
+        assert cond_name in summary_stats, f"Missing {cond_name} in closed_loop summary stats"
+        st = summary_stats[cond_name]
+        measured_mean_ms = st["latency_mean_ms"]["mean"]
+        tp = st["throughput_rps"]["mean"]
+        tautological_mean_ms = (concurrency / tp) * 1000.0
+        diff = abs(measured_mean_ms - tautological_mean_ms)
+        assert diff > 1e-6, (
+            f"Tautology detected for {cond_name}: measured mean ({measured_mean_ms:.8f} ms) "
+            f"matches C / throughput ({tautological_mean_ms:.8f} ms) to within 1e-6! "
+            f"Mean latency must come from per-request timestamps, not inverted throughput."
+        )
+
+
+def test_sanity_inspection_latency_ordering_check():
+    """
+    Sanity Check 6: Inspection mean/p50 latency >= passthrough.
+    """
+    import json
+    from pathlib import Path
+
+    summary_path = Path("results/latency/summary.json")
+    if not summary_path.exists():
+        pytest.skip("results/latency/summary.json not yet generated.")
+
+    with open(summary_path) as f:
+        data = json.load(f)
+
+    stats = data["closed_loop"]["summary_stats"]
+    no_p50 = stats["no_inspection"]["latency_p50_ms"]["mean"]
+    fast_p50 = stats["benign_fast_path"]["latency_p50_ms"]["mean"]
+    no_mean = stats["no_inspection"]["latency_mean_ms"]["mean"]
+    fast_mean = stats["benign_fast_path"]["latency_mean_ms"]["mean"]
+
+    assert (fast_p50 >= no_p50 * 0.95) or (fast_mean >= no_mean * 0.95), (
+        f"Inspection latency (p50={fast_p50:.2f}ms, mean={fast_mean:.2f}ms) "
+        f"lower than passthrough (p50={no_p50:.2f}ms, mean={no_mean:.2f}ms)"
+    )
+
+
+def test_sanity_knee_detector():
+    """
+    Sanity Check 7: Automatic knee detector:
+      - Baseline = minimum p95 across levels
+      - Flags knee where latency > 2.0x baseline OR achieved/offered < 0.98
+      - Returns 'not reached' if conditions are never met.
+    """
+    from load_test.load_test_suite import detect_saturation_knee
+
+    # Case 1: Doubling knee at 300 req/s (latency 2.3 > 2.0 * min(1.0))
+    rates = [100, 200, 300, 400]
+    latencies = [1.0, 1.2, 2.3, 5.5]
+    knee_r, label, _ = detect_saturation_knee(rates, latencies, threshold_factor=2.0)
+    assert knee_r == 300, f"Expected knee at 300, got {knee_r}"
+    assert label == "300 req/s"
+
+    # Case 2: Flat curve (knee not reached)
+    flat_latencies = [1.0, 1.1, 1.2, 1.3]
+    knee_r, label, _ = detect_saturation_knee(rates, flat_latencies, threshold_factor=2.0)
+    assert knee_r is None, f"Expected None for flat curve, got {knee_r}"
+    assert label == "not reached"
+
+    # Case 3: Throughput degradation knee (achieved/offered < 0.98)
+    achieved = [100.0, 200.0, 280.0, 350.0]  # 280/300 = 0.933 < 0.98
+    latencies_flat = [1.0, 1.1, 1.2, 1.3]
+    knee_r, label, reason = detect_saturation_knee(
+        rates, latencies_flat, achieved_rates=achieved, threshold_factor=2.0, achieved_ratio_threshold=0.98
+    )
+    assert knee_r == 300, f"Expected throughput degradation knee at 300, got {knee_r} ({reason})"
+    assert "achieved/offered" in reason
+
+
+def test_sanity_timeout_enforcement_overload():
+    """
+    Sanity Check 8: Under overload or with short timeout, timeout_count > 0 and 504 is returned on fail_closed.
+    """
+    import src.gateway.middleware as mw
+    from src.gateway.middleware import screen_request
+    from fastapi import BackgroundTasks
+
+    mw.save_gateway_state({
+        "mode": "two_tier",
+        "behavior": "hold_with_timeout",
+        "timeout_ms": 5.0,
+        "timeout_action": "fail_closed",
+    })
+    mw.reset_telemetry_stats()
+
+    # Create an escalated request without worker consumption to trigger timeout
+    req = MockClientRequest(
+        method="POST",
+        path="/tienda1/miembros/editar.jsp",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        body="modo=registro&login=glaser&password=elementada",
+    )
+
+    async def run_overload():
+        bg = BackgroundTasks()
+        resp = await screen_request(req, bg)
+        return resp
+
+    resp = asyncio.run(run_overload())
+    assert resp.status_code == 504, f"Expected 504 on timeout with fail_closed, got {resp.status_code}"
+    stats = mw.get_telemetry_stats()
+    assert stats["timeout_count"] > 0, f"Expected timeout_count > 0, got {stats['timeout_count']}"
+    assert stats["fail_closed_504_count"] > 0, f"Expected fail_closed_504_count > 0, got {stats['fail_closed_504_count']}"
+
+
+def test_sanity_onnx_sklearn_parity():
+    """
+    Sanity Check 9: ONNX vs Scikit-Learn parity:
+      - Label agreement >= 99.9%
+      - Max probability difference < 1e-3
+      - Zero flips across the [0.30, 0.70] escalation thresholds
+    """
+    from tier2.track_a_http import compute_onnx_parity
+    verifier = get_verifier()
+    df_csic = pd.read_csv(CSIC_CSV)
+    df_test = df_csic.iloc[2000:3000]
+
+    res = compute_onnx_parity(verifier, df_test)
+    assert res["label_agreement_pct"] >= 99.9, f"Label agreement {res['label_agreement_pct']:.2f}% < 99.9%"
+    assert res["max_prob_diff"] < 1e-3, f"Max prob diff {res['max_prob_diff']:.2e} >= 1e-3"
+    assert res["threshold_flips_count"] == 0, f"Threshold flips count {res['threshold_flips_count']} != 0"
+    assert res["parity_passed"] is True
+

@@ -40,6 +40,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
     accuracy_score,
     auc,
+    balanced_accuracy_score,
+
     confusion_matrix,
     f1_score,
     precision_recall_curve,
@@ -71,22 +73,30 @@ def compute_metrics(
     preds: np.ndarray,
     escalated: np.ndarray,
     scores: np.ndarray,
+    y_family: np.ndarray = None,
+    tier2_preds: np.ndarray = None,
     oracle_tier2: bool = False,
+    is_tier2_only: bool = False,
 ) -> Dict[str, float]:
     """
-    Computes all Task 3 metrics:
-    - acc, prec, rec, f1, pr_auc, fpr
-    - silent_failure_rate (SFR): % of novel-attack flows confidently classified benign
+    Computes all standard Task 3 comparative metrics:
+    - balanced_accuracy, prec, rec, f1, pr_auc, fpr
+    - per-family recalls: FTP, SSH, GoldenEye, Hulk, Slowloris
+    - silent_failure_rate (SFR): true attacks classified as benign without escalation
     - escalation_rate
     - novelty_auroc
     """
-    # Two-tier effective predictions: if escalated and oracle_tier2, verdict is true label
-    if oracle_tier2:
+    if is_tier2_only and tier2_preds is not None:
+        effective_preds = tier2_preds
+    elif tier2_preds is not None:
+        effective_preds = np.where(escalated, tier2_preds, preds)
+    elif oracle_tier2:
         effective_preds = np.where(escalated, y_true, preds)
     else:
         effective_preds = preds
 
     acc = float(accuracy_score(y_true, effective_preds))
+    bacc = float(balanced_accuracy_score(y_true, effective_preds))
     prec = float(precision_score(y_true, effective_preds, zero_division=0))
     rec = float(recall_score(y_true, effective_preds, zero_division=0))
     f1 = float(f1_score(y_true, effective_preds, zero_division=0))
@@ -94,6 +104,17 @@ def compute_metrics(
     # Confusion matrix & FPR
     tn, fp, fn, tp = confusion_matrix(y_true, effective_preds, labels=[0, 1]).ravel()
     fpr = float(fp / (fp + tn)) if (fp + tn) > 0 else 0.0
+
+    # Per-family recall
+    all_fams = ["FTP-BruteForce", "SSH-BruteForce", "DoS-GoldenEye", "DoS-Hulk", "DoS-Slowloris"]
+    fam_recalls = {}
+    if y_family is not None:
+        for f in all_fams:
+            mask = (y_family == f)
+            fam_recalls[f] = float(np.mean(effective_preds[mask] == 1)) if np.sum(mask) > 0 else float("nan")
+    else:
+        for f in all_fams:
+            fam_recalls[f] = float("nan")
 
     # PR-AUC on novelty score
     try:
@@ -110,18 +131,27 @@ def compute_metrics(
 
     # Silent Failure Rate (SFR): % of true attacks that are NOT escalated and predicted as benign (label 0)
     attack_mask = (y_true == 1)
-    if np.any(attack_mask):
-        confidently_benign = (preds == 0) & (~escalated)
-        sfr = float(np.mean(confidently_benign[attack_mask]))
+    if is_tier2_only:
+        sfr = float(np.mean(effective_preds[attack_mask] == 0)) if np.any(attack_mask) else 0.0
+        esc_rate = 1.0
     else:
-        sfr = 0.0
-
-    esc_rate = float(np.mean(escalated))
+        if np.any(attack_mask):
+            confidently_benign = (effective_preds == 0) & (~escalated)
+            sfr = float(np.mean(confidently_benign[attack_mask]))
+        else:
+            sfr = 0.0
+        esc_rate = float(np.mean(escalated))
 
     return {
         "accuracy": acc,
+        "balanced_accuracy": bacc,
         "precision": prec,
         "recall": rec,
+        "recall_ftp": fam_recalls["FTP-BruteForce"],
+        "recall_ssh": fam_recalls["SSH-BruteForce"],
+        "recall_goldeneye": fam_recalls["DoS-GoldenEye"],
+        "recall_hulk": fam_recalls["DoS-Hulk"],
+        "recall_slowloris": fam_recalls["DoS-Slowloris"],
         "f1": f1,
         "pr_auc": pr_auc,
         "fpr": fpr,
@@ -129,6 +159,7 @@ def compute_metrics(
         "escalation_rate": esc_rate,
         "novelty_auroc": novelty_auroc,
     }
+
 
 
 def compute_coverage_curve(
@@ -166,9 +197,12 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
 
     bench = np.load(BENCHMARK_NPZ)
     X_tr = bench["ftp_only_X_train"]
+    X_tr_76 = bench["ftp_only_X_train_76"]
     y_tr = bench["ftp_only_y_train"]
     X_te = bench["ftp_only_X_test"]
+    X_te_76 = bench["ftp_only_X_test_76"]
     y_te = bench["ftp_only_y_test"]
+    y_fam = bench["ftp_only_y_family_test"]
 
     print(f"Data Loaded: Train {X_tr.shape}, Test {X_te.shape} (Attacks: {np.sum(y_te)}, Benign: {np.sum(y_te==0)})")
 
@@ -183,6 +217,7 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         "Isolation Forest Novelty",
         "Evidential Deep Learning (EDL)",
         "EDL Ensemble (Warm-Start Prior)",
+        "Tier-2-Only Baseline",
         "Oracle Tier 2",
     ]
 
@@ -199,13 +234,18 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         X_train_sub, y_train_sub = X_tr[cal_idx[:split_pt]], y_tr[cal_idx[:split_pt]]
         X_cal, y_cal = X_tr[cal_idx[split_pt:]], y_tr[cal_idx[split_pt:]]
 
+        # Train Tier 2 model with all 76 features
+        tier2_model = RandomForestClassifier(n_estimators=250, max_depth=None, random_state=seed)
+        tier2_model.fit(X_tr_76, y_tr)
+        preds_t2 = tier2_model.predict(X_te_76)
+
         # ── 1. Single-Tier RF Baseline ──
         rf_base = RandomForestClassifier(n_estimators=40, max_depth=6, random_state=seed)
         rf_base.fit(X_train_sub, y_train_sub)
         p_rf = rf_base.predict_proba(X_te)[:, 1]
         preds_rf = (p_rf >= 0.5).astype(int)
         esc_rf = np.zeros(len(y_te), dtype=bool)
-        m_rf = compute_metrics(y_te, preds_rf, esc_rf, p_rf)
+        m_rf = compute_metrics(y_te, preds_rf, esc_rf, p_rf, y_family=y_fam)
         all_seed_results["Single-Tier RF (No Escalation)"].append(m_rf)
         coverage_curves["Single-Tier RF (No Escalation)"].append(compute_coverage_curve(p_rf, preds_rf, y_te))
 
@@ -215,7 +255,7 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         p_xgb = xgb_base.predict_proba(X_te)[:, 1]
         preds_xgb = (p_xgb >= 0.5).astype(int)
         esc_xgb = np.zeros(len(y_te), dtype=bool)
-        m_xgb = compute_metrics(y_te, preds_xgb, esc_xgb, p_xgb)
+        m_xgb = compute_metrics(y_te, preds_xgb, esc_xgb, p_xgb, y_family=y_fam)
         all_seed_results["Single-Tier XGBoost (No Escalation)"].append(m_xgb)
         coverage_curves["Single-Tier XGBoost (No Escalation)"].append(compute_coverage_curve(p_xgb, preds_xgb, y_te))
 
@@ -223,7 +263,7 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         band = RFProbabilityBandTrigger(low=0.30, high=0.70, random_state=seed)
         band.fit(X_train_sub, y_train_sub)
         p_band, esc_band, s_band = band.predict(X_te)
-        m_band = compute_metrics(y_te, p_band, esc_band, s_band, oracle_tier2=True)
+        m_band = compute_metrics(y_te, p_band, esc_band, s_band, y_family=y_fam, tier2_preds=preds_t2)
         all_seed_results["RF Prob Band [0.30, 0.70]"].append(m_band)
         coverage_curves["RF Prob Band [0.30, 0.70]"].append(compute_coverage_curve(s_band, p_band, y_te))
 
@@ -231,7 +271,7 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         cal = CalibratedRFTrigger(method="isotonic", random_state=seed)
         cal.fit(X_train_sub, y_train_sub, X_cal=X_cal, y_cal=y_cal)
         p_cal, esc_cal, s_cal = cal.predict(X_te)
-        m_cal = compute_metrics(y_te, p_cal, esc_cal, s_cal, oracle_tier2=True)
+        m_cal = compute_metrics(y_te, p_cal, esc_cal, s_cal, y_family=y_fam, tier2_preds=preds_t2)
         all_seed_results["Calibrated RF (Isotonic)"].append(m_cal)
         coverage_curves["Calibrated RF (Isotonic)"].append(compute_coverage_curve(s_cal, p_cal, y_te))
 
@@ -239,7 +279,7 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         bagged = BaggedRFVarianceTrigger(random_state=seed)
         bagged.fit(X_train_sub, y_train_sub, X_cal=X_cal, y_cal=y_cal)
         p_bag, esc_bag, s_bag = bagged.predict(X_te)
-        m_bag = compute_metrics(y_te, p_bag, esc_bag, s_bag, oracle_tier2=True)
+        m_bag = compute_metrics(y_te, p_bag, esc_bag, s_bag, y_family=y_fam, tier2_preds=preds_t2)
         all_seed_results["Bagged RF Tree Variance"].append(m_bag)
         coverage_curves["Bagged RF Tree Variance"].append(compute_coverage_curve(s_bag, p_bag, y_te))
 
@@ -247,7 +287,7 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         conf = SplitConformalTrigger(alpha=0.10, random_state=seed)
         conf.fit(X_train_sub, y_train_sub, X_cal=X_cal, y_cal=y_cal)
         p_conf, esc_conf, s_conf = conf.predict(X_te)
-        m_conf = compute_metrics(y_te, p_conf, esc_conf, s_conf, oracle_tier2=True)
+        m_conf = compute_metrics(y_te, p_conf, esc_conf, s_conf, y_family=y_fam, tier2_preds=preds_t2)
         all_seed_results["Split-Conformal Prediction"].append(m_conf)
         coverage_curves["Split-Conformal Prediction"].append(compute_coverage_curve(s_conf, p_conf, y_te))
 
@@ -255,7 +295,7 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         iso = IsolationForestTrigger(random_state=seed)
         iso.fit(X_train_sub, y_train_sub)
         p_iso, esc_iso, s_iso = iso.predict(X_te)
-        m_iso = compute_metrics(y_te, p_iso, esc_iso, s_iso, oracle_tier2=True)
+        m_iso = compute_metrics(y_te, p_iso, esc_iso, s_iso, y_family=y_fam, tier2_preds=preds_t2)
         all_seed_results["Isolation Forest Novelty"].append(m_iso)
         coverage_curves["Isolation Forest Novelty"].append(compute_coverage_curve(s_iso, p_iso, y_te))
 
@@ -263,7 +303,7 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         edl = EDLTrigger(input_dim=X_tr.shape[1], seed=seed)
         edl.fit(X_train_sub, y_train_sub)
         p_edl, esc_edl, s_edl = edl.predict(X_te)
-        m_edl = compute_metrics(y_te, p_edl, esc_edl, s_edl, oracle_tier2=True)
+        m_edl = compute_metrics(y_te, p_edl, esc_edl, s_edl, y_family=y_fam, tier2_preds=preds_t2)
         all_seed_results["Evidential Deep Learning (EDL)"].append(m_edl)
         coverage_curves["Evidential Deep Learning (EDL)"].append(compute_coverage_curve(s_edl, p_edl, y_te))
 
@@ -271,25 +311,36 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         edl_ens = EDLEnsembleWarmStartTrigger(input_dim=X_tr.shape[1], seed=seed)
         edl_ens.fit(X_train_sub, y_train_sub)
         p_ens, esc_ens, s_ens = edl_ens.predict(X_te)
-        m_ens = compute_metrics(y_te, p_ens, esc_ens, s_ens, oracle_tier2=True)
+        m_ens = compute_metrics(y_te, p_ens, esc_ens, s_ens, y_family=y_fam, tier2_preds=preds_t2)
         all_seed_results["EDL Ensemble (Warm-Start Prior)"].append(m_ens)
         coverage_curves["EDL Ensemble (Warm-Start Prior)"].append(compute_coverage_curve(s_ens, p_ens, y_te))
 
-        # ── 10. Oracle Tier 2 (Upper Bound) ──
+        # ── 10. Tier-2-Only Baseline (All 76 Features) ──
+        m_t2 = compute_metrics(y_te, preds_t2, np.ones(len(y_te), dtype=bool), np.ones(len(y_te)), y_family=y_fam, tier2_preds=preds_t2, is_tier2_only=True)
+        all_seed_results["Tier-2-Only Baseline"].append(m_t2)
+        coverage_curves["Tier-2-Only Baseline"].append({f"{int(b*100)}%": m_t2["accuracy"] for b in [0.0, 0.05, 0.10, 0.15, 0.20, 0.30, 0.40, 0.50, 0.75, 1.0]})
+
+        # ── 11. Oracle Tier 2 (Upper Bound) ──
         esc_oracle = np.ones(len(y_te), dtype=bool)
-        m_oracle = compute_metrics(y_te, preds_rf, esc_oracle, p_rf, oracle_tier2=True)
+        m_oracle = compute_metrics(y_te, preds_rf, esc_oracle, p_rf, y_family=y_fam, oracle_tier2=True)
         all_seed_results["Oracle Tier 2"].append(m_oracle)
         coverage_curves["Oracle Tier 2"].append({f"{int(b*100)}%": 1.0 for b in [0.0, 0.05, 0.10, 0.15, 0.20, 0.30, 0.40, 0.50, 0.75, 1.0]})
 
-        print(f"  RF Baseline Acc: {m_rf['accuracy']*100:.2f}%, SFR: {m_rf['silent_failure_rate']*100:.2f}%")
-        print(f"  RF Band Acc:     {m_band['accuracy']*100:.2f}%, Esc: {m_band['escalation_rate']*100:.2f}%, SFR: {m_band['silent_failure_rate']*100:.2f}%")
-        print(f"  EDL Warm Acc:    {m_ens['accuracy']*100:.2f}%, Esc: {m_ens['escalation_rate']*100:.2f}%, SFR: {m_ens['silent_failure_rate']*100:.2f}%")
+        print(f"  RF Baseline Acc: {m_rf['accuracy']*100:.2f}%, BAcc: {m_rf['balanced_accuracy']*100:.2f}%, SFR: {m_rf['silent_failure_rate']*100:.2f}%")
+        print(f"  RF Band Acc:     {m_band['accuracy']*100:.2f}%, BAcc: {m_band['balanced_accuracy']*100:.2f}%, Esc: {m_band['escalation_rate']*100:.2f}%, SFR: {m_band['silent_failure_rate']*100:.2f}%")
+        print(f"  EDL Warm Acc:    {m_ens['accuracy']*100:.2f}%, BAcc: {m_ens['balanced_accuracy']*100:.2f}%, Esc: {m_ens['escalation_rate']*100:.2f}%, SFR: {m_ens['silent_failure_rate']*100:.2f}%")
+        print(f"  Tier 2 Only Acc: {m_t2['accuracy']*100:.2f}%, BAcc: {m_t2['balanced_accuracy']*100:.2f}%, SFR: {m_t2['silent_failure_rate']*100:.2f}%")
+
 
     # Aggregate across seeds
     summary_table = []
     agg_dict = {}
 
-    keys = ["accuracy", "precision", "recall", "f1", "pr_auc", "fpr", "silent_failure_rate", "escalation_rate", "novelty_auroc"]
+    keys = [
+        "accuracy", "balanced_accuracy", "precision", "recall",
+        "recall_ftp", "recall_ssh", "recall_goldeneye", "recall_hulk", "recall_slowloris",
+        "f1", "pr_auc", "fpr", "silent_failure_rate", "escalation_rate", "novelty_auroc"
+    ]
 
     for m in method_names:
         m_stats = {"method": m}
@@ -375,15 +426,18 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         f.write(f"**Dataset:** CSE-CIC-IDS2018 Cleaned Open-Set Protocol (`ftp_only` train, 4 novel families test)  \n\n")
 
         f.write("## Empirical Comparison Table\n\n")
-        f.write("| Method | Accuracy (%) | Precision (%) | Recall (%) | F1 Score | Silent Failure Rate (%) | Escalation Rate (%) | Novelty AUROC |\n")
-        f.write("| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n")
+        f.write("| Method | Balanced Accuracy (%) | Rec(FTP) | Rec(SSH) | Rec(Gold) | Rec(Hulk) | Rec(Slow) | FPR (%) | Silent Failure Rate (%) | Escalation Rate (%) | Novelty AUROC |\n")
+        f.write("| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n")
         for st in summary_table:
             f.write(
                 f"| **{st['method']}** | "
-                f"{st['accuracy_mean']*100:.2f} ± {st['accuracy_ci95']*100:.2f} | "
-                f"{st['precision_mean']*100:.2f} ± {st['precision_ci95']*100:.2f} | "
-                f"{st['recall_mean']*100:.2f} ± {st['recall_ci95']*100:.2f} | "
-                f"{st['f1_mean']:.3f} ± {st['f1_ci95']:.3f} | "
+                f"{st['balanced_accuracy_mean']*100:.2f} ± {st['balanced_accuracy_ci95']*100:.2f} | "
+                f"{st['recall_ftp_mean']*100:.2f} | "
+                f"{st['recall_ssh_mean']*100:.2f} | "
+                f"{st['recall_goldeneye_mean']*100:.2f} | "
+                f"{st['recall_hulk_mean']*100:.2f} | "
+                f"{st['recall_slowloris_mean']*100:.2f} | "
+                f"{st['fpr_mean']*100:.2f} | "
                 f"**{st['silent_failure_rate_mean']*100:.2f}** ± {st['silent_failure_rate_ci95']*100:.2f} | "
                 f"{st['escalation_rate_mean']*100:.2f} ± {st['escalation_rate_ci95']*100:.2f} | "
                 f"{st['novelty_auroc_mean']:.3f} ± {st['novelty_auroc_ci95']:.3f} |\n"
@@ -405,13 +459,18 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
         f.write("\\begin{table*}[t]\n\\centering\n\\small\n")
         f.write("\\caption{Comparison of Tier 1 Escalation Triggers on Novel Attack Stream (Mean $\\pm$ 95\\% CI across 5 Seeds)}\n")
         f.write("\\label{tab:escalation_triggers}\n")
-        f.write("\\begin{tabular}{lcccccc}\n\\toprule\n")
-        f.write("Method & Accuracy (\\%) & F1 Score & Silent Failure (\\%) & Escalation (\\%) & Novelty AUROC \\\\\n\\midrule\n")
+        f.write("\\begin{tabular}{lccccccccccc}\n\\toprule\n")
+        f.write("Method & BAcc (\\%) & Rec(FTP) & Rec(SSH) & Rec(Gold) & Rec(Hulk) & Rec(Slow) & FPR (\\%) & SFR (\\%) & Esc (\\%) & Novelty AUROC \\\\\n\\midrule\n")
         for st in summary_table:
             f.write(
                 f"{st['method']} & "
-                f"{st['accuracy_mean']*100:.2f} $\\pm$ {st['accuracy_ci95']*100:.2f} & "
-                f"{st['f1_mean']:.3f} & "
+                f"{st['balanced_accuracy_mean']*100:.2f} $\\pm$ {st['balanced_accuracy_ci95']*100:.2f} & "
+                f"{st['recall_ftp_mean']*100:.2f} & "
+                f"{st['recall_ssh_mean']*100:.2f} & "
+                f"{st['recall_goldeneye_mean']*100:.2f} & "
+                f"{st['recall_hulk_mean']*100:.2f} & "
+                f"{st['recall_slowloris_mean']*100:.2f} & "
+                f"{st['fpr_mean']*100:.2f} & "
                 f"\\textbf{{{st['silent_failure_rate_mean']*100:.2f}}} & "
                 f"{st['escalation_rate_mean']*100:.2f} & "
                 f"{st['novelty_auroc_mean']:.3f} \\\\\n"
@@ -422,6 +481,7 @@ def run_experiment(seeds: List[int] = [42, 71, 137, 256, 512]):
     print(f"  Markdown Report: {report_path}")
     print(f"  LaTeX Table:     {latex_path}")
     return summary_table
+
 
 
 if __name__ == "__main__":

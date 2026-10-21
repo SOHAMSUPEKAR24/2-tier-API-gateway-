@@ -71,7 +71,7 @@ def test_benchmark_splits_leakage_and_shape():
         pytest.skip(f"Benchmark splits not yet generated at {npz_path}")
 
     data = np.load(npz_path)
-    protocols = set([k.rsplit("_", 2)[0] for k in data.files])
+    protocols = set([k[:-8] for k in data.files if k.endswith("_X_train")])
 
     for proto in protocols:
         X_tr = data[f"{proto}_X_train"]
@@ -79,9 +79,23 @@ def test_benchmark_splits_leakage_and_shape():
         X_te = data[f"{proto}_X_test"]
         y_te = data[f"{proto}_y_test"]
 
-        # 1. Feature count must equal canonical allowlist length
+        # 1. Feature count must equal canonical allowlist length (9)
         assert X_tr.shape[1] == len(TIER1_ALLOWLIST), f"Train features in {proto} != {len(TIER1_ALLOWLIST)}"
         assert X_te.shape[1] == len(TIER1_ALLOWLIST), f"Test features in {proto} != {len(TIER1_ALLOWLIST)}"
+
+        # Verify 25 and 76 feature matrices if present
+        if f"{proto}_X_train_25" in data:
+            assert data[f"{proto}_X_train_25"].shape[1] == 25
+            assert data[f"{proto}_X_test_25"].shape[1] == 25
+            assert np.all(np.isfinite(data[f"{proto}_X_train_25"]))
+            assert np.all(np.isfinite(data[f"{proto}_X_test_25"]))
+
+        if f"{proto}_X_train_76" in data:
+            assert data[f"{proto}_X_train_76"].shape[1] == 76
+            assert data[f"{proto}_X_test_76"].shape[1] == 76
+            assert np.all(np.isfinite(data[f"{proto}_X_train_76"]))
+            assert np.all(np.isfinite(data[f"{proto}_X_test_76"]))
+            assert_no_leakage(data[f"{proto}_X_train_76"], data[f"{proto}_X_test_76"])
 
         # 2. No NaNs or Infs
         assert np.all(np.isfinite(X_tr)), f"NaN/Inf found in {proto} train set"
@@ -93,6 +107,7 @@ def test_benchmark_splits_leakage_and_shape():
         # 4. Binary targets only
         assert set(np.unique(y_tr)).issubset({0, 1}), f"Non-binary target in {proto} train"
         assert set(np.unique(y_te)).issubset({0, 1}), f"Non-binary target in {proto} test"
+
 
 
 def test_benchmark_stats_json_validity():

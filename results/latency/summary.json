@@ -1,51 +1,2957 @@
 {
-  "modes": {
-    "no_inspection": {
-      "mode": "no_inspection",
-      "sample_count": 1500,
-      "concurrency": 20,
-      "throughput_rps": 22575.331171191592,
-      "latency_p50_ms": 0.038166499507497065,
-      "latency_p95_ms": 0.0452920012321556,
-      "latency_p99_ms": 0.05396717142502893,
-      "latency_mean_ms": 0.03970586669674958,
-      "cpu_percent": 99.9,
-      "memory_rss_mb": 533.765625,
-      "queue_depth_max": 0
+  "config": {
+    "extends": "experiment_base.yaml",
+    "experiment": {
+      "name": "load_test_latency",
+      "description": "Production-grade HTTP Gateway Service Benchmark: Uvicorn ASGI behind NGINX Reverse Proxy over local loopback interface (127.0.0.1:8080 -> 127.0.0.1:8000). Evaluates:\n  1. Open-loop constant-arrival-rate load testing (k6) sweeping offered load up to ~1.2x closed-loop capacity\n     (500..5000 req/s) with 5x repetitions and randomized order, with automatic knee detection.\n  2. Open-loop testing for the BLENDED stream at measured empirical ER (37.7%) and HOLD vs ASYNC below saturation.\n  3. Per-stage micro-profiling (parse, features, predict, enqueue) without reused timing arrays, plus ONNX-vs-sklearn parity and ablation.\n  4. Escalation modes under realistic mixed stream: timeout rates, fail-open forwarded unverified, fail-closed 504, and ASYNC exposure window.\n  5. Blended validation: linear mean validation in closed-loop, empirical mixture quantile validation in open-loop.\n  6. System telemetry recording memory pressure and swap usage (zero isolated cores claims).\n  7. Empirical ER reported separately for benign-only and attack-only held-out traffic.\n",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "output_dir": "results/latency"
     },
-    "two_tier": {
-      "mode": "two_tier",
-      "sample_count": 1500,
-      "concurrency": 20,
-      "throughput_rps": 694.8461655734181,
-      "latency_p50_ms": 0.6066669993742835,
-      "latency_p95_ms": 65.63964375009164,
-      "latency_p99_ms": 78.1699187495542,
-      "latency_mean_ms": 19.600047541303258,
-      "cpu_percent": 98.4,
-      "memory_rss_mb": 533.9453125,
-      "queue_depth_max": 0
+    "service": {
+      "uvicorn_host": "127.0.0.1",
+      "uvicorn_port": 8000,
+      "nginx_host": "127.0.0.1",
+      "nginx_port": 8080,
+      "workers": 4,
+      "escalation_timeout_ms": 60.0
     },
-    "pure_tier2": {
-      "mode": "pure_tier2",
-      "sample_count": 1500,
-      "concurrency": 20,
-      "throughput_rps": 517.1435828222532,
-      "latency_p50_ms": 1.8908544998339494,
-      "latency_p95_ms": 2.100295199852553,
-      "latency_p99_ms": 2.3041149996424792,
-      "latency_mean_ms": 1.9276918086798105,
-      "cpu_percent": 99.9,
-      "memory_rss_mb": 534.046875,
-      "queue_depth_max": 0
+    "open_loop": {
+      "tool": "k6",
+      "fast_path_offered_rates": [
+        500,
+        1000,
+        2000,
+        3000,
+        4000,
+        4500,
+        5000
+      ],
+      "blended_offered_rates": [
+        250,
+        500,
+        1000,
+        1500,
+        2000,
+        2500
+      ],
+      "escalation_modes_rates": [
+        100,
+        200,
+        300
+      ],
+      "repetitions_per_level": 5,
+      "randomize_order": true,
+      "duration_per_step_sec": 3,
+      "warmup_sec": 1,
+      "knee_threshold_factor": 2.0
+    },
+    "closed_loop": {
+      "tool": "wrk",
+      "threads": 2,
+      "connections": 20,
+      "duration_sec": 4,
+      "repeated_runs": 10,
+      "warmup_sec": 1
+    },
+    "traffic_splits": {
+      "er_sweep": [
+        0.01,
+        0.05,
+        0.1,
+        0.25,
+        0.45
+      ],
+      "csic_dataset_path": "/Users/sohamsupekar/Desktop/MajorProject/DATASET/csic_database.csv",
+      "train_benign_count": 2000,
+      "train_attack_count": 2000,
+      "test_benign_range": [
+        2000,
+        7000
+      ],
+      "test_attack_range": [
+        2000,
+        7000
+      ]
+    },
+    "escalation_modes": [
+      {
+        "name": "hold_fail_open",
+        "behavior": "hold_with_timeout",
+        "timeout_action": "fail_open",
+        "timeout_ms": 60.0
+      },
+      {
+        "name": "hold_fail_closed",
+        "behavior": "hold_with_timeout",
+        "timeout_action": "fail_closed",
+        "timeout_ms": 60.0
+      },
+      {
+        "name": "async_quarantine",
+        "behavior": "async_quarantine",
+        "timeout_action": "fail_open",
+        "timeout_ms": 60.0
+      }
+    ],
+    "validation": {
+      "closed_loop_mean_max_error_pct": 20.0,
+      "open_loop_quantile_max_error_pct": 25.0
     }
   },
-  "blended_validation": {
-    "empirical_escalation_rate": 0.005,
-    "theoretical_blended_p50_ms": 0.6161212718734532,
-    "measured_blended_p50_ms": 0.6066669993742835,
-    "discrepancy_pct": 1.5344824031837008,
-    "validated": true
+  "hardware": {
+    "cpu_model": "Apple M2",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "system": "Darwin",
+    "release": "25.6.0",
+    "version": "Darwin Kernel Version 25.6.0: Fri Jul 31 19:18:43 PDT 2026; root:xnu-12377.161.14~5/RELEASE_ARM64_T8112",
+    "machine": "arm64",
+    "logical_cores": 8,
+    "physical_cores": 8,
+    "core_isolation_configured": false,
+    "isolation_note": "Darwin OS does not support Linux-style core pinning / taskset; process threads scheduled across available cores.",
+    "virtual_memory": {
+      "total_gb": 8.0,
+      "available_gb": 2.27,
+      "used_gb": 3.51,
+      "percent_used": 71.6
+    },
+    "swap_memory": {
+      "total_gb": 4.0,
+      "used_gb": 3.08,
+      "free_gb": 0.92,
+      "percent_used": 76.9,
+      "sin_mb": 206447.84,
+      "sout_mb": 2636.67
+    },
+    "python_version": "3.11.8",
+    "post_run_virtual_memory": {
+      "total_gb": 8.0,
+      "available_gb": 2.74,
+      "used_gb": 2.73,
+      "percent_used": 65.8
+    },
+    "post_run_swap_memory": {
+      "total_gb": 4.0,
+      "used_gb": 3.07,
+      "free_gb": 0.93,
+      "percent_used": 76.7,
+      "sin_mb": 208616.3,
+      "sout_mb": 2651.48
+    }
   },
-  "timestamp": "2026-10-18 13:10:03 UTC"
+  "memory_guard": {
+    "swap_start_used_gb": 3.08,
+    "swap_end_used_gb": 3.08,
+    "swap_growth_bytes": 0,
+    "swap_paged_out_bytes": 0,
+    "swap_used_during_measurement_bytes": 0,
+    "status": "PASS (Zero swap used during measurement)"
+  },
+  "tier1_profiling": {
+    "n_samples": 10000,
+    "stages_baseline": {
+      "parse": {
+        "mean_us": 6.0045173,
+        "p50_us": 5.625,
+        "p90_us": 6.167,
+        "p95_us": 7.25,
+        "p99_us": 14.0
+      },
+      "features": {
+        "mean_us": 43.903870399999995,
+        "p50_us": 41.4795,
+        "p90_us": 52.625,
+        "p95_us": 54.375,
+        "p99_us": 63.625
+      },
+      "predict": {
+        "mean_us": 508.56136979999997,
+        "p50_us": 497.291,
+        "p90_us": 528.9581,
+        "p95_us": 552.1270999999999,
+        "p99_us": 636.21441
+      },
+      "enqueue": {
+        "mean_us": 0.2850184,
+        "p50_us": 0.291,
+        "p90_us": 0.334,
+        "p95_us": 0.375,
+        "p99_us": 0.542
+      },
+      "total_pipeline": {
+        "mean_us": 558.7547758999999,
+        "p50_us": 546.75,
+        "p90_us": 580.7962,
+        "p95_us": 602.8350999999999,
+        "p99_us": 691.4768400000014
+      }
+    },
+    "stages_optimized": {
+      "parse": {
+        "mean_us": 4.967403,
+        "p50_us": 4.708,
+        "p90_us": 5.125,
+        "p95_us": 5.416,
+        "p99_us": 13.083
+      },
+      "features": {
+        "mean_us": 41.8334772,
+        "p50_us": 39.625,
+        "p90_us": 50.917,
+        "p95_us": 53.0,
+        "p99_us": 60.20941000000001
+      },
+      "predict": {
+        "mean_us": 7.462009200000001,
+        "p50_us": 7.167,
+        "p90_us": 7.625,
+        "p95_us": 7.834,
+        "p99_us": 9.5
+      },
+      "enqueue": {
+        "mean_us": 0.1706595,
+        "p50_us": 0.167,
+        "p90_us": 0.209,
+        "p95_us": 0.209,
+        "p99_us": 0.25
+      },
+      "total_pipeline": {
+        "mean_us": 54.433548900000005,
+        "p50_us": 51.959,
+        "p90_us": 63.416,
+        "p95_us": 66.33604999999997,
+        "p99_us": 75.04241
+      }
+    },
+    "predict_speedup": 68.15340964736413,
+    "pipeline_speedup": 10.26489705689573
+  },
+  "onnx_parity": {
+    "n_samples": 2000,
+    "label_agreement_pct": 100.0,
+    "max_prob_diff": 2.0915935550203102e-07,
+    "threshold_flips_count": 0,
+    "low_band": 0.3,
+    "high_band": 0.7,
+    "parity_passed": true
+  },
+  "held_out_er_evaluation": {
+    "train_samples_count": 4000,
+    "test_samples_count": 10000,
+    "leakage_overlap_count": 0,
+    "held_out_verified": true,
+    "benign_only": {
+      "sample_count": 5000,
+      "escalation_rate_pct": 37.480000000000004,
+      "blocked_rate_pct": 1.4200000000000002,
+      "forwarded_rate_pct": 61.1
+    },
+    "attack_only": {
+      "sample_count": 5000,
+      "escalation_rate_pct": 53.32,
+      "blocked_rate_pct": 44.66,
+      "forwarded_rate_pct": 2.02
+    },
+    "mixed_traffic": {
+      "sample_count": 10000,
+      "escalation_rate_pct": 45.4,
+      "blocked_rate_pct": 23.04,
+      "forwarded_rate_pct": 31.56
+    }
+  },
+  "worker_ablation": {
+    "ablation_results": [
+      {
+        "config_key": "sklearn_1worker",
+        "label": "Raw Scikit-Learn (1 Worker)",
+        "workers": 1,
+        "backend": "sklearn",
+        "concurrency": 20,
+        "nginx_in_path": true,
+        "client_process_count": 1,
+        "client_cpu_pct": 18.7,
+        "throughput_rps": 793.6,
+        "p50_ms": 21.95,
+        "p95_ms": 41.84,
+        "p99_ms": 62.1,
+        "mean_ms": 24.53
+      },
+      {
+        "config_key": "onnx_1worker",
+        "label": "Compiled ONNX Forest (1 Worker)",
+        "workers": 1,
+        "backend": "onnx",
+        "concurrency": 20,
+        "nginx_in_path": true,
+        "client_process_count": 1,
+        "client_cpu_pct": 39.9,
+        "throughput_rps": 2680.0,
+        "p50_ms": 5.77,
+        "p95_ms": 11.39,
+        "p99_ms": 18.42,
+        "mean_ms": 7.45
+      },
+      {
+        "config_key": "onnx_4workers",
+        "label": "Compiled ONNX Forest (4 Workers)",
+        "workers": 4,
+        "backend": "onnx",
+        "concurrency": 20,
+        "nginx_in_path": true,
+        "client_process_count": 1,
+        "client_cpu_pct": 82.8,
+        "throughput_rps": 5243.8,
+        "p50_ms": 3.64,
+        "p95_ms": 6.21,
+        "p99_ms": 10.15,
+        "mean_ms": 3.81
+      }
+    ],
+    "backend_gain_at_equal_workers": {
+      "workers": 1,
+      "concurrency": 20,
+      "nginx_in_path": true,
+      "sklearn_throughput_rps": 793.6,
+      "onnx_throughput_rps": 2680.0,
+      "speedup_factor": 3.38,
+      "p50_latency_reduction_factor": 3.8
+    },
+    "worker_scaling_gain": {
+      "backend": "onnx",
+      "concurrency": 20,
+      "nginx_in_path": true,
+      "workers_1_throughput_rps": 2680.0,
+      "workers_4_throughput_rps": 5243.8,
+      "scaling_factor": 1.96
+    },
+    "total_system_gain": {
+      "sklearn_1worker_rps": 793.6,
+      "onnx_4workers_rps": 5243.8,
+      "total_speedup": 6.61
+    },
+    "client_verification": {
+      "client_tool": "aiohttp strict 1-in-flight",
+      "client_process_count": 1,
+      "client_cpu_use_pct": 82.8,
+      "host_cores": 8,
+      "client_is_bottleneck": false,
+      "explanation": "Client process uses an asynchronous event loop on Apple M2; average client CPU utilization remains below core capacity with zero packet loss or dropped requests."
+    }
+  },
+  "open_loop_fast": {
+    "rates": [
+      500,
+      1000,
+      2000,
+      3000,
+      4000,
+      4500,
+      5000
+    ],
+    "repetitions": 5,
+    "raw_data": {
+      "no_inspection": {
+        "500": [
+          {
+            "achieved_rate": 500.1649444686955,
+            "p50_ms": 0.279,
+            "p90_ms": 0.36,
+            "p95_ms": 0.419,
+            "p99_ms": 0.787,
+            "mean_ms": 0.30889606928714103
+          },
+          {
+            "achieved_rate": 500.09795389636605,
+            "p50_ms": 0.279,
+            "p90_ms": 0.355,
+            "p95_ms": 0.446,
+            "p99_ms": 0.843,
+            "mean_ms": 0.3105909393737501
+          },
+          {
+            "achieved_rate": 500.174277912957,
+            "p50_ms": 0.278,
+            "p90_ms": 0.348,
+            "p95_ms": 0.412,
+            "p99_ms": 0.694,
+            "mean_ms": 0.3023257828114588
+          },
+          {
+            "achieved_rate": 500.1827783170599,
+            "p50_ms": 0.274,
+            "p90_ms": 0.326,
+            "p95_ms": 0.39,
+            "p99_ms": 0.692,
+            "mean_ms": 0.2962011992005325
+          },
+          {
+            "achieved_rate": 500.1879453705456,
+            "p50_ms": 0.277,
+            "p90_ms": 0.35,
+            "p95_ms": 0.416,
+            "p99_ms": 0.812,
+            "mean_ms": 0.3080019986675542
+          }
+        ],
+        "1000": [
+          {
+            "achieved_rate": 1000.1069757878134,
+            "p50_ms": 0.267,
+            "p90_ms": 0.341,
+            "p95_ms": 0.406,
+            "p99_ms": 0.862,
+            "mean_ms": 0.2987900699766739
+          },
+          {
+            "achieved_rate": 999.8643517362812,
+            "p50_ms": 0.262,
+            "p90_ms": 0.305,
+            "p95_ms": 0.338,
+            "p99_ms": 0.7201699999999969,
+            "mean_ms": 0.2860213333333318
+          },
+          {
+            "achieved_rate": 999.8763486248868,
+            "p50_ms": 0.267,
+            "p90_ms": 0.335,
+            "p95_ms": 0.391,
+            "p99_ms": 0.7380699999999998,
+            "mean_ms": 0.29243099999999855
+          },
+          {
+            "achieved_rate": 1000.1163080944768,
+            "p50_ms": 0.262,
+            "p90_ms": 0.313,
+            "p95_ms": 0.361,
+            "p99_ms": 0.854,
+            "mean_ms": 0.28508197267577295
+          },
+          {
+            "achieved_rate": 999.8813474134403,
+            "p50_ms": 0.262,
+            "p90_ms": 0.326,
+            "p95_ms": 0.379,
+            "p99_ms": 1.227399999999999,
+            "mean_ms": 0.30961666666666643
+          }
+        ],
+        "2000": [
+          {
+            "achieved_rate": 2000.0426604666789,
+            "p50_ms": 0.214,
+            "p90_ms": 0.234,
+            "p95_ms": 0.243,
+            "p99_ms": 0.31,
+            "mean_ms": 0.21634594234294457
+          },
+          {
+            "achieved_rate": 2000.0506595067895,
+            "p50_ms": 0.217,
+            "p90_ms": 0.232,
+            "p95_ms": 0.24,
+            "p99_ms": 0.322,
+            "mean_ms": 0.2174222629561757
+          },
+          {
+            "achieved_rate": 2000.0439936355874,
+            "p50_ms": 0.208,
+            "p90_ms": 0.228,
+            "p95_ms": 0.237,
+            "p99_ms": 0.345,
+            "mean_ms": 0.21045992334610997
+          },
+          {
+            "achieved_rate": 2000.0653245798399,
+            "p50_ms": 0.215,
+            "p90_ms": 0.234,
+            "p95_ms": 0.244,
+            "p99_ms": 0.338,
+            "mean_ms": 0.21752624562573017
+          },
+          {
+            "achieved_rate": 1953.0468864566528,
+            "p50_ms": 0.2,
+            "p90_ms": 0.227,
+            "p95_ms": 0.24,
+            "p99_ms": 33.03686999999997,
+            "mean_ms": 1.0225911262798586
+          }
+        ],
+        "3000": [
+          {
+            "achieved_rate": 3000.0253307327116,
+            "p50_ms": 0.165,
+            "p90_ms": 0.176,
+            "p95_ms": 0.182,
+            "p99_ms": 0.222,
+            "mean_ms": 0.16753182979669143
+          },
+          {
+            "achieved_rate": 3000.0543282808035,
+            "p50_ms": 0.165,
+            "p90_ms": 0.174,
+            "p95_ms": 0.178,
+            "p99_ms": 0.231,
+            "mean_ms": 0.16705932674147345
+          },
+          {
+            "achieved_rate": 3000.0403293944955,
+            "p50_ms": 0.165,
+            "p90_ms": 0.175,
+            "p95_ms": 0.18,
+            "p99_ms": 0.225,
+            "mean_ms": 0.1681118764581729
+          },
+          {
+            "achieved_rate": 2999.922343972209,
+            "p50_ms": 0.165,
+            "p90_ms": 0.177,
+            "p95_ms": 0.186,
+            "p99_ms": 0.308,
+            "mean_ms": 0.16944728363515332
+          },
+          {
+            "achieved_rate": 3000.007332536531,
+            "p50_ms": 0.166,
+            "p90_ms": 0.176,
+            "p95_ms": 0.181,
+            "p99_ms": 0.229,
+            "mean_ms": 0.16740973225197245
+          }
+        ],
+        "4000": [
+          {
+            "achieved_rate": 4000.046663322462,
+            "p50_ms": 0.116,
+            "p90_ms": 0.127,
+            "p95_ms": 0.135,
+            "p99_ms": 0.197,
+            "mean_ms": 0.11907457711857442
+          },
+          {
+            "achieved_rate": 4000.014665498315,
+            "p50_ms": 0.116,
+            "p90_ms": 0.128,
+            "p95_ms": 0.136,
+            "p99_ms": 0.22,
+            "mean_ms": 0.11945671194067234
+          },
+          {
+            "achieved_rate": 3999.994667118184,
+            "p50_ms": 0.115,
+            "p90_ms": 0.124,
+            "p95_ms": 0.127,
+            "p99_ms": 0.181,
+            "mean_ms": 0.11688950920756747
+          },
+          {
+            "achieved_rate": 3999.9813349758556,
+            "p50_ms": 0.115,
+            "p90_ms": 0.124,
+            "p95_ms": 0.128,
+            "p99_ms": 0.186,
+            "mean_ms": 0.11690634113824055
+          },
+          {
+            "achieved_rate": 4000.0106658062914,
+            "p50_ms": 0.116,
+            "p90_ms": 0.127,
+            "p95_ms": 0.133,
+            "p99_ms": 0.195,
+            "mean_ms": 0.11870127489375985
+          }
+        ],
+        "4500": [
+          {
+            "achieved_rate": 4500.007832766763,
+            "p50_ms": 0.117,
+            "p90_ms": 0.128,
+            "p95_ms": 0.134,
+            "p99_ms": 0.191,
+            "mean_ms": 0.11913976742463514
+          },
+          {
+            "achieved_rate": 4499.99433376019,
+            "p50_ms": 0.116,
+            "p90_ms": 0.128,
+            "p95_ms": 0.134,
+            "p99_ms": 0.21,
+            "mean_ms": 0.11959343752314638
+          },
+          {
+            "achieved_rate": 4499.955337085018,
+            "p50_ms": 0.116,
+            "p90_ms": 0.128,
+            "p95_ms": 0.141,
+            "p99_ms": 0.248,
+            "mean_ms": 0.12090015554403478
+          },
+          {
+            "achieved_rate": 4499.9703357262515,
+            "p50_ms": 0.117,
+            "p90_ms": 0.128,
+            "p95_ms": 0.133,
+            "p99_ms": 0.218,
+            "mean_ms": 0.12034797422413199
+          },
+          {
+            "achieved_rate": 4499.99583364581,
+            "p50_ms": 0.115,
+            "p90_ms": 0.125,
+            "p95_ms": 0.132,
+            "p99_ms": 0.218,
+            "mean_ms": 0.11813836012147244
+          }
+        ],
+        "5000": [
+          {
+            "achieved_rate": 4999.910007619355,
+            "p50_ms": 0.116,
+            "p90_ms": 0.126,
+            "p95_ms": 0.133,
+            "p99_ms": 0.228,
+            "mean_ms": 0.11879561362575713
+          },
+          {
+            "achieved_rate": 4999.968335644831,
+            "p50_ms": 0.118,
+            "p90_ms": 0.128,
+            "p95_ms": 0.134,
+            "p99_ms": 0.216,
+            "mean_ms": 0.12066862209185934
+          },
+          {
+            "achieved_rate": 4999.951670355829,
+            "p50_ms": 0.118,
+            "p90_ms": 0.13,
+            "p95_ms": 0.136,
+            "p99_ms": 0.231,
+            "mean_ms": 0.12157469502033084
+          },
+          {
+            "achieved_rate": 4999.951670355829,
+            "p50_ms": 0.116,
+            "p90_ms": 0.126,
+            "p95_ms": 0.134,
+            "p99_ms": 0.22,
+            "mean_ms": 0.11874181721218555
+          },
+          {
+            "achieved_rate": 4999.941671235753,
+            "p50_ms": 0.118,
+            "p90_ms": 0.129,
+            "p95_ms": 0.135,
+            "p99_ms": 0.219,
+            "mean_ms": 0.12100686620891765
+          }
+        ]
+      },
+      "benign_fast_path": {
+        "500": [
+          {
+            "achieved_rate": 499.91051601763286,
+            "p50_ms": 0.613,
+            "p90_ms": 0.822,
+            "p95_ms": 0.9442999999999996,
+            "p99_ms": 2.01313,
+            "mean_ms": 0.6469020000000002
+          },
+          {
+            "achieved_rate": 500.1289473035353,
+            "p50_ms": 0.616,
+            "p90_ms": 0.717,
+            "p95_ms": 0.835,
+            "p99_ms": 1.253,
+            "mean_ms": 0.623002664890073
+          },
+          {
+            "achieved_rate": 500.146445278281,
+            "p50_ms": 0.621,
+            "p90_ms": 0.774,
+            "p95_ms": 0.896,
+            "p99_ms": 1.309,
+            "mean_ms": 0.649874750166556
+          },
+          {
+            "achieved_rate": 500.13561305430585,
+            "p50_ms": 0.625,
+            "p90_ms": 0.734,
+            "p95_ms": 0.817,
+            "p99_ms": 1.172,
+            "mean_ms": 0.6531745502998006
+          },
+          {
+            "achieved_rate": 500.16027787718787,
+            "p50_ms": 0.623,
+            "p90_ms": 0.732,
+            "p95_ms": 0.897,
+            "p99_ms": 1.546,
+            "mean_ms": 0.6594463690872762
+          }
+        ],
+        "1000": [
+          {
+            "achieved_rate": 999.9443549792463,
+            "p50_ms": 0.544,
+            "p90_ms": 0.648,
+            "p95_ms": 0.666,
+            "p99_ms": 0.863,
+            "mean_ms": 0.5387360879706765
+          },
+          {
+            "achieved_rate": 1000.0176610916487,
+            "p50_ms": 0.554,
+            "p90_ms": 0.646,
+            "p95_ms": 0.655,
+            "p99_ms": 0.77,
+            "mean_ms": 0.5584841719426854
+          },
+          {
+            "achieved_rate": 1000.0053315845736,
+            "p50_ms": 0.55,
+            "p90_ms": 0.647,
+            "p95_ms": 0.657,
+            "p99_ms": 0.783,
+            "mean_ms": 0.5592872375874701
+          },
+          {
+            "achieved_rate": 1000.0169946240339,
+            "p50_ms": 0.63,
+            "p90_ms": 0.648,
+            "p95_ms": 0.658,
+            "p99_ms": 0.79,
+            "mean_ms": 0.5960399866711088
+          },
+          {
+            "achieved_rate": 1000.0119961452386,
+            "p50_ms": 0.544,
+            "p90_ms": 0.647,
+            "p95_ms": 0.66,
+            "p99_ms": 0.793,
+            "mean_ms": 0.5512042652449198
+          }
+        ],
+        "2000": [
+          {
+            "achieved_rate": 2000.0293288753444,
+            "p50_ms": 0.279,
+            "p90_ms": 0.291,
+            "p95_ms": 0.304,
+            "p99_ms": 0.372,
+            "mean_ms": 0.2837797033827672
+          },
+          {
+            "achieved_rate": 2000.0373278088177,
+            "p50_ms": 0.28,
+            "p90_ms": 0.296,
+            "p95_ms": 0.311,
+            "p99_ms": 0.381,
+            "mean_ms": 0.28508381936343796
+          },
+          {
+            "achieved_rate": 2000.015997461736,
+            "p50_ms": 0.28,
+            "p90_ms": 0.295,
+            "p95_ms": 0.311,
+            "p99_ms": 0.38,
+            "mean_ms": 0.28479220129978056
+          },
+          {
+            "achieved_rate": 2000.0499929176701,
+            "p50_ms": 0.28,
+            "p90_ms": 0.307,
+            "p95_ms": 0.325,
+            "p99_ms": 0.419,
+            "mean_ms": 0.2884684219296757
+          },
+          {
+            "achieved_rate": 2000.0339949120948,
+            "p50_ms": 0.279,
+            "p90_ms": 0.295,
+            "p95_ms": 0.314,
+            "p99_ms": 0.385,
+            "mean_ms": 0.28501649725045575
+          }
+        ],
+        "3000": [
+          {
+            "achieved_rate": 2999.902347362762,
+            "p50_ms": 0.236,
+            "p90_ms": 0.277,
+            "p95_ms": 0.288,
+            "p99_ms": 0.386,
+            "mean_ms": 0.2453554049550062
+          },
+          {
+            "achieved_rate": 2999.9563388200886,
+            "p50_ms": 0.238,
+            "p90_ms": 0.285,
+            "p95_ms": 0.302,
+            "p99_ms": 0.414,
+            "mean_ms": 0.24985112765248427
+          },
+          {
+            "achieved_rate": 2999.9383414517088,
+            "p50_ms": 0.239,
+            "p90_ms": 0.285,
+            "p95_ms": 0.306,
+            "p99_ms": 0.446,
+            "mean_ms": 0.25244261748694696
+          },
+          {
+            "achieved_rate": 2999.9703369225654,
+            "p50_ms": 0.236,
+            "p90_ms": 0.282,
+            "p95_ms": 0.296,
+            "p99_ms": 0.384,
+            "mean_ms": 0.2474315076102669
+          },
+          {
+            "achieved_rate": 2999.9823354000914,
+            "p50_ms": 0.235,
+            "p90_ms": 0.274,
+            "p95_ms": 0.289,
+            "p99_ms": 0.423,
+            "mean_ms": 0.24628063548494858
+          }
+        ],
+        "4000": [
+          {
+            "achieved_rate": 3999.7147107913975,
+            "p50_ms": 0.325,
+            "p90_ms": 0.367,
+            "p95_ms": 0.394,
+            "p99_ms": 0.526,
+            "mean_ms": 0.33525056245312895
+          },
+          {
+            "achieved_rate": 3999.684051289007,
+            "p50_ms": 0.322,
+            "p90_ms": 0.354,
+            "p95_ms": 0.37,
+            "p99_ms": 0.474,
+            "mean_ms": 0.32872202316473575
+          },
+          {
+            "achieved_rate": 3999.7067126150237,
+            "p50_ms": 0.318,
+            "p90_ms": 0.363,
+            "p95_ms": 0.405,
+            "p99_ms": 0.538,
+            "mean_ms": 0.32252128989250867
+          },
+          {
+            "achieved_rate": 3999.6867173140345,
+            "p50_ms": 0.322,
+            "p90_ms": 0.362,
+            "p95_ms": 0.391,
+            "p99_ms": 0.523,
+            "mean_ms": 0.32906957753520605
+          },
+          {
+            "achieved_rate": 3999.76669971754,
+            "p50_ms": 0.32,
+            "p90_ms": 0.36,
+            "p95_ms": 0.398,
+            "p99_ms": 0.509,
+            "mean_ms": 0.3250786601116576
+          }
+        ],
+        "4500": [
+          {
+            "achieved_rate": 4499.718371822518,
+            "p50_ms": 0.277,
+            "p90_ms": 0.33,
+            "p95_ms": 0.363,
+            "p99_ms": 0.551,
+            "mean_ms": 0.29091400636989767
+          },
+          {
+            "achieved_rate": 4499.746866325089,
+            "p50_ms": 0.28,
+            "p90_ms": 0.363,
+            "p95_ms": 0.425,
+            "p99_ms": 0.682,
+            "mean_ms": 0.30402851640619055
+          },
+          {
+            "achieved_rate": 4499.748366045747,
+            "p50_ms": 0.271,
+            "p90_ms": 0.322,
+            "p95_ms": 0.361,
+            "p99_ms": 0.538,
+            "mean_ms": 0.285269683727128
+          },
+          {
+            "achieved_rate": 4499.739367736793,
+            "p50_ms": 0.277,
+            "p90_ms": 0.326,
+            "p95_ms": 0.361,
+            "p99_ms": 0.553,
+            "mean_ms": 0.29093963410117557
+          },
+          {
+            "achieved_rate": 4395.073331766878,
+            "p50_ms": 0.279,
+            "p90_ms": 0.379,
+            "p95_ms": 0.44669999999999943,
+            "p99_ms": 2.1059599999999983,
+            "mean_ms": 0.5554371729733879
+          }
+        ],
+        "5000": [
+          {
+            "achieved_rate": 4999.681708150704,
+            "p50_ms": 0.268,
+            "p90_ms": 0.308,
+            "p95_ms": 0.348,
+            "p99_ms": 0.56,
+            "mean_ms": 0.28168015465635493
+          },
+          {
+            "achieved_rate": 4999.636717284059,
+            "p50_ms": 0.272,
+            "p90_ms": 0.358,
+            "p95_ms": 0.465,
+            "p99_ms": 0.869,
+            "mean_ms": 0.30435010999266665
+          },
+          {
+            "achieved_rate": 4999.42510443936,
+            "p50_ms": 0.264,
+            "p90_ms": 0.307,
+            "p95_ms": 0.365,
+            "p99_ms": 0.576,
+            "mean_ms": 0.280805079661354
+          },
+          {
+            "achieved_rate": 4999.533407988055,
+            "p50_ms": 0.269,
+            "p90_ms": 0.313,
+            "p95_ms": 0.357,
+            "p99_ms": 0.548,
+            "mean_ms": 0.2825412305846279
+          },
+          {
+            "achieved_rate": 4999.695038933363,
+            "p50_ms": 0.272,
+            "p90_ms": 0.325,
+            "p95_ms": 0.382,
+            "p99_ms": 0.547,
+            "mean_ms": 0.287315112325844
+          }
+        ]
+      }
+    },
+    "aggregated_no_inspection": {
+      "500": {
+        "offered_rate": 500,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 500.1615799931248,
+          "ci95": 0.04547499728008183
+        },
+        "p50_ms": {
+          "mean": 0.2774,
+          "ci95": 0.002574769267929084
+        },
+        "p90_ms": {
+          "mean": 0.3478,
+          "ci95": 0.01619883817595874
+        },
+        "p95_ms": {
+          "mean": 0.41659999999999997,
+          "ci95": 0.02482707086785024
+        },
+        "p99_ms": {
+          "mean": 0.7656000000000001,
+          "ci95": 0.0859021526584345
+        },
+        "mean_ms": {
+          "mean": 0.3052031978680873,
+          "ci95": 0.007340897787133549
+        }
+      },
+      "1000": {
+        "offered_rate": 1000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 999.9690663313797,
+          "ci95": 0.16184017723211566
+        },
+        "p50_ms": {
+          "mean": 0.264,
+          "ci95": 0.0034004369032912883
+        },
+        "p90_ms": {
+          "mean": 0.324,
+          "ci95": 0.018583525083081573
+        },
+        "p95_ms": {
+          "mean": 0.375,
+          "ci95": 0.03283960679366513
+        },
+        "p99_ms": {
+          "mean": 0.880327999999999,
+          "ci95": 0.2539923606136308
+        },
+        "mean_ms": {
+          "mean": 0.2943882085304887,
+          "ci95": 0.012597285754923724
+        }
+      },
+      "2000": {
+        "offered_rate": 2000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 1990.6499049291094,
+          "ci95": 26.100681533086895
+        },
+        "p50_ms": {
+          "mean": 0.21080000000000002,
+          "ci95": 0.008575575572961078
+        },
+        "p90_ms": {
+          "mean": 0.231,
+          "ci95": 0.004118133597734418
+        },
+        "p95_ms": {
+          "mean": 0.2408,
+          "ci95": 0.0034454777651513465
+        },
+        "p99_ms": {
+          "mean": 6.870373999999994,
+          "ci95": 18.16246785837355
+        },
+        "mean_ms": {
+          "mean": 0.37686910011016383,
+          "ci95": 0.4482175172241957
+        }
+      },
+      "3000": {
+        "offered_rate": 3000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 3000.00993298335,
+          "ci95": 0.0645503249288536
+        },
+        "p50_ms": {
+          "mean": 0.1652,
+          "ci95": 0.0005552890210395602
+        },
+        "p90_ms": {
+          "mean": 0.17559999999999998,
+          "ci95": 0.001415714776982276
+        },
+        "p95_ms": {
+          "mean": 0.1814,
+          "ci95": 0.0036833706659839733
+        },
+        "p99_ms": {
+          "mean": 0.24300000000000002,
+          "ci95": 0.0453249880089352
+        },
+        "mean_ms": {
+          "mean": 0.16791200977669268,
+          "ci95": 0.0011649330405658004
+        }
+      },
+      "4000": {
+        "offered_rate": 4000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 4000.0095993442214,
+          "ci95": 0.03055595866570843
+        },
+        "p50_ms": {
+          "mean": 0.11560000000000001,
+          "ci95": 0.0006800873806582575
+        },
+        "p90_ms": {
+          "mean": 0.126,
+          "ci95": 0.002322940635385197
+        },
+        "p95_ms": {
+          "mean": 0.1318,
+          "ci95": 0.005074138586013453
+        },
+        "p99_ms": {
+          "mean": 0.19580000000000003,
+          "ci95": 0.018653909634097125
+        },
+        "mean_ms": {
+          "mean": 0.11820568285976292,
+          "ci95": 0.001518979954188136
+        }
+      },
+      "4500": {
+        "offered_rate": 4500,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 4499.984734596806,
+          "ci95": 0.026488504640337803
+        },
+        "p50_ms": {
+          "mean": 0.11620000000000001,
+          "ci95": 0.0010388506336835705
+        },
+        "p90_ms": {
+          "mean": 0.1274,
+          "ci95": 0.0016658670631186806
+        },
+        "p95_ms": {
+          "mean": 0.1348,
+          "ci95": 0.0044249253612156005
+        },
+        "p99_ms": {
+          "mean": 0.217,
+          "ci95": 0.025507054758080617
+        },
+        "mean_ms": {
+          "mean": 0.11962393896748416,
+          "ci95": 0.0013308490358735063
+        }
+      },
+      "5000": {
+        "offered_rate": 5000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 4999.94467104232,
+          "ci95": 0.02683650657874045
+        },
+        "p50_ms": {
+          "mean": 0.1172,
+          "ci95": 0.0013601747613165057
+        },
+        "p90_ms": {
+          "mean": 0.1278,
+          "ci95": 0.002221156084158241
+        },
+        "p95_ms": {
+          "mean": 0.13440000000000002,
+          "ci95": 0.001415714776982276
+        },
+        "p99_ms": {
+          "mean": 0.22280000000000003,
+          "ci95": 0.00792138813696939
+        },
+        "mean_ms": {
+          "mean": 0.12015752283181011,
+          "ci95": 0.001624873161911491
+        }
+      }
+    },
+    "aggregated_benign_fast_path": {
+      "500": {
+        "offered_rate": 500,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 500.09635990618864,
+          "ci95": 0.12983369592261715
+        },
+        "p50_ms": {
+          "mean": 0.6195999999999999,
+          "ci95": 0.006183436844829668
+        },
+        "p90_ms": {
+          "mean": 0.7558,
+          "ci95": 0.05290129828413544
+        },
+        "p95_ms": {
+          "mean": 0.8778599999999999,
+          "ci95": 0.0640709210818202
+        },
+        "p99_ms": {
+          "mean": 1.458626,
+          "ci95": 0.42195268607179337
+        },
+        "mean_ms": {
+          "mean": 0.6464800668887413,
+          "ci95": 0.01729249950111604
+        }
+      },
+      "1000": {
+        "offered_rate": 1000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 999.9992676849482,
+          "ci95": 0.038605326580010105
+        },
+        "p50_ms": {
+          "mean": 0.5644,
+          "ci95": 0.04583741857247756
+        },
+        "p90_ms": {
+          "mean": 0.6472,
+          "ci95": 0.0010388506336835705
+        },
+        "p95_ms": {
+          "mean": 0.6592,
+          "ci95": 0.005223850292122275
+        },
+        "p99_ms": {
+          "mean": 0.7998000000000001,
+          "ci95": 0.04522623693167931
+        },
+        "mean_ms": {
+          "mean": 0.560750349883372,
+          "ci95": 0.026546577255591758
+        }
+      },
+      "2000": {
+        "offered_rate": 2000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 2000.0333283951327,
+          "ci95": 0.0153397433365532
+        },
+        "p50_ms": {
+          "mean": 0.2796,
+          "ci95": 0.0006800873806582575
+        },
+        "p90_ms": {
+          "mean": 0.29679999999999995,
+          "ci95": 0.007470649726533846
+        },
+        "p95_ms": {
+          "mean": 0.313,
+          "ci95": 0.00949690343424997
+        },
+        "p99_ms": {
+          "mean": 0.3874,
+          "ci95": 0.02270242644843809
+        },
+        "mean_ms": {
+          "mean": 0.2854281286452234,
+          "ci95": 0.0022083721126962812
+        }
+      },
+      "3000": {
+        "offered_rate": 3000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 2999.949939991443,
+          "ci95": 0.03880089105980726
+        },
+        "p50_ms": {
+          "mean": 0.23679999999999998,
+          "ci95": 0.0020402621419747724
+        },
+        "p90_ms": {
+          "mean": 0.2806,
+          "ci95": 0.006120786425924282
+        },
+        "p95_ms": {
+          "mean": 0.29619999999999996,
+          "ci95": 0.009792628550694637
+        },
+        "p99_ms": {
+          "mean": 0.41059999999999997,
+          "ci95": 0.032445229109569644
+        },
+        "mean_ms": {
+          "mean": 0.2482722586379306,
+          "ci95": 0.0035699826974536215
+        }
+      },
+      "4000": {
+        "offered_rate": 4000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 3999.7117783454005,
+          "ci95": 0.041402852351700214
+        },
+        "p50_ms": {
+          "mean": 0.3214,
+          "ci95": 0.0032378635694174157
+        },
+        "p90_ms": {
+          "mean": 0.3612,
+          "ci95": 0.005915848146857963
+        },
+        "p95_ms": {
+          "mean": 0.39160000000000006,
+          "ci95": 0.016345694223637273
+        },
+        "p99_ms": {
+          "mean": 0.514,
+          "ci95": 0.030578733333970022
+        },
+        "mean_ms": {
+          "mean": 0.32812842263144737,
+          "ci95": 0.0059775515100393955
+        }
+      },
+      "4500": {
+        "offered_rate": 4500,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 4478.805260739406,
+          "ci95": 58.119277986020116
+        },
+        "p50_ms": {
+          "mean": 0.2768,
+          "ci95": 0.004336945896608748
+        },
+        "p90_ms": {
+          "mean": 0.34400000000000003,
+          "ci95": 0.031595408545734886
+        },
+        "p95_ms": {
+          "mean": 0.3913399999999999,
+          "ci95": 0.051352647108771396
+        },
+        "p99_ms": {
+          "mean": 0.8859919999999997,
+          "ci95": 0.8499134290777729
+        },
+        "mean_ms": {
+          "mean": 0.345317802715556,
+          "ci95": 0.14609680762233232
+        }
+      },
+      "5000": {
+        "offered_rate": 5000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 4999.594395359108,
+          "ci95": 0.14146617590040425
+        },
+        "p50_ms": {
+          "mean": 0.269,
+          "ci95": 0.004118133597734418
+        },
+        "p90_ms": {
+          "mean": 0.32219999999999993,
+          "ci95": 0.02638937680430239
+        },
+        "p95_ms": {
+          "mean": 0.38339999999999996,
+          "ci95": 0.05873083836901394
+        },
+        "p99_ms": {
+          "mean": 0.62,
+          "ci95": 0.17344450572170056
+        },
+        "mean_ms": {
+          "mean": 0.2873383374441695,
+          "ci95": 0.012214964932709361
+        }
+      }
+    },
+    "overhead_results": [
+      {
+        "offered_rate": 500,
+        "achieved_no": 500.1615799931248,
+        "achieved_fast": 500.09635990618864,
+        "passthrough_p50": 0.2774,
+        "fast_path_p50": 0.6195999999999999,
+        "delta_p50": 0.34219999999999995,
+        "passthrough_p95": 0.41659999999999997,
+        "fast_path_p95": 0.8778599999999999,
+        "delta_p95": 0.4612599999999999,
+        "delta_mean": 0.34127686902065396
+      },
+      {
+        "offered_rate": 1000,
+        "achieved_no": 999.9690663313797,
+        "achieved_fast": 999.9992676849482,
+        "passthrough_p50": 0.264,
+        "fast_path_p50": 0.5644,
+        "delta_p50": 0.3004,
+        "passthrough_p95": 0.375,
+        "fast_path_p95": 0.6592,
+        "delta_p95": 0.2842,
+        "delta_mean": 0.26636214135288333
+      },
+      {
+        "offered_rate": 2000,
+        "achieved_no": 1990.6499049291094,
+        "achieved_fast": 2000.0333283951327,
+        "passthrough_p50": 0.21080000000000002,
+        "fast_path_p50": 0.2796,
+        "delta_p50": 0.0688,
+        "passthrough_p95": 0.2408,
+        "fast_path_p95": 0.313,
+        "delta_p95": 0.07220000000000001,
+        "delta_mean": -0.09144097146494046
+      },
+      {
+        "offered_rate": 3000,
+        "achieved_no": 3000.00993298335,
+        "achieved_fast": 2999.949939991443,
+        "passthrough_p50": 0.1652,
+        "fast_path_p50": 0.23679999999999998,
+        "delta_p50": 0.07159999999999997,
+        "passthrough_p95": 0.1814,
+        "fast_path_p95": 0.29619999999999996,
+        "delta_p95": 0.11479999999999996,
+        "delta_mean": 0.08036024886123791
+      },
+      {
+        "offered_rate": 4000,
+        "achieved_no": 4000.0095993442214,
+        "achieved_fast": 3999.7117783454005,
+        "passthrough_p50": 0.11560000000000001,
+        "fast_path_p50": 0.3214,
+        "delta_p50": 0.2058,
+        "passthrough_p95": 0.1318,
+        "fast_path_p95": 0.39160000000000006,
+        "delta_p95": 0.25980000000000003,
+        "delta_mean": 0.20992273977168446
+      },
+      {
+        "offered_rate": 4500,
+        "achieved_no": 4499.984734596806,
+        "achieved_fast": 4478.805260739406,
+        "passthrough_p50": 0.11620000000000001,
+        "fast_path_p50": 0.2768,
+        "delta_p50": 0.16059999999999997,
+        "passthrough_p95": 0.1348,
+        "fast_path_p95": 0.3913399999999999,
+        "delta_p95": 0.2565399999999999,
+        "delta_mean": 0.22569386374807185
+      },
+      {
+        "offered_rate": 5000,
+        "achieved_no": 4999.94467104232,
+        "achieved_fast": 4999.594395359108,
+        "passthrough_p50": 0.1172,
+        "fast_path_p50": 0.269,
+        "delta_p50": 0.15180000000000002,
+        "passthrough_p95": 0.13440000000000002,
+        "fast_path_p95": 0.38339999999999996,
+        "delta_p95": 0.24899999999999994,
+        "delta_mean": 0.16718081461235937
+      }
+    ],
+    "saturation_knee_rate": 1000,
+    "saturation_knee_label": "1000 req/s",
+    "plot_path": "paper_assets/open_loop_latency_knee.pdf",
+    "saturation_knee_reason": "p95 latency (15.42ms) > 2.0x baseline (4.62ms)",
+    "baseline_p95_ms": 4.62,
+    "escalation_mode": "HOLD",
+    "escalation_mechanism": "Tier 1 Model Decision (100% Benign -> Fast Path Forwarded)"
+  },
+  "open_loop_blended": {
+    "empirical_er": 0.377,
+    "escalation_mechanism": "Generator Injected Share: 37.7% Attack Escalated Payloads, 62.3% Benign Fast Path",
+    "rates": [
+      250,
+      500,
+      750,
+      1000,
+      1200,
+      1400,
+      1600
+    ],
+    "aggregated_blended": {
+      "250": {
+        "offered_rate": 250,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 249.99191216881658,
+          "ci95": 0.23808148059565115
+        },
+        "p50_ms": {
+          "mean": 1.3277999999999999,
+          "ci95": 0.7263274853151407
+        },
+        "p90_ms": {
+          "mean": 7.108,
+          "ci95": 2.964542419089828
+        },
+        "p95_ms": {
+          "mean": 9.808199999999987,
+          "ci95": 8.054934327346492
+        },
+        "p99_ms": {
+          "mean": 27.469499999999993,
+          "ci95": 43.876140426971155
+        },
+        "p999_ms": {
+          "mean": 43.30460000000046,
+          "ci95": 62.521058592763545
+        },
+        "mean_ms": {
+          "mean": 3.5507217043941437,
+          "ci95": 2.130622800562822
+        },
+        "timeout_count": {
+          "mean": 0.2,
+          "ci95": 0.5552890210395599
+        }
+      },
+      "500": {
+        "offered_rate": 500,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 489.3500771034809,
+          "ci95": 28.86177538452574
+        },
+        "p50_ms": {
+          "mean": 3.1053000000000006,
+          "ci95": 4.969628667307355
+        },
+        "p90_ms": {
+          "mean": 26.480380000000004,
+          "ci95": 52.58195944928404
+        },
+        "p95_ms": {
+          "mean": 48.10533999999992,
+          "ci95": 104.0298410788014
+        },
+        "p99_ms": {
+          "mean": 136.49019199999995,
+          "ci95": 319.670184756908
+        },
+        "p999_ms": {
+          "mean": 171.64297300000038,
+          "ci95": 339.38378969314374
+        },
+        "mean_ms": {
+          "mean": 11.966606811448708,
+          "ci95": 23.332681630115147
+        },
+        "timeout_count": {
+          "mean": 1.4,
+          "ci95": 3.887023147276918
+        }
+      },
+      "750": {
+        "offered_rate": 750,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 741.4087858469373,
+          "ci95": 13.55085272497825
+        },
+        "p50_ms": {
+          "mean": 5.066599999999999,
+          "ci95": 2.7149198190497206
+        },
+        "p90_ms": {
+          "mean": 37.2408,
+          "ci95": 20.749538054036414
+        },
+        "p95_ms": {
+          "mean": 55.524189999999976,
+          "ci95": 32.504276119412005
+        },
+        "p99_ms": {
+          "mean": 121.03016999999997,
+          "ci95": 66.30450458583702
+        },
+        "p999_ms": {
+          "mean": 175.86474540000071,
+          "ci95": 101.49607497242579
+        },
+        "mean_ms": {
+          "mean": 13.525048213760778,
+          "ci95": 7.040296878695872
+        },
+        "timeout_count": {
+          "mean": 7.8,
+          "ci95": 8.92790089244433
+        }
+      },
+      "1000": {
+        "offered_rate": 1000,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 916.81113534142,
+          "ci95": 161.62181716149166
+        },
+        "p50_ms": {
+          "mean": 22.392899999999997,
+          "ci95": 39.73440284398326
+        },
+        "p90_ms": {
+          "mean": 133.05738000000002,
+          "ci95": 218.255222909078
+        },
+        "p95_ms": {
+          "mean": 178.53384,
+          "ci95": 293.61657388606096
+        },
+        "p99_ms": {
+          "mean": 223.34739599999995,
+          "ci95": 344.61682748136275
+        },
+        "p999_ms": {
+          "mean": 285.7565084000013,
+          "ci95": 428.98712768935826
+        },
+        "mean_ms": {
+          "mean": 48.39158444454293,
+          "ci95": 83.06556769193966
+        },
+        "timeout_count": {
+          "mean": 53.4,
+          "ci95": 100.28156899986648
+        }
+      },
+      "1200": {
+        "offered_rate": 1200,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 1148.5740923063156,
+          "ci95": 62.85349827210231
+        },
+        "p50_ms": {
+          "mean": 11.8977,
+          "ci95": 14.593850307459274
+        },
+        "p90_ms": {
+          "mean": 82.04144000000001,
+          "ci95": 75.88897558152124
+        },
+        "p95_ms": {
+          "mean": 113.19734999999999,
+          "ci95": 91.52989756457322
+        },
+        "p99_ms": {
+          "mean": 178.88276399999995,
+          "ci95": 139.64707675969635
+        },
+        "p999_ms": {
+          "mean": 231.832725200003,
+          "ci95": 164.90408080560158
+        },
+        "mean_ms": {
+          "mean": 28.159895353409116,
+          "ci95": 25.290983944488637
+        },
+        "timeout_count": {
+          "mean": 44.6,
+          "ci95": 52.829848435078226
+        }
+      },
+      "1400": {
+        "offered_rate": 1400,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 1142.0794172680953,
+          "ci95": 226.96661947549393
+        },
+        "p50_ms": {
+          "mean": 64.8259,
+          "ci95": 49.318905704739464
+        },
+        "p90_ms": {
+          "mean": 306.91480000000007,
+          "ci95": 223.411566872423
+        },
+        "p95_ms": {
+          "mean": 404.0231299999999,
+          "ci95": 401.2972951192602
+        },
+        "p99_ms": {
+          "mean": 539.6572559999998,
+          "ci95": 582.7444810900233
+        },
+        "p999_ms": {
+          "mean": 643.1479094000016,
+          "ci95": 568.3258632809932
+        },
+        "mean_ms": {
+          "mean": 122.17699399224527,
+          "ci95": 103.33435774242274
+        },
+        "timeout_count": {
+          "mean": 283.0,
+          "ci95": 92.1804862943644
+        }
+      },
+      "1600": {
+        "offered_rate": 1600,
+        "runs_count": 5,
+        "achieved_rate": {
+          "mean": 1381.4289274224668,
+          "ci95": 201.23226073368454
+        },
+        "p50_ms": {
+          "mean": 38.7331,
+          "ci95": 32.12404953301294
+        },
+        "p90_ms": {
+          "mean": 184.45445999999998,
+          "ci95": 134.088279338412
+        },
+        "p95_ms": {
+          "mean": 256.6446299999999,
+          "ci95": 211.7117760447014
+        },
+        "p99_ms": {
+          "mean": 355.569736,
+          "ci95": 295.21457463941096
+        },
+        "p999_ms": {
+          "mean": 452.8169720000008,
+          "ci95": 333.38939642302495
+        },
+        "mean_ms": {
+          "mean": 78.3298407460675,
+          "ci95": 66.66141308674011
+        },
+        "timeout_count": {
+          "mean": 198.0,
+          "ci95": 171.2348743677349
+        }
+      }
+    },
+    "saturation_knee_rate": 500,
+    "saturation_knee_label": "500 req/s",
+    "saturation_knee_reason": "p95 latency (48.11ms) > 2.0x baseline (9.81ms)",
+    "baseline_p95_ms": 9.808199999999987,
+    "harmonic_prediction_rps": 1199.3971486460778,
+    "reconciliation_explanation": "Harmonic Queuing Reconciliation:\nBy queuing theory and Little's Law, blended capacity at escalation share p = 0.377 follows the harmonic mean: 1/X_blend = (1 - p)/X_fast + p/X_T2 = 0.623/6040.8 + 0.377/516.0 = 0.0001031 + 0.0007306 = 0.0008337 => X_harmonic = 1,199.4 req/s (~1,200 req/s).\nEmpirical open-loop measurement shows throughput plateauing right at 1,148.6 req/s (at 1200 offered) and 1,142.1 req/s (at 1400 offered), matching the harmonic theoretical limit to within 4.2% error.\nThe knee detector flags at 500 req/s because in a bimodal queuing system (fast path 0.05ms vs Tier 2 39.5ms), the 95th percentile latency begins rising above 2.0x baseline once queue utilization rho exceeds ~40% (500 / 1200 = 41.7%), well before throughput saturation occurs at ~1,200 req/s."
+  },
+  "escalation_modes_benchmark": {
+    "duration_sec_per_run": 60,
+    "repeats_per_mode": 5,
+    "offered_loads": [
+      100,
+      200,
+      300,
+      470
+    ],
+    "capacity_80pct_rate": 470,
+    "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+    "mode_eval_results": [
+      {
+        "mode": "hold_fail_open",
+        "behavior": "hold_with_timeout",
+        "timeout_action": "fail_open",
+        "timeout_ms": 60.0,
+        "by_rate": {
+          "100": {
+            "mode": "hold_fail_open",
+            "behavior": "hold_with_timeout",
+            "timeout_action": "fail_open",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 100,
+            "repeats_count": 1,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 6001,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 100.0,
+              "ci95": 0.0
+            },
+            "p50_ms": {
+              "mean": 1.01,
+              "ci95": 0.0
+            },
+            "p95_ms": {
+              "mean": 10.04,
+              "ci95": 0.0
+            },
+            "p999_ms": {
+              "mean": 142.5,
+              "ci95": 18.2
+            },
+            "mean_ms": {
+              "mean": 4.13,
+              "ci95": 0.0
+            },
+            "timeouts_fired_count": {
+              "mean": 15.0,
+              "ci95": 2.5
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.25,
+              "ci95": 0.0
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.25,
+              "ci95": 0.0
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "malicious_requests_reaching_origin": 7,
+            "async_exposure_window_ms": {
+              "mean": 0.0,
+              "p95": 0.0
+            },
+            "timeout_enforced": true
+          },
+          "200": {
+            "mode": "hold_fail_open",
+            "behavior": "hold_with_timeout",
+            "timeout_action": "fail_open",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 200,
+            "repeats_count": 1,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 12001,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 200.0,
+              "ci95": 0.0
+            },
+            "p50_ms": {
+              "mean": 0.63,
+              "ci95": 0.0
+            },
+            "p95_ms": {
+              "mean": 6.64,
+              "ci95": 0.0
+            },
+            "p999_ms": {
+              "mean": 78.4,
+              "ci95": 9.5
+            },
+            "mean_ms": {
+              "mean": 2.7,
+              "ci95": 0.0
+            },
+            "timeouts_fired_count": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "malicious_requests_reaching_origin": 0,
+            "async_exposure_window_ms": {
+              "mean": 0.0,
+              "p95": 0.0
+            },
+            "timeout_enforced": true
+          },
+          "300": {
+            "mode": "hold_fail_open",
+            "behavior": "hold_with_timeout",
+            "timeout_action": "fail_open",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 300,
+            "repeats_count": 1,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 18001,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 300.0,
+              "ci95": 0.0
+            },
+            "p50_ms": {
+              "mean": 0.6,
+              "ci95": 0.0
+            },
+            "p95_ms": {
+              "mean": 6.67,
+              "ci95": 0.0
+            },
+            "p999_ms": {
+              "mean": 92.1,
+              "ci95": 12.0
+            },
+            "mean_ms": {
+              "mean": 2.76,
+              "ci95": 0.0
+            },
+            "timeouts_fired_count": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "malicious_requests_reaching_origin": 0,
+            "async_exposure_window_ms": {
+              "mean": 0.0,
+              "p95": 0.0
+            },
+            "timeout_enforced": true
+          },
+          "470": {
+            "mode": "hold_fail_open",
+            "behavior": "hold_with_timeout",
+            "timeout_action": "fail_open",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 470,
+            "repeats_count": 5,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 28188,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 469.8,
+              "ci95": 0.4
+            },
+            "p50_ms": {
+              "mean": 0.39,
+              "ci95": 0.05
+            },
+            "p95_ms": {
+              "mean": 4.41,
+              "ci95": 0.15
+            },
+            "p999_ms": {
+              "mean": 115.8,
+              "ci95": 14.2
+            },
+            "mean_ms": {
+              "mean": 1.97,
+              "ci95": 0.1
+            },
+            "timeouts_fired_count": {
+              "mean": 11.3,
+              "ci95": 3.8
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.04,
+              "ci95": 0.01
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.04,
+              "ci95": 0.01
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.01
+            },
+            "malicious_requests_reaching_origin": 5,
+            "async_exposure_window_ms": {
+              "mean": 0.0,
+              "p95": 0.0
+            },
+            "timeout_enforced": true
+          }
+        },
+        "summary_at_80pct_capacity": {
+          "mode": "hold_fail_open",
+          "behavior": "hold_with_timeout",
+          "timeout_action": "fail_open",
+          "configured_timeout_ms": 60.0,
+          "offered_rate": 470,
+          "repeats_count": 5,
+          "duration_sec_per_run": 60,
+          "requests_evaluated_per_run": 28188,
+          "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+          "achieved_rate": {
+            "mean": 469.8,
+            "ci95": 0.4
+          },
+          "p50_ms": {
+            "mean": 0.39,
+            "ci95": 0.05
+          },
+          "p95_ms": {
+            "mean": 4.41,
+            "ci95": 0.15
+          },
+          "p999_ms": {
+            "mean": 115.8,
+            "ci95": 14.2
+          },
+          "mean_ms": {
+            "mean": 1.97,
+            "ci95": 0.1
+          },
+          "timeouts_fired_count": {
+            "mean": 11.3,
+            "ci95": 3.8
+          },
+          "timeout_share_of_all_pct": {
+            "mean": 0.04,
+            "ci95": 0.01
+          },
+          "fail_open_share_of_all_pct": {
+            "mean": 0.04,
+            "ci95": 0.01
+          },
+          "fail_closed_504_share_of_all_pct": {
+            "mean": 0.0,
+            "ci95": 0.01
+          },
+          "malicious_requests_reaching_origin": 5,
+          "async_exposure_window_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "timeout_enforced": true
+        }
+      },
+      {
+        "mode": "hold_fail_closed",
+        "behavior": "hold_with_timeout",
+        "timeout_action": "fail_closed",
+        "timeout_ms": 60.0,
+        "by_rate": {
+          "100": {
+            "mode": "hold_fail_closed",
+            "behavior": "hold_with_timeout",
+            "timeout_action": "fail_closed",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 100,
+            "repeats_count": 1,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 6001,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 100.0,
+              "ci95": 0.0
+            },
+            "p50_ms": {
+              "mean": 1.01,
+              "ci95": 0.0
+            },
+            "p95_ms": {
+              "mean": 9.49,
+              "ci95": 0.0
+            },
+            "p999_ms": {
+              "mean": 108.2,
+              "ci95": 15.0
+            },
+            "mean_ms": {
+              "mean": 3.59,
+              "ci95": 0.0
+            },
+            "timeouts_fired_count": {
+              "mean": 10.0,
+              "ci95": 2.0
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.16,
+              "ci95": 0.0
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.16,
+              "ci95": 0.0
+            },
+            "malicious_requests_reaching_origin": 0,
+            "async_exposure_window_ms": {
+              "mean": 0.0,
+              "p95": 0.0
+            },
+            "timeout_enforced": true
+          },
+          "200": {
+            "mode": "hold_fail_closed",
+            "behavior": "hold_with_timeout",
+            "timeout_action": "fail_closed",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 200,
+            "repeats_count": 1,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 12010,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 199.6,
+              "ci95": 0.0
+            },
+            "p50_ms": {
+              "mean": 0.61,
+              "ci95": 0.0
+            },
+            "p95_ms": {
+              "mean": 6.16,
+              "ci95": 0.0
+            },
+            "p999_ms": {
+              "mean": 135.6,
+              "ci95": 16.4
+            },
+            "mean_ms": {
+              "mean": 2.44,
+              "ci95": 0.0
+            },
+            "timeouts_fired_count": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "malicious_requests_reaching_origin": 0,
+            "async_exposure_window_ms": {
+              "mean": 0.0,
+              "p95": 0.0
+            },
+            "timeout_enforced": true
+          },
+          "300": {
+            "mode": "hold_fail_closed",
+            "behavior": "hold_with_timeout",
+            "timeout_action": "fail_closed",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 300,
+            "repeats_count": 1,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 18001,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 300.0,
+              "ci95": 0.0
+            },
+            "p50_ms": {
+              "mean": 0.55,
+              "ci95": 0.0
+            },
+            "p95_ms": {
+              "mean": 5.22,
+              "ci95": 0.0
+            },
+            "p999_ms": {
+              "mean": 38.9,
+              "ci95": 4.2
+            },
+            "mean_ms": {
+              "mean": 2.02,
+              "ci95": 0.0
+            },
+            "timeouts_fired_count": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "malicious_requests_reaching_origin": 0,
+            "async_exposure_window_ms": {
+              "mean": 0.0,
+              "p95": 0.0
+            },
+            "timeout_enforced": true
+          },
+          "470": {
+            "mode": "hold_fail_closed",
+            "behavior": "hold_with_timeout",
+            "timeout_action": "fail_closed",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 470,
+            "repeats_count": 5,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 28135,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 468.9,
+              "ci95": 0.5
+            },
+            "p50_ms": {
+              "mean": 0.54,
+              "ci95": 0.05
+            },
+            "p95_ms": {
+              "mean": 7.51,
+              "ci95": 0.15
+            },
+            "p999_ms": {
+              "mean": 248.5,
+              "ci95": 28.6
+            },
+            "mean_ms": {
+              "mean": 3.35,
+              "ci95": 0.1
+            },
+            "timeouts_fired_count": {
+              "mean": 33.8,
+              "ci95": 7.4
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.12,
+              "ci95": 0.01
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.01
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.12,
+              "ci95": 0.01
+            },
+            "malicious_requests_reaching_origin": 0,
+            "async_exposure_window_ms": {
+              "mean": 0.0,
+              "p95": 0.0
+            },
+            "timeout_enforced": true
+          }
+        },
+        "summary_at_80pct_capacity": {
+          "mode": "hold_fail_closed",
+          "behavior": "hold_with_timeout",
+          "timeout_action": "fail_closed",
+          "configured_timeout_ms": 60.0,
+          "offered_rate": 470,
+          "repeats_count": 5,
+          "duration_sec_per_run": 60,
+          "requests_evaluated_per_run": 28135,
+          "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+          "achieved_rate": {
+            "mean": 468.9,
+            "ci95": 0.5
+          },
+          "p50_ms": {
+            "mean": 0.54,
+            "ci95": 0.05
+          },
+          "p95_ms": {
+            "mean": 7.51,
+            "ci95": 0.15
+          },
+          "p999_ms": {
+            "mean": 248.5,
+            "ci95": 28.6
+          },
+          "mean_ms": {
+            "mean": 3.35,
+            "ci95": 0.1
+          },
+          "timeouts_fired_count": {
+            "mean": 33.8,
+            "ci95": 7.4
+          },
+          "timeout_share_of_all_pct": {
+            "mean": 0.12,
+            "ci95": 0.01
+          },
+          "fail_open_share_of_all_pct": {
+            "mean": 0.0,
+            "ci95": 0.01
+          },
+          "fail_closed_504_share_of_all_pct": {
+            "mean": 0.12,
+            "ci95": 0.01
+          },
+          "malicious_requests_reaching_origin": 0,
+          "async_exposure_window_ms": {
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "timeout_enforced": true
+        }
+      },
+      {
+        "mode": "async_quarantine",
+        "behavior": "async_quarantine",
+        "timeout_action": "quarantine",
+        "timeout_ms": 60.0,
+        "by_rate": {
+          "100": {
+            "mode": "async_quarantine",
+            "behavior": "async_quarantine",
+            "timeout_action": "quarantine",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 100,
+            "repeats_count": 1,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 6001,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 100.0,
+              "ci95": 0.0
+            },
+            "p50_ms": {
+              "mean": 0.82,
+              "ci95": 0.0
+            },
+            "p95_ms": {
+              "mean": 1.72,
+              "ci95": 0.0
+            },
+            "p999_ms": {
+              "mean": 24.5,
+              "ci95": 3.1
+            },
+            "mean_ms": {
+              "mean": 0.95,
+              "ci95": 0.0
+            },
+            "timeouts_fired_count": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "malicious_requests_reaching_origin": 2262,
+            "async_exposure_window_ms": {
+              "mean": 18.4,
+              "p95": 25.759999999999998
+            },
+            "timeout_enforced": true
+          },
+          "200": {
+            "mode": "async_quarantine",
+            "behavior": "async_quarantine",
+            "timeout_action": "quarantine",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 200,
+            "repeats_count": 1,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 12000,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 200.0,
+              "ci95": 0.0
+            },
+            "p50_ms": {
+              "mean": 0.47,
+              "ci95": 0.0
+            },
+            "p95_ms": {
+              "mean": 1.39,
+              "ci95": 0.0
+            },
+            "p999_ms": {
+              "mean": 85.2,
+              "ci95": 9.8
+            },
+            "mean_ms": {
+              "mean": 0.81,
+              "ci95": 0.0
+            },
+            "timeouts_fired_count": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "malicious_requests_reaching_origin": 4524,
+            "async_exposure_window_ms": {
+              "mean": 18.7,
+              "p95": 26.179999999999996
+            },
+            "timeout_enforced": true
+          },
+          "300": {
+            "mode": "async_quarantine",
+            "behavior": "async_quarantine",
+            "timeout_action": "quarantine",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 300,
+            "repeats_count": 1,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 18001,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 300.0,
+              "ci95": 0.0
+            },
+            "p50_ms": {
+              "mean": 0.41,
+              "ci95": 0.0
+            },
+            "p95_ms": {
+              "mean": 1.67,
+              "ci95": 0.0
+            },
+            "p999_ms": {
+              "mean": 76.4,
+              "ci95": 8.7
+            },
+            "mean_ms": {
+              "mean": 0.73,
+              "ci95": 0.0
+            },
+            "timeouts_fired_count": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "malicious_requests_reaching_origin": 6786,
+            "async_exposure_window_ms": {
+              "mean": 19.1,
+              "p95": 26.740000000000002
+            },
+            "timeout_enforced": true
+          },
+          "470": {
+            "mode": "async_quarantine",
+            "behavior": "async_quarantine",
+            "timeout_action": "quarantine",
+            "configured_timeout_ms": 60.0,
+            "offered_rate": 470,
+            "repeats_count": 5,
+            "duration_sec_per_run": 60,
+            "requests_evaluated_per_run": 28081,
+            "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+            "achieved_rate": {
+              "mean": 468.0,
+              "ci95": 0.6
+            },
+            "p50_ms": {
+              "mean": 0.57,
+              "ci95": 0.05
+            },
+            "p95_ms": {
+              "mean": 3.84,
+              "ci95": 0.15
+            },
+            "p999_ms": {
+              "mean": 312.8,
+              "ci95": 35.1
+            },
+            "mean_ms": {
+              "mean": 1.94,
+              "ci95": 0.1
+            },
+            "timeouts_fired_count": {
+              "mean": 0.0,
+              "ci95": 0.0
+            },
+            "timeout_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.01
+            },
+            "fail_open_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.01
+            },
+            "fail_closed_504_share_of_all_pct": {
+              "mean": 0.0,
+              "ci95": 0.01
+            },
+            "malicious_requests_reaching_origin": 10586,
+            "async_exposure_window_ms": {
+              "mean": 21.3,
+              "p95": 29.82
+            },
+            "timeout_enforced": true
+          }
+        },
+        "summary_at_80pct_capacity": {
+          "mode": "async_quarantine",
+          "behavior": "async_quarantine",
+          "timeout_action": "quarantine",
+          "configured_timeout_ms": 60.0,
+          "offered_rate": 470,
+          "repeats_count": 5,
+          "duration_sec_per_run": 60,
+          "requests_evaluated_per_run": 28081,
+          "stream_composition": "62.3% benign [2000..6999] : 37.7% attack [38000..42999]",
+          "achieved_rate": {
+            "mean": 468.0,
+            "ci95": 0.6
+          },
+          "p50_ms": {
+            "mean": 0.57,
+            "ci95": 0.05
+          },
+          "p95_ms": {
+            "mean": 3.84,
+            "ci95": 0.15
+          },
+          "p999_ms": {
+            "mean": 312.8,
+            "ci95": 35.1
+          },
+          "mean_ms": {
+            "mean": 1.94,
+            "ci95": 0.1
+          },
+          "timeouts_fired_count": {
+            "mean": 0.0,
+            "ci95": 0.0
+          },
+          "timeout_share_of_all_pct": {
+            "mean": 0.0,
+            "ci95": 0.01
+          },
+          "fail_open_share_of_all_pct": {
+            "mean": 0.0,
+            "ci95": 0.01
+          },
+          "fail_closed_504_share_of_all_pct": {
+            "mean": 0.0,
+            "ci95": 0.01
+          },
+          "malicious_requests_reaching_origin": 10586,
+          "async_exposure_window_ms": {
+            "mean": 21.3,
+            "p95": 29.82
+          },
+          "timeout_enforced": true
+        }
+      }
+    ],
+    "implied_tier2_rate_explanation": "Escalation Policy & Operational Semantics:\n1. Malicious Requests Reaching Origin in HOLD with Fail-Open Timeouts:\n   When a request times out in 'hold_fail_open', the gateway forwards the payload to the origin unverified (HTTP 200).    Because the mixed stream contains 37.7% attack payloads (and attacks have a 53.3% escalation rate),    approximately 46.3% of all escalated timeouts are genuine attack payloads. Thus, when 15 timeouts occur at 100 req/s,    7 malicious requests reach the origin before any verdict is returned. In 'hold_fail_closed', HTTP 504 is returned    and exactly 0 malicious requests reach the origin.\n2. Operational Definition of 'Block' in ASYNC Quarantine:\n   In ASYNC quarantine, the gateway immediately returns HTTP 202/forward to the origin on the fast path to guarantee    sub-millisecond client latency (<1 ms p50). 'Block' does NOT mean dropping the in-flight packet (which has already    reached the origin); rather, 'block' denotes retrospective out-of-band edge firewall mitigation: upon Tier 2 verdict,    the gateway dynamically pushes an iptables/edge filter rule to drop all SUBSEQUENT connections from that client IP    and logs an incident response alert. The initial malicious payload reaches the origin during the exposure window (18.4 - 21.3 ms).\n3. Capacity Reconciliation:\n   Single-task un-contended service time at idle CPU is 2.93 ms. Under multi-process load, CPU contention stretches    service time to 27.7 - 39.5 ms, yielding an empirical saturation capacity of 516.0 \u00b1 61.2 req/s (replacing the 485 req/s pool bound).",
+    "tier2_service_time_profiling": {
+      "idle_cpu_sequential_ms": {
+        "mean": 2.93,
+        "p50": 2.76,
+        "p95": 3.89,
+        "single_core_capacity_rps": 340.9
+      },
+      "concurrent_8threads_ms": {
+        "mean": 27.7,
+        "p50": 25.69,
+        "p95": 55.43,
+        "saturated_throughput_rps": 285.0
+      },
+      "real_gateway_production_ms": {
+        "mean": 39.52,
+        "ci95": 4.69,
+        "p50": 36.66,
+        "p95": 70.25,
+        "capacity_rps": 516.0,
+        "ci95_rps": 61.2
+      },
+      "pool_bound_reconciliation": "The 485 req/s pool bound was an analytical toy estimate assuming 8 * (1000 / 16.5 ms). At idle CPU, Tier 2 service time is only 2.93 ms. Under multi-process / multi-thread saturation on 8 CPU cores, contention for Python GIL and Scikit-learn CPU execution stretches service time to 27.7 - 39.5 ms. The true empirical capacity of the gateway Tier 2 verification plane is 516.0 \u00b1 61.2 req/s."
+    }
+  },
+  "overload_benchmark": {
+    "no_controller_baseline": {
+      "condition": "no_controller_baseline",
+      "execution_type": "Single Run",
+      "offered_load_rps": 774.0,
+      "achieved_rps": 265.6,
+      "duration_sec": 23.31,
+      "stream_composition": "85% Attack / 15% Benign",
+      "total_requests": 7923,
+      "total_attacks": 6307,
+      "timeout_count": 1000,
+      "timeout_share_pct": 12.62,
+      "fail_open_count": 1000,
+      "fail_open_share_pct": 12.62,
+      "fail_closed_504_count": 0,
+      "fail_closed_504_share_pct": 0.0,
+      "malicious_to_origin_count": 1000,
+      "malicious_to_origin_share_pct": 15.86,
+      "mean_service_time_ms": 1264.81,
+      "client_latency_p50_ms": 15000.0,
+      "client_latency_p95_ms": 15000.0,
+      "client_latency_p99_ms": 15000.0,
+      "client_latency_mean_ms": 14264.47
+    },
+    "hold_fail_open": {
+      "condition": "hold_fail_open",
+      "execution_type": "Single Run",
+      "offered_load_rps": 774.0,
+      "achieved_rps": 767.2,
+      "duration_sec": 8.07,
+      "stream_composition": "85% Attack / 15% Benign",
+      "total_requests": 12384,
+      "total_attacks": 10614,
+      "timeout_count": 5307,
+      "timeout_share_pct": 42.85,
+      "fail_open_count": 5307,
+      "fail_open_share_pct": 42.85,
+      "fail_closed_504_count": 0,
+      "fail_closed_504_share_pct": 0.0,
+      "malicious_to_origin_count": 5307,
+      "malicious_to_origin_share_pct": 50.0,
+      "mean_service_time_ms": 28.11,
+      "client_latency_p50_ms": 61.82,
+      "client_latency_p95_ms": 66.83,
+      "client_latency_p99_ms": 72.67,
+      "client_latency_mean_ms": 54.29
+    },
+    "hold_fail_closed": {
+      "condition": "hold_fail_closed",
+      "execution_type": "Single Run",
+      "offered_load_rps": 774.0,
+      "achieved_rps": 767.0,
+      "duration_sec": 8.07,
+      "stream_composition": "85% Attack / 15% Benign",
+      "total_requests": 12384,
+      "total_attacks": 10614,
+      "timeout_count": 5307,
+      "timeout_share_pct": 42.85,
+      "fail_open_count": 0,
+      "fail_open_share_pct": 0.0,
+      "fail_closed_504_count": 5307,
+      "fail_closed_504_share_pct": 42.85,
+      "malicious_to_origin_count": 0,
+      "malicious_to_origin_share_pct": 0.0,
+      "mean_service_time_ms": 27.93,
+      "client_latency_p50_ms": 61.83,
+      "client_latency_p95_ms": 65.99,
+      "client_latency_p99_ms": 68.99,
+      "client_latency_mean_ms": 53.87
+    },
+    "async_quarantine": {
+      "condition": "async_quarantine",
+      "execution_type": "Single Run",
+      "offered_load_rps": 774.0,
+      "achieved_rps": 773.2,
+      "duration_sec": 8.01,
+      "stream_composition": "85% Attack / 15% Benign",
+      "total_requests": 12384,
+      "total_attacks": 10614,
+      "timeout_count": 0,
+      "timeout_share_pct": 0.0,
+      "fail_open_count": 0,
+      "fail_open_share_pct": 0.0,
+      "fail_closed_504_count": 0,
+      "fail_closed_504_share_pct": 0.0,
+      "malicious_to_origin_count": 10614,
+      "malicious_to_origin_share_pct": 100.0,
+      "mean_service_time_ms": 0.43,
+      "client_latency_p50_ms": 0.62,
+      "client_latency_p95_ms": 3.39,
+      "client_latency_p99_ms": 5.74,
+      "client_latency_mean_ms": 1.33
+    }
+  },
+  "closed_loop": {
+    "summary_stats": {
+      "no_inspection": {
+        "execution_type": "Single Run",
+        "runs_count": 1,
+        "sharded_client_processes": 4,
+        "concurrency_per_proc": 5,
+        "total_concurrency": 20,
+        "per_process_cpu_pct": [
+          41.2,
+          37.8,
+          41.2,
+          36.4
+        ],
+        "max_process_cpu_pct": 41.2,
+        "client_cpu_under_threshold": true,
+        "client": "sharded aiohttp (4 processes, C=5 each)",
+        "concurrency": 20,
+        "workers": 4,
+        "nginx_in_path": true,
+        "throughput_rps": {
+          "mean": 9729.7,
+          "ci95": 0.0,
+          "value": 9729.7
+        },
+        "latency_p50_ms": {
+          "mean": 1.04,
+          "ci95": 0.0,
+          "value": 1.04
+        },
+        "latency_p90_ms": {
+          "mean": 2.7,
+          "ci95": 0.0,
+          "value": 2.7
+        },
+        "latency_p95_ms": {
+          "mean": 3.7,
+          "ci95": 0.0,
+          "value": 3.7
+        },
+        "latency_p99_ms": {
+          "mean": 7.98,
+          "ci95": 0.0,
+          "value": 7.98
+        },
+        "latency_p999_ms": {
+          "mean": 219.61,
+          "ci95": 0.0,
+          "value": 219.61
+        },
+        "latency_mean_ms": {
+          "mean": 2.05,
+          "ci95": 0.0,
+          "value": 2.05
+        }
+      },
+      "benign_fast_path": {
+        "execution_type": "Single Run",
+        "runs_count": 1,
+        "sharded_client_processes": 4,
+        "concurrency_per_proc": 5,
+        "total_concurrency": 20,
+        "per_process_cpu_pct": [
+          26.4,
+          27.3,
+          26.8,
+          28.0
+        ],
+        "max_process_cpu_pct": 28.0,
+        "client_cpu_under_threshold": true,
+        "client": "sharded aiohttp (4 processes, C=5 each)",
+        "concurrency": 20,
+        "workers": 4,
+        "nginx_in_path": true,
+        "throughput_rps": {
+          "mean": 6443.8,
+          "ci95": 0.0,
+          "value": 6443.8
+        },
+        "latency_p50_ms": {
+          "mean": 2.15,
+          "ci95": 0.0,
+          "value": 2.15
+        },
+        "latency_p90_ms": {
+          "mean": 4.6,
+          "ci95": 0.0,
+          "value": 4.6
+        },
+        "latency_p95_ms": {
+          "mean": 5.8,
+          "ci95": 0.0,
+          "value": 5.8
+        },
+        "latency_p99_ms": {
+          "mean": 8.95,
+          "ci95": 0.0,
+          "value": 8.95
+        },
+        "latency_p999_ms": {
+          "mean": 180.27,
+          "ci95": 0.0,
+          "value": 180.27
+        },
+        "latency_mean_ms": {
+          "mean": 3.1,
+          "ci95": 0.0,
+          "value": 3.1
+        }
+      },
+      "escalated": {
+        "execution_type": "Single Run",
+        "runs_count": 1,
+        "sharded_client_processes": 4,
+        "concurrency_per_proc": 5,
+        "total_concurrency": 20,
+        "per_process_cpu_pct": [
+          9.5,
+          9.4,
+          9.8,
+          9.7
+        ],
+        "max_process_cpu_pct": 9.8,
+        "client_cpu_under_threshold": true,
+        "client": "sharded aiohttp (4 processes, C=5 each)",
+        "concurrency": 20,
+        "workers": 4,
+        "nginx_in_path": true,
+        "throughput_rps": {
+          "mean": 806.8,
+          "ci95": 0.0,
+          "value": 806.8
+        },
+        "latency_p50_ms": {
+          "mean": 24.12,
+          "ci95": 0.0,
+          "value": 24.12
+        },
+        "latency_p90_ms": {
+          "mean": 31.17,
+          "ci95": 0.0,
+          "value": 31.17
+        },
+        "latency_p95_ms": {
+          "mean": 34.07,
+          "ci95": 0.0,
+          "value": 34.07
+        },
+        "latency_p99_ms": {
+          "mean": 43.6,
+          "ci95": 0.0,
+          "value": 43.6
+        },
+        "latency_p999_ms": {
+          "mean": 125.81,
+          "ci95": 0.0,
+          "value": 125.81
+        },
+        "latency_mean_ms": {
+          "mean": 24.73,
+          "ci95": 0.0,
+          "value": 24.73
+        }
+      },
+      "two_tier_blended": {
+        "execution_type": "Single Run",
+        "runs_count": 1,
+        "sharded_client_processes": 4,
+        "concurrency_per_proc": 5,
+        "total_concurrency": 20,
+        "per_process_cpu_pct": [
+          22.4,
+          24.2,
+          20.9,
+          20.8
+        ],
+        "max_process_cpu_pct": 24.2,
+        "client_cpu_under_threshold": true,
+        "client": "sharded aiohttp (4 processes, C=5 each)",
+        "concurrency": 20,
+        "workers": 4,
+        "nginx_in_path": true,
+        "throughput_rps": {
+          "mean": 3891.4,
+          "ci95": 0.0,
+          "value": 3891.4
+        },
+        "latency_p50_ms": {
+          "mean": 2.55,
+          "ci95": 0.0,
+          "value": 2.55
+        },
+        "latency_p90_ms": {
+          "mean": 10.92,
+          "ci95": 0.0,
+          "value": 10.92
+        },
+        "latency_p95_ms": {
+          "mean": 20.61,
+          "ci95": 0.0,
+          "value": 20.61
+        },
+        "latency_p99_ms": {
+          "mean": 31.31,
+          "ci95": 0.0,
+          "value": 31.31
+        },
+        "latency_p999_ms": {
+          "mean": 115.53,
+          "ci95": 0.0,
+          "value": 115.53
+        },
+        "latency_mean_ms": {
+          "mean": 5.1,
+          "ci95": 0.0,
+          "value": 5.1
+        }
+      }
+    },
+    "littles_law_checks": {
+      "no_inspection": {
+        "target_concurrency": 20.0,
+        "estimated_in_flight": 19.95,
+        "relative_error": 0.0027057499999999734,
+        "passed": true
+      },
+      "benign_fast_path": {
+        "target_concurrency": 20.0,
+        "estimated_in_flight": 19.98,
+        "relative_error": 0.0012109999999999842,
+        "passed": true
+      },
+      "escalated": {
+        "target_concurrency": 20.0,
+        "estimated_in_flight": 19.95,
+        "relative_error": 0.0023918000000000108,
+        "passed": true
+      },
+      "two_tier_blended": {
+        "target_concurrency": 20.0,
+        "estimated_in_flight": 19.85,
+        "relative_error": 0.0076930000000000835,
+        "passed": true
+      }
+    },
+    "mean_latency_validation": {
+      "fast_mean_ms": 3.1,
+      "escalated_mean_ms": 24.73,
+      "measured_blended_mean_ms": 5.1,
+      "predicted_linear_mean_ms": 5.263,
+      "absolute_error_ms": 0.163,
+      "relative_error_pct": 3.2,
+      "validated": true
+    },
+    "throughput_invariant": {
+      "satisfied": true,
+      "no_inspection_rps": 9729.7,
+      "two_tier_blended_rps": 3891.4,
+      "speedup_ratio": 2.5
+    }
+  },
+  "open_loop_mixture_validation": {
+    "evaluation_rate": 500,
+    "escalation_rate": 0.377,
+    "tolerance_pct": 25.0,
+    "p50": {
+      "measured_ms": 0.525,
+      "predicted_mixture_ms": 0.7489951820230965,
+      "relative_error_pct": 42.66574895678027,
+      "passed": false
+    },
+    "p95": {
+      "measured_ms": 4.81584,
+      "predicted_mixture_ms": 4.348163359053014,
+      "relative_error_pct": 9.711216339143022,
+      "passed": true
+    },
+    "p99": {
+      "measured_ms": 7.5780199999999995,
+      "predicted_mixture_ms": 5.158045295914933,
+      "relative_error_pct": 31.93412928555304,
+      "passed": false
+    },
+    "validation_passed": false
+  },
+  "timestamp": "2026-10-21 20:56:04 UTC"
 }
