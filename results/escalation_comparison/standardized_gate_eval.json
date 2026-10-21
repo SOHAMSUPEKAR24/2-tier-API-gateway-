@@ -1,0 +1,1857 @@
+{
+  "execution_timestamp": "2026-10-21 21:14:21 UTC",
+  "standardized_gates": {
+    "Full_kNN": {
+      "1%": {
+        "target_budget": 1.0,
+        "achieved_benign": 1.002079788239743,
+        "achieved_benign_ci95": 0.4397353108087785,
+        "novel_macro_coverage": 26.182603763109935,
+        "novel_macro_coverage_ci95": 26.649571151699966,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 63,
+            "coverage_pct": 14.000000000000002
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 100,
+            "coverage_pct": 25.70694087403599
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 277,
+            "coverage_pct": 65.02347417840375
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 440,
+          "t2_caught": 0,
+          "t2_missed": 440,
+          "oracle_caught": 440,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 447,
+          "oracle_miss": 1085,
+          "oracle_miss_rate_pct": 70.822454308094,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 63,
+            "t2_caught": 0,
+            "t2_missed": 63,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 100,
+            "t2_caught": 0,
+            "t2_missed": 100,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 277,
+            "t2_caught": 0,
+            "t2_missed": 277,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          }
+        }
+      },
+      "2%": {
+        "target_budget": 2.0,
+        "achieved_benign": 2.004159576479486,
+        "achieved_benign_ci95": 0.5589259130573095,
+        "novel_macro_coverage": 43.93267517127903,
+        "novel_macro_coverage_ci95": 29.92525059122494,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 187,
+            "coverage_pct": 41.55555555555556
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 269,
+            "coverage_pct": 69.1516709511568
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 277,
+            "coverage_pct": 65.02347417840375
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 733,
+          "t2_caught": 0,
+          "t2_missed": 733,
+          "oracle_caught": 733,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 740,
+          "oracle_miss": 792,
+          "oracle_miss_rate_pct": 51.697127937336816,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 187,
+            "t2_caught": 0,
+            "t2_missed": 187,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 269,
+            "t2_caught": 0,
+            "t2_missed": 269,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 277,
+            "t2_caught": 0,
+            "t2_missed": 277,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          }
+        }
+      },
+      "5%": {
+        "target_budget": 5.0,
+        "achieved_benign": 5.010398941198714,
+        "achieved_benign_ci95": 0.8543492692193742,
+        "novel_macro_coverage": 48.931532640573515,
+        "novel_macro_coverage_ci95": 33.52852604054669,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 255,
+            "coverage_pct": 56.666666666666664
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 288,
+            "coverage_pct": 74.03598971722364
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 277,
+            "coverage_pct": 65.02347417840375
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 820,
+          "t2_caught": 0,
+          "t2_missed": 820,
+          "oracle_caught": 820,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 827,
+          "oracle_miss": 705,
+          "oracle_miss_rate_pct": 46.01827676240209,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 255,
+            "t2_caught": 0,
+            "t2_missed": 255,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 288,
+            "t2_caught": 0,
+            "t2_missed": 288,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 277,
+            "t2_caught": 0,
+            "t2_missed": 277,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          }
+        }
+      },
+      "10%": {
+        "target_budget": 10.0,
+        "achieved_benign": 10.001890716581583,
+        "achieved_benign_ci95": 2.5378619866209653,
+        "novel_macro_coverage": 50.69945609101625,
+        "novel_macro_coverage_ci95": 34.31613033685926,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 266,
+            "coverage_pct": 59.111111111111114
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 306,
+            "coverage_pct": 78.66323907455013
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 277,
+            "coverage_pct": 65.02347417840375
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 849,
+          "t2_caught": 0,
+          "t2_missed": 849,
+          "oracle_caught": 849,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 856,
+          "oracle_miss": 676,
+          "oracle_miss_rate_pct": 44.12532637075718,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 266,
+            "t2_caught": 0,
+            "t2_missed": 266,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 306,
+            "t2_caught": 0,
+            "t2_missed": 306,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 277,
+            "t2_caught": 0,
+            "t2_missed": 277,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          }
+        }
+      }
+    },
+    "Prototype_kNN": {
+      "1%": {
+        "target_budget": 1.0,
+        "achieved_benign": 1.0209869540555871,
+        "achieved_benign_ci95": 0.4062059168649799,
+        "novel_macro_coverage": 8.457297914881462,
+        "novel_macro_coverage_ci95": 6.203418384658517,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 62,
+            "coverage_pct": 13.777777777777779
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 78,
+            "coverage_pct": 20.051413881748072
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 140,
+          "t2_caught": 0,
+          "t2_missed": 140,
+          "oracle_caught": 140,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 147,
+          "oracle_miss": 1385,
+          "oracle_miss_rate_pct": 90.40469973890339,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 62,
+            "t2_caught": 0,
+            "t2_missed": 62,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 78,
+            "t2_caught": 0,
+            "t2_missed": 78,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          }
+        }
+      },
+      "2%": {
+        "target_budget": 2.0,
+        "achieved_benign": 2.004159576479486,
+        "achieved_benign_ci95": 0.8207949945623928,
+        "novel_macro_coverage": 31.228150106005927,
+        "novel_macro_coverage_ci95": 25.458456829300015,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 125,
+            "coverage_pct": 27.77777777777778
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 124,
+            "coverage_pct": 31.876606683804624
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 278,
+            "coverage_pct": 65.25821596244131
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 527,
+          "t2_caught": 0,
+          "t2_missed": 527,
+          "oracle_caught": 527,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 534,
+          "oracle_miss": 998,
+          "oracle_miss_rate_pct": 65.14360313315926,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 125,
+            "t2_caught": 0,
+            "t2_missed": 125,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 124,
+            "t2_caught": 0,
+            "t2_missed": 124,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 278,
+            "t2_caught": 0,
+            "t2_missed": 278,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          }
+        }
+      },
+      "5%": {
+        "target_budget": 5.0,
+        "achieved_benign": 5.010398941198714,
+        "achieved_benign_ci95": 0.9835320489007793,
+        "novel_macro_coverage": 35.54918916526868,
+        "novel_macro_coverage_ci95": 26.015728513620406,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 130,
+            "coverage_pct": 28.888888888888886
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 186,
+            "coverage_pct": 47.81491002570694
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 279,
+            "coverage_pct": 65.49295774647888
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 1,
+            "coverage_pct": 0.3731343283582089
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 595,
+          "t2_caught": 0,
+          "t2_missed": 595,
+          "oracle_caught": 595,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 602,
+          "oracle_miss": 930,
+          "oracle_miss_rate_pct": 60.704960835509134,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 130,
+            "t2_caught": 0,
+            "t2_missed": 130,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 186,
+            "t2_caught": 0,
+            "t2_missed": 186,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 279,
+            "t2_caught": 0,
+            "t2_missed": 279,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 1,
+            "t2_caught": 1,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          }
+        }
+      },
+      "10%": {
+        "target_budget": 10.0,
+        "achieved_benign": 10.001890716581583,
+        "achieved_benign_ci95": 1.518325023468396,
+        "novel_macro_coverage": 51.90691995445969,
+        "novel_macro_coverage_ci95": 32.09243713473643,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 265,
+            "coverage_pct": 58.88888888888889
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 322,
+            "coverage_pct": 82.77634961439588
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 281,
+            "coverage_pct": 65.96244131455398
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 1,
+            "coverage_pct": 0.3731343283582089
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 868,
+          "t2_caught": 0,
+          "t2_missed": 868,
+          "oracle_caught": 868,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 875,
+          "oracle_miss": 657,
+          "oracle_miss_rate_pct": 42.885117493472585,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 265,
+            "t2_caught": 0,
+            "t2_missed": 265,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 322,
+            "t2_caught": 0,
+            "t2_missed": 322,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 281,
+            "t2_caught": 0,
+            "t2_missed": 281,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 1,
+            "t2_caught": 1,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          }
+        }
+      }
+    },
+    "Mahalanobis": {
+      "1%": {
+        "target_budget": 1.0,
+        "achieved_benign": 1.002079788239743,
+        "achieved_benign_ci95": 0.507890648075543,
+        "novel_macro_coverage": 2.229791488146244,
+        "novel_macro_coverage_ci95": 1.6489371709784566,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 17,
+            "coverage_pct": 3.7777777777777777
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 20,
+            "coverage_pct": 5.141388174807198
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 37,
+          "t2_caught": 0,
+          "t2_missed": 37,
+          "oracle_caught": 37,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 44,
+          "oracle_miss": 1488,
+          "oracle_miss_rate_pct": 97.12793733681463,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 17,
+            "t2_caught": 0,
+            "t2_missed": 17,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 20,
+            "t2_caught": 0,
+            "t2_missed": 20,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          }
+        }
+      },
+      "2%": {
+        "target_budget": 2.0,
+        "achieved_benign": 2.004159576479486,
+        "achieved_benign_ci95": 0.8782732649396247,
+        "novel_macro_coverage": 25.142023808087025,
+        "novel_macro_coverage_ci95": 19.371013430490716,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 124,
+            "coverage_pct": 27.555555555555557
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 116,
+            "coverage_pct": 29.82005141388175
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 184,
+            "coverage_pct": 43.1924882629108
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 424,
+          "t2_caught": 0,
+          "t2_missed": 424,
+          "oracle_caught": 424,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 431,
+          "oracle_miss": 1101,
+          "oracle_miss_rate_pct": 71.8668407310705,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 124,
+            "t2_caught": 0,
+            "t2_missed": 124,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 116,
+            "t2_caught": 0,
+            "t2_missed": 116,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 184,
+            "t2_caught": 0,
+            "t2_missed": 184,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          }
+        }
+      },
+      "5%": {
+        "target_budget": 5.0,
+        "achieved_benign": 5.010398941198714,
+        "achieved_benign_ci95": 0.8635026369262683,
+        "novel_macro_coverage": 51.35298365456952,
+        "novel_macro_coverage_ci95": 33.65191858230036,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 250,
+            "coverage_pct": 55.55555555555556
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 330,
+            "coverage_pct": 84.83290488431876
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 277,
+            "coverage_pct": 65.02347417840375
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 857,
+          "t2_caught": 0,
+          "t2_missed": 857,
+          "oracle_caught": 857,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 864,
+          "oracle_miss": 668,
+          "oracle_miss_rate_pct": 43.60313315926893,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 250,
+            "t2_caught": 0,
+            "t2_missed": 250,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 330,
+            "t2_caught": 0,
+            "t2_missed": 330,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 277,
+            "t2_caught": 0,
+            "t2_missed": 277,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          }
+        }
+      },
+      "10%": {
+        "target_budget": 10.0,
+        "achieved_benign": 10.001890716581583,
+        "achieved_benign_ci95": 1.8736961624459678,
+        "novel_macro_coverage": 58.02821930152753,
+        "novel_macro_coverage_ci95": 37.16995183447813,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 310,
+            "coverage_pct": 68.88888888888889
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 382,
+            "coverage_pct": 98.20051413881748
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 277,
+            "coverage_pct": 65.02347417840375
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 969,
+          "t2_caught": 0,
+          "t2_missed": 969,
+          "oracle_caught": 969,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 976,
+          "oracle_miss": 556,
+          "oracle_miss_rate_pct": 36.29242819843342,
+          "trained_caught": 7,
+          "trained_miss": 1525,
+          "trained_miss_rate_pct": 99.54308093994779
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 310,
+            "t2_caught": 0,
+            "t2_missed": 310,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 382,
+            "t2_caught": 0,
+            "t2_missed": 382,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 277,
+            "t2_caught": 0,
+            "t2_missed": 277,
+            "t2_caught_pct": 0.0
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          }
+        }
+      }
+    },
+    "RF_Band": {
+      "1%": {
+        "target_budget": 1.0,
+        "achieved_benign": 1.191151446398185,
+        "achieved_benign_ci95": 0.40610880883422873,
+        "novel_macro_coverage": 20.021536360262225,
+        "novel_macro_coverage_ci95": 23.729827127318472,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 3,
+            "coverage_pct": 1.1235955056179776
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 4,
+            "coverage_pct": 1.0282776349614395
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 332,
+            "coverage_pct": 77.93427230046949
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 23,
+            "coverage_pct": 8.582089552238806
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 339,
+          "t2_caught": 39,
+          "t2_missed": 300,
+          "oracle_caught": 339,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 339,
+          "oracle_miss": 1193,
+          "oracle_miss_rate_pct": 77.87206266318537,
+          "trained_caught": 39,
+          "trained_miss": 1493,
+          "trained_miss_rate_pct": 97.45430809399478
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 3,
+            "t2_caught": 2,
+            "t2_missed": 1,
+            "t2_caught_pct": 66.66666666666666
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 4,
+            "t2_caught": 0,
+            "t2_missed": 4,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 332,
+            "t2_caught": 37,
+            "t2_missed": 295,
+            "t2_caught_pct": 11.144578313253012
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 23,
+            "t2_caught": 23,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          }
+        }
+      },
+      "2%": {
+        "target_budget": 2.0,
+        "achieved_benign": 2.3255813953488373,
+        "achieved_benign_ci95": 0.6784370975140643,
+        "novel_macro_coverage": 20.396068195468217,
+        "novel_macro_coverage_ci95": 23.10793636352786,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 7,
+            "coverage_pct": 2.6217228464419478
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 4,
+            "coverage_pct": 1.0282776349614395
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 332,
+            "coverage_pct": 77.93427230046949
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 23,
+            "coverage_pct": 8.582089552238806
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 343,
+          "t2_caught": 39,
+          "t2_missed": 304,
+          "oracle_caught": 343,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 343,
+          "oracle_miss": 1189,
+          "oracle_miss_rate_pct": 77.61096605744126,
+          "trained_caught": 39,
+          "trained_miss": 1493,
+          "trained_miss_rate_pct": 97.45430809399478
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 7,
+            "t2_caught": 2,
+            "t2_missed": 5,
+            "t2_caught_pct": 28.57142857142857
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 4,
+            "t2_caught": 0,
+            "t2_missed": 4,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 332,
+            "t2_caught": 37,
+            "t2_missed": 295,
+            "t2_caught_pct": 11.144578313253012
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 23,
+            "t2_caught": 23,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          }
+        }
+      },
+      "5%": {
+        "target_budget": 5.0,
+        "achieved_benign": 8.489317451314047,
+        "achieved_benign_ci95": 1.5696672777472014,
+        "novel_macro_coverage": 25.912500120350845,
+        "novel_macro_coverage_ci95": 30.18885055624519,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 7,
+            "coverage_pct": 2.6217228464419478
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 4,
+            "coverage_pct": 1.0282776349614395
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 426,
+            "coverage_pct": 100.0
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 26,
+            "coverage_pct": 9.701492537313433
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 437,
+          "t2_caught": 39,
+          "t2_missed": 398,
+          "oracle_caught": 437,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 437,
+          "oracle_miss": 1095,
+          "oracle_miss_rate_pct": 71.47519582245431,
+          "trained_caught": 39,
+          "trained_miss": 1493,
+          "trained_miss_rate_pct": 97.45430809399478
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 7,
+            "t2_caught": 2,
+            "t2_missed": 5,
+            "t2_caught_pct": 28.57142857142857
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 0,
+            "t2_caught": 0,
+            "t2_missed": 0,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 4,
+            "t2_caught": 0,
+            "t2_missed": 4,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 426,
+            "t2_caught": 37,
+            "t2_missed": 389,
+            "t2_caught_pct": 8.685446009389672
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 26,
+            "t2_caught": 26,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          }
+        }
+      },
+      "10%": {
+        "target_budget": 10.0,
+        "achieved_benign": 15.938740782756664,
+        "achieved_benign_ci95": 3.7911527775234055,
+        "novel_macro_coverage": 27.079166787017513,
+        "novel_macro_coverage_ci95": 30.14900336089996,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 7,
+            "coverage_pct": 2.6217228464419478
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 21,
+            "coverage_pct": 4.666666666666667
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 4,
+            "coverage_pct": 1.0282776349614395
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 426,
+            "coverage_pct": 100.0
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 29,
+            "coverage_pct": 10.820895522388058
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 458,
+          "t2_caught": 39,
+          "t2_missed": 419,
+          "oracle_caught": 458,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 458,
+          "oracle_miss": 1074,
+          "oracle_miss_rate_pct": 70.10443864229765,
+          "trained_caught": 39,
+          "trained_miss": 1493,
+          "trained_miss_rate_pct": 97.45430809399478
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 7,
+            "t2_caught": 2,
+            "t2_missed": 5,
+            "t2_caught_pct": 28.57142857142857
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 21,
+            "t2_caught": 0,
+            "t2_missed": 21,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 4,
+            "t2_caught": 0,
+            "t2_missed": 4,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 426,
+            "t2_caught": 37,
+            "t2_missed": 389,
+            "t2_caught_pct": 8.685446009389672
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 29,
+            "t2_caught": 29,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          }
+        }
+      }
+    },
+    "UNION_Gate": {
+      "1%": {
+        "target_budget": 1.0,
+        "achieved_benign": 1.0398941198714313,
+        "achieved_benign_ci95": 0.6090008338763723,
+        "novel_macro_coverage": 27.32421873993545,
+        "novel_macro_coverage_ci95": 29.147917271174975,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 2,
+            "coverage_pct": 0.7490636704119851
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 51,
+            "coverage_pct": 11.333333333333332
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 75,
+            "coverage_pct": 19.28020565552699
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 332,
+            "coverage_pct": 77.93427230046949
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 4,
+            "coverage_pct": 1.4925373134328357
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 460,
+          "t2_caught": 39,
+          "t2_missed": 421,
+          "oracle_caught": 460,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 460,
+          "oracle_miss": 1072,
+          "oracle_miss_rate_pct": 69.9738903394256,
+          "trained_caught": 39,
+          "trained_miss": 1493,
+          "trained_miss_rate_pct": 97.45430809399478
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 2,
+            "t2_caught": 2,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 51,
+            "t2_caught": 0,
+            "t2_missed": 51,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 75,
+            "t2_caught": 0,
+            "t2_missed": 75,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 332,
+            "t2_caught": 37,
+            "t2_missed": 295,
+            "t2_caught_pct": 11.144578313253012
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 4,
+            "t2_caught": 4,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          }
+        }
+      },
+      "2%": {
+        "target_budget": 2.0,
+        "achieved_benign": 2.0608810739270185,
+        "achieved_benign_ci95": 0.8042583715370497,
+        "novel_macro_coverage": 29.948271578771223,
+        "novel_macro_coverage_ci95": 31.577290402921072,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 3,
+            "coverage_pct": 1.1235955056179776
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 63,
+            "coverage_pct": 14.000000000000002
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 104,
+            "coverage_pct": 26.735218508997427
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 332,
+            "coverage_pct": 77.93427230046949
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 23,
+            "coverage_pct": 8.582089552238806
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 502,
+          "t2_caught": 39,
+          "t2_missed": 463,
+          "oracle_caught": 502,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 502,
+          "oracle_miss": 1030,
+          "oracle_miss_rate_pct": 67.23237597911226,
+          "trained_caught": 39,
+          "trained_miss": 1493,
+          "trained_miss_rate_pct": 97.45430809399478
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 3,
+            "t2_caught": 2,
+            "t2_missed": 1,
+            "t2_caught_pct": 66.66666666666666
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 63,
+            "t2_caught": 0,
+            "t2_missed": 63,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 104,
+            "t2_caught": 0,
+            "t2_missed": 104,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 332,
+            "t2_caught": 37,
+            "t2_missed": 295,
+            "t2_caught_pct": 11.144578313253012
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 23,
+            "t2_caught": 23,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          }
+        }
+      },
+      "5%": {
+        "target_budget": 5.0,
+        "achieved_benign": 5.823407071280015,
+        "achieved_benign_ci95": 1.1967155679606656,
+        "novel_macro_coverage": 57.179709489102635,
+        "novel_macro_coverage_ci95": 40.95515367412091,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 7,
+            "coverage_pct": 2.6217228464419478
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 247,
+            "coverage_pct": 54.888888888888886
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 277,
+            "coverage_pct": 71.2082262210797
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 426,
+            "coverage_pct": 100.0
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 26,
+            "coverage_pct": 9.701492537313433
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 957,
+          "t2_caught": 39,
+          "t2_missed": 918,
+          "oracle_caught": 957,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 957,
+          "oracle_miss": 575,
+          "oracle_miss_rate_pct": 37.532637075718014,
+          "trained_caught": 39,
+          "trained_miss": 1493,
+          "trained_miss_rate_pct": 97.45430809399478
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 7,
+            "t2_caught": 2,
+            "t2_missed": 5,
+            "t2_caught_pct": 28.57142857142857
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 247,
+            "t2_caught": 0,
+            "t2_missed": 247,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 277,
+            "t2_caught": 0,
+            "t2_missed": 277,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 426,
+            "t2_caught": 37,
+            "t2_missed": 389,
+            "t2_caught_pct": 8.685446009389672
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 26,
+            "t2_caught": 26,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          }
+        }
+      },
+      "10%": {
+        "target_budget": 10.0,
+        "achieved_benign": 13.310644734354321,
+        "achieved_benign_ci95": 1.605123991963253,
+        "novel_macro_coverage": 58.58816421632342,
+        "novel_macro_coverage_ci95": 38.84262638369277,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 7,
+            "coverage_pct": 2.6217228464419478
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 255,
+            "coverage_pct": 56.666666666666664
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 292,
+            "coverage_pct": 75.06426735218508
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 426,
+            "coverage_pct": 100.0
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 26,
+            "coverage_pct": 9.701492537313433
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 980,
+          "t2_caught": 39,
+          "t2_missed": 941,
+          "oracle_caught": 980,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 980,
+          "oracle_miss": 552,
+          "oracle_miss_rate_pct": 36.0313315926893,
+          "trained_caught": 39,
+          "trained_miss": 1493,
+          "trained_miss_rate_pct": 97.45430809399478
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 7,
+            "t2_caught": 2,
+            "t2_missed": 5,
+            "t2_caught_pct": 28.57142857142857
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 255,
+            "t2_caught": 0,
+            "t2_missed": 255,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Hulk": {
+            "escalated_count": 292,
+            "t2_caught": 0,
+            "t2_missed": 292,
+            "t2_caught_pct": 0.0
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 426,
+            "t2_caught": 37,
+            "t2_missed": 389,
+            "t2_caught_pct": 8.685446009389672
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 26,
+            "t2_caught": 26,
+            "t2_missed": 0,
+            "t2_caught_pct": 100.0
+          }
+        }
+      }
+    }
+  },
+  "calibration_comparison": {
+    "kNN": {
+      "1%": {
+        "deployable_threshold": 2.082659662098534,
+        "deployable_achieved_benign": 1.0398941198714313,
+        "oracle_threshold": 1.676834540217633,
+        "oracle_achieved_benign": 1.002079788239743
+      },
+      "2%": {
+        "deployable_threshold": 1.0962419802340688,
+        "deployable_achieved_benign": 2.4768387218755907,
+        "oracle_threshold": 1.293448198668357,
+        "oracle_achieved_benign": 2.004159576479486
+      },
+      "5%": {
+        "deployable_threshold": 0.5595708139570622,
+        "deployable_achieved_benign": 6.541879372282095,
+        "oracle_threshold": 0.755057391159884,
+        "oracle_achieved_benign": 5.010398941198714
+      },
+      "10%": {
+        "deployable_threshold": 0.3471129600790299,
+        "deployable_achieved_benign": 13.159387407827566,
+        "oracle_threshold": 0.5346944161159979,
+        "oracle_achieved_benign": 10.001890716581583
+      }
+    },
+    "Mahalanobis": {
+      "1%": {
+        "deployable_threshold": 11.85364534332075,
+        "deployable_achieved_benign": 1.0588012856872755,
+        "oracle_threshold": 11.436838695494412,
+        "oracle_achieved_benign": 1.002079788239743
+      },
+      "2%": {
+        "deployable_threshold": 6.596088623679155,
+        "deployable_achieved_benign": 2.3633957269805257,
+        "oracle_threshold": 6.9648283438543865,
+        "oracle_achieved_benign": 2.004159576479486
+      },
+      "5%": {
+        "deployable_threshold": 4.026770594335942,
+        "deployable_achieved_benign": 6.579693703913783,
+        "oracle_threshold": 4.047355604660209,
+        "oracle_achieved_benign": 5.010398941198714
+      },
+      "10%": {
+        "deployable_threshold": 3.7012454920170716,
+        "deployable_achieved_benign": 11.325392323690679,
+        "oracle_threshold": 3.76508201552724,
+        "oracle_achieved_benign": 10.001890716581583
+      }
+    }
+  },
+  "paired_block_differences": {
+    "Full_kNN": {
+      "1%": {
+        "mean_paired_difference": 1.397513874325929,
+        "ci95_paired_difference": 2.061147360975894,
+        "pct_blocks_positive": 20.0
+      },
+      "2%": {
+        "mean_paired_difference": 5.65919019021525,
+        "ci95_paired_difference": 7.787737243077087,
+        "pct_blocks_positive": 20.0
+      },
+      "5%": {
+        "mean_paired_difference": 5.588045688337899,
+        "ci95_paired_difference": 8.17933252179762,
+        "pct_blocks_positive": 20.0
+      },
+      "10%": {
+        "mean_paired_difference": 6.008396188217116,
+        "ci95_paired_difference": 8.751293071567634,
+        "pct_blocks_positive": 20.0
+      }
+    },
+    "Prototype_kNN": {
+      "1%": {
+        "mean_paired_difference": -2.289568539427853,
+        "ci95_paired_difference": 5.270653176744996,
+        "pct_blocks_positive": 10.0
+      },
+      "2%": {
+        "mean_paired_difference": 2.1143259905625267,
+        "ci95_paired_difference": 3.4740123034306296,
+        "pct_blocks_positive": 20.0
+      },
+      "5%": {
+        "mean_paired_difference": 2.545892699494458,
+        "ci95_paired_difference": 4.562907690114987,
+        "pct_blocks_positive": 20.0
+      },
+      "10%": {
+        "mean_paired_difference": 6.373345651538253,
+        "ci95_paired_difference": 9.098178563217516,
+        "pct_blocks_positive": 20.0
+      }
+    },
+    "Mahalanobis": {
+      "1%": {
+        "mean_paired_difference": -3.7036228209342696,
+        "ci95_paired_difference": 6.730461807261665,
+        "pct_blocks_positive": 10.0
+      },
+      "2%": {
+        "mean_paired_difference": 0.8661751535050538,
+        "ci95_paired_difference": 2.8875576219051324,
+        "pct_blocks_positive": 10.0
+      },
+      "5%": {
+        "mean_paired_difference": 6.508298783848727,
+        "ci95_paired_difference": 9.238026165080921,
+        "pct_blocks_positive": 20.0
+      },
+      "10%": {
+        "mean_paired_difference": 8.010456485417325,
+        "ci95_paired_difference": 11.16110899502824,
+        "pct_blocks_positive": 20.0
+      }
+    },
+    "UNION_Gate": {
+      "1%": {
+        "mean_paired_difference": 1.5715770047621453,
+        "ci95_paired_difference": 2.278191443927413,
+        "pct_blocks_positive": 20.0
+      },
+      "2%": {
+        "mean_paired_difference": 2.018324358840752,
+        "ci95_paired_difference": 3.2119351366285174,
+        "pct_blocks_positive": 20.0
+      },
+      "5%": {
+        "mean_paired_difference": 7.395587971729356,
+        "ci95_paired_difference": 9.171809878173526,
+        "pct_blocks_positive": 20.0
+      },
+      "10%": {
+        "mean_paired_difference": 7.759001332491761,
+        "ci95_paired_difference": 9.61853421641479,
+        "pct_blocks_positive": 20.0
+      }
+    }
+  },
+  "ssh_check_25_features": {
+    "total_ssh_test_flows": 267,
+    "score_distribution": {
+      "knn25_benign": {
+        "min": 5.331201499700045e-07,
+        "median": 0.16608718242436854,
+        "p90": 1.677216145662514,
+        "p99": 4.044054217022924,
+        "max": 1867.3161137752547
+      },
+      "knn25_ssh": {
+        "min": 0.006161677248208588,
+        "median": 0.6112798078910117,
+        "p90": 0.6333197879778436,
+        "p99": 0.6527480751826633,
+        "max": 0.6576501634150481
+      }
+    },
+    "budgets": {
+      "1%": {
+        "knn25_ssh_escalated": 0,
+        "knn25_ssh_coverage_pct": 0.0,
+        "maha25_ssh_escalated": 0,
+        "maha25_ssh_coverage_pct": 0.0
+      },
+      "2%": {
+        "knn25_ssh_escalated": 0,
+        "knn25_ssh_coverage_pct": 0.0,
+        "maha25_ssh_escalated": 0,
+        "maha25_ssh_coverage_pct": 0.0
+      },
+      "5%": {
+        "knn25_ssh_escalated": 0,
+        "knn25_ssh_coverage_pct": 0.0,
+        "maha25_ssh_escalated": 0,
+        "maha25_ssh_coverage_pct": 0.0
+      },
+      "10%": {
+        "knn25_ssh_escalated": 0,
+        "knn25_ssh_coverage_pct": 0.0,
+        "maha25_ssh_escalated": 0,
+        "maha25_ssh_coverage_pct": 0.0
+      }
+    }
+  },
+  "slowloris_tier2_audit": {
+    "total_test_slowloris": 426,
+    "escalated_slowloris_count": 277,
+    "non_escalated_slowloris_count": 149,
+    "escalated_caught_by_t2": 0,
+    "escalated_missed_by_t2": 277,
+    "non_escalated_caught_by_t2": 37,
+    "non_escalated_missed_by_t2": 112,
+    "mean_prob_escalated_slowloris": 0.1635379061371841,
+    "max_prob_escalated_slowloris": 0.3,
+    "standalone_t2_slowloris_recall": 8.685446009389672,
+    "standalone_t1_slowloris_recall": 1.643192488262911
+  }
+}

@@ -1,6 +1,6 @@
 # Phase 7 Report: Adversarial Robustness & Attack Evaluation (Hardened)
 
-**Date:** 2026-10-21 20:56:49 UTC  
+**Date:** 2026-10-21 21:40:56 UTC  
 **Seeds Tested:** `[42, 71, 137, 256, 512]` (mean ± 95% CI reported)  
 
 ## 1. Band-Evasion Attack & Defenses

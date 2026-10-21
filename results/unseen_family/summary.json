@@ -315,10 +315,10 @@
       "silent_failure_rate_ci95": 0.0210534374099615,
       "escalation_rate_mean": 0.0,
       "escalation_rate_ci95": 0.0,
-      "latency_p50_ms_mean": 0.6372919015120715,
-      "latency_p50_ms_ci95": 0.0024776219464341417,
-      "latency_p95_ms_mean": 0.6642767720040864,
-      "latency_p95_ms_ci95": 0.020847679357851766
+      "latency_p50_ms_mean": 1.0965831999783404,
+      "latency_p50_ms_ci95": 0.0034151091795667863,
+      "latency_p95_ms_mean": 1.1776576997363009,
+      "latency_p95_ms_ci95": 0.016282102903988193
     },
     "Regime A: Tier 1 Standalone (25 Features)": {
       "balanced_accuracy_mean": 0.8865616373605597,
@@ -343,10 +343,10 @@
       "silent_failure_rate_ci95": 0.00157301641886919,
       "escalation_rate_mean": 0.0,
       "escalation_rate_ci95": 0.0,
-      "latency_p50_ms_mean": 0.6389500951627269,
-      "latency_p50_ms_ci95": 0.003969626446098477,
-      "latency_p95_ms_mean": 0.6696070174803026,
-      "latency_p95_ms_ci95": 0.04184460962302823
+      "latency_p50_ms_mean": 1.096862502163276,
+      "latency_p50_ms_ci95": 0.0029586915821292322,
+      "latency_p95_ms_mean": 1.152229864965193,
+      "latency_p95_ms_ci95": 0.025061463375624017
     },
     "Regime A: Tier 1 Standalone (All 76 Features)": {
       "balanced_accuracy_mean": 0.8917093968614104,
@@ -371,10 +371,10 @@
       "silent_failure_rate_ci95": 0.0075344543473762704,
       "escalation_rate_mean": 0.0,
       "escalation_rate_ci95": 0.0,
-      "latency_p50_ms_mean": 0.6452709014411084,
-      "latency_p50_ms_ci95": 0.016182186897477656,
-      "latency_p95_ms_mean": 0.7199522823793811,
-      "latency_p95_ms_ci95": 0.06421237192306621
+      "latency_p50_ms_mean": 1.0946876020170748,
+      "latency_p50_ms_ci95": 0.003576168226155395,
+      "latency_p95_ms_mean": 1.1790247086901215,
+      "latency_p95_ms_ci95": 0.07915941529029016
     },
     "Regime A: Two-Tier System (9 Fast Features -> Tier 2)": {
       "balanced_accuracy_mean": 0.8796328543517994,
@@ -399,10 +399,10 @@
       "silent_failure_rate_ci95": 0.005217105250457639,
       "escalation_rate_mean": 0.04028776978417266,
       "escalation_rate_ci95": 0.01181904116627878,
-      "latency_p50_ms_mean": 0.6407499982742593,
-      "latency_p50_ms_ci95": 0.011004045587340822,
-      "latency_p95_ms_mean": 0.6826703526894562,
-      "latency_p95_ms_ci95": 0.05757541409121626
+      "latency_p50_ms_mean": 1.0955124991596676,
+      "latency_p50_ms_ci95": 0.0011758515004319488,
+      "latency_p95_ms_mean": 1.1523654065968003,
+      "latency_p95_ms_ci95": 0.036741316707368535
     },
     "Regime A: Two-Tier System (25 Features -> Tier 2)": {
       "balanced_accuracy_mean": 0.8907861914665658,
@@ -427,10 +427,10 @@
       "silent_failure_rate_ci95": 0.0037339233120946406,
       "escalation_rate_mean": 0.02031316123571731,
       "escalation_rate_ci95": 0.000567562590415218,
-      "latency_p50_ms_mean": 0.6365248977090232,
-      "latency_p50_ms_ci95": 0.0020579069035693057,
-      "latency_p95_ms_mean": 0.6666958326241001,
-      "latency_p95_ms_ci95": 0.028912972462945587
+      "latency_p50_ms_mean": 1.095670901122503,
+      "latency_p50_ms_ci95": 0.0018896586406362949,
+      "latency_p95_ms_mean": 1.1595535300148185,
+      "latency_p95_ms_ci95": 0.03962782666767485
     },
     "Regime A: Two-Tier System (All 76 Features -> Tier 2)": {
       "balanced_accuracy_mean": 0.8941006176340831,
@@ -455,10 +455,10 @@
       "silent_failure_rate_ci95": 0.04627408508662999,
       "escalation_rate_mean": 0.028635914797573707,
       "escalation_rate_ci95": 0.012831123335224879,
-      "latency_p50_ms_mean": 0.6379206999554299,
-      "latency_p50_ms_ci95": 0.004951800136442428,
-      "latency_p95_ms_mean": 0.6459494579758029,
-      "latency_p95_ms_ci95": 0.006257782571812431
+      "latency_p50_ms_mean": 1.0963501001242548,
+      "latency_p50_ms_ci95": 0.004595241765397171,
+      "latency_p95_ms_mean": 1.1645199901249725,
+      "latency_p95_ms_ci95": 0.03820872478483071
     },
     "Regime B: Tier 1 Standalone (9 Features)": {
       "balanced_accuracy_mean": 0.5774162097434928,
@@ -483,10 +483,10 @@
       "silent_failure_rate_ci95": 0.01655983074815193,
       "escalation_rate_mean": 0.0,
       "escalation_rate_ci95": 0.0,
-      "latency_p50_ms_mean": 0.6392293988028541,
-      "latency_p50_ms_ci95": 0.00972463489304034,
-      "latency_p95_ms_mean": 1.026108041114639,
-      "latency_p95_ms_ci95": 1.051986854717828
+      "latency_p50_ms_mean": 1.099737497861497,
+      "latency_p50_ms_ci95": 0.01901155420216786,
+      "latency_p95_ms_mean": 1.2646532081998885,
+      "latency_p95_ms_ci95": 0.2933088457069333
     },
     "Regime B: Tier 1 Standalone (25 Features)": {
       "balanced_accuracy_mean": 0.5741218566836832,
@@ -511,10 +511,10 @@
       "silent_failure_rate_ci95": 0.0003084939005775814,
       "escalation_rate_mean": 0.0,
       "escalation_rate_ci95": 0.0,
-      "latency_p50_ms_mean": 0.6351458010612987,
-      "latency_p50_ms_ci95": 0.002463401888202154,
-      "latency_p95_ms_mean": 0.6600560601509642,
-      "latency_p95_ms_ci95": 0.021954231756317073
+      "latency_p50_ms_mean": 1.0940957989078015,
+      "latency_p50_ms_ci95": 0.0018705200578751238,
+      "latency_p95_ms_mean": 1.1492725076095662,
+      "latency_p95_ms_ci95": 0.0177142788619542
     },
     "Regime B: Tier 1 Standalone (All 76 Features)": {
       "balanced_accuracy_mean": 0.57400957963068,
@@ -539,10 +539,10 @@
       "silent_failure_rate_ci95": 0.0,
       "escalation_rate_mean": 0.0,
       "escalation_rate_ci95": 0.0,
-      "latency_p50_ms_mean": 0.6400125988875516,
-      "latency_p50_ms_ci95": 0.017100087710570186,
-      "latency_p95_ms_mean": 0.775937979633454,
-      "latency_p95_ms_ci95": 0.33700888689843744
+      "latency_p50_ms_mean": 1.091399899451062,
+      "latency_p50_ms_ci95": 0.0024906338898467253,
+      "latency_p95_ms_mean": 1.1456124296819323,
+      "latency_p95_ms_ci95": 0.019308825479414298
     },
     "Regime B: Two-Tier System (9 Fast Features -> Tier 2)": {
       "balanced_accuracy_mean": 0.5798050986323817,
@@ -567,10 +567,10 @@
       "silent_failure_rate_ci95": 0.05408462065371285,
       "escalation_rate_mean": 0.011313302299337,
       "escalation_rate_ci95": 0.013511486783780492,
-      "latency_p50_ms_mean": 0.6321834967820905,
-      "latency_p50_ms_ci95": 0.0018796564294033178,
-      "latency_p95_ms_mean": 0.6538056598219555,
-      "latency_p95_ms_ci95": 0.03550130814048206
+      "latency_p50_ms_mean": 1.0939043000689708,
+      "latency_p50_ms_ci95": 0.004847589632561741,
+      "latency_p95_ms_mean": 1.143846311897505,
+      "latency_p95_ms_ci95": 0.01971310147200913
     },
     "Regime B: Two-Tier System (25 Features -> Tier 2)": {
       "balanced_accuracy_mean": 0.5811384319657149,
@@ -595,10 +595,10 @@
       "silent_failure_rate_ci95": 0.05128937243659265,
       "escalation_rate_mean": 0.011031175059952039,
       "escalation_rate_ci95": 0.013070615033855258,
-      "latency_p50_ms_mean": 0.6346000955090858,
-      "latency_p50_ms_ci95": 0.002078451549717467,
-      "latency_p95_ms_mean": 0.6499482707295101,
-      "latency_p95_ms_ci95": 0.011874334867621572
+      "latency_p50_ms_mean": 1.0927957962849177,
+      "latency_p50_ms_ci95": 0.002767596886962503,
+      "latency_p95_ms_mean": 1.1387822580581997,
+      "latency_p95_ms_ci95": 0.02831007665746129
     },
     "Regime B: Two-Tier System (All 76 Features -> Tier 2)": {
       "balanced_accuracy_mean": 0.5818050986323817,
@@ -623,10 +623,10 @@
       "silent_failure_rate_ci95": 0.05437374557285476,
       "escalation_rate_mean": 0.016165890816758354,
       "escalation_rate_ci95": 0.013759094329465406,
-      "latency_p50_ms_mean": 0.6350373980239965,
-      "latency_p50_ms_ci95": 0.0013078333383140426,
-      "latency_p95_ms_mean": 0.6647307009552605,
-      "latency_p95_ms_ci95": 0.02497208690600367
+      "latency_p50_ms_mean": 1.0919915992417373,
+      "latency_p50_ms_ci95": 0.0038638405319675957,
+      "latency_p95_ms_mean": 1.1509917880175635,
+      "latency_p95_ms_ci95": 0.033104690270585935
     },
     "Tier-2-Only Baseline (All 76 Features)": {
       "balanced_accuracy_mean": 0.8938548244784773,
@@ -651,10 +651,10 @@
       "silent_failure_rate_ci95": 0.000377826322587923,
       "escalation_rate_mean": 1.0,
       "escalation_rate_ci95": 0.0,
-      "latency_p50_ms_mean": 3.632108194869943,
-      "latency_p50_ms_ci95": 0.07521026094805253,
-      "latency_p95_ms_mean": 4.47508415658376,
-      "latency_p95_ms_ci95": 1.4881145028572105
+      "latency_p50_ms_mean": 6.1897584033431485,
+      "latency_p50_ms_ci95": 0.012212363334930563,
+      "latency_p95_ms_mean": 6.346099461807171,
+      "latency_p95_ms_ci95": 0.10699463215980287
     }
   },
   "realistic_prevalence": {
