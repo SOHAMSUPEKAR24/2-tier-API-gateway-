@@ -1,8 +1,8 @@
 # Phase 2 Benchmark Report: Reproducible Open-Set Benchmark
 
-**Date:** 2026-10-22 06:21:07 UTC  
+**Date:** 2026-10-22 17:34:08 UTC  
 **Dataset:** CSE-CIC-IDS2018 (Cleaned, CICFlowMeter-V3)  
-**Release Tag:** `v1.2` (Newest Authoritative Benchmark Freeze)  
+**Release Tag:** `v1.2.1` (Authoritative Point Estimates & Reconciled Diagnostics Freeze)  
 **Artifacts Generated:**  
 - `scripts/download_datasets.sh` (Acquisition pipeline for CSE-CIC-IDS2018, CIC-IDS2017, CSIC 2010)
 - `src/data_collection/benchmark_pipeline.py` (Deduplication, feature guarding, protocol splits)

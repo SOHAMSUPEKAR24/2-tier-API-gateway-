@@ -1,8 +1,8 @@
 # Escalation Triggers Comparative Evaluation & Two-Tier Security Audit
 
-**Execution Timestamp:** 2026-10-22 06:21:07 UTC  
+**Execution Timestamp:** 2026-10-22 17:34:08 UTC  
 **Dataset:** CSE-CIC-IDS2018 (Benchmark Splits)  
-**Release Tag:** `v1.2` (Newest Authoritative Benchmark Freeze)  
+**Release Tag:** `v1.2.1` (Authoritative Point Estimates & Reconciled Diagnostics Freeze)  
 **Evaluation Seeds:** All metrics report mean ± 95% block-bootstrap confidence intervals over 10 chronological time blocks (1,000 resamples).  
 
 ---
@@ -20,7 +20,7 @@ Evaluated across:
 ### 1.1 Performance at Matched Achieved Benign Escalation
 
 | Gate Architecture | Target Budget | Achieved Benign Esc (%) | SSH Esc ($N=267$) | GoldenEye Esc ($N=450$) | Hulk Esc ($N=389$) | Slowloris Esc ($N=426$) | FTP Esc ($N=268$) | Novel Macro Coverage (%) | Novel Pooled Coverage (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Full kNN (Standardized)** | **1%** | 1.00 ± 0.44% | 0 (0.0%) | 63 (14.0%) | 100 (25.7%) | 277 (65.0%) | 0 (0.0%) | **26.18 ± 26.65%** | **28.72 ± 32.26%** |
 | | **2%** | 2.00 ± 0.56% | 0 (0.0%) | 187 (41.6%) | 269 (69.2%) | 277 (65.0%) | 0 (0.0%) | **43.93 ± 29.93%** | **47.85 ± 34.97%** |
 | | **5%** | 5.01 ± 0.85% | 0 (0.0%) | 255 (56.7%) | 288 (74.0%) | 277 (65.0%) | 0 (0.0%) | **48.93 ± 33.53%** | **53.52 ± 38.24%** |
@@ -56,7 +56,7 @@ Evaluated across:
 Thresholds fit on a 50% held-out training calibration split (deployable in production) compared to oracle-matched thresholds on the test partition, reporting achieved benign escalation, novel macro coverage, and novel pooled coverage:
 
 | Gate & Budget | Deployable Threshold | Deployable Achieved Benign | Deployable Macro Coverage (%) | Deployable Pooled Coverage (%) | Oracle Threshold | Oracle Achieved Benign | Oracle Macro Coverage (%) | Oracle Pooled Coverage (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **kNN 1%** | 2.0827 | 1.04% | 31.30% | 34.46% | 1.6768 | 1.00% | 26.18% | 28.72% |
 | **Mahalanobis 1%** | 11.8536 | 1.06% | 9.62% | 10.64% | 11.4368 | 1.00% | 2.23% | 2.42% |
 | **kNN 2%** | 1.0962 | 2.48% | 48.48% | 53.00% | 1.2934 | 2.00% | 43.93% | 47.85% |
@@ -110,7 +110,7 @@ Evaluated on 25 allowlisted features to investigate SSH-BruteForce escalation:
 We logged per-flow predictions of Trained Tier 2 ($RF_{76}$) on flows escalated by each gate, comparing **FTP-only Trained Tier 2**, **LOFO-Trained Tier 2**, and **Oracle Tier 2**:
 
 | Gate Architecture | Target Budget | Escalated Novel Flows | Caught (FTP-T2) | Miss Rate (FTP-T2) | Caught (LOFO-T2) | Miss Rate (LOFO-T2) | Oracle Miss Rate |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Full kNN (Standardized)** | **1%** | 440 | 0 | 1525 (99.54%) | 10 | 1515 (98.89%) | 1085 (70.82%) |
 | **Full kNN (Standardized)** | **2%** | 733 | 0 | 1525 (99.54%) | 13 | 1512 (98.69%) | 792 (51.70%) |
 | **Full kNN (Standardized)** | **5%** | 820 | 0 | 1525 (99.54%) | 13 | 1512 (98.69%) | 705 (46.02%) |
@@ -152,7 +152,7 @@ Evaluated across 5 random seeds over 5 streaming adaptation cycles with 10-block
 ### 4.1 Final Adaptation Summary Across Arms (Cycle 5)
 
 | Adaptation Configuration | Label Source | Retraining Gate Policy | Final SSH Recall (%) | Final GoldenEye Recall (%) | Final Hulk Recall (%) | Final Slowloris Recall (%) | Final FTP Recall (%) | Final Benign FPR (%) |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Oracle Tier 2, L=inf, With Rehearsal** | Oracle | Gate ON (Rollback) | 0.0 ± 0.0% | 54.9 ± 0.0% | 72.6 ± 6.2% | 77.6 ± 0.0% | 100.0 ± 0.0% | 0.01 ± 0.01% |
 | **Oracle Tier 2, L=inf, No Rehearsal (Rollback)** | Oracle | Gate ON (Rollback) | 0.0 ± 0.0% | 0.0 ± 0.0% | 0.0 ± 0.0% | 2.9 ± 0.0% | 100.0 ± 0.0% | 0.09 ± 0.13% |
 | **Oracle Tier 2, L=inf, No Rehearsal (Gate OFF: True Forgetting)** | Oracle | Gate OFF (True Forgetting) | 54.2 ± 1.2% | 95.6 ± 0.0% | 98.9 ± 0.7% | 87.1 ± 0.0% | 36.7 ± 0.0% | 34.58 ± 2.62% |
@@ -164,7 +164,7 @@ Evaluated across 5 random seeds over 5 streaming adaptation cycles with 10-block
 ### 4.2 Full Cycle-by-Cycle Adaptation Trajectory (Cycles 0 to 5)
 
 | Adaptation Configuration | Label Source | Retraining Gate Policy | Cycle | SSH Recall (%) | GoldenEye Recall (%) | Hulk Recall (%) | Slowloris Recall (%) | FTP Recall (%) | Benign FPR (%) |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Oracle Tier 2, L=inf, With Rehearsal** | Oracle | Gate ON (Rollback) | **Cycle 0** | 0.0 ± 0.0% | 0.0 ± 0.0% | 0.0 ± 0.0% | 2.9 ± 0.0% | 100.0 ± 0.0% | 0.09 ± 0.13% |
 | **Oracle Tier 2, L=inf, With Rehearsal** | Oracle | Gate ON (Rollback) | **Cycle 1** | 0.0 ± 0.0% | 54.9 ± 0.0% | 66.3 ± 9.7% | 73.3 ± 0.0% | 100.0 ± 0.0% | 0.08 ± 0.06% |
 | **Oracle Tier 2, L=inf, With Rehearsal** | Oracle | Gate ON (Rollback) | **Cycle 2** | 0.0 ± 0.0% | 54.9 ± 0.0% | 69.0 ± 8.2% | 75.4 ± 0.0% | 100.0 ± 0.0% | 0.06 ± 0.06% |
