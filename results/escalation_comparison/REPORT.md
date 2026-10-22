@@ -1,7 +1,8 @@
 # Escalation Triggers Comparative Evaluation & Two-Tier Security Audit
 
-**Execution Timestamp:** 2026-10-22 06:07:58 UTC  
+**Execution Timestamp:** 2026-10-22 06:21:07 UTC  
 **Dataset:** CSE-CIC-IDS2018 (Benchmark Splits)  
+**Release Tag:** `v1.2` (Newest Authoritative Benchmark Freeze)  
 **Evaluation Seeds:** All metrics report mean ± 95% block-bootstrap confidence intervals over 10 chronological time blocks (1,000 resamples).  
 
 ---

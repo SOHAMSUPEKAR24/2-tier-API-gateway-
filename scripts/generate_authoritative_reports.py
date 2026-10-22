@@ -262,6 +262,7 @@ lofo_report_md = f"""# Leave-One-Family-Out (LOFO) Full Benchmark & Novelty Diag
 
 **Execution Timestamp:** {TIMESTAMP}  
 **Dataset Version:** CSE-CIC-IDS2018 (Communications Security Establishment & Canadian Institute for Cybersecurity)  
+**Release Tag:** `v1.2` (Newest Authoritative Benchmark Freeze)  
 **Evaluation Seeds:** `[42, 71, 137, 256, 512]` (all metrics report mean ± 95% block-bootstrap confidence intervals over 10 chronological blocks)  
 **Protocol:** Leave-One-Family-Out across all 5 attack families. Zero train-test leakage strictly verified via hash deduplication.  
 **Identifiers Excluded:** `Dst Port`, `Protocol`, `Timestamp`, `Flow ID`, `Src/Dst IP`.  
@@ -560,6 +561,7 @@ esc_report_md = f"""# Escalation Triggers Comparative Evaluation & Two-Tier Secu
 
 **Execution Timestamp:** {TIMESTAMP}  
 **Dataset:** CSE-CIC-IDS2018 (Benchmark Splits)  
+**Release Tag:** `v1.2` (Newest Authoritative Benchmark Freeze)  
 **Evaluation Seeds:** All metrics report mean ± 95% block-bootstrap confidence intervals over 10 chronological time blocks (1,000 resamples).  
 
 ---
@@ -701,6 +703,7 @@ bench_report_md = f"""# Phase 2 Benchmark Report: Reproducible Open-Set Benchmar
 
 **Date:** {TIMESTAMP}  
 **Dataset:** CSE-CIC-IDS2018 (Cleaned, CICFlowMeter-V3)  
+**Release Tag:** `v1.2` (Newest Authoritative Benchmark Freeze)  
 **Artifacts Generated:**  
 - `scripts/download_datasets.sh` (Acquisition pipeline for CSE-CIC-IDS2018, CIC-IDS2017, CSIC 2010)
 - `src/data_collection/benchmark_pipeline.py` (Deduplication, feature guarding, protocol splits)

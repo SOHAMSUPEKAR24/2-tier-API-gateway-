@@ -1,7 +1,8 @@
 # Leave-One-Family-Out (LOFO) Full Benchmark & Novelty Diagnostics Report
 
-**Execution Timestamp:** 2026-10-22 06:07:58 UTC  
+**Execution Timestamp:** 2026-10-22 06:21:07 UTC  
 **Dataset Version:** CSE-CIC-IDS2018 (Communications Security Establishment & Canadian Institute for Cybersecurity)  
+**Release Tag:** `v1.2` (Newest Authoritative Benchmark Freeze)  
 **Evaluation Seeds:** `[42, 71, 137, 256, 512]` (all metrics report mean ± 95% block-bootstrap confidence intervals over 10 chronological blocks)  
 **Protocol:** Leave-One-Family-Out across all 5 attack families. Zero train-test leakage strictly verified via hash deduplication.  
 **Identifiers Excluded:** `Dst Port`, `Protocol`, `Timestamp`, `Flow ID`, `Src/Dst IP`.  
