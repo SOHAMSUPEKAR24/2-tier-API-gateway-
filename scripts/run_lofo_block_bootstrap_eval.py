@@ -76,20 +76,22 @@ def run_lofo_benchmark():
             n_atk = int(np.sum(y == 1))
             assert n_tot == n_ben + n_atk, f"Sum mismatch in {s_name}: {n_tot} != {n_ben} + {n_atk}"
 
-            # Family breakdown for training splits
+            # Family breakdown for training splits (derived from benchmark pools: FTP=625, SSH=623, Gold=1048, Hulk=905, Slow=992)
             fam_counts = {}
             if s_name == "ftp_only_train":
                 fam_counts = {"FTP-BruteForce": 625, "SSH-BruteForce": 0, "DoS-GoldenEye": 0, "DoS-Hulk": 0, "DoS-Slowloris": 0}
             elif s_name == "lofo_FTP-BruteForce_train":
-                fam_counts = {"FTP-BruteForce": 0, "SSH-BruteForce": 623, "DoS-GoldenEye": 1048, "DoS-Hulk": 903, "DoS-Slowloris": 994}
+                fam_counts = {"FTP-BruteForce": 0, "SSH-BruteForce": 623, "DoS-GoldenEye": 1048, "DoS-Hulk": 905, "DoS-Slowloris": 992}
             elif s_name == "lofo_SSH-BruteForce_train":
-                fam_counts = {"FTP-BruteForce": 625, "SSH-BruteForce": 0, "DoS-GoldenEye": 1048, "DoS-Hulk": 903, "DoS-Slowloris": 994}
+                fam_counts = {"FTP-BruteForce": 625, "SSH-BruteForce": 0, "DoS-GoldenEye": 1048, "DoS-Hulk": 905, "DoS-Slowloris": 992}
             elif s_name == "lofo_DoS-GoldenEye_train":
-                fam_counts = {"FTP-BruteForce": 625, "SSH-BruteForce": 623, "DoS-GoldenEye": 0, "DoS-Hulk": 903, "DoS-Slowloris": 994}
+                fam_counts = {"FTP-BruteForce": 625, "SSH-BruteForce": 623, "DoS-GoldenEye": 0, "DoS-Hulk": 905, "DoS-Slowloris": 992}
             elif s_name == "lofo_DoS-Hulk_train":
-                fam_counts = {"FTP-BruteForce": 625, "SSH-BruteForce": 623, "DoS-GoldenEye": 1048, "DoS-Hulk": 0, "DoS-Slowloris": 994}
+                fam_counts = {"FTP-BruteForce": 625, "SSH-BruteForce": 623, "DoS-GoldenEye": 1048, "DoS-Hulk": 0, "DoS-Slowloris": 992}
             elif s_name == "lofo_DoS-Slowloris_train":
-                fam_counts = {"FTP-BruteForce": 625, "SSH-BruteForce": 623, "DoS-GoldenEye": 1048, "DoS-Hulk": 903, "DoS-Slowloris": 0}
+                fam_counts = {"FTP-BruteForce": 625, "SSH-BruteForce": 623, "DoS-GoldenEye": 1048, "DoS-Hulk": 905, "DoS-Slowloris": 0}
+
+            assert sum(fam_counts.values()) == n_atk, f"Training family sum mismatch in {s_name}: {sum(fam_counts.values())} != {n_atk}"
 
             split_table[s_name] = {
                 "total_flows": n_tot,

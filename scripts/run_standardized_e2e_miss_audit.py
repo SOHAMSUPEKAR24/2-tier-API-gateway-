@@ -87,10 +87,25 @@ def run_standardized_eval():
     rf_score_benign = -np.abs(rf_t1.predict_proba(b_te)[:, 1] - 0.5)
     preds_t1 = rf_t1.predict(X_te_9)
 
-    # Train Tier 2 (RF on 76 features)
-    rf_t2 = RandomForestClassifier(n_estimators=50, max_depth=10, random_state=42).fit(X_tr_76, y_tr)
-    preds_t2 = rf_t2.predict(X_te_76)
-    probs_t2 = rf_t2.predict_proba(X_te_76)[:, 1]
+    # Train Tier 2 (RF on 76 features) - FTP-only Baseline
+    rf_t2_ftp = RandomForestClassifier(n_estimators=50, max_depth=10, random_state=42).fit(X_tr_76, y_tr)
+    preds_t2_ftp = rf_t2_ftp.predict(X_te_76)
+    probs_t2_ftp = rf_t2_ftp.predict_proba(X_te_76)[:, 1]
+
+    # Train Tier 2 (RF on 76 features) - LOFO Models (trained on remaining 4 attack families + benign)
+    lofo_t2_models = {}
+    for fam in NOVEL_FAMILIES:
+        rf_l = RandomForestClassifier(n_estimators=50, max_depth=10, random_state=42, n_jobs=-1).fit(
+            bench[f"lofo_{fam}_X_train_76"], bench[f"lofo_{fam}_y_train"]
+        )
+        lofo_t2_models[fam] = rf_l
+
+    # Predictions under LOFO-trained Tier 2 across novel test flows
+    preds_t2_lofo = np.zeros(len(y_te), dtype=int)
+    for fam in NOVEL_FAMILIES:
+        fm = (y_fam == fam)
+        if np.sum(fm) > 0:
+            preds_t2_lofo[fm] = lofo_t2_models[fam].predict(X_te_76[fm])
 
     # Gate: Full kNN (k=5)
     nn_full = NearestNeighbors(n_neighbors=5, metric="euclidean", n_jobs=-1).fit(b_tr_sc[:4000])
@@ -140,6 +155,7 @@ def run_standardized_eval():
 
     def evaluate_single_gate(score_all, score_b, is_union=False, knn_s=None, knn_b=None):
         out = {}
+        total_novel = int(np.sum(novel_te_mask))
         for b in TARGET_BUDGETS:
             b_key = f"{int(b*100)}%"
             if is_union:
@@ -161,10 +177,13 @@ def run_standardized_eval():
                 pct = float((n_esc / max(1, n_total)) * 100.0)
                 fam_counts[fam] = {"total": n_total, "escalated": n_esc, "coverage_pct": pct}
 
-            novel_cov = float(np.mean([fam_counts[fam]["coverage_pct"] for fam in NOVEL_FAMILIES]))
+            novel_macro_cov = float(np.mean([fam_counts[fam]["coverage_pct"] for fam in NOVEL_FAMILIES]))
+            nov_esc = esc_mask & novel_te_mask
+            nov_esc_count = int(np.sum(nov_esc))
+            novel_pooled_cov = float((nov_esc_count / max(1, total_novel)) * 100.0)
 
             # Block bootstrap over 10 time blocks
-            boot_benign, boot_cov = [], []
+            boot_benign, boot_macro, boot_pooled = [], [], []
             for _ in range(500):
                 sampled_b = rng_boot.choice(N_BLOCKS, size=N_BLOCKS, replace=True)
                 idx = np.concatenate([blocks[b_i] for b_i in sampled_b])
@@ -177,27 +196,32 @@ def run_standardized_eval():
                     for fam in NOVEL_FAMILIES
                     if np.sum(b_fam == fam) > 0
                 ]
-                boot_cov.append(float(np.mean(covs) if covs else 0.0))
+                boot_macro.append(float(np.mean(covs) if covs else 0.0))
+                b_nov = np.isin(b_fam, NOVEL_FAMILIES)
+                boot_pooled.append(float(np.mean(b_esc[b_nov]) * 100.0) if np.sum(b_nov) > 0 else 0.0)
 
-            # Tier 2 Predictions on Escalated Novel Flows
-            nov_esc = esc_mask & novel_te_mask
-            nov_esc_count = int(np.sum(nov_esc))
-            t2_caught_novel = int(np.sum((preds_t2 == 1) & nov_esc))
-            t2_missed_novel = int(nov_esc_count - t2_caught_novel)
+            # FTP-only Trained Tier 2
+            t2_ftp_caught_novel = int(np.sum((preds_t2_ftp == 1) & nov_esc))
+            t2_ftp_missed_novel = int(nov_esc_count - t2_ftp_caught_novel)
+            ftp_e2e_caught = int(
+                np.sum(((preds_t1 == 1) & (~esc_mask) & novel_te_mask) | ((preds_t2_ftp == 1) & nov_esc))
+            )
+            ftp_e2e_miss = total_novel - ftp_e2e_caught
+            ftp_e2e_miss_rate = float((ftp_e2e_miss / total_novel) * 100.0)
 
-            # End-to-End Miss Rates on Novel Flows (N=1532)
-            total_novel = int(np.sum(novel_te_mask))
-            # Oracle Tier 2 catches all escalated novel flows
+            # LOFO-Trained Tier 2
+            t2_lofo_caught_novel = int(np.sum((preds_t2_lofo == 1) & nov_esc))
+            t2_lofo_missed_novel = int(nov_esc_count - t2_lofo_caught_novel)
+            lofo_e2e_caught = int(
+                np.sum(((preds_t1 == 1) & (~esc_mask) & novel_te_mask) | ((preds_t2_lofo == 1) & nov_esc))
+            )
+            lofo_e2e_miss = total_novel - lofo_e2e_caught
+            lofo_e2e_miss_rate = float((lofo_e2e_miss / total_novel) * 100.0)
+
+            # Oracle Tier 2 (catches 100% of escalated novel flows)
             oracle_e2e_caught = int(np.sum(((preds_t1 == 1) & (~esc_mask) & novel_te_mask) | nov_esc))
             oracle_e2e_miss = total_novel - oracle_e2e_caught
             oracle_miss_rate = float((oracle_e2e_miss / total_novel) * 100.0)
-
-            # Trained Tier 2
-            trained_e2e_caught = int(
-                np.sum(((preds_t1 == 1) & (~esc_mask) & novel_te_mask) | ((preds_t2 == 1) & nov_esc))
-            )
-            trained_e2e_miss = total_novel - trained_e2e_caught
-            trained_miss_rate = float((trained_e2e_miss / total_novel) * 100.0)
 
             # Detailed per-family Tier 2 audit on escalated flows
             t2_per_fam = {}
@@ -205,26 +229,33 @@ def run_standardized_eval():
                 fm = y_fam == fam
                 f_esc = esc_mask & fm
                 n_esc_f = int(np.sum(f_esc))
-                c_t2 = int(np.sum((preds_t2 == 1) & f_esc))
-                m_t2 = n_esc_f - c_t2
+                c_ftp = int(np.sum((preds_t2_ftp == 1) & f_esc))
+                c_lofo = int(np.sum((preds_t2_lofo == 1) & f_esc))
                 t2_per_fam[fam] = {
                     "escalated_count": n_esc_f,
-                    "t2_caught": c_t2,
-                    "t2_missed": m_t2,
-                    "t2_caught_pct": float((c_t2 / max(1, n_esc_f)) * 100.0),
+                    "t2_ftp_caught": c_ftp,
+                    "t2_ftp_missed": n_esc_f - c_ftp,
+                    "t2_lofo_caught": c_lofo,
+                    "t2_lofo_missed": n_esc_f - c_lofo,
+                    "t2_ftp_caught_pct": float((c_ftp / max(1, n_esc_f)) * 100.0),
+                    "t2_lofo_caught_pct": float((c_lofo / max(1, n_esc_f)) * 100.0),
                 }
 
             out[b_key] = {
                 "target_budget": b * 100.0,
                 "achieved_benign": achieved_benign,
                 "achieved_benign_ci95": float(1.96 * np.std(boot_benign)),
-                "novel_macro_coverage": novel_cov,
-                "novel_macro_coverage_ci95": float(1.96 * np.std(boot_cov)),
+                "novel_macro_coverage": novel_macro_cov,
+                "novel_macro_coverage_ci95": float(1.96 * np.std(boot_macro)),
+                "novel_pooled_coverage": novel_pooled_cov,
+                "novel_pooled_coverage_ci95": float(1.96 * np.std(boot_pooled)),
                 "family_counts": fam_counts,
                 "tier2_on_novel_escalated": {
                     "novel_escalated_count": nov_esc_count,
-                    "t2_caught": t2_caught_novel,
-                    "t2_missed": t2_missed_novel,
+                    "t2_ftp_caught": t2_ftp_caught_novel,
+                    "t2_ftp_missed": t2_ftp_missed_novel,
+                    "t2_lofo_caught": t2_lofo_caught_novel,
+                    "t2_lofo_missed": t2_lofo_missed_novel,
                     "oracle_caught": nov_esc_count,
                     "oracle_missed": 0,
                 },
@@ -233,12 +264,16 @@ def run_standardized_eval():
                     "oracle_caught": oracle_e2e_caught,
                     "oracle_miss": oracle_e2e_miss,
                     "oracle_miss_rate_pct": oracle_miss_rate,
-                    "trained_caught": trained_e2e_caught,
-                    "trained_miss": trained_e2e_miss,
-                    "trained_miss_rate_pct": trained_miss_rate,
+                    "ftp_only_caught": ftp_e2e_caught,
+                    "ftp_only_miss": ftp_e2e_miss,
+                    "ftp_only_miss_rate_pct": ftp_e2e_miss_rate,
+                    "lofo_caught": lofo_e2e_caught,
+                    "lofo_miss": lofo_e2e_miss,
+                    "lofo_miss_rate_pct": lofo_e2e_miss_rate,
                 },
                 "tier2_per_family_on_escalated": t2_per_fam,
             }
+        return out
         return out
 
     gates_eval = {
@@ -252,40 +287,77 @@ def run_standardized_eval():
     }
 
     # ── 4. Deployable vs Oracle Calibration Comparison ───────────────────────
+    # ── 4. Deployable vs Oracle Calibration Comparison ───────────────────────
     cal_comparison = {"kNN": {}, "Mahalanobis": {}}
+    test_cal_all_knn = nn_cal.kneighbors(X_te_sc_cal)[0][:, -1]
+    diff_test_cal_all = X_te_sc_cal - np.mean(b_fit_sc, axis=0)
+    test_cal_all_maha = np.sqrt(np.sum(diff_test_cal_all @ inv_cov_cal * diff_test_cal_all, axis=1))
+
     for b in TARGET_BUDGETS:
         b_key = f"{int(b*100)}%"
 
         # kNN
         th_dep_knn = float(np.percentile(cal_scores_knn, 100 * (1 - b)))
         th_orc_knn = float(np.percentile(knn_score_benign, 100 * (1 - b)))
-        ach_dep_knn = float(np.mean(test_cal_knn >= th_dep_knn) * 100.0)
-        ach_orc_knn = float(np.mean(knn_score_benign >= th_orc_knn) * 100.0)
+        esc_dep_knn = test_cal_all_knn >= th_dep_knn
+        esc_orc_knn = knn_score_all >= th_orc_knn
+
+        ach_dep_knn = float(np.mean(esc_dep_knn[benign_te_mask]) * 100.0)
+        ach_orc_knn = float(np.mean(esc_orc_knn[benign_te_mask]) * 100.0)
+        dep_macro_knn = float(np.mean([np.mean(esc_dep_knn[y_fam == fam]) * 100.0 for fam in NOVEL_FAMILIES]))
+        dep_pooled_knn = float(np.mean(esc_dep_knn[novel_te_mask]) * 100.0)
+        orc_macro_knn = float(np.mean([np.mean(esc_orc_knn[y_fam == fam]) * 100.0 for fam in NOVEL_FAMILIES]))
+        orc_pooled_knn = float(np.mean(esc_orc_knn[novel_te_mask]) * 100.0)
 
         cal_comparison["kNN"][b_key] = {
             "deployable_threshold": th_dep_knn,
             "deployable_achieved_benign": ach_dep_knn,
+            "deployable_macro_coverage": dep_macro_knn,
+            "deployable_pooled_coverage": dep_pooled_knn,
             "oracle_threshold": th_orc_knn,
             "oracle_achieved_benign": ach_orc_knn,
+            "oracle_macro_coverage": orc_macro_knn,
+            "oracle_pooled_coverage": orc_pooled_knn,
         }
 
         # Mahalanobis
         th_dep_maha = float(np.percentile(cal_scores_maha, 100 * (1 - b)))
         th_orc_maha = float(np.percentile(maha_score_benign, 100 * (1 - b)))
-        ach_dep_maha = float(np.mean(test_cal_maha >= th_dep_maha) * 100.0)
-        ach_orc_maha = float(np.mean(maha_score_benign >= th_orc_maha) * 100.0)
+        esc_dep_maha = test_cal_all_maha >= th_dep_maha
+        esc_orc_maha = maha_score_all >= th_orc_maha
+
+        ach_dep_maha = float(np.mean(esc_dep_maha[benign_te_mask]) * 100.0)
+        ach_orc_maha = float(np.mean(esc_orc_maha[benign_te_mask]) * 100.0)
+        dep_macro_maha = float(np.mean([np.mean(esc_dep_maha[y_fam == fam]) * 100.0 for fam in NOVEL_FAMILIES]))
+        dep_pooled_maha = float(np.mean(esc_dep_maha[novel_te_mask]) * 100.0)
+        orc_macro_maha = float(np.mean([np.mean(esc_orc_maha[y_fam == fam]) * 100.0 for fam in NOVEL_FAMILIES]))
+        orc_pooled_maha = float(np.mean(esc_orc_maha[novel_te_mask]) * 100.0)
 
         cal_comparison["Mahalanobis"][b_key] = {
             "deployable_threshold": th_dep_maha,
             "deployable_achieved_benign": ach_dep_maha,
+            "deployable_macro_coverage": dep_macro_maha,
+            "deployable_pooled_coverage": dep_pooled_maha,
             "oracle_threshold": th_orc_maha,
             "oracle_achieved_benign": ach_orc_maha,
+            "oracle_macro_coverage": orc_macro_maha,
+            "oracle_pooled_coverage": orc_pooled_maha,
         }
 
     # ── 5. Paired Per-Block Differences vs RF Band ───────────────────────────
     paired_diffs = {}
+    gate_descriptions = {
+        "Full_kNN": "Full kNN Gate (Standardized, k=5, 9 features, N=4000 reference)",
+        "Prototype_kNN": "Prototype kNN Gate (M=32 cluster centroids, 9 features)",
+        "Mahalanobis": "Mahalanobis Distance Gate (Regularized covariance, 9 features)",
+        "UNION_Gate": "UNION Gate (RF Band + Full kNN, split budget, 9 features)",
+    }
     for gate_name in ["Full_kNN", "Prototype_kNN", "Mahalanobis", "UNION_Gate"]:
-        paired_diffs[gate_name] = {}
+        paired_diffs[gate_name] = {
+            "description": gate_descriptions[gate_name],
+            "baseline": "RF Probability Band Gate (Uncertainty thresholding)",
+            "budgets": {},
+        }
         for b in TARGET_BUDGETS:
             b_key = f"{int(b*100)}%"
             th_rf = np.percentile(rf_score_benign, 100 * (1 - b))
@@ -303,7 +375,8 @@ def run_standardized_eval():
                 th_u_rf = np.percentile(rf_score_benign, 100 * (1 - b / 2))
                 th_u_knn = np.percentile(knn_score_benign, 100 * (1 - b / 2))
 
-            diffs = []
+            macro_diffs = []
+            pooled_diffs = []
             for b_idx in blocks:
                 # RF coverage in this block
                 rf_covs = [
@@ -311,7 +384,9 @@ def run_standardized_eval():
                     for fam in NOVEL_FAMILIES
                     if np.sum(y_fam[b_idx] == fam) > 0
                 ]
-                rf_c = float(np.mean(rf_covs) if rf_covs else 0.0)
+                rf_macro = float(np.mean(rf_covs) if rf_covs else 0.0)
+                b_nov = novel_te_mask[b_idx]
+                rf_pooled = float(np.mean(rf_score_all[b_idx][b_nov] >= th_rf) * 100.0) if np.sum(b_nov) > 0 else 0.0
 
                 if gate_name == "UNION_Gate":
                     u_esc = (rf_score_all[b_idx] >= th_u_rf) | (knn_score_all[b_idx] >= th_u_knn)
@@ -320,24 +395,33 @@ def run_standardized_eval():
                         for fam in NOVEL_FAMILIES
                         if np.sum(y_fam[b_idx] == fam) > 0
                     ]
+                    g_macro = float(np.mean(g_covs) if g_covs else 0.0)
+                    g_pooled = float(np.mean(u_esc[b_nov]) * 100.0) if np.sum(b_nov) > 0 else 0.0
                 else:
                     g_covs = [
                         np.mean(s_g[b_idx][y_fam[b_idx] == fam] >= th_g) * 100.0
                         for fam in NOVEL_FAMILIES
                         if np.sum(y_fam[b_idx] == fam) > 0
                     ]
-                g_c = float(np.mean(g_covs) if g_covs else 0.0)
-                diffs.append(g_c - rf_c)
+                    g_macro = float(np.mean(g_covs) if g_covs else 0.0)
+                    g_pooled = float(np.mean(s_g[b_idx][b_nov] >= th_g) * 100.0) if np.sum(b_nov) > 0 else 0.0
 
-            diffs_arr = np.array(diffs)
-            mean_d = float(np.mean(diffs_arr))
-            ci_d = float(1.96 * np.std(diffs_arr) / np.sqrt(len(diffs_arr)))
-            pos_pct = float(np.mean(diffs_arr > 0) * 100.0)
+                macro_diffs.append(g_macro - rf_macro)
+                pooled_diffs.append(g_pooled - rf_pooled)
 
-            paired_diffs[gate_name][b_key] = {
-                "mean_paired_difference": mean_d,
-                "ci95_paired_difference": ci_d,
-                "pct_blocks_positive": pos_pct,
+            macro_arr = np.array(macro_diffs)
+            pooled_arr = np.array(pooled_diffs)
+
+            paired_diffs[gate_name]["budgets"][b_key] = {
+                "mean_paired_difference": float(np.mean(macro_arr)),
+                "ci95_paired_difference": float(1.96 * np.std(macro_arr) / np.sqrt(len(macro_arr))),
+                "pct_blocks_positive": float(np.mean(macro_arr > 0) * 100.0),
+                "mean_paired_macro_difference": float(np.mean(macro_arr)),
+                "ci95_paired_macro_difference": float(1.96 * np.std(macro_arr) / np.sqrt(len(macro_arr))),
+                "pct_blocks_positive_macro": float(np.mean(macro_arr > 0) * 100.0),
+                "mean_paired_pooled_difference": float(np.mean(pooled_arr)),
+                "ci95_paired_pooled_difference": float(1.96 * np.std(pooled_arr) / np.sqrt(len(pooled_arr))),
+                "pct_blocks_positive_pooled": float(np.mean(pooled_arr > 0) * 100.0),
             }
 
     # ── 6. SSH Check on Standardized 25-Feature Gate ─────────────────────────
@@ -411,13 +495,13 @@ def run_standardized_eval():
         "total_test_slowloris": int(np.sum(slow_mask)),
         "escalated_slowloris_count": int(np.sum(slow_esc)),
         "non_escalated_slowloris_count": int(np.sum((~esc_2pct) & slow_mask)),
-        "escalated_caught_by_t2": int(np.sum((preds_t2 == 1) & slow_esc)),
-        "escalated_missed_by_t2": int(np.sum((preds_t2 == 0) & slow_esc)),
-        "non_escalated_caught_by_t2": int(np.sum((preds_t2 == 1) & (~esc_2pct) & slow_mask)),
-        "non_escalated_missed_by_t2": int(np.sum((preds_t2 == 0) & (~esc_2pct) & slow_mask)),
-        "mean_prob_escalated_slowloris": float(np.mean(probs_t2[slow_esc])),
-        "max_prob_escalated_slowloris": float(np.max(probs_t2[slow_esc])),
-        "standalone_t2_slowloris_recall": float(np.mean(preds_t2[slow_mask]) * 100.0),
+        "escalated_caught_by_t2": int(np.sum((preds_t2_ftp == 1) & slow_esc)),
+        "escalated_missed_by_t2": int(np.sum((preds_t2_ftp == 0) & slow_esc)),
+        "non_escalated_caught_by_t2": int(np.sum((preds_t2_ftp == 1) & (~esc_2pct) & slow_mask)),
+        "non_escalated_missed_by_t2": int(np.sum((preds_t2_ftp == 0) & (~esc_2pct) & slow_mask)),
+        "mean_prob_escalated_slowloris": float(np.mean(probs_t2_ftp[slow_esc])),
+        "max_prob_escalated_slowloris": float(np.max(probs_t2_ftp[slow_esc])),
+        "standalone_t2_slowloris_recall": float(np.mean(preds_t2_ftp[slow_mask]) * 100.0),
         "standalone_t1_slowloris_recall": float(np.mean(preds_t1[slow_mask]) * 100.0),
     }
 

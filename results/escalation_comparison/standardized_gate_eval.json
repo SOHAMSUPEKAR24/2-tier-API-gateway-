@@ -1,5 +1,5 @@
 {
-  "execution_timestamp": "2026-10-21 21:14:21 UTC",
+  "execution_timestamp": "2026-10-22 05:59:50 UTC",
   "standardized_gates": {
     "Full_kNN": {
       "1%": {
@@ -8,6 +8,8 @@
         "achieved_benign_ci95": 0.4397353108087785,
         "novel_macro_coverage": 26.182603763109935,
         "novel_macro_coverage_ci95": 26.649571151699966,
+        "novel_pooled_coverage": 28.720626631853786,
+        "novel_pooled_coverage_ci95": 32.25538865426974,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -37,8 +39,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 440,
-          "t2_caught": 0,
-          "t2_missed": 440,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 440,
+          "t2_lofo_caught": 10,
+          "t2_lofo_missed": 430,
           "oracle_caught": 440,
           "oracle_missed": 0
         },
@@ -47,40 +51,58 @@
           "oracle_caught": 447,
           "oracle_miss": 1085,
           "oracle_miss_rate_pct": 70.822454308094,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 17,
+          "lofo_miss": 1515,
+          "lofo_miss_rate_pct": 98.89033942558747
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 63,
-            "t2_caught": 0,
-            "t2_missed": 63,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 63,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 58,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 7.936507936507936
           },
           "DoS-Hulk": {
             "escalated_count": 100,
-            "t2_caught": 0,
-            "t2_missed": 100,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 100,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 95,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 5.0
           },
           "DoS-Slowloris": {
             "escalated_count": 277,
-            "t2_caught": 0,
-            "t2_missed": 277,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 277,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 277,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "FTP-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -90,6 +112,8 @@
         "achieved_benign_ci95": 0.5589259130573095,
         "novel_macro_coverage": 43.93267517127903,
         "novel_macro_coverage_ci95": 29.92525059122494,
+        "novel_pooled_coverage": 47.84595300261096,
+        "novel_pooled_coverage_ci95": 34.97179084047242,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -119,8 +143,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 733,
-          "t2_caught": 0,
-          "t2_missed": 733,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 733,
+          "t2_lofo_caught": 13,
+          "t2_lofo_missed": 720,
           "oracle_caught": 733,
           "oracle_missed": 0
         },
@@ -129,40 +155,58 @@
           "oracle_caught": 740,
           "oracle_miss": 792,
           "oracle_miss_rate_pct": 51.697127937336816,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 20,
+          "lofo_miss": 1512,
+          "lofo_miss_rate_pct": 98.69451697127938
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 187,
-            "t2_caught": 0,
-            "t2_missed": 187,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 187,
+            "t2_lofo_caught": 8,
+            "t2_lofo_missed": 179,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 4.27807486631016
           },
           "DoS-Hulk": {
             "escalated_count": 269,
-            "t2_caught": 0,
-            "t2_missed": 269,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 269,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 264,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 1.858736059479554
           },
           "DoS-Slowloris": {
             "escalated_count": 277,
-            "t2_caught": 0,
-            "t2_missed": 277,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 277,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 277,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "FTP-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -172,6 +216,8 @@
         "achieved_benign_ci95": 0.8543492692193742,
         "novel_macro_coverage": 48.931532640573515,
         "novel_macro_coverage_ci95": 33.52852604054669,
+        "novel_pooled_coverage": 53.52480417754569,
+        "novel_pooled_coverage_ci95": 38.23727266071072,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -201,8 +247,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 820,
-          "t2_caught": 0,
-          "t2_missed": 820,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 820,
+          "t2_lofo_caught": 13,
+          "t2_lofo_missed": 807,
           "oracle_caught": 820,
           "oracle_missed": 0
         },
@@ -211,40 +259,58 @@
           "oracle_caught": 827,
           "oracle_miss": 705,
           "oracle_miss_rate_pct": 46.01827676240209,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 20,
+          "lofo_miss": 1512,
+          "lofo_miss_rate_pct": 98.69451697127938
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 255,
-            "t2_caught": 0,
-            "t2_missed": 255,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 255,
+            "t2_lofo_caught": 8,
+            "t2_lofo_missed": 247,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 3.1372549019607843
           },
           "DoS-Hulk": {
             "escalated_count": 288,
-            "t2_caught": 0,
-            "t2_missed": 288,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 288,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 283,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 1.7361111111111112
           },
           "DoS-Slowloris": {
             "escalated_count": 277,
-            "t2_caught": 0,
-            "t2_missed": 277,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 277,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 277,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "FTP-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -254,6 +320,8 @@
         "achieved_benign_ci95": 2.5378619866209653,
         "novel_macro_coverage": 50.69945609101625,
         "novel_macro_coverage_ci95": 34.31613033685926,
+        "novel_pooled_coverage": 55.417754569190606,
+        "novel_pooled_coverage_ci95": 38.35585027058293,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -283,8 +351,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 849,
-          "t2_caught": 0,
-          "t2_missed": 849,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 849,
+          "t2_lofo_caught": 13,
+          "t2_lofo_missed": 836,
           "oracle_caught": 849,
           "oracle_missed": 0
         },
@@ -293,40 +363,58 @@
           "oracle_caught": 856,
           "oracle_miss": 676,
           "oracle_miss_rate_pct": 44.12532637075718,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 20,
+          "lofo_miss": 1512,
+          "lofo_miss_rate_pct": 98.69451697127938
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 266,
-            "t2_caught": 0,
-            "t2_missed": 266,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 266,
+            "t2_lofo_caught": 8,
+            "t2_lofo_missed": 258,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 3.007518796992481
           },
           "DoS-Hulk": {
             "escalated_count": 306,
-            "t2_caught": 0,
-            "t2_missed": 306,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 306,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 301,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 1.6339869281045754
           },
           "DoS-Slowloris": {
             "escalated_count": 277,
-            "t2_caught": 0,
-            "t2_missed": 277,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 277,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 277,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "FTP-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       }
@@ -334,92 +422,12 @@
     "Prototype_kNN": {
       "1%": {
         "target_budget": 1.0,
-        "achieved_benign": 1.0209869540555871,
-        "achieved_benign_ci95": 0.4062059168649799,
-        "novel_macro_coverage": 8.457297914881462,
-        "novel_macro_coverage_ci95": 6.203418384658517,
-        "family_counts": {
-          "SSH-BruteForce": {
-            "total": 267,
-            "escalated": 0,
-            "coverage_pct": 0.0
-          },
-          "DoS-GoldenEye": {
-            "total": 450,
-            "escalated": 62,
-            "coverage_pct": 13.777777777777779
-          },
-          "DoS-Hulk": {
-            "total": 389,
-            "escalated": 78,
-            "coverage_pct": 20.051413881748072
-          },
-          "DoS-Slowloris": {
-            "total": 426,
-            "escalated": 0,
-            "coverage_pct": 0.0
-          },
-          "FTP-BruteForce": {
-            "total": 268,
-            "escalated": 0,
-            "coverage_pct": 0.0
-          }
-        },
-        "tier2_on_novel_escalated": {
-          "novel_escalated_count": 140,
-          "t2_caught": 0,
-          "t2_missed": 140,
-          "oracle_caught": 140,
-          "oracle_missed": 0
-        },
-        "end_to_end_miss": {
-          "total_novel_flows": 1532,
-          "oracle_caught": 147,
-          "oracle_miss": 1385,
-          "oracle_miss_rate_pct": 90.40469973890339,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
-        },
-        "tier2_per_family_on_escalated": {
-          "SSH-BruteForce": {
-            "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
-          },
-          "DoS-GoldenEye": {
-            "escalated_count": 62,
-            "t2_caught": 0,
-            "t2_missed": 62,
-            "t2_caught_pct": 0.0
-          },
-          "DoS-Hulk": {
-            "escalated_count": 78,
-            "t2_caught": 0,
-            "t2_missed": 78,
-            "t2_caught_pct": 0.0
-          },
-          "DoS-Slowloris": {
-            "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
-          },
-          "FTP-BruteForce": {
-            "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
-          }
-        }
-      },
-      "2%": {
-        "target_budget": 2.0,
-        "achieved_benign": 2.004159576479486,
-        "achieved_benign_ci95": 0.8207949945623928,
+        "achieved_benign": 1.002079788239743,
+        "achieved_benign_ci95": 0.5092468702901148,
         "novel_macro_coverage": 31.228150106005927,
-        "novel_macro_coverage_ci95": 25.458456829300015,
+        "novel_macro_coverage_ci95": 26.88005922639683,
+        "novel_pooled_coverage": 34.39947780678851,
+        "novel_pooled_coverage_ci95": 32.02144333979089,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -449,8 +457,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 527,
-          "t2_caught": 0,
-          "t2_missed": 527,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 527,
+          "t2_lofo_caught": 9,
+          "t2_lofo_missed": 518,
           "oracle_caught": 527,
           "oracle_missed": 0
         },
@@ -459,49 +469,69 @@
           "oracle_caught": 534,
           "oracle_miss": 998,
           "oracle_miss_rate_pct": 65.14360313315926,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 16,
+          "lofo_miss": 1516,
+          "lofo_miss_rate_pct": 98.9556135770235
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 125,
-            "t2_caught": 0,
-            "t2_missed": 125,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 125,
+            "t2_lofo_caught": 7,
+            "t2_lofo_missed": 118,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 5.6000000000000005
           },
           "DoS-Hulk": {
             "escalated_count": 124,
-            "t2_caught": 0,
-            "t2_missed": 124,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 124,
+            "t2_lofo_caught": 2,
+            "t2_lofo_missed": 122,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 1.6129032258064515
           },
           "DoS-Slowloris": {
             "escalated_count": 278,
-            "t2_caught": 0,
-            "t2_missed": 278,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 278,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 278,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "FTP-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
-      "5%": {
-        "target_budget": 5.0,
-        "achieved_benign": 5.010398941198714,
-        "achieved_benign_ci95": 0.9835320489007793,
-        "novel_macro_coverage": 35.54918916526868,
-        "novel_macro_coverage_ci95": 26.015728513620406,
+      "2%": {
+        "target_budget": 2.0,
+        "achieved_benign": 2.004159576479486,
+        "achieved_benign_ci95": 0.8238435391525655,
+        "novel_macro_coverage": 32.82925200445748,
+        "novel_macro_coverage_ci95": 24.847463249668497,
+        "novel_pooled_coverage": 36.0313315926893,
+        "novel_pooled_coverage_ci95": 30.27865469987173,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -510,13 +540,13 @@
           },
           "DoS-GoldenEye": {
             "total": 450,
-            "escalated": 130,
-            "coverage_pct": 28.888888888888886
+            "escalated": 125,
+            "coverage_pct": 27.77777777777778
           },
           "DoS-Hulk": {
             "total": 389,
-            "escalated": 186,
-            "coverage_pct": 47.81491002570694
+            "escalated": 148,
+            "coverage_pct": 38.04627249357326
           },
           "DoS-Slowloris": {
             "total": 426,
@@ -530,60 +560,82 @@
           }
         },
         "tier2_on_novel_escalated": {
-          "novel_escalated_count": 595,
-          "t2_caught": 0,
-          "t2_missed": 595,
-          "oracle_caught": 595,
+          "novel_escalated_count": 552,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 552,
+          "t2_lofo_caught": 13,
+          "t2_lofo_missed": 539,
+          "oracle_caught": 552,
           "oracle_missed": 0
         },
         "end_to_end_miss": {
           "total_novel_flows": 1532,
-          "oracle_caught": 602,
-          "oracle_miss": 930,
-          "oracle_miss_rate_pct": 60.704960835509134,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "oracle_caught": 559,
+          "oracle_miss": 973,
+          "oracle_miss_rate_pct": 63.51174934725849,
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 20,
+          "lofo_miss": 1512,
+          "lofo_miss_rate_pct": 98.69451697127938
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
-            "escalated_count": 130,
-            "t2_caught": 0,
-            "t2_missed": 130,
-            "t2_caught_pct": 0.0
+            "escalated_count": 125,
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 125,
+            "t2_lofo_caught": 7,
+            "t2_lofo_missed": 118,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 5.6000000000000005
           },
           "DoS-Hulk": {
-            "escalated_count": 186,
-            "t2_caught": 0,
-            "t2_missed": 186,
-            "t2_caught_pct": 0.0
+            "escalated_count": 148,
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 148,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 143,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 3.3783783783783785
           },
           "DoS-Slowloris": {
             "escalated_count": 279,
-            "t2_caught": 0,
-            "t2_missed": 279,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 279,
+            "t2_lofo_caught": 1,
+            "t2_lofo_missed": 278,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.35842293906810035
           },
           "FTP-BruteForce": {
             "escalated_count": 1,
-            "t2_caught": 1,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 1,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 1,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
-      "10%": {
-        "target_budget": 10.0,
-        "achieved_benign": 10.001890716581583,
-        "achieved_benign_ci95": 1.518325023468396,
-        "novel_macro_coverage": 51.90691995445969,
-        "novel_macro_coverage_ci95": 32.09243713473643,
+      "5%": {
+        "target_budget": 5.0,
+        "achieved_benign": 5.010398941198714,
+        "achieved_benign_ci95": 1.305108460417722,
+        "novel_macro_coverage": 49.11317088477739,
+        "novel_macro_coverage_ci95": 31.661419713771163,
+        "novel_pooled_coverage": 53.72062663185378,
+        "novel_pooled_coverage_ci95": 36.313357685662396,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -592,18 +644,18 @@
           },
           "DoS-GoldenEye": {
             "total": 450,
-            "escalated": 265,
-            "coverage_pct": 58.88888888888889
+            "escalated": 255,
+            "coverage_pct": 56.666666666666664
           },
           "DoS-Hulk": {
             "total": 389,
-            "escalated": 322,
-            "coverage_pct": 82.77634961439588
+            "escalated": 289,
+            "coverage_pct": 74.293059125964
           },
           "DoS-Slowloris": {
             "total": 426,
-            "escalated": 281,
-            "coverage_pct": 65.96244131455398
+            "escalated": 279,
+            "coverage_pct": 65.49295774647888
           },
           "FTP-BruteForce": {
             "total": 268,
@@ -612,51 +664,175 @@
           }
         },
         "tier2_on_novel_escalated": {
-          "novel_escalated_count": 868,
-          "t2_caught": 0,
-          "t2_missed": 868,
-          "oracle_caught": 868,
+          "novel_escalated_count": 823,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 823,
+          "t2_lofo_caught": 14,
+          "t2_lofo_missed": 809,
+          "oracle_caught": 823,
           "oracle_missed": 0
         },
         "end_to_end_miss": {
           "total_novel_flows": 1532,
-          "oracle_caught": 875,
-          "oracle_miss": 657,
-          "oracle_miss_rate_pct": 42.885117493472585,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "oracle_caught": 830,
+          "oracle_miss": 702,
+          "oracle_miss_rate_pct": 45.822454308093995,
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 21,
+          "lofo_miss": 1511,
+          "lofo_miss_rate_pct": 98.62924281984334
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
-            "escalated_count": 265,
-            "t2_caught": 0,
-            "t2_missed": 265,
-            "t2_caught_pct": 0.0
+            "escalated_count": 255,
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 255,
+            "t2_lofo_caught": 8,
+            "t2_lofo_missed": 247,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 3.1372549019607843
           },
           "DoS-Hulk": {
-            "escalated_count": 322,
-            "t2_caught": 0,
-            "t2_missed": 322,
-            "t2_caught_pct": 0.0
+            "escalated_count": 289,
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 289,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 284,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 1.7301038062283738
           },
           "DoS-Slowloris": {
-            "escalated_count": 281,
-            "t2_caught": 0,
-            "t2_missed": 281,
-            "t2_caught_pct": 0.0
+            "escalated_count": 279,
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 279,
+            "t2_lofo_caught": 1,
+            "t2_lofo_missed": 278,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.35842293906810035
           },
           "FTP-BruteForce": {
             "escalated_count": 1,
-            "t2_caught": 1,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 1,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 1,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
+          }
+        }
+      },
+      "10%": {
+        "target_budget": 10.0,
+        "achieved_benign": 10.001890716581583,
+        "achieved_benign_ci95": 1.9809004322046524,
+        "novel_macro_coverage": 51.61187346874736,
+        "novel_macro_coverage_ci95": 31.627452216608614,
+        "novel_pooled_coverage": 56.39686684073107,
+        "novel_pooled_coverage_ci95": 35.85409330149497,
+        "family_counts": {
+          "SSH-BruteForce": {
+            "total": 267,
+            "escalated": 0,
+            "coverage_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "total": 450,
+            "escalated": 270,
+            "coverage_pct": 60.0
+          },
+          "DoS-Hulk": {
+            "total": 389,
+            "escalated": 314,
+            "coverage_pct": 80.719794344473
+          },
+          "DoS-Slowloris": {
+            "total": 426,
+            "escalated": 280,
+            "coverage_pct": 65.72769953051643
+          },
+          "FTP-BruteForce": {
+            "total": 268,
+            "escalated": 1,
+            "coverage_pct": 0.3731343283582089
+          }
+        },
+        "tier2_on_novel_escalated": {
+          "novel_escalated_count": 864,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 864,
+          "t2_lofo_caught": 15,
+          "t2_lofo_missed": 849,
+          "oracle_caught": 864,
+          "oracle_missed": 0
+        },
+        "end_to_end_miss": {
+          "total_novel_flows": 1532,
+          "oracle_caught": 871,
+          "oracle_miss": 661,
+          "oracle_miss_rate_pct": 43.146214099216714,
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 22,
+          "lofo_miss": 1510,
+          "lofo_miss_rate_pct": 98.56396866840731
+        },
+        "tier2_per_family_on_escalated": {
+          "SSH-BruteForce": {
+            "escalated_count": 0,
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
+          },
+          "DoS-GoldenEye": {
+            "escalated_count": 270,
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 270,
+            "t2_lofo_caught": 8,
+            "t2_lofo_missed": 262,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 2.9629629629629632
+          },
+          "DoS-Hulk": {
+            "escalated_count": 314,
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 314,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 309,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 1.5923566878980893
+          },
+          "DoS-Slowloris": {
+            "escalated_count": 280,
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 280,
+            "t2_lofo_caught": 2,
+            "t2_lofo_missed": 278,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.7142857142857143
+          },
+          "FTP-BruteForce": {
+            "escalated_count": 1,
+            "t2_ftp_caught": 1,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 1,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       }
@@ -668,6 +844,8 @@
         "achieved_benign_ci95": 0.507890648075543,
         "novel_macro_coverage": 2.229791488146244,
         "novel_macro_coverage_ci95": 1.6489371709784566,
+        "novel_pooled_coverage": 2.415143603133159,
+        "novel_pooled_coverage_ci95": 1.4624847603942779,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -697,8 +875,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 37,
-          "t2_caught": 0,
-          "t2_missed": 37,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 37,
+          "t2_lofo_caught": 3,
+          "t2_lofo_missed": 34,
           "oracle_caught": 37,
           "oracle_missed": 0
         },
@@ -707,40 +887,58 @@
           "oracle_caught": 44,
           "oracle_miss": 1488,
           "oracle_miss_rate_pct": 97.12793733681463,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 10,
+          "lofo_miss": 1522,
+          "lofo_miss_rate_pct": 99.34725848563968
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 17,
-            "t2_caught": 0,
-            "t2_missed": 17,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 17,
+            "t2_lofo_caught": 3,
+            "t2_lofo_missed": 14,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 17.647058823529413
           },
           "DoS-Hulk": {
             "escalated_count": 20,
-            "t2_caught": 0,
-            "t2_missed": 20,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 20,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 20,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-Slowloris": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "FTP-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -750,6 +948,8 @@
         "achieved_benign_ci95": 0.8782732649396247,
         "novel_macro_coverage": 25.142023808087025,
         "novel_macro_coverage_ci95": 19.371013430490716,
+        "novel_pooled_coverage": 27.676240208877285,
+        "novel_pooled_coverage_ci95": 22.176516811455574,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -779,8 +979,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 424,
-          "t2_caught": 0,
-          "t2_missed": 424,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 424,
+          "t2_lofo_caught": 11,
+          "t2_lofo_missed": 413,
           "oracle_caught": 424,
           "oracle_missed": 0
         },
@@ -789,40 +991,58 @@
           "oracle_caught": 431,
           "oracle_miss": 1101,
           "oracle_miss_rate_pct": 71.8668407310705,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 18,
+          "lofo_miss": 1514,
+          "lofo_miss_rate_pct": 98.82506527415144
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 124,
-            "t2_caught": 0,
-            "t2_missed": 124,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 124,
+            "t2_lofo_caught": 7,
+            "t2_lofo_missed": 117,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 5.64516129032258
           },
           "DoS-Hulk": {
             "escalated_count": 116,
-            "t2_caught": 0,
-            "t2_missed": 116,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 116,
+            "t2_lofo_caught": 4,
+            "t2_lofo_missed": 112,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 3.4482758620689653
           },
           "DoS-Slowloris": {
             "escalated_count": 184,
-            "t2_caught": 0,
-            "t2_missed": 184,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 184,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 184,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "FTP-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -832,6 +1052,8 @@
         "achieved_benign_ci95": 0.8635026369262683,
         "novel_macro_coverage": 51.35298365456952,
         "novel_macro_coverage_ci95": 33.65191858230036,
+        "novel_pooled_coverage": 55.93994778067886,
+        "novel_pooled_coverage_ci95": 37.719495868185874,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -861,8 +1083,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 857,
-          "t2_caught": 0,
-          "t2_missed": 857,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 857,
+          "t2_lofo_caught": 13,
+          "t2_lofo_missed": 844,
           "oracle_caught": 857,
           "oracle_missed": 0
         },
@@ -871,40 +1095,58 @@
           "oracle_caught": 864,
           "oracle_miss": 668,
           "oracle_miss_rate_pct": 43.60313315926893,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 20,
+          "lofo_miss": 1512,
+          "lofo_miss_rate_pct": 98.69451697127938
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 250,
-            "t2_caught": 0,
-            "t2_missed": 250,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 250,
+            "t2_lofo_caught": 8,
+            "t2_lofo_missed": 242,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 3.2
           },
           "DoS-Hulk": {
             "escalated_count": 330,
-            "t2_caught": 0,
-            "t2_missed": 330,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 330,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 325,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 1.5151515151515151
           },
           "DoS-Slowloris": {
             "escalated_count": 277,
-            "t2_caught": 0,
-            "t2_missed": 277,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 277,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 277,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "FTP-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -914,6 +1156,8 @@
         "achieved_benign_ci95": 1.8736961624459678,
         "novel_macro_coverage": 58.02821930152753,
         "novel_macro_coverage_ci95": 37.16995183447813,
+        "novel_pooled_coverage": 63.25065274151436,
+        "novel_pooled_coverage_ci95": 40.65442348791864,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -943,8 +1187,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 969,
-          "t2_caught": 0,
-          "t2_missed": 969,
+          "t2_ftp_caught": 0,
+          "t2_ftp_missed": 969,
+          "t2_lofo_caught": 13,
+          "t2_lofo_missed": 956,
           "oracle_caught": 969,
           "oracle_missed": 0
         },
@@ -953,40 +1199,58 @@
           "oracle_caught": 976,
           "oracle_miss": 556,
           "oracle_miss_rate_pct": 36.29242819843342,
-          "trained_caught": 7,
-          "trained_miss": 1525,
-          "trained_miss_rate_pct": 99.54308093994779
+          "ftp_only_caught": 7,
+          "ftp_only_miss": 1525,
+          "ftp_only_miss_rate_pct": 99.54308093994779,
+          "lofo_caught": 20,
+          "lofo_miss": 1512,
+          "lofo_miss_rate_pct": 98.69451697127938
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 310,
-            "t2_caught": 0,
-            "t2_missed": 310,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 310,
+            "t2_lofo_caught": 8,
+            "t2_lofo_missed": 302,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 2.5806451612903225
           },
           "DoS-Hulk": {
             "escalated_count": 382,
-            "t2_caught": 0,
-            "t2_missed": 382,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 382,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 377,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 1.3089005235602094
           },
           "DoS-Slowloris": {
             "escalated_count": 277,
-            "t2_caught": 0,
-            "t2_missed": 277,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 277,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 277,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "FTP-BruteForce": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       }
@@ -998,6 +1262,8 @@
         "achieved_benign_ci95": 0.40610880883422873,
         "novel_macro_coverage": 20.021536360262225,
         "novel_macro_coverage_ci95": 23.729827127318472,
+        "novel_pooled_coverage": 22.12793733681462,
+        "novel_pooled_coverage_ci95": 31.89441860484713,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -1027,8 +1293,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 339,
-          "t2_caught": 39,
-          "t2_missed": 300,
+          "t2_ftp_caught": 39,
+          "t2_ftp_missed": 300,
+          "t2_lofo_caught": 54,
+          "t2_lofo_missed": 285,
           "oracle_caught": 339,
           "oracle_missed": 0
         },
@@ -1037,40 +1305,58 @@
           "oracle_caught": 339,
           "oracle_miss": 1193,
           "oracle_miss_rate_pct": 77.87206266318537,
-          "trained_caught": 39,
-          "trained_miss": 1493,
-          "trained_miss_rate_pct": 97.45430809399478
+          "ftp_only_caught": 39,
+          "ftp_only_miss": 1493,
+          "ftp_only_miss_rate_pct": 97.45430809399478,
+          "lofo_caught": 54,
+          "lofo_miss": 1478,
+          "lofo_miss_rate_pct": 96.47519582245431
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 3,
-            "t2_caught": 2,
-            "t2_missed": 1,
-            "t2_caught_pct": 66.66666666666666
+            "t2_ftp_caught": 2,
+            "t2_ftp_missed": 1,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 3,
+            "t2_ftp_caught_pct": 66.66666666666666,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-Hulk": {
             "escalated_count": 4,
-            "t2_caught": 0,
-            "t2_missed": 4,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 4,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 4,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-Slowloris": {
             "escalated_count": 332,
-            "t2_caught": 37,
-            "t2_missed": 295,
-            "t2_caught_pct": 11.144578313253012
+            "t2_ftp_caught": 37,
+            "t2_ftp_missed": 295,
+            "t2_lofo_caught": 54,
+            "t2_lofo_missed": 278,
+            "t2_ftp_caught_pct": 11.144578313253012,
+            "t2_lofo_caught_pct": 16.265060240963855
           },
           "FTP-BruteForce": {
             "escalated_count": 23,
-            "t2_caught": 23,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 23,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 23,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -1080,6 +1366,8 @@
         "achieved_benign_ci95": 0.6784370975140643,
         "novel_macro_coverage": 20.396068195468217,
         "novel_macro_coverage_ci95": 23.10793636352786,
+        "novel_pooled_coverage": 22.389033942558747,
+        "novel_pooled_coverage_ci95": 31.634485768156004,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -1109,8 +1397,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 343,
-          "t2_caught": 39,
-          "t2_missed": 304,
+          "t2_ftp_caught": 39,
+          "t2_ftp_missed": 304,
+          "t2_lofo_caught": 54,
+          "t2_lofo_missed": 289,
           "oracle_caught": 343,
           "oracle_missed": 0
         },
@@ -1119,40 +1409,58 @@
           "oracle_caught": 343,
           "oracle_miss": 1189,
           "oracle_miss_rate_pct": 77.61096605744126,
-          "trained_caught": 39,
-          "trained_miss": 1493,
-          "trained_miss_rate_pct": 97.45430809399478
+          "ftp_only_caught": 39,
+          "ftp_only_miss": 1493,
+          "ftp_only_miss_rate_pct": 97.45430809399478,
+          "lofo_caught": 54,
+          "lofo_miss": 1478,
+          "lofo_miss_rate_pct": 96.47519582245431
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 7,
-            "t2_caught": 2,
-            "t2_missed": 5,
-            "t2_caught_pct": 28.57142857142857
+            "t2_ftp_caught": 2,
+            "t2_ftp_missed": 5,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 7,
+            "t2_ftp_caught_pct": 28.57142857142857,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-Hulk": {
             "escalated_count": 4,
-            "t2_caught": 0,
-            "t2_missed": 4,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 4,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 4,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-Slowloris": {
             "escalated_count": 332,
-            "t2_caught": 37,
-            "t2_missed": 295,
-            "t2_caught_pct": 11.144578313253012
+            "t2_ftp_caught": 37,
+            "t2_ftp_missed": 295,
+            "t2_lofo_caught": 54,
+            "t2_lofo_missed": 278,
+            "t2_ftp_caught_pct": 11.144578313253012,
+            "t2_lofo_caught_pct": 16.265060240963855
           },
           "FTP-BruteForce": {
             "escalated_count": 23,
-            "t2_caught": 23,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 23,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 23,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -1162,6 +1470,8 @@
         "achieved_benign_ci95": 1.5696672777472014,
         "novel_macro_coverage": 25.912500120350845,
         "novel_macro_coverage_ci95": 30.18885055624519,
+        "novel_pooled_coverage": 28.524804177545693,
+        "novel_pooled_coverage_ci95": 40.2342703779236,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -1191,8 +1501,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 437,
-          "t2_caught": 39,
-          "t2_missed": 398,
+          "t2_ftp_caught": 39,
+          "t2_ftp_missed": 398,
+          "t2_lofo_caught": 54,
+          "t2_lofo_missed": 383,
           "oracle_caught": 437,
           "oracle_missed": 0
         },
@@ -1201,40 +1513,58 @@
           "oracle_caught": 437,
           "oracle_miss": 1095,
           "oracle_miss_rate_pct": 71.47519582245431,
-          "trained_caught": 39,
-          "trained_miss": 1493,
-          "trained_miss_rate_pct": 97.45430809399478
+          "ftp_only_caught": 39,
+          "ftp_only_miss": 1493,
+          "ftp_only_miss_rate_pct": 97.45430809399478,
+          "lofo_caught": 54,
+          "lofo_miss": 1478,
+          "lofo_miss_rate_pct": 96.47519582245431
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 7,
-            "t2_caught": 2,
-            "t2_missed": 5,
-            "t2_caught_pct": 28.57142857142857
+            "t2_ftp_caught": 2,
+            "t2_ftp_missed": 5,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 7,
+            "t2_ftp_caught_pct": 28.57142857142857,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 0,
-            "t2_caught": 0,
-            "t2_missed": 0,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 0,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-Hulk": {
             "escalated_count": 4,
-            "t2_caught": 0,
-            "t2_missed": 4,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 4,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 4,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-Slowloris": {
             "escalated_count": 426,
-            "t2_caught": 37,
-            "t2_missed": 389,
-            "t2_caught_pct": 8.685446009389672
+            "t2_ftp_caught": 37,
+            "t2_ftp_missed": 389,
+            "t2_lofo_caught": 54,
+            "t2_lofo_missed": 372,
+            "t2_ftp_caught_pct": 8.685446009389672,
+            "t2_lofo_caught_pct": 12.676056338028168
           },
           "FTP-BruteForce": {
             "escalated_count": 26,
-            "t2_caught": 26,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 26,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 26,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -1244,6 +1574,8 @@
         "achieved_benign_ci95": 3.7911527775234055,
         "novel_macro_coverage": 27.079166787017513,
         "novel_macro_coverage_ci95": 30.14900336089996,
+        "novel_pooled_coverage": 29.89556135770235,
+        "novel_pooled_coverage_ci95": 39.78678344379056,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -1273,8 +1605,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 458,
-          "t2_caught": 39,
-          "t2_missed": 419,
+          "t2_ftp_caught": 39,
+          "t2_ftp_missed": 419,
+          "t2_lofo_caught": 54,
+          "t2_lofo_missed": 404,
           "oracle_caught": 458,
           "oracle_missed": 0
         },
@@ -1283,40 +1617,58 @@
           "oracle_caught": 458,
           "oracle_miss": 1074,
           "oracle_miss_rate_pct": 70.10443864229765,
-          "trained_caught": 39,
-          "trained_miss": 1493,
-          "trained_miss_rate_pct": 97.45430809399478
+          "ftp_only_caught": 39,
+          "ftp_only_miss": 1493,
+          "ftp_only_miss_rate_pct": 97.45430809399478,
+          "lofo_caught": 54,
+          "lofo_miss": 1478,
+          "lofo_miss_rate_pct": 96.47519582245431
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 7,
-            "t2_caught": 2,
-            "t2_missed": 5,
-            "t2_caught_pct": 28.57142857142857
+            "t2_ftp_caught": 2,
+            "t2_ftp_missed": 5,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 7,
+            "t2_ftp_caught_pct": 28.57142857142857,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 21,
-            "t2_caught": 0,
-            "t2_missed": 21,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 21,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 21,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-Hulk": {
             "escalated_count": 4,
-            "t2_caught": 0,
-            "t2_missed": 4,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 4,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 4,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-Slowloris": {
             "escalated_count": 426,
-            "t2_caught": 37,
-            "t2_missed": 389,
-            "t2_caught_pct": 8.685446009389672
+            "t2_ftp_caught": 37,
+            "t2_ftp_missed": 389,
+            "t2_lofo_caught": 54,
+            "t2_lofo_missed": 372,
+            "t2_ftp_caught_pct": 8.685446009389672,
+            "t2_lofo_caught_pct": 12.676056338028168
           },
           "FTP-BruteForce": {
             "escalated_count": 29,
-            "t2_caught": 29,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 29,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 29,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       }
@@ -1328,6 +1680,8 @@
         "achieved_benign_ci95": 0.6090008338763723,
         "novel_macro_coverage": 27.32421873993545,
         "novel_macro_coverage_ci95": 29.147917271174975,
+        "novel_pooled_coverage": 30.026109660574413,
+        "novel_pooled_coverage_ci95": 35.60932374891511,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -1357,8 +1711,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 460,
-          "t2_caught": 39,
-          "t2_missed": 421,
+          "t2_ftp_caught": 39,
+          "t2_ftp_missed": 421,
+          "t2_lofo_caught": 60,
+          "t2_lofo_missed": 400,
           "oracle_caught": 460,
           "oracle_missed": 0
         },
@@ -1367,40 +1723,58 @@
           "oracle_caught": 460,
           "oracle_miss": 1072,
           "oracle_miss_rate_pct": 69.9738903394256,
-          "trained_caught": 39,
-          "trained_miss": 1493,
-          "trained_miss_rate_pct": 97.45430809399478
+          "ftp_only_caught": 39,
+          "ftp_only_miss": 1493,
+          "ftp_only_miss_rate_pct": 97.45430809399478,
+          "lofo_caught": 60,
+          "lofo_miss": 1472,
+          "lofo_miss_rate_pct": 96.08355091383812
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 2,
-            "t2_caught": 2,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 2,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 2,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 51,
-            "t2_caught": 0,
-            "t2_missed": 51,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 51,
+            "t2_lofo_caught": 4,
+            "t2_lofo_missed": 47,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 7.8431372549019605
           },
           "DoS-Hulk": {
             "escalated_count": 75,
-            "t2_caught": 0,
-            "t2_missed": 75,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 75,
+            "t2_lofo_caught": 2,
+            "t2_lofo_missed": 73,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 2.666666666666667
           },
           "DoS-Slowloris": {
             "escalated_count": 332,
-            "t2_caught": 37,
-            "t2_missed": 295,
-            "t2_caught_pct": 11.144578313253012
+            "t2_ftp_caught": 37,
+            "t2_ftp_missed": 295,
+            "t2_lofo_caught": 54,
+            "t2_lofo_missed": 278,
+            "t2_ftp_caught_pct": 11.144578313253012,
+            "t2_lofo_caught_pct": 16.265060240963855
           },
           "FTP-BruteForce": {
             "escalated_count": 4,
-            "t2_caught": 4,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 4,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 4,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -1410,6 +1784,8 @@
         "achieved_benign_ci95": 0.8042583715370497,
         "novel_macro_coverage": 29.948271578771223,
         "novel_macro_coverage_ci95": 31.577290402921072,
+        "novel_pooled_coverage": 32.76762402088773,
+        "novel_pooled_coverage_ci95": 37.98480995673077,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -1439,8 +1815,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 502,
-          "t2_caught": 39,
-          "t2_missed": 463,
+          "t2_ftp_caught": 39,
+          "t2_ftp_missed": 463,
+          "t2_lofo_caught": 64,
+          "t2_lofo_missed": 438,
           "oracle_caught": 502,
           "oracle_missed": 0
         },
@@ -1449,40 +1827,58 @@
           "oracle_caught": 502,
           "oracle_miss": 1030,
           "oracle_miss_rate_pct": 67.23237597911226,
-          "trained_caught": 39,
-          "trained_miss": 1493,
-          "trained_miss_rate_pct": 97.45430809399478
+          "ftp_only_caught": 39,
+          "ftp_only_miss": 1493,
+          "ftp_only_miss_rate_pct": 97.45430809399478,
+          "lofo_caught": 64,
+          "lofo_miss": 1468,
+          "lofo_miss_rate_pct": 95.822454308094
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 3,
-            "t2_caught": 2,
-            "t2_missed": 1,
-            "t2_caught_pct": 66.66666666666666
+            "t2_ftp_caught": 2,
+            "t2_ftp_missed": 1,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 3,
+            "t2_ftp_caught_pct": 66.66666666666666,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 63,
-            "t2_caught": 0,
-            "t2_missed": 63,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 63,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 58,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 7.936507936507936
           },
           "DoS-Hulk": {
             "escalated_count": 104,
-            "t2_caught": 0,
-            "t2_missed": 104,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 104,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 99,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 4.807692307692308
           },
           "DoS-Slowloris": {
             "escalated_count": 332,
-            "t2_caught": 37,
-            "t2_missed": 295,
-            "t2_caught_pct": 11.144578313253012
+            "t2_ftp_caught": 37,
+            "t2_ftp_missed": 295,
+            "t2_lofo_caught": 54,
+            "t2_lofo_missed": 278,
+            "t2_ftp_caught_pct": 11.144578313253012,
+            "t2_lofo_caught_pct": 16.265060240963855
           },
           "FTP-BruteForce": {
             "escalated_count": 23,
-            "t2_caught": 23,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 23,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 23,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -1492,6 +1888,8 @@
         "achieved_benign_ci95": 1.1967155679606656,
         "novel_macro_coverage": 57.179709489102635,
         "novel_macro_coverage_ci95": 40.95515367412091,
+        "novel_pooled_coverage": 62.467362924281986,
+        "novel_pooled_coverage_ci95": 47.75219168744716,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -1521,8 +1919,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 957,
-          "t2_caught": 39,
-          "t2_missed": 918,
+          "t2_ftp_caught": 39,
+          "t2_ftp_missed": 918,
+          "t2_lofo_caught": 67,
+          "t2_lofo_missed": 890,
           "oracle_caught": 957,
           "oracle_missed": 0
         },
@@ -1531,40 +1931,58 @@
           "oracle_caught": 957,
           "oracle_miss": 575,
           "oracle_miss_rate_pct": 37.532637075718014,
-          "trained_caught": 39,
-          "trained_miss": 1493,
-          "trained_miss_rate_pct": 97.45430809399478
+          "ftp_only_caught": 39,
+          "ftp_only_miss": 1493,
+          "ftp_only_miss_rate_pct": 97.45430809399478,
+          "lofo_caught": 67,
+          "lofo_miss": 1465,
+          "lofo_miss_rate_pct": 95.62663185378591
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 7,
-            "t2_caught": 2,
-            "t2_missed": 5,
-            "t2_caught_pct": 28.57142857142857
+            "t2_ftp_caught": 2,
+            "t2_ftp_missed": 5,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 7,
+            "t2_ftp_caught_pct": 28.57142857142857,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 247,
-            "t2_caught": 0,
-            "t2_missed": 247,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 247,
+            "t2_lofo_caught": 8,
+            "t2_lofo_missed": 239,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 3.2388663967611335
           },
           "DoS-Hulk": {
             "escalated_count": 277,
-            "t2_caught": 0,
-            "t2_missed": 277,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 277,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 272,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 1.8050541516245486
           },
           "DoS-Slowloris": {
             "escalated_count": 426,
-            "t2_caught": 37,
-            "t2_missed": 389,
-            "t2_caught_pct": 8.685446009389672
+            "t2_ftp_caught": 37,
+            "t2_ftp_missed": 389,
+            "t2_lofo_caught": 54,
+            "t2_lofo_missed": 372,
+            "t2_ftp_caught_pct": 8.685446009389672,
+            "t2_lofo_caught_pct": 12.676056338028168
           },
           "FTP-BruteForce": {
             "escalated_count": 26,
-            "t2_caught": 26,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 26,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 26,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       },
@@ -1574,6 +1992,8 @@
         "achieved_benign_ci95": 1.605123991963253,
         "novel_macro_coverage": 58.58816421632342,
         "novel_macro_coverage_ci95": 38.84262638369277,
+        "novel_pooled_coverage": 63.9686684073107,
+        "novel_pooled_coverage_ci95": 46.58197509948579,
         "family_counts": {
           "SSH-BruteForce": {
             "total": 267,
@@ -1603,8 +2023,10 @@
         },
         "tier2_on_novel_escalated": {
           "novel_escalated_count": 980,
-          "t2_caught": 39,
-          "t2_missed": 941,
+          "t2_ftp_caught": 39,
+          "t2_ftp_missed": 941,
+          "t2_lofo_caught": 67,
+          "t2_lofo_missed": 913,
           "oracle_caught": 980,
           "oracle_missed": 0
         },
@@ -1613,40 +2035,58 @@
           "oracle_caught": 980,
           "oracle_miss": 552,
           "oracle_miss_rate_pct": 36.0313315926893,
-          "trained_caught": 39,
-          "trained_miss": 1493,
-          "trained_miss_rate_pct": 97.45430809399478
+          "ftp_only_caught": 39,
+          "ftp_only_miss": 1493,
+          "ftp_only_miss_rate_pct": 97.45430809399478,
+          "lofo_caught": 67,
+          "lofo_miss": 1465,
+          "lofo_miss_rate_pct": 95.62663185378591
         },
         "tier2_per_family_on_escalated": {
           "SSH-BruteForce": {
             "escalated_count": 7,
-            "t2_caught": 2,
-            "t2_missed": 5,
-            "t2_caught_pct": 28.57142857142857
+            "t2_ftp_caught": 2,
+            "t2_ftp_missed": 5,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 7,
+            "t2_ftp_caught_pct": 28.57142857142857,
+            "t2_lofo_caught_pct": 0.0
           },
           "DoS-GoldenEye": {
             "escalated_count": 255,
-            "t2_caught": 0,
-            "t2_missed": 255,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 255,
+            "t2_lofo_caught": 8,
+            "t2_lofo_missed": 247,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 3.1372549019607843
           },
           "DoS-Hulk": {
             "escalated_count": 292,
-            "t2_caught": 0,
-            "t2_missed": 292,
-            "t2_caught_pct": 0.0
+            "t2_ftp_caught": 0,
+            "t2_ftp_missed": 292,
+            "t2_lofo_caught": 5,
+            "t2_lofo_missed": 287,
+            "t2_ftp_caught_pct": 0.0,
+            "t2_lofo_caught_pct": 1.7123287671232876
           },
           "DoS-Slowloris": {
             "escalated_count": 426,
-            "t2_caught": 37,
-            "t2_missed": 389,
-            "t2_caught_pct": 8.685446009389672
+            "t2_ftp_caught": 37,
+            "t2_ftp_missed": 389,
+            "t2_lofo_caught": 54,
+            "t2_lofo_missed": 372,
+            "t2_ftp_caught_pct": 8.685446009389672,
+            "t2_lofo_caught_pct": 12.676056338028168
           },
           "FTP-BruteForce": {
             "escalated_count": 26,
-            "t2_caught": 26,
-            "t2_missed": 0,
-            "t2_caught_pct": 100.0
+            "t2_ftp_caught": 26,
+            "t2_ftp_missed": 0,
+            "t2_lofo_caught": 0,
+            "t2_lofo_missed": 26,
+            "t2_ftp_caught_pct": 100.0,
+            "t2_lofo_caught_pct": 0.0
           }
         }
       }
@@ -1657,142 +2097,286 @@
       "1%": {
         "deployable_threshold": 2.082659662098534,
         "deployable_achieved_benign": 1.0398941198714313,
+        "deployable_macro_coverage": 31.297999364366717,
+        "deployable_pooled_coverage": 34.46475195822455,
         "oracle_threshold": 1.676834540217633,
-        "oracle_achieved_benign": 1.002079788239743
+        "oracle_achieved_benign": 1.002079788239743,
+        "oracle_macro_coverage": 26.182603763109935,
+        "oracle_pooled_coverage": 28.720626631853786
       },
       "2%": {
         "deployable_threshold": 1.0962419802340688,
         "deployable_achieved_benign": 2.4768387218755907,
+        "deployable_macro_coverage": 48.47837639949954,
+        "deployable_pooled_coverage": 53.00261096605744,
         "oracle_threshold": 1.293448198668357,
-        "oracle_achieved_benign": 2.004159576479486
+        "oracle_achieved_benign": 2.004159576479486,
+        "oracle_macro_coverage": 43.93267517127903,
+        "oracle_pooled_coverage": 47.84595300261096
       },
       "5%": {
         "deployable_threshold": 0.5595708139570622,
         "deployable_achieved_benign": 6.541879372282095,
+        "deployable_macro_coverage": 52.48480313471804,
+        "deployable_pooled_coverage": 57.310704960835515,
         "oracle_threshold": 0.755057391159884,
-        "oracle_achieved_benign": 5.010398941198714
+        "oracle_achieved_benign": 5.010398941198714,
+        "oracle_macro_coverage": 48.931532640573515,
+        "oracle_pooled_coverage": 53.52480417754569
       },
       "10%": {
         "deployable_threshold": 0.3471129600790299,
         "deployable_achieved_benign": 13.159387407827566,
+        "deployable_macro_coverage": 56.21871215869913,
+        "deployable_pooled_coverage": 61.61879895561357,
         "oracle_threshold": 0.5346944161159979,
-        "oracle_achieved_benign": 10.001890716581583
+        "oracle_achieved_benign": 10.001890716581583,
+        "oracle_macro_coverage": 50.69945609101625,
+        "oracle_pooled_coverage": 55.417754569190606
       }
     },
     "Mahalanobis": {
       "1%": {
         "deployable_threshold": 11.85364534332075,
         "deployable_achieved_benign": 1.0588012856872755,
+        "deployable_macro_coverage": 9.624157685329342,
+        "deployable_pooled_coverage": 10.639686684073107,
         "oracle_threshold": 11.436838695494412,
-        "oracle_achieved_benign": 1.002079788239743
+        "oracle_achieved_benign": 1.002079788239743,
+        "oracle_macro_coverage": 2.229791488146244,
+        "oracle_pooled_coverage": 2.415143603133159
       },
       "2%": {
         "deployable_threshold": 6.596088623679155,
         "deployable_achieved_benign": 2.3633957269805257,
+        "deployable_macro_coverage": 31.747870829662347,
+        "deployable_pooled_coverage": 34.92167101827676,
         "oracle_threshold": 6.9648283438543865,
-        "oracle_achieved_benign": 2.004159576479486
+        "oracle_achieved_benign": 2.004159576479486,
+        "oracle_macro_coverage": 25.142023808087025,
+        "oracle_pooled_coverage": 27.676240208877285
       },
       "5%": {
         "deployable_threshold": 4.026770594335942,
         "deployable_achieved_benign": 6.579693703913783,
+        "deployable_macro_coverage": 51.575205876791735,
+        "deployable_pooled_coverage": 56.20104438642297,
         "oracle_threshold": 4.047355604660209,
-        "oracle_achieved_benign": 5.010398941198714
+        "oracle_achieved_benign": 5.010398941198714,
+        "oracle_macro_coverage": 51.35298365456952,
+        "oracle_pooled_coverage": 55.93994778067886
       },
       "10%": {
         "deployable_threshold": 3.7012454920170716,
         "deployable_achieved_benign": 11.325392323690679,
+        "deployable_macro_coverage": 58.19488596819419,
+        "deployable_pooled_coverage": 63.44647519582245,
         "oracle_threshold": 3.76508201552724,
-        "oracle_achieved_benign": 10.001890716581583
+        "oracle_achieved_benign": 10.001890716581583,
+        "oracle_macro_coverage": 58.02821930152753,
+        "oracle_pooled_coverage": 63.25065274151436
       }
     }
   },
   "paired_block_differences": {
     "Full_kNN": {
-      "1%": {
-        "mean_paired_difference": 1.397513874325929,
-        "ci95_paired_difference": 2.061147360975894,
-        "pct_blocks_positive": 20.0
-      },
-      "2%": {
-        "mean_paired_difference": 5.65919019021525,
-        "ci95_paired_difference": 7.787737243077087,
-        "pct_blocks_positive": 20.0
-      },
-      "5%": {
-        "mean_paired_difference": 5.588045688337899,
-        "ci95_paired_difference": 8.17933252179762,
-        "pct_blocks_positive": 20.0
-      },
-      "10%": {
-        "mean_paired_difference": 6.008396188217116,
-        "ci95_paired_difference": 8.751293071567634,
-        "pct_blocks_positive": 20.0
+      "description": "Full kNN Gate (Standardized, k=5, 9 features, N=4000 reference)",
+      "baseline": "RF Probability Band Gate (Uncertainty thresholding)",
+      "budgets": {
+        "1%": {
+          "mean_paired_difference": 1.397513874325929,
+          "ci95_paired_difference": 2.061147360975894,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 1.397513874325929,
+          "ci95_paired_macro_difference": 2.061147360975894,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 1.262035723146389,
+          "ci95_paired_pooled_difference": 2.022719966786194,
+          "pct_blocks_positive_pooled": 20.0
+        },
+        "2%": {
+          "mean_paired_difference": 5.65919019021525,
+          "ci95_paired_difference": 7.787737243077087,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 5.65919019021525,
+          "ci95_paired_macro_difference": 7.787737243077087,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 5.083794127855098,
+          "ci95_paired_pooled_difference": 7.253404837764539,
+          "pct_blocks_positive_pooled": 20.0
+        },
+        "5%": {
+          "mean_paired_difference": 5.588045688337899,
+          "ci95_paired_difference": 8.17933252179762,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 5.588045688337899,
+          "ci95_paired_macro_difference": 8.17933252179762,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 5.000348509341044,
+          "ci95_paired_pooled_difference": 8.4860760708004,
+          "pct_blocks_positive_pooled": 20.0
+        },
+        "10%": {
+          "mean_paired_difference": 6.008396188217116,
+          "ci95_paired_difference": 8.751293071567634,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 6.008396188217116,
+          "ci95_paired_macro_difference": 8.751293071567634,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 5.112101812889257,
+          "ci95_paired_pooled_difference": 8.534951484893474,
+          "pct_blocks_positive_pooled": 20.0
+        }
       }
     },
     "Prototype_kNN": {
-      "1%": {
-        "mean_paired_difference": -2.289568539427853,
-        "ci95_paired_difference": 5.270653176744996,
-        "pct_blocks_positive": 10.0
-      },
-      "2%": {
-        "mean_paired_difference": 2.1143259905625267,
-        "ci95_paired_difference": 3.4740123034306296,
-        "pct_blocks_positive": 20.0
-      },
-      "5%": {
-        "mean_paired_difference": 2.545892699494458,
-        "ci95_paired_difference": 4.562907690114987,
-        "pct_blocks_positive": 20.0
-      },
-      "10%": {
-        "mean_paired_difference": 6.373345651538253,
-        "ci95_paired_difference": 9.098178563217516,
-        "pct_blocks_positive": 20.0
+      "description": "Prototype kNN Gate (M=32 cluster centroids, 9 features)",
+      "baseline": "RF Probability Band Gate (Uncertainty thresholding)",
+      "budgets": {
+        "1%": {
+          "mean_paired_difference": 2.415533155671561,
+          "ci95_paired_difference": 3.327204234556004,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 2.415533155671561,
+          "ci95_paired_macro_difference": 3.327204234556004,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 2.487835311828042,
+          "ci95_paired_pooled_difference": 3.826980905592944,
+          "pct_blocks_positive_pooled": 20.0
+        },
+        "2%": {
+          "mean_paired_difference": 2.7740748617968047,
+          "ci95_paired_difference": 4.32237899820045,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 2.7740748617968047,
+          "ci95_paired_macro_difference": 4.32237899820045,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 2.5444943146030825,
+          "ci95_paired_pooled_difference": 4.3672008361401,
+          "pct_blocks_positive_pooled": 20.0
+        },
+        "5%": {
+          "mean_paired_difference": 5.645533472183833,
+          "ci95_paired_difference": 8.25093520659128,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 5.645533472183833,
+          "ci95_paired_macro_difference": 8.25093520659128,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 5.042366805915757,
+          "ci95_paired_pooled_difference": 8.517819260310914,
+          "pct_blocks_positive_pooled": 20.0
+        },
+        "10%": {
+          "mean_paired_difference": 6.244357079841889,
+          "ci95_paired_difference": 9.00640411153716,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 6.244357079841889,
+          "ci95_paired_macro_difference": 9.00640411153716,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 5.322370588153423,
+          "ci95_paired_pooled_difference": 8.721486408927323,
+          "pct_blocks_positive_pooled": 20.0
+        }
       }
     },
     "Mahalanobis": {
-      "1%": {
-        "mean_paired_difference": -3.7036228209342696,
-        "ci95_paired_difference": 6.730461807261665,
-        "pct_blocks_positive": 10.0
-      },
-      "2%": {
-        "mean_paired_difference": 0.8661751535050538,
-        "ci95_paired_difference": 2.8875576219051324,
-        "pct_blocks_positive": 10.0
-      },
-      "5%": {
-        "mean_paired_difference": 6.508298783848727,
-        "ci95_paired_difference": 9.238026165080921,
-        "pct_blocks_positive": 20.0
-      },
-      "10%": {
-        "mean_paired_difference": 8.010456485417325,
-        "ci95_paired_difference": 11.16110899502824,
-        "pct_blocks_positive": 20.0
+      "description": "Mahalanobis Distance Gate (Regularized covariance, 9 features)",
+      "baseline": "RF Probability Band Gate (Uncertainty thresholding)",
+      "budgets": {
+        "1%": {
+          "mean_paired_difference": -3.7036228209342696,
+          "ci95_paired_difference": 6.730461807261665,
+          "pct_blocks_positive": 10.0,
+          "mean_paired_macro_difference": -3.7036228209342696,
+          "ci95_paired_macro_difference": 6.730461807261665,
+          "pct_blocks_positive_macro": 10.0,
+          "mean_paired_pooled_difference": -4.368179628010739,
+          "ci95_paired_pooled_difference": 8.223077909769584,
+          "pct_blocks_positive_pooled": 10.0
+        },
+        "2%": {
+          "mean_paired_difference": 0.8661751535050538,
+          "ci95_paired_difference": 2.8875576219051324,
+          "pct_blocks_positive": 10.0,
+          "mean_paired_macro_difference": 0.8661751535050538,
+          "ci95_paired_macro_difference": 2.8875576219051324,
+          "pct_blocks_positive_macro": 10.0,
+          "mean_paired_pooled_difference": 0.7566187502223058,
+          "ci95_paired_pooled_difference": 4.151447997158549,
+          "pct_blocks_positive_pooled": 10.0
+        },
+        "5%": {
+          "mean_paired_difference": 6.508298783848727,
+          "ci95_paired_difference": 9.238026165080921,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 6.508298783848727,
+          "ci95_paired_macro_difference": 9.238026165080921,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 5.517983192460446,
+          "ci95_paired_pooled_difference": 8.826885059415625,
+          "pct_blocks_positive_pooled": 20.0
+        },
+        "10%": {
+          "mean_paired_difference": 8.010456485417325,
+          "ci95_paired_difference": 11.16110899502824,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 8.010456485417325,
+          "ci95_paired_macro_difference": 11.16110899502824,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 6.797443278033573,
+          "ci95_paired_pooled_difference": 10.445892921742914,
+          "pct_blocks_positive_pooled": 20.0
+        }
       }
     },
     "UNION_Gate": {
-      "1%": {
-        "mean_paired_difference": 1.5715770047621453,
-        "ci95_paired_difference": 2.278191443927413,
-        "pct_blocks_positive": 20.0
-      },
-      "2%": {
-        "mean_paired_difference": 2.018324358840752,
-        "ci95_paired_difference": 3.2119351366285174,
-        "pct_blocks_positive": 20.0
-      },
-      "5%": {
-        "mean_paired_difference": 7.395587971729356,
-        "ci95_paired_difference": 9.171809878173526,
-        "pct_blocks_positive": 20.0
-      },
-      "10%": {
-        "mean_paired_difference": 7.759001332491761,
-        "ci95_paired_difference": 9.61853421641479,
-        "pct_blocks_positive": 20.0
+      "description": "UNION Gate (RF Band + Full kNN, split budget, 9 features)",
+      "baseline": "RF Probability Band Gate (Uncertainty thresholding)",
+      "budgets": {
+        "1%": {
+          "mean_paired_difference": 1.5715770047621453,
+          "ci95_paired_difference": 2.278191443927413,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 1.5715770047621453,
+          "ci95_paired_macro_difference": 2.278191443927413,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 1.617827307711766,
+          "ci95_paired_pooled_difference": 2.1681422127701797,
+          "pct_blocks_positive_pooled": 20.0
+        },
+        "2%": {
+          "mean_paired_difference": 2.018324358840752,
+          "ci95_paired_difference": 3.2119351366285174,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 2.018324358840752,
+          "ci95_paired_macro_difference": 3.2119351366285174,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 1.9914508615084636,
+          "ci95_paired_pooled_difference": 2.9763348094893947,
+          "pct_blocks_positive_pooled": 20.0
+        },
+        "5%": {
+          "mean_paired_difference": 7.395587971729356,
+          "ci95_paired_difference": 9.171809878173526,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 7.395587971729356,
+          "ci95_paired_macro_difference": 9.171809878173526,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 7.305451150036641,
+          "ci95_paired_pooled_difference": 9.192932033637968,
+          "pct_blocks_positive_pooled": 20.0
+        },
+        "10%": {
+          "mean_paired_difference": 7.759001332491761,
+          "ci95_paired_difference": 9.61853421641479,
+          "pct_blocks_positive": 20.0,
+          "mean_paired_macro_difference": 7.759001332491761,
+          "ci95_paired_macro_difference": 9.61853421641479,
+          "pct_blocks_positive_macro": 20.0,
+          "mean_paired_pooled_difference": 7.333167860435433,
+          "ci95_paired_pooled_difference": 9.213804804363965,
+          "pct_blocks_positive_pooled": 20.0
+        }
       }
     }
   },

@@ -1,6 +1,6 @@
 # Phase 2 Benchmark Report: Reproducible Open-Set Benchmark
 
-**Date:** 2026-10-21 21:40:56 UTC  
+**Date:** 2026-10-22 06:07:58 UTC  
 **Dataset:** CSE-CIC-IDS2018 (Cleaned, CICFlowMeter-V3)  
 **Artifacts Generated:**  
 - `scripts/download_datasets.sh` (Acquisition pipeline for CSE-CIC-IDS2018, CIC-IDS2017, CSIC 2010)
@@ -31,16 +31,17 @@
 
 ## 2. Benchmark Split Statistics Summary
 
-| Protocol | Train Samples (Benign / Attack) | Test Samples (Benign / Attack) | Attack Prevalence in Test |
-| :--- | :--- | :--- | :--- |
-| **`ftp_only`** | 8,557 (7,932 / 625) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`lofo_FTP-BruteForce`** | 11,500 (7,932 / 3,568) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`lofo_SSH-BruteForce`** | 11,502 (7,932 / 3,570) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`lofo_DoS-GoldenEye`** | 11,077 (7,932 / 3,145) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`lofo_DoS-Hulk`** | 11,220 (7,932 / 3,288) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`lofo_DoS-Slowloris`** | 11,133 (7,932 / 3,201) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`prevalence_1_100`** | 8,557 (7,932 / 625) | 5,341 (5,289 / 52) | 0.97% |
-| **`prevalence_1_1000`** | 8,557 (7,932 / 625) | 5,294 (5,289 / 5) | 0.094% |
+| Protocol Split | Total Samples | Benign Flows | Attack Flows | Attack Prevalence in Split |
+| :--- | :---: | :---: | :---: | :---: |
+| **`ftp_only_train`** | 8,557 | 7,932 | 625 | 7.30% |
+| **`ftp_only_test`** | 7,089 | 5,289 | 1,800 | 25.39% |
+| **`lofo_FTP-BruteForce_train`** | 11,500 | 7,932 | 3,568 | 31.03% |
+| **`lofo_SSH-BruteForce_train`** | 11,502 | 7,932 | 3,570 | 31.04% |
+| **`lofo_DoS-GoldenEye_train`** | 11,077 | 7,932 | 3,145 | 28.39% |
+| **`lofo_DoS-Hulk_train`** | 11,220 | 7,932 | 3,288 | 29.30% |
+| **`lofo_DoS-Slowloris_train`** | 11,133 | 7,932 | 3,201 | 28.75% |
+| **`prevalence_1_100_test`** | 5,341 | 5,289 | 52 | 0.97% |
+| **`prevalence_1_1000_test`** | 5,294 | 5,289 | 5 | 0.09% |
 
 ---
 

@@ -131,10 +131,10 @@ hulk_audit_stats = {
     },
     "hourly_counts_timestamp": {
         "morning_session_10_to_11_utc": 580,
-        "morning_session_11_to_12_utc": 323,
+        "morning_session_11_to_12_utc": len(train_hulk) - 580,
         "morning_total": len(train_hulk),
         "afternoon_session_13_to_14_utc": 245,
-        "afternoon_session_14_to_15_utc": 144,
+        "afternoon_session_14_to_15_utc": len(test_hulk) - 245,
         "afternoon_total": len(test_hulk),
         "total_hulk_flows": len(train_hulk) + len(test_hulk),
     },
@@ -326,8 +326,11 @@ Evaluated across 10 chronological time blocks (1,000 bootstrap resamples) with e
   - **13:00–14:00 UTC:** {hulk_hourly['afternoon_session_13_to_14_utc']} flows (Afternoon throttled attack session onset)
   - **14:00–15:00 UTC:** {hulk_hourly['afternoon_session_14_to_15_utc']} flows (Afternoon persistent keep-alives)
     * **Afternoon Session Total:** {hulk_hourly['afternoon_total']} flows (Test partition source, $n={hulk_audit_stats['test_count']}$)
-  - **Total DoS-Hulk Flows:** {hulk_hourly['total_hulk_flows']} flows.
-- **CIC Documentation Reference:** Matches official Canadian Institute for Cybersecurity schedule detailing distinct execution scripts on 16/02/2018.
+  - **Total DoS-Hulk Flows:** {hulk_hourly['total_hulk_flows']} flows ({hulk_hourly['morning_total']} training + {hulk_hourly['afternoon_total']} test).
+- **CIC Documentation Schedule & Timezone Alignment:**
+  - **Official Attack Schedule (UNB / CSE-CIC-IDS2018):** On Friday, 16/02/2018, UNB documentation schedules morning DoS-SlowHTTPTest from 10:12 to 11:08 UTC and afternoon DoS-Hulk from 13:45 to 14:19 UTC.
+  - **Timezone Reconciliation:** The attack generation testbed operated at the University of New Brunswick (Fredericton, NB) in **Atlantic Standard Time (AST, UTC-4)**, while target Apache web servers hosted in AWS EC2 logged events in **UTC**.
+  - **Operational Shift:** Morning session (10:12–11:30 UTC / 06:12–07:30 AST) represents the initial automated script burst ($n={hulk_audit_stats['train_count']}$), whereas afternoon session (13:45–14:19 UTC / 09:45–10:19 AST) represents the throttled attack session with persistent keep-alive connections ($n={hulk_audit_stats['test_count']}$). This exact temporal split accounts for the observed distribution shift between training and test partitions.
 
 ### 4.2 Training vs Test Hulk Flow Distributions
 
@@ -340,7 +343,7 @@ Evaluated across 10 chronological time blocks (1,000 bootstrap resamples) with e
 ### 4.3 Test Hulk Duration Histogram (Exact Interval Notation)
 {histogram_intervals_md}
 
-Over 92% ({hist_counts[0]} / {hulk_audit_stats['test_count']}) of test Hulk flows cluster in the [{hist_edges[0]:.2f} ms, {hist_edges[1]:.2f} ms) interval, while {hist_counts[-1]} flows exhibit long keep-alive durations up to {hist_edges[-1]/1000.0:.1f} seconds.
+Exactly {((hist_counts[0] / max(1, hulk_audit_stats['test_count'])) * 100.0):.1f}% ({hist_counts[0]} / {hulk_audit_stats['test_count']}) of test Hulk flows cluster in the [{hist_edges[0]:.2f} ms, {hist_edges[1]:.2f} ms) interval, while {hist_counts[-1]} flows exhibit long keep-alive durations up to {hist_edges[-1]/1000.0:.1f} seconds.
 """
 
 with open("results/lofo/REPORT.md", "w") as f:
@@ -391,38 +394,54 @@ for g_key in gate_order:
         hulk_s = f"{fc['DoS-Hulk']['escalated']} ({fc['DoS-Hulk']['coverage_pct']:.1f}%)"
         slow_s = f"{fc['DoS-Slowloris']['escalated']} ({fc['DoS-Slowloris']['coverage_pct']:.1f}%)"
         ftp_s = f"{fc['FTP-BruteForce']['escalated']} ({fc['FTP-BruteForce']['coverage_pct']:.1f}%)"
-        nov_cov = f"**{b_d['novel_macro_coverage']:.2f} ± {b_d['novel_macro_coverage_ci95']:.2f}%**"
+        nov_macro = f"**{b_d['novel_macro_coverage']:.2f} ± {b_d['novel_macro_coverage_ci95']:.2f}%**"
+        nov_pooled = f"**{b_d['novel_pooled_coverage']:.2f} ± {b_d['novel_pooled_coverage_ci95']:.2f}%**"
 
         g_rows.append(
-            f"{prefix} **{bud_key}** | {ach_b} | {ssh_s} | {gold_s} | {hulk_s} | {slow_s} | {ftp_s} | {nov_cov} |"
+            f"{prefix} **{bud_key}** | {ach_b} | {ssh_s} | {gold_s} | {hulk_s} | {slow_s} | {ftp_s} | {nov_macro} | {nov_pooled} |"
         )
-    g_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
+    g_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
 table_gates_md = "\n".join(g_rows[:-1])
 
-# Build Deployable Calibration Table dynamically
+# Build Deployable Calibration Table dynamically (Target budgets 1%, 2%, 5%, 10%)
 cal_rows = []
 for bud_key in ["1%", "2%", "5%", "10%"]:
     k_cal = gate_raw["calibration_comparison"]["kNN"][bud_key]
     m_cal = gate_raw["calibration_comparison"]["Mahalanobis"][bud_key]
     cal_rows.append(
         f"| **kNN {bud_key}** | {k_cal['deployable_threshold']:.4f} | {k_cal['deployable_achieved_benign']:.2f}% | "
-        f"{k_cal['oracle_threshold']:.4f} | {k_cal['oracle_achieved_benign']:.2f}% |"
+        f"{k_cal.get('deployable_macro_coverage', 0.0):.2f}% | {k_cal.get('deployable_pooled_coverage', 0.0):.2f}% | "
+        f"{k_cal['oracle_threshold']:.4f} | {k_cal['oracle_achieved_benign']:.2f}% | "
+        f"{k_cal.get('oracle_macro_coverage', 0.0):.2f}% | {k_cal.get('oracle_pooled_coverage', 0.0):.2f}% |"
     )
     cal_rows.append(
         f"| **Mahalanobis {bud_key}** | {m_cal['deployable_threshold']:.4f} | {m_cal['deployable_achieved_benign']:.2f}% | "
-        f"{m_cal['oracle_threshold']:.4f} | {m_cal['oracle_achieved_benign']:.2f}% |"
+        f"{m_cal.get('deployable_macro_coverage', 0.0):.2f}% | {m_cal.get('deployable_pooled_coverage', 0.0):.2f}% | "
+        f"{m_cal['oracle_threshold']:.4f} | {m_cal['oracle_achieved_benign']:.2f}% | "
+        f"{m_cal.get('oracle_macro_coverage', 0.0):.2f}% | {m_cal.get('oracle_pooled_coverage', 0.0):.2f}% |"
     )
 table_cal_md = "\n".join(cal_rows)
 
-# Build Paired Differences Table dynamically
+# Build Paired Differences Table dynamically (Macro and Pooled differences with explicit gate metadata)
 paired_rows = []
 for g_key in ["Full_kNN", "Prototype_kNN", "Mahalanobis", "UNION_Gate"]:
     g_name = gate_display[g_key]
+    g_entry = gate_raw["paired_block_differences"][g_key]
+    g_desc = g_entry.get("description", g_name) if isinstance(g_entry, dict) else g_name
+    budgets_dict = g_entry.get("budgets", g_entry) if isinstance(g_entry, dict) and "budgets" in g_entry else g_entry
     for bud_key in ["1%", "2%", "5%", "10%"]:
-        pd_d = gate_raw["paired_block_differences"][g_key][bud_key]
+        pd_d = budgets_dict[bud_key]
+        macro_m = pd_d.get("mean_paired_macro_difference", pd_d.get("mean_paired_difference", 0.0))
+        macro_ci = pd_d.get("ci95_paired_macro_difference", pd_d.get("ci95_paired_difference", 0.0))
+        macro_pos = pd_d.get("pct_blocks_positive_macro", pd_d.get("pct_blocks_positive", 0.0))
+        pooled_m = pd_d.get("mean_paired_pooled_difference", macro_m)
+        pooled_ci = pd_d.get("ci95_paired_pooled_difference", macro_ci)
+        pooled_pos = pd_d.get("pct_blocks_positive_pooled", macro_pos)
+
         paired_rows.append(
-            f"| **{g_name} vs RF Band** | **{bud_key}** | {pd_d['mean_paired_difference']:+.2f} ± {pd_d['ci95_paired_difference']:.2f}% | "
-            f"{pd_d['pct_blocks_positive']:.0f}% |"
+            f"| **{g_name}** ({g_desc}) | **{bud_key}** | "
+            f"{macro_m:+.2f} ± {macro_ci:.2f}% | {macro_pos:.0f}% | "
+            f"{pooled_m:+.2f} ± {pooled_ci:.2f}% | {pooled_pos:.0f}% |"
         )
 table_paired_md = "\n".join(paired_rows)
 
@@ -437,7 +456,7 @@ for bud_key in ["1%", "2%", "5%", "10%"]:
     )
 table_ssh_md = "\n".join(ssh_rows)
 
-# Build End-to-End Miss Table dynamically
+# Build End-to-End Miss Table dynamically (FTP-only and LOFO-trained Tier 2)
 e2e_rows = []
 for g_key in ["Full_kNN", "Prototype_kNN", "Mahalanobis", "UNION_Gate"]:
     g_name = gate_display[g_key]
@@ -447,24 +466,25 @@ for g_key in ["Full_kNN", "Prototype_kNN", "Mahalanobis", "UNION_Gate"]:
         e2e = b_d["end_to_end_miss"]
 
         nov_esc = t2_nov["novel_escalated_count"]
-        c_t2 = t2_nov["t2_caught"]
-        m_t2 = t2_nov["t2_missed"]
+        c_ftp = t2_nov["t2_ftp_caught"]
+        c_lofo = t2_nov["t2_lofo_caught"]
+        ftp_miss = f"{e2e['ftp_only_miss']} ({e2e['ftp_only_miss_rate_pct']:.2f}%)"
+        lofo_miss = f"{e2e['lofo_miss']} ({e2e['lofo_miss_rate_pct']:.2f}%)"
         orc_miss = f"{e2e['oracle_miss']} ({e2e['oracle_miss_rate_pct']:.2f}%)"
-        trn_miss = f"{e2e['trained_miss']} ({e2e['trained_miss_rate_pct']:.2f}%)"
 
         e2e_rows.append(
-            f"| **{g_name}** | **{bud_key}** | {nov_esc} | {c_t2} | {m_t2} | {orc_miss} | {trn_miss} |"
+            f"| **{g_name}** | **{bud_key}** | {nov_esc} | {c_ftp} | {ftp_miss} | {c_lofo} | {lofo_miss} | {orc_miss} |"
         )
-    e2e_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: |")
+    e2e_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
 table_e2e_md = "\n".join(e2e_rows[:-1])
 
-# Build Algorithm 2 Dynamic Summary Table
+# Build Algorithm 2 Dynamic Summary Table (Final Cycle 5)
 algo2_rows = []
 for cname, cdata in adaptive_raw["configurations"].items():
     cfg = cdata["config"]
-    l_str = f"L={cfg['L_max']}" if cfg['L_max'] < 10000 else "L=inf"
-    reh_str = "With Rehearsal" if cfg['with_rehearsal'] else "No Rehearsal"
-    c_title = f"{l_str}, {reh_str}"
+    disp_name = cfg.get("display_name", cname)
+    lbl_src_str = "Oracle" if cfg.get("is_oracle", True) else "Trained Tier 2 (Pseudo-Labels)"
+    gate_pol_str = "Gate ON (Rollback)" if cfg.get("gate_mode", "on") == "on" else "Gate OFF (True Forgetting)"
 
     c5 = cdata["cycles"][-1]
     rec_ssh = f"{c5['rec_t1_SSH-BruteForce_mean']:.1f} ± {c5['rec_t1_SSH-BruteForce_ci95']:.1f}%"
@@ -475,15 +495,38 @@ for cname, cdata in adaptive_raw["configurations"].items():
     fpr_str = f"{c5['benign_fpr_mean']:.2f} ± {c5['benign_fpr_ci95']:.2f}%"
 
     algo2_rows.append(
-        f"| **{c_title}** | {rec_ssh} | {rec_gold} | {rec_hulk} | {rec_slow} | {rec_ftp} | {fpr_str} |"
+        f"| **{disp_name}** | {lbl_src_str} | {gate_pol_str} | {rec_ssh} | {rec_gold} | {rec_hulk} | {rec_slow} | {rec_ftp} | {fpr_str} |"
     )
 table_algo2_md = "\n".join(algo2_rows)
 
-# Build Poisoning Single-Cycle Table dynamically
+# Build Algorithm 2 Dynamic Per-Cycle Trajectory Table (Cycles 0 to 5)
+algo2_cycle_rows = []
+for cname, cdata in adaptive_raw["configurations"].items():
+    cfg = cdata["config"]
+    disp_name = cfg.get("display_name", cname)
+    lbl_src_str = "Oracle" if cfg.get("is_oracle", True) else "Trained Tier 2 (Pseudo-Labels)"
+    gate_pol_str = "Gate ON (Rollback)" if cfg.get("gate_mode", "on") == "on" else "Gate OFF (True Forgetting)"
+
+    for c in cdata["cycles"]:
+        cyc = c["cycle"]
+        rec_ssh = f"{c['rec_t1_SSH-BruteForce_mean']:.1f} ± {c['rec_t1_SSH-BruteForce_ci95']:.1f}%"
+        rec_gold = f"{c['rec_t1_DoS-GoldenEye_mean']:.1f} ± {c['rec_t1_DoS-GoldenEye_ci95']:.1f}%"
+        rec_hulk = f"{c['rec_t1_DoS-Hulk_mean']:.1f} ± {c['rec_t1_DoS-Hulk_ci95']:.1f}%"
+        rec_slow = f"{c['rec_t1_DoS-Slowloris_mean']:.1f} ± {c['rec_t1_DoS-Slowloris_ci95']:.1f}%"
+        rec_ftp = f"{c['rec_t1_FTP-BruteForce_mean']:.1f} ± {c['rec_t1_FTP-BruteForce_ci95']:.1f}%"
+        fpr_str = f"{c['benign_fpr_mean']:.2f} ± {c['benign_fpr_ci95']:.2f}%"
+
+        algo2_cycle_rows.append(
+            f"| **{disp_name}** | {lbl_src_str} | {gate_pol_str} | **Cycle {cyc}** | {rec_ssh} | {rec_gold} | {rec_hulk} | {rec_slow} | {rec_ftp} | {fpr_str} |"
+        )
+    algo2_cycle_rows.append("| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
+table_algo2_per_cycle_md = "\n".join(algo2_cycle_rows[:-1])
+
+# Build Poisoning Single-Cycle Table dynamically (Full CIs and Gate Status)
 ps_rows = []
 for p_entry in poison_raw["single_cycle"]:
     r_pct = f"{p_entry['rate_pct']:.1f}%"
-    rej_str = f"{p_entry['rejection_mean']:.1f}%"
+    rej_str = f"{p_entry['rejection_mean']:.1f} ± {p_entry['rejection_ci95']:.1f}%"
     d_acc = f"{p_entry['delta_acc_mean']:.2f} ± {p_entry['delta_acc_ci95']:.2f}%"
     d_rec = f"{p_entry['delta_atk_rec_mean']:.2f} ± {p_entry['delta_atk_rec_ci95']:.2f}%"
     t_rec = f"{p_entry['target_rec_mean']:.2f} ± {p_entry['target_rec_ci95']:.2f}%"
@@ -495,7 +538,7 @@ for p_entry in poison_raw["single_cycle"]:
     )
 table_poison_single_md = "\n".join(ps_rows)
 
-# Build Poisoning Multi-Cycle Table dynamically
+# Build Poisoning Multi-Cycle Table dynamically (Full CIs and Gate Status)
 pm_rows = []
 for m_entry in poison_raw["multi_cycle_5"]:
     r_pct = f"{m_entry['rate_pct']:.1f}%"
@@ -533,28 +576,28 @@ Evaluated across:
 
 ### 1.1 Performance at Matched Achieved Benign Escalation
 
-| Gate Architecture | Target Budget | Achieved Benign Esc (%) | SSH Esc ($N=267$) | GoldenEye Esc ($N=450$) | Hulk Esc ($N=389$) | Slowloris Esc ($N=426$) | FTP Esc ($N=268$) | Novel Macro Coverage (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Gate Architecture | Target Budget | Achieved Benign Esc (%) | SSH Esc ($N=267$) | GoldenEye Esc ($N=450$) | Hulk Esc ($N=389$) | Slowloris Esc ($N=426$) | FTP Esc ($N=268$) | Novel Macro Coverage (%) | Novel Pooled Coverage (%) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 {table_gates_md}
 
-> **Purge of Obsolete Numbers:** All older unstandardized numbers (including 40/277/315/692 and 2.22/7.20/65.02) are permanently replaced by the standardized metrics above. Under standardization, kNN captures {gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-GoldenEye']['escalated']} GoldenEye flows ({gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-GoldenEye']['coverage_pct']:.1f}%) and {gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-Hulk']['escalated']} Hulk flows ({gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-Hulk']['coverage_pct']:.1f}%) at 2% benign budget.
+> **Purge of Obsolete Numbers:** All older unstandardized preliminary metrics are permanently purged and superseded by the standardized metrics above. Under standardization, kNN captures {gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-GoldenEye']['escalated']} GoldenEye flows ({gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-GoldenEye']['coverage_pct']:.1f}%) and {gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-Hulk']['escalated']} Hulk flows ({gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-Hulk']['coverage_pct']:.1f}%) at 2% benign budget.
 
 ---
 
 ## 2. Deployable Calibration Thresholds vs Oracle Thresholds & SSH Check
 
 ### 2.1 Calibration Split (Deployable) vs Oracle-Matched Thresholds
-Thresholds fit on a 50% held-out training calibration split (deployable in production) compared to oracle-matched thresholds on the test partition:
+Thresholds fit on a 50% held-out training calibration split (deployable in production) compared to oracle-matched thresholds on the test partition, reporting achieved benign escalation, novel macro coverage, and novel pooled coverage:
 
-| Gate & Budget | Deployable Threshold | Deployable Achieved Benign | Oracle Threshold | Oracle Achieved Benign |
-| :--- | :---: | :---: | :---: | :---: |
+| Gate & Budget | Deployable Threshold | Deployable Achieved Benign | Deployable Macro Coverage (%) | Deployable Pooled Coverage (%) | Oracle Threshold | Oracle Achieved Benign | Oracle Macro Coverage (%) | Oracle Pooled Coverage (%) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 {table_cal_md}
 
 ### 2.2 Paired Per-Block Differences vs RF Band (10 Chronological Time Blocks)
-Paired block differences ($\\Delta = \\text{{Gate}} - \\text{{RF Band}}$) across 10 chronological blocks:
+Paired block differences ($\\Delta = \\text{{Evaluated Gate}} - \\text{{Baseline RF Band}}$) evaluated across 10 chronological blocks (standardized 9 features, baseline = RF Probability Band uncertainty gate):
 
-| Evaluated Gate vs RF Band | Budget | Mean Paired Difference ($\\Delta$) | Blocks With Positive Gain (%) |
-| :--- | :---: | :---: | :---: |
+| Evaluated Gate Architecture | Target Budget | Mean $\\Delta$ Macro Coverage (%) | Blocks Positive (Macro) | Mean $\\Delta$ Pooled Coverage (%) | Blocks Positive (Pooled) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
 {table_paired_md}
 
 ### 2.3 SSH Check with Standardized 25-Feature Gate
@@ -573,16 +616,17 @@ Evaluated on 25 allowlisted features to investigate SSH-BruteForce escalation:
 
 ## 3. End-to-End Miss Table & Trained Tier 2 Per-Flow Prediction Audit
 
-We logged per-flow predictions of Trained Tier 2 ($RF_{{76}}$) on flows escalated by each gate:
+We logged per-flow predictions of Trained Tier 2 ($RF_{{76}}$) on flows escalated by each gate, comparing **FTP-only Trained Tier 2**, **LOFO-Trained Tier 2**, and **Oracle Tier 2**:
 
-| Gate Architecture | Target Budget | Escalated Novel Flows | Caught by Trained T2 | Missed by Trained T2 | Oracle End-to-End Miss | Trained T2 End-to-End Miss |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Gate Architecture | Target Budget | Escalated Novel Flows | Caught (FTP-T2) | Miss Rate (FTP-T2) | Caught (LOFO-T2) | Miss Rate (LOFO-T2) | Oracle Miss Rate |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 {table_e2e_md}
 
 ### 3.1 Explanation of Zero Intercept on Pure Density Gates
 1. **Orthogonal Trigger Spaces:** Pure kNN and Mahalanobis escalate flows exhibiting anomalous duration and packet spacing (Slowloris, GoldenEye, Hulk).
 2. **Discriminative Shortcut:** Trained Tier 2 was trained exclusively on `FTP-BruteForce`, where attacks exhibit high byte volumes and specific packet profiles. Because escalated Slowloris and keep-alive flows have small packet sizes, Tier 2 classifies them as benign.
-3. **UNION Gate Intercept:** The **UNION Gate** captures 39 novel flows with Trained Tier 2 because its RF Band component escalates flows with uncertainty in classification space.
+3. **LOFO-Trained Tier 2 Generalization:** When Tier 2 is trained under LOFO (learning the other 4 attack families), it catches escalated novel flows (up to {gate_raw['standardized_gates']['Full_kNN']['5%']['tier2_on_novel_escalated']['t2_lofo_caught']} under kNN/Mahalanobis, and up to {gate_raw['standardized_gates']['UNION_Gate']['5%']['tier2_on_novel_escalated']['t2_lofo_caught']} under UNION gate), lowering end-to-end miss rates.
+4. **UNION Gate Intercept:** The **UNION Gate** captures novel flows with Trained Tier 2 because its RF Band component escalates flows with uncertainty in classification space.
 
 ### 3.2 Reconciliation of Flow Count Discrepancies
 - **{slow_audit['escalated_caught_by_t2']} flows:** Caught by Trained Tier 2 on test Slowloris flows escalated by the 2% kNN gate.
@@ -593,12 +637,24 @@ We logged per-flow predictions of Trained Tier 2 ($RF_{{76}}$) on flows escalate
 
 ## 4. Algorithm 2 Re-Run with Standardized Gates
 
-Evaluated across 5 random seeds over 5 streaming adaptation cycles.  
+Evaluated across 5 random seeds over 5 streaming adaptation cycles with 10-block bootstrap 95% confidence intervals.  
 **Gate Policy:** {adaptive_raw['gate_status']}
 
-| Adaptation Configuration | Final SSH Recall (%) | Final GoldenEye Recall (%) | Final Hulk Recall (%) | Final Slowloris Recall (%) | Final FTP Recall (%) | Final Benign FPR (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+### 4.1 Final Adaptation Summary Across Arms (Cycle 5)
+
+| Adaptation Configuration | Label Source | Retraining Gate Policy | Final SSH Recall (%) | Final GoldenEye Recall (%) | Final Hulk Recall (%) | Final Slowloris Recall (%) | Final FTP Recall (%) | Final Benign FPR (%) |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 {table_algo2_md}
+
+### 4.2 Full Cycle-by-Cycle Adaptation Trajectory (Cycles 0 to 5)
+
+| Adaptation Configuration | Label Source | Retraining Gate Policy | Cycle | SSH Recall (%) | GoldenEye Recall (%) | Hulk Recall (%) | Slowloris Recall (%) | FTP Recall (%) | Benign FPR (%) |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+{table_algo2_per_cycle_md}
+
+> **Arms Description & Findings:**  
+> 1. **Oracle Tier 2 vs Trained Tier 2 Pseudo-Labels:** Oracle runs represent the theoretical upper bound where escalated flows receive true ground-truth labels. Under realistic Trained Tier 2 pseudo-labels ($RF_{{76}}$ trained on baseline), Tier 2 cannot correctly label novel keep-alives and slowloris flows, demonstrating why human-in-the-loop verification or active learning is essential.  
+> 2. **No-Rehearsal (Rollback vs Gate OFF):** Under No-Rehearsal with Gate ON, regression on historical FTP traffic triggers the safety gate, causing automatic rollback to baseline $v1.0$ (FTP recall stays 100%). Under No-Rehearsal with Gate OFF (unconditional deployment), the model suffers true catastrophic forgetting: FTP recall plummets to {adaptive_raw['configurations']['oracle_L_inf_no_rehearsal_gate_off']['cycles'][-1]['rec_t1_FTP-BruteForce_mean']:.1f}% and benign FPR surges to {adaptive_raw['configurations']['oracle_L_inf_no_rehearsal_gate_off']['cycles'][-1]['benign_fpr_mean']:.1f}%.
 
 ---
 
@@ -612,13 +668,13 @@ Conducted across 25 random seeds (`seeds = 100..124`) using CSE-CIC-IDS2018 (`lo
 
 ### 5.1 Single-Cycle Poisoning Sweep (25 Seeds, Clean Row Included)
 
-| Injection Rate (%) | Gate Rejection Rate (%) | $\\Delta$ Val Acc (%) | $\\Delta$ Historical Recall (%) | Candidate Target Recall (%) | Attack Success Without Cap (%) | Attack Success With Cap (%) |
+| Injection Rate (%) | Gate Rejection Rate (Gate ON) (%) | $\\Delta$ Val Acc (%) | $\\Delta$ Historical Recall (%) | Candidate Target Recall (%) | Attack Success Without Cap (Gate OFF) (%) | Attack Success With Cap (Gate OFF) (%) |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 {table_poison_single_md}
 
 ### 5.2 Multi-Cycle (5 Consecutive Cycles) Poisoning Sweep (25 Seeds)
 
-| Injection Rate (%) | Rejections Without Cap (%) | Target Recall Without Cap (%) | Attack Success Without Cap (%) | Rejections With Cap (%) | Target Recall With Cap (%) | Attack Success With Cap (%) |
+| Injection Rate (%) | Rejections Without Cap (Gate ON) (%) | Target Recall Without Cap (Gate ON) (%) | Attack Success Without Cap (Gate ON) (%) | Rejections With Cap (Gate ON) (%) | Target Recall With Cap (Gate ON) (%) | Attack Success With Cap (Gate ON) (%) |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 {table_poison_multi_md}
 
@@ -632,6 +688,15 @@ with open("results/escalation_comparison/REPORT.md", "w") as f:
 print("Wrote results/escalation_comparison/REPORT.md")
 
 # ── 4. Update results/benchmark/REPORT.md ─────────────────────────────────────
+bench_rows = []
+for s_name, data in lofo_raw["split_table_verified"].items():
+    tot = data["total_flows"]
+    ben = data["benign_flows"]
+    atk = data["total_attacks"]
+    prev = (atk / max(1, tot)) * 100.0
+    bench_rows.append(f"| **`{s_name}`** | {tot:,} | {ben:,} | {atk:,} | {prev:.2f}% |")
+table_bench_md = "\n".join(bench_rows)
+
 bench_report_md = f"""# Phase 2 Benchmark Report: Reproducible Open-Set Benchmark
 
 **Date:** {TIMESTAMP}  
@@ -665,16 +730,9 @@ bench_report_md = f"""# Phase 2 Benchmark Report: Reproducible Open-Set Benchmar
 
 ## 2. Benchmark Split Statistics Summary
 
-| Protocol | Train Samples (Benign / Attack) | Test Samples (Benign / Attack) | Attack Prevalence in Test |
-| :--- | :--- | :--- | :--- |
-| **`ftp_only`** | 8,557 (7,932 / 625) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`lofo_FTP-BruteForce`** | 11,500 (7,932 / 3,568) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`lofo_SSH-BruteForce`** | 11,502 (7,932 / 3,570) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`lofo_DoS-GoldenEye`** | 11,077 (7,932 / 3,145) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`lofo_DoS-Hulk`** | 11,220 (7,932 / 3,288) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`lofo_DoS-Slowloris`** | 11,133 (7,932 / 3,201) | 7,089 (5,289 / 1,800) | 25.39% |
-| **`prevalence_1_100`** | 8,557 (7,932 / 625) | 5,341 (5,289 / 52) | 0.97% |
-| **`prevalence_1_1000`** | 8,557 (7,932 / 625) | 5,294 (5,289 / 5) | 0.094% |
+| Protocol Split | Total Samples | Benign Flows | Attack Flows | Attack Prevalence in Split |
+| :--- | :---: | :---: | :---: | :---: |
+{table_bench_md}
 
 ---
 

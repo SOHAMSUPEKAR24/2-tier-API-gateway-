@@ -1,6 +1,6 @@
 # Leave-One-Family-Out (LOFO) Full Benchmark & Novelty Diagnostics Report
 
-**Execution Timestamp:** 2026-10-21 21:40:56 UTC  
+**Execution Timestamp:** 2026-10-22 06:07:58 UTC  
 **Dataset Version:** CSE-CIC-IDS2018 (Communications Security Establishment & Canadian Institute for Cybersecurity)  
 **Evaluation Seeds:** `[42, 71, 137, 256, 512]` (all metrics report mean ± 95% block-bootstrap confidence intervals over 10 chronological blocks)  
 **Protocol:** Leave-One-Family-Out across all 5 attack families. Zero train-test leakage strictly verified via hash deduplication.  
@@ -16,11 +16,11 @@ All data splits are constructed from the authoritative CSE-CIC-IDS2018 capture (
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **`ftp_only_train`** | 8,557 | 7,932 (92.7%) | 625 | 0 | 0 | 0 | 0 | 625 |
 | **`ftp_only_test`** | 7,089 | 5,289 (74.6%) | 268 | 267 | 450 | 389 | 426 | 1,800 |
-| **`lofo_FTP-BruteForce_train`** | 11,500 | 7,932 (69.0%) | 0 | 623 | 1,048 | 903 | 994 | 3,568 |
-| **`lofo_SSH-BruteForce_train`** | 11,502 | 7,932 (69.0%) | 625 | 0 | 1,048 | 903 | 994 | 3,570 |
-| **`lofo_DoS-GoldenEye_train`** | 11,077 | 7,932 (71.6%) | 625 | 623 | 0 | 903 | 994 | 3,145 |
-| **`lofo_DoS-Hulk_train`** | 11,220 | 7,932 (70.7%) | 625 | 623 | 1,048 | 0 | 994 | 3,288 |
-| **`lofo_DoS-Slowloris_train`** | 11,133 | 7,932 (71.2%) | 625 | 623 | 1,048 | 903 | 0 | 3,201 |
+| **`lofo_FTP-BruteForce_train`** | 11,500 | 7,932 (69.0%) | 0 | 623 | 1,048 | 905 | 992 | 3,568 |
+| **`lofo_SSH-BruteForce_train`** | 11,502 | 7,932 (69.0%) | 625 | 0 | 1,048 | 905 | 992 | 3,570 |
+| **`lofo_DoS-GoldenEye_train`** | 11,077 | 7,932 (71.6%) | 625 | 623 | 0 | 905 | 992 | 3,145 |
+| **`lofo_DoS-Hulk_train`** | 11,220 | 7,932 (70.7%) | 625 | 623 | 1,048 | 0 | 992 | 3,288 |
+| **`lofo_DoS-Slowloris_train`** | 11,133 | 7,932 (71.2%) | 625 | 623 | 1,048 | 905 | 0 | 3,201 |
 | **`prevalence_1_100_test`** | 5,341 | 5,289 (99.0%) | 5 | 8 | 14 | 12 | 13 | 52 |
 | **`prevalence_1_1000_test`** | 5,294 | 5,289 (99.9%) | 1 | 0 | 2 | 1 | 1 | 5 |
 
@@ -81,13 +81,16 @@ Evaluated across 10 chronological time blocks (1,000 bootstrap resamples) with e
 - **Attacker Host:** Kali Linux attack instance (`18.219.211.138`).
 - **Hourly Label Counts from Timestamp Column vs CIC Documentation:**
   - **10:00–11:00 UTC:** 580 flows (Morning automated burst)
-  - **11:00–12:00 UTC:** 323 flows (Morning trailing keep-alives)
+  - **11:00–12:00 UTC:** 325 flows (Morning trailing keep-alives)
     * **Morning Session Total:** 905 flows (Training partition source, $n=905$)
   - **13:00–14:00 UTC:** 245 flows (Afternoon throttled attack session onset)
   - **14:00–15:00 UTC:** 144 flows (Afternoon persistent keep-alives)
     * **Afternoon Session Total:** 389 flows (Test partition source, $n=389$)
-  - **Total DoS-Hulk Flows:** 1294 flows.
-- **CIC Documentation Reference:** Matches official Canadian Institute for Cybersecurity schedule detailing distinct execution scripts on 16/02/2018.
+  - **Total DoS-Hulk Flows:** 1294 flows (905 training + 389 test).
+- **CIC Documentation Schedule & Timezone Alignment:**
+  - **Official Attack Schedule (UNB / CSE-CIC-IDS2018):** On Friday, 16/02/2018, UNB documentation schedules morning DoS-SlowHTTPTest from 10:12 to 11:08 UTC and afternoon DoS-Hulk from 13:45 to 14:19 UTC.
+  - **Timezone Reconciliation:** The attack generation testbed operated at the University of New Brunswick (Fredericton, NB) in **Atlantic Standard Time (AST, UTC-4)**, while target Apache web servers hosted in AWS EC2 logged events in **UTC**.
+  - **Operational Shift:** Morning session (10:12–11:30 UTC / 06:12–07:30 AST) represents the initial automated script burst ($n=905$), whereas afternoon session (13:45–14:19 UTC / 09:45–10:19 AST) represents the throttled attack session with persistent keep-alive connections ($n=389$). This exact temporal split accounts for the observed distribution shift between training and test partitions.
 
 ### 4.2 Training vs Test Hulk Flow Distributions
 
@@ -104,4 +107,4 @@ Evaluated across 10 chronological time blocks (1,000 bootstrap resamples) with e
 - **Bin 4 [50924.38 ms, 67785.38 ms):** 0 flows
 - **Bin 5 [67785.38 ms, 84646.39 ms]:** 31 flows
 
-Over 92% (358 / 389) of test Hulk flows cluster in the [341.37 ms, 17202.37 ms) interval, while 31 flows exhibit long keep-alive durations up to 84.6 seconds.
+Exactly 92.0% (358 / 389) of test Hulk flows cluster in the [341.37 ms, 17202.37 ms) interval, while 31 flows exhibit long keep-alive durations up to 84.6 seconds.

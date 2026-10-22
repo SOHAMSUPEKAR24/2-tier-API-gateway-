@@ -1,5 +1,5 @@
 {
-  "execution_timestamp": "2026-10-21 21:40:56 UTC",
+  "execution_timestamp": "2026-10-22 06:07:58 UTC",
   "dataset_version": "CSE-CIC-IDS2018",
   "split_table": {
     "ftp_only_train": {
@@ -36,8 +36,8 @@
         "FTP-BruteForce": 0,
         "SSH-BruteForce": 623,
         "DoS-GoldenEye": 1048,
-        "DoS-Hulk": 903,
-        "DoS-Slowloris": 994
+        "DoS-Hulk": 905,
+        "DoS-Slowloris": 992
       },
       "verified_sum": true
     },
@@ -49,8 +49,8 @@
         "FTP-BruteForce": 625,
         "SSH-BruteForce": 0,
         "DoS-GoldenEye": 1048,
-        "DoS-Hulk": 903,
-        "DoS-Slowloris": 994
+        "DoS-Hulk": 905,
+        "DoS-Slowloris": 992
       },
       "verified_sum": true
     },
@@ -62,8 +62,8 @@
         "FTP-BruteForce": 625,
         "SSH-BruteForce": 623,
         "DoS-GoldenEye": 0,
-        "DoS-Hulk": 903,
-        "DoS-Slowloris": 994
+        "DoS-Hulk": 905,
+        "DoS-Slowloris": 992
       },
       "verified_sum": true
     },
@@ -76,7 +76,7 @@
         "SSH-BruteForce": 623,
         "DoS-GoldenEye": 1048,
         "DoS-Hulk": 0,
-        "DoS-Slowloris": 994
+        "DoS-Slowloris": 992
       },
       "verified_sum": true
     },
@@ -88,7 +88,7 @@
         "FTP-BruteForce": 625,
         "SSH-BruteForce": 623,
         "DoS-GoldenEye": 1048,
-        "DoS-Hulk": 903,
+        "DoS-Hulk": 905,
         "DoS-Slowloris": 0
       },
       "verified_sum": true
@@ -772,7 +772,7 @@
     },
     "hourly_counts_timestamp": {
       "morning_session_10_to_11_utc": 580,
-      "morning_session_11_to_12_utc": 323,
+      "morning_session_11_to_12_utc": 325,
       "morning_total": 905,
       "afternoon_session_13_to_14_utc": 245,
       "afternoon_session_14_to_15_utc": 144,
