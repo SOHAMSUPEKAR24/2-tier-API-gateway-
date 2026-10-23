@@ -30,10 +30,12 @@ exp-audit:
 # Phase 2: Open-Set Benchmark Dataset
 exp-benchmark:
 	$(PYTHON) src/data_collection/benchmark_pipeline.py
+	$(PYTHON) scripts/run_sampling_sensitivity.py
 
 # Phase 2b: Multi-Regime & Unseen Family Benchmark
 exp-unseen-family:
-	$(PYTHON) scripts/run_unseen_family_benchmark.py
+	$(PYTHON) scripts/run_uniform_lofo_eval.py
+	$(PYTHON) scripts/run_lofo_standardized_gates.py
 
 # Phase 3: Escalation Triggers
 exp-escalation:

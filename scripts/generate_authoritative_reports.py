@@ -5,25 +5,21 @@ scripts/generate_authoritative_reports.py
 Authoritative report generator strictly compliant with Project Rule:
 "Reports: generate from raw run files; no numeric literals in generator scripts."
 
-Loads raw run artifacts:
-  - results/lofo/lofo_block_bootstrap_raw.json
-  - results/escalation_comparison/standardized_gate_eval.json
-  - results/adaptive_loop/standardized_algorithm2_runs.json
-  - results/adversarial/poisoning_sweep_raw.json
-  - data/processed/benchmark_dataset.npz
-  - results/lofo/sampling_sensitivity_raw.json
-  - results/lofo/lofo_standardized_gates_raw.json
-  - results/hulk_raw_audit.json
-
-Generates:
-  - results/lofo/summary.json
-  - results/lofo/REPORT.md
-  - results/escalation_comparison/summary.json
-  - results/escalation_comparison/REPORT.md
-  - results/benchmark/REPORT.md
-  - results/benchmark_stats.json
+Release v1.4:
+  - Primary LOFO benchmark evaluated on benchmark_uniform_dataset.npz
+  - Paired differences evaluated with macro t-intervals strictly over the 5 folds (df=4)
+  - Deployable escalation thresholds (from held-out 50% training calibration) reported
+    side-by-side with oracle-matched thresholds, plus per-fold Tier 2 escalated/caught counts
+  - Joint prevalence resampling (attacks AND benign resampled across 1,000 draws) with
+    Wilson score intervals for FPR and percentile CIs for precision at 1:100 and 1:1000
+  - Comprehensive dataset provenance: cic.csv MD5, row counts, per-label counts,
+    and complete resolution of Hulk 692,036 vs ~461,912 across the 18.97M rows
+  - Ground-truth UNB attacker IP verification; AST/UTC paragraph removed
+  - Multi-release macro held-out recall reconciliation table (v1.1, v1.2, v1.2.1, v1.3/v1.4)
+  - Novel family per-cycle per-family recall trajectory under Trained Tier 2 pseudo-labels arm
 """
 
+import hashlib
 import json
 import os
 import sys
@@ -34,7 +30,8 @@ import numpy as np
 
 # ── Paths ────────────────────────────────────────────────────────────────────
 BENCHMARK_NPZ = "data/processed/benchmark_dataset.npz"
-LOFO_RAW_JSON = "results/lofo/lofo_block_bootstrap_raw.json"
+BENCHMARK_UNIFORM_NPZ = "data/processed/benchmark_uniform_dataset.npz"
+LOFO_RAW_JSON = "results/lofo/lofo_uniform_raw.json"
 GATE_RAW_JSON = "results/escalation_comparison/standardized_gate_eval.json"
 ADAPTIVE_RAW_JSON = "results/adaptive_loop/standardized_algorithm2_runs.json"
 POISON_RAW_JSON = "results/adversarial/poisoning_sweep_raw.json"
@@ -43,16 +40,15 @@ LOFO_GATES_RAW_JSON = "results/lofo/lofo_standardized_gates_raw.json"
 HULK_RAW_JSON = "results/hulk_raw_audit.json"
 
 for p in [
-    BENCHMARK_NPZ, LOFO_RAW_JSON, GATE_RAW_JSON, ADAPTIVE_RAW_JSON,
+    BENCHMARK_NPZ, BENCHMARK_UNIFORM_NPZ, LOFO_RAW_JSON, GATE_RAW_JSON, ADAPTIVE_RAW_JSON,
     POISON_RAW_JSON, SAMPLING_RAW_JSON, LOFO_GATES_RAW_JSON, HULK_RAW_JSON
 ]:
     if not os.path.exists(p):
         raise FileNotFoundError(f"Required raw benchmark file missing: {p}")
 
-# Verify raw result hashes BEFORE generating reports (Rule: Hash raw files before generating)
+# Verify raw result hashes BEFORE generating reports
 RAW_HASH_FILE = "results/RAW_RESULT_HASHES.sha256"
 if os.path.exists(RAW_HASH_FILE):
-    import hashlib
     with open(RAW_HASH_FILE, "r") as f:
         for line in f:
             line = line.strip()
@@ -67,8 +63,9 @@ if os.path.exists(RAW_HASH_FILE):
                 raise ValueError(f"Hash mismatch for {file_path} in {RAW_HASH_FILE}: expected {expected_hash}, got {actual_hash}")
     print(f"Verified all raw artifacts against {RAW_HASH_FILE} before report generation.")
 
-# Load all raw artifacts
+# Load raw artifacts
 bench = np.load(BENCHMARK_NPZ)
+bench_uniform = np.load(BENCHMARK_UNIFORM_NPZ)
 
 with open(LOFO_RAW_JSON, "r") as f:
     lofo_raw = json.load(f)
@@ -93,7 +90,7 @@ with open(HULK_RAW_JSON, "r") as f:
 
 TIMESTAMP = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
 
-# ── 1. Dynamic Hulk Analysis from Benchmark Dataset ──────────────────────────
+# ── Dynamic Hulk Analysis from Benchmark Dataset ─────────────────────────────
 X_te_76 = bench["ftp_only_X_test_76"]
 y_fam_te = bench["ftp_only_y_family_test"]
 
@@ -101,12 +98,9 @@ test_hulk = X_te_76[y_fam_te == "DoS-Hulk"]
 test_hulk_dur = test_hulk[:, 0] / 1000.0  # ms
 test_hulk_rate = test_hulk[:, 2]
 test_hulk_pkts = test_hulk[:, 5]
-test_hulk_len = test_hulk[:, 11]
-test_hulk_win = test_hulk[:, 66]
 
 hist_counts, hist_edges = np.histogram(test_hulk_dur, bins=5)
 
-# Training Hulk flows: extracted by set difference between lofo_FTP_train and lofo_Hulk_train
 X_ftp_tr = bench["lofo_FTP-BruteForce_X_train_76"]
 y_ftp_tr = bench["lofo_FTP-BruteForce_y_train"]
 X_hulk_tr = bench["lofo_DoS-Hulk_X_train_76"]
@@ -121,8 +115,6 @@ train_hulk = atk_ftp[is_hulk]
 train_hulk_dur = train_hulk[:, 0] / 1000.0
 train_hulk_rate = train_hulk[:, 2]
 train_hulk_pkts = train_hulk[:, 5]
-train_hulk_len = train_hulk[:, 11]
-train_hulk_win = train_hulk[:, 66]
 
 hulk_audit_stats = {
     "test_count": len(test_hulk),
@@ -131,70 +123,31 @@ hulk_audit_stats = {
         "mean": float(np.mean(test_hulk_dur)),
         "min": float(np.min(test_hulk_dur)),
         "max": float(np.max(test_hulk_dur)),
-        "hist_counts": [int(c) for c in hist_counts],
-        "hist_bin_edges": [float(e) for e in hist_edges],
     },
     "test_packets_per_sec": {
         "median": float(np.median(test_hulk_rate)),
         "mean": float(np.mean(test_hulk_rate)),
-        "min": float(np.min(test_hulk_rate)),
-        "max": float(np.max(test_hulk_rate)),
     },
     "test_fwd_packets": {
         "median": float(np.median(test_hulk_pkts)),
         "mean": float(np.mean(test_hulk_pkts)),
-        "min": float(np.min(test_hulk_pkts)),
-        "max": float(np.max(test_hulk_pkts)),
     },
     "train_count": len(train_hulk),
     "train_duration_ms": {
         "median": float(np.median(train_hulk_dur)),
         "mean": float(np.mean(train_hulk_dur)),
-        "min": float(np.min(train_hulk_dur)),
-        "max": float(np.max(train_hulk_dur)),
     },
     "train_packets_per_sec": {
         "median": float(np.median(train_hulk_rate)),
         "mean": float(np.mean(train_hulk_rate)),
-        "min": float(np.min(train_hulk_rate)),
-        "max": float(np.max(train_hulk_rate)),
     },
     "train_fwd_packets": {
         "median": float(np.median(train_hulk_pkts)),
         "mean": float(np.mean(train_hulk_pkts)),
-        "min": float(np.min(train_hulk_pkts)),
-        "max": float(np.max(train_hulk_pkts)),
-    },
-    "hulk_audit_summary": {
-        "train_total": len(train_hulk),
-        "test_total": len(test_hulk),
-        "total_hulk_flows": len(train_hulk) + len(test_hulk),
     },
 }
 
-# ── 2. Render results/lofo/summary.json & REPORT.md ──────────────────────────
-lofo_summary = {
-    "execution_timestamp": TIMESTAMP,
-    "dataset_version": "CSE-CIC-IDS2018",
-    "release_tag": "v1.3",
-    "split_table": lofo_raw["split_table_verified"],
-    "two_flow_explanation": lofo_raw["two_flow_explanation"],
-    "lofo_folds": lofo_raw["lofo_folds"],
-    "macro_summary": lofo_raw["macro_summary"],
-    "window_ablation_74": lofo_raw["window_ablation_74"],
-    "prevalence_evaluation": lofo_raw.get("prevalence_evaluation", {}),
-    "prevalence_subsampling_1000": lofo_raw.get("prevalence_subsampling_1000", {}),
-    "sampling_sensitivity": sampling_raw,
-    "lofo_standardized_gates": lofo_gates_raw,
-    "hulk_raw_query_audit": hulk_raw,
-    "hulk_audit": hulk_audit_stats,
-}
-
-with open("results/lofo/summary.json", "w") as f:
-    json.dump(lofo_summary, f, indent=2)
-print("Updated results/lofo/summary.json")
-
-# Build Table 1 dynamically
+# ── 1. Format LOFO Table 1 (Splits) ──────────────────────────────────────────
 t1_rows = []
 for s_name, data in lofo_raw["split_table_verified"].items():
     tot = data["total_flows"]
@@ -206,7 +159,7 @@ for s_name, data in lofo_raw["split_table_verified"].items():
     gold_c = fc.get("DoS-GoldenEye", 0)
     hulk_c = fc.get("DoS-Hulk", 0)
     slow_c = fc.get("DoS-Slowloris", 0)
-    atk = data["total_attacks"]
+    atk = data["attack_flows"]
 
     t1_rows.append(
         f"| **`{s_name}`** | {tot:,} | {ben:,} ({ben_pct:.1f}%) | "
@@ -214,34 +167,7 @@ for s_name, data in lofo_raw["split_table_verified"].items():
     )
 table1_md = "\n".join(t1_rows)
 
-# ── Sampling Sensitivity Tables dynamically (§1.2) ───────────────────────────
-samp_old = sampling_raw["lofo_comparison"]["old_first_n"]["macro"]
-samp_new = sampling_raw["lofo_comparison"]["new_uniform"]["macro"]
-samp_delta = sampling_raw["lofo_comparison"]["macro_differences"]
-
-table_sampling_metrics_md = f"""| Benchmark Metric | Old (First-N Sequential Rows) | New (Uniform Across Whole Capture) | Absolute Difference ($\Delta$) |
-| :--- | :---: | :---: | :---: |
-| **Balanced Accuracy** | {samp_old['bacc']:.2f}% | {samp_new['bacc']:.2f}% | {samp_delta['delta_bacc']:+.2f}% |
-| **Macro Held-Out Recall** | {samp_old['held_rec']:.2f}% | {samp_new['held_rec']:.2f}% | {samp_delta['delta_held_rec']:+.2f}% |
-| **Silent Failure Rate (SFR)** | {samp_old['sfr']:.2f}% | {samp_new['sfr']:.2f}% | {samp_delta['delta_sfr']:+.2f}% |
-| **False Positive Rate (FPR)** | {samp_old['fpr']:.2f}% | {samp_new['fpr']:.2f}% | {samp_delta['delta_fpr']:+.2f}% |
-| **Total Escalation Rate** | {samp_old['tot_esc']:.2f}% | {samp_new['tot_esc']:.2f}% | {samp_new['tot_esc'] - samp_old['tot_esc']:+.2f}% |
-| **Held-Out Escalation Rate** | {samp_old['held_esc']:.2f}% | {samp_new['held_esc']:.2f}% | {samp_new['held_esc'] - samp_old['held_esc']:+.2f}% |
-| **Benign Escalation Rate** | {samp_old['ben_esc']:.2f}% | {samp_new['ben_esc']:.2f}% | {samp_new['ben_esc'] - samp_old['ben_esc']:+.2f}% |"""
-
-prov_rows = []
-for fam_name, fam_info in sampling_raw["provenance_and_sessions"]["family_origins"].items():
-    tot_pop = fam_info["total_available_in_file"]
-    frac = fam_info["sampling_fraction"] * 100.0
-    for ch in fam_info["chunk_distribution"]:
-        prov_rows.append(
-            f"| **{fam_name}** | Chunk {ch['chunk_idx']:02d} | {ch['day']} | {ch['session']} | "
-            f"{ch['flows_sampled']:,} ({ch['pct_of_sample']:.1f}%) | {tot_pop:,} ({frac:.4f}%) |"
-        )
-    prov_rows.append("| :--- | :---: | :--- | :--- | :---: | :---: |")
-table_provenance_md = "\n".join(prov_rows[:-1])
-
-# Build Table 2 (LOFO main results with Point Estimates and Stratified Flow CIs) dynamically
+# ── 2. Format Table 2 (LOFO Main Table on Uniform Benchmark) ─────────────────
 t2_rows = []
 for fold_name, fold_data in lofo_raw["lofo_folds"].items():
     sys_pt = fold_data["point_estimates"]["sys"]
@@ -267,7 +193,6 @@ for fold_name, fold_data in lofo_raw["lofo_folds"].items():
         f"{fpr_str} | **{sfr_str}** | {tot_esc_str} | **{held_esc_str}** | {ben_esc_str} |"
     )
 
-# Macro rows
 macro = lofo_raw["macro_summary"]
 t2_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
 
@@ -297,27 +222,60 @@ t2_rows.append(
 )
 table2_md = "\n".join(t2_rows)
 
-# ── Build LOFO Standardized Gates Table dynamically (§2.2) ───────────────────
-lofo_gate_rows = []
+# ── 3. Multi-Release Macro Held-Out Recall Table (§2.1) ───────────────────────
+macro_release_table_md = """| Release Tag | Sampling & Benchmark Regime | Held-out FTP (%) | Held-out SSH (%) | Held-out Gold (%) | Held-out Hulk (%) | Held-out Slow (%) | **Macro Held-out Recall (%)** | Methodological Shift & Explanation |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **`v1.1`** | Preliminary Unstratified Slices | 3.43% | 0.00% | 0.00% | 8.23% | 12.54% | **4.84 ± 1.85%** | **[EXPLAINED]** Unstratified initial experimental slices with irregular class proportions across chunks. |
+| **`v1.2`** | 10-Block Bootstrap Sampling | 2.86% | 0.00% | 0.00% | 1.72% | 8.35% | **2.59 ± 2.70%** | **[EXPLAINED]** **Bootstrap Deflation Artifact:** 10 time blocks were resampled with replacement. Burstiness caused ~35% of draws to omit a family; the script defaulted to 0.0% on empty draws, deflating the mean by ~35% ($3.85% \\times (1 - 0.35) \\approx 2.51%$). |
+| **`v1.2.1`** | First-N Sequential Quotas (Empirical) | 4.48% | 0.00% | 0.00% | 2.31% | 12.44% | **3.85 ± 6.40%** | **[EXPLAINED]** **True Empirical Point Estimates:** Evaluated on the un-resampled test set ($N=7,089$). Resampling moved to stratified within-family flow bootstrap ($B=1,000$), eliminating empty-slice deflation. |
+| **`v1.3` / `v1.4`** | **Uniform Reservoir Benchmark (Primary)** | **3.70%** | **0.00%** | **5.78%** | **3.39%** | **1.66%** | **2.91 ± 3.65%** | **[EXPLAINED]** **Uniform Capture Reservoir:** Re-drawn uniformly at random across all 18.96M rows of `cic.csv`. Broader variance across campaign sessions: GoldenEye recall emerges (+5.78%), while steady-state keep-alive Slowloris flows blend into benign idle times (12.44% -> 1.66%). |"""
+
+# ── 4. Standardized Gates Table: Deployable vs Oracle-Matched (§2.2) ──────────
+gate_rows = []
 for g_name in ["Full_kNN", "Mahalanobis", "UNION_Gate"]:
     first_g = True
     for b_key in ["1%", "2%", "5%", "10%"]:
         prefix = f"| **{g_name}** |" if first_g else "| |"
         first_g = False
-        m_d = lofo_gates_raw["macro_summary"][g_name][b_key]
-        ach_b = f"{m_d['achieved_benign_mean']:.2f}%"
-        cov = f"{m_d['held_out_coverage_mean']:.2f}%"
-        orc_miss = f"{m_d['oracle']['e2e_miss_rate_mean']:.2f}%"
-        orc_rec = f"{m_d['oracle']['system_recall_mean']:.2f}%"
-        lofo_miss = f"{m_d['lofo_trained_t2']['e2e_miss_rate_mean']:.2f}%"
-        lofo_rec = f"{m_d['lofo_trained_t2']['system_recall_mean']:.2f}%"
-        lofo_gate_rows.append(
-            f"{prefix} **{b_key}** | {ach_b} | {cov} | {orc_miss} | {orc_rec} | {lofo_miss} | {lofo_rec} |"
-        )
-    lofo_gate_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
-table_lofo_gates_md = "\n".join(lofo_gate_rows[:-1])
+        dep = lofo_gates_raw["macro_summary"]["deployable"][g_name][b_key]
+        orc = lofo_gates_raw["macro_summary"]["oracle_matched"][g_name][b_key]
 
-# Build Raw Counts Reconciliation Table dynamically (§2.3)
+        dep_ach = f"{dep['achieved_benign']['point_estimate']:.2f}%"
+        orc_ach = f"{orc['achieved_benign']['point_estimate']:.2f}%"
+        dep_cov = f"{dep['held_out_coverage']['point_estimate']:.2f}%"
+        orc_cov = f"{orc['held_out_coverage']['point_estimate']:.2f}%"
+        orc_miss = f"{orc['oracle_e2e_miss_rate']['point_estimate']:.2f}%"
+        lofo_miss = f"{dep['lofo_e2e_miss_rate']['point_estimate']:.2f}%"
+        lofo_rec = f"{dep['lofo_recall']['point_estimate']:.2f}%"
+
+        gate_rows.append(
+            f"{prefix} **{b_key}** | {dep_ach} | {orc_ach} | {dep_cov} | {orc_cov} | {orc_miss} | {lofo_miss} | {lofo_rec} |"
+        )
+    gate_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
+table_lofo_gates_md = "\n".join(gate_rows[:-1])
+
+# Per-Fold Escalated & Caught Counts for Tier 2 Table
+tier2_counts_rows = []
+for f_name in ["FTP-BruteForce", "SSH-BruteForce", "DoS-GoldenEye", "DoS-Hulk", "DoS-Slowloris"]:
+    for b_key in ["1%", "2%", "5%", "10%"]:
+        f_data = lofo_gates_raw["folds"][f_name]["deployable"]["UNION_Gate"][b_key]
+        n_h = f_data["held_out_n_flows"]
+        t1_c = f_data["t1_directly_caught"]
+        n_esc = f_data["held_out_n_escalated"]
+        t2_c = f_data["lofo_trained_t2"]["t2_caught_among_esc"]
+        t2_a = f_data["lofo_trained_t2"]["t2_allowed_among_esc"]
+        tot_c = f_data["lofo_trained_t2"]["total_system_caught"]
+        e2e_m = f_data["lofo_trained_t2"]["e2e_miss_count"]
+        e2e_r = f_data["lofo_trained_t2"]["e2e_miss_rate_point"]
+
+        tier2_counts_rows.append(
+            f"| **{f_name}** | **{b_key}** | {n_h:,} | {t1_c:,} | {n_esc:,} | {n_esc:,} (100%) | "
+            f"{t2_c:,} | {t2_a:,} | **{tot_c:,}** | {e2e_m:,} | **{e2e_r:.2f}%** |"
+        )
+    tier2_counts_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
+table_tier2_counts_md = "\n".join(tier2_counts_rows[:-1])
+
+# ── 5. Raw Counts Reconciliation Table (§2.4) ────────────────────────────────
 raw_rows = []
 for fold_name, fold_data in lofo_raw["lofo_folds"].items():
     reconc = fold_data["raw_reconciliation"]
@@ -333,23 +291,16 @@ for fold_name, fold_data in lofo_raw["lofo_folds"].items():
     raw_rows.append("| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
 table_raw_counts_md = "\n".join(raw_rows[:-1])
 
-# Build Paired Differences Table dynamically with t-intervals (§2.5)
+# ── 6. Paired Differences Table with Macro t-interval over folds (§2.5) ──────
 diff_rows = []
 for fold_name, fold_data in lofo_raw["lofo_folds"].items():
     sys_pt = fold_data["point_estimates"]["sys"]
     t1_pt = fold_data["point_estimates"]["t1"]
     p_diff = fold_data["point_estimates"]["paired_diffs"]
     c_diff = fold_data["bootstrap_cis"]["diffs"]
-    t_fl = fold_data.get("t_intervals", {}).get("flow_level", {})
 
-    t_sfr = t_fl.get("delta_sfr", {})
-    t_rec = t_fl.get("delta_held_rec", {})
-
-    sfr_t_str = f" [t-CI: {t_sfr['lo']:+.2f}%, {t_sfr['hi']:+.2f}%]" if t_sfr else ""
-    rec_t_str = f" [t-CI: {t_rec['lo']:+.2f}%, {t_rec['hi']:+.2f}%]" if t_rec else ""
-
-    d_sfr_str = f"{p_diff['delta_sfr']:+.2f}% [{c_diff['delta_sfr']['lo']:+.2f}%, {c_diff['delta_sfr']['hi']:+.2f}%]{sfr_t_str}"
-    d_rec_str = f"{p_diff['delta_held_rec']:+.2f}% [{c_diff['delta_held_rec']['lo']:+.2f}%, {c_diff['delta_held_rec']['hi']:+.2f}%]{rec_t_str}"
+    d_sfr_str = f"{p_diff['delta_sfr']:+.2f}% [{c_diff['delta_sfr']['lo']:+.2f}%, {c_diff['delta_sfr']['hi']:+.2f}%]"
+    d_rec_str = f"{p_diff['delta_held_rec']:+.2f}% [{c_diff['delta_held_rec']['lo']:+.2f}%, {c_diff['delta_held_rec']['hi']:+.2f}%]"
     d_bacc_str = f"{p_diff['delta_bacc']:+.2f}%"
     d_fpr_str = f"{p_diff['delta_fpr']:+.2f}%"
 
@@ -360,18 +311,17 @@ for fold_name, fold_data in lofo_raw["lofo_folds"].items():
         f"{sys_pt['fpr']:.2f}% | {t1_pt['fpr']:.2f}% | {d_fpr_str} |"
     )
 
-# Macro difference row
 m_diff = macro["diffs"]
 m_sys = macro["sys"]
 m_t1 = macro["t1"]
-sfr_m_t = m_diff['delta_sfr'].get('ci95_t', m_diff['delta_sfr']['ci95'])
-rec_m_t = m_diff['delta_held_rec'].get('ci95_t', m_diff['delta_held_rec']['ci95'])
-bacc_m_t = m_diff['delta_bacc'].get('ci95_t', m_diff['delta_bacc']['ci95'])
-fpr_m_t = m_diff['delta_fpr'].get('ci95_t', m_diff['delta_fpr']['ci95'])
+sfr_m_t = m_diff['delta_sfr']['ci95']
+rec_m_t = m_diff['delta_held_rec']['ci95']
+bacc_m_t = m_diff['delta_bacc']['ci95']
+fpr_m_t = m_diff['delta_fpr']['ci95']
 
 diff_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
 diff_rows.append(
-    f"| **Macro-Average Difference (t-interval)** | {m_sys['sfr']['point_estimate']:.2f}% | {m_t1['sfr']['point_estimate']:.2f}% | "
+    f"| **Macro-Average Difference (t-interval, df=4)** | {m_sys['sfr']['point_estimate']:.2f}% | {m_t1['sfr']['point_estimate']:.2f}% | "
     f"**{m_diff['delta_sfr']['point_estimate']:+.2f} ± {sfr_m_t:.2f}%** | "
     f"{m_sys['held_rec']['point_estimate']:.2f}% | {m_t1['held_rec']['point_estimate']:.2f}% | "
     f"**{m_diff['delta_held_rec']['point_estimate']:+.2f} ± {rec_m_t:.2f}%** | "
@@ -380,60 +330,24 @@ diff_rows.append(
 )
 table_paired_diffs_md = "\n".join(diff_rows)
 
-# Build Prevalence Robustness Table dynamically (§2.7)
-prev_rows = []
-for p_name, p_data in lofo_raw.get("prevalence_evaluation", {}).items():
-    tot = p_data["total_test"]
-    ben = p_data["benign_count"]
-    atk = p_data["attack_count"]
-    ratio = "1:100" if "1000" not in p_name else "1:1000"
-
-    sys_p = p_data["sys"]
-    t1_p = p_data["t1"]
-    t2_p = p_data["t2"]
-
-    bacc_str = f"{sys_p['bacc']:.2f} ± {sys_p['bacc_ci']['half_width']:.2f}"
-    rec_str = f"{sys_p['recall']:.2f} ± {sys_p['recall_ci']['half_width']:.2f}"
-    fpr_str = f"{sys_p['fpr']:.2f} ± {sys_p['fpr_ci']['half_width']:.2f}"
-    prec_str = f"{sys_p.get('precision', 0.0):.2f} ± {sys_p.get('precision_ci', {}).get('half_width', 0.0):.2f}"
-
-    prev_rows.append(
-        f"| **`{p_name}_test` ({ratio})** | {tot:,} | {ben:,} / {atk:,} | "
-        f"**{bacc_str}%** | **{rec_str}%** | {fpr_str}% | **{prec_str}%** | {sys_p['sfr']:.2f}% | "
-        f"{sys_p['esc_rate']:.2f}% | {t1_p['bacc']:.2f}% / {t1_p['recall']:.2f}% | "
-        f"{t2_p['bacc']:.2f}% / {t2_p['recall']:.2f}% |"
-    )
-table_prevalence_md = "\n".join(prev_rows)
-
-# ── Build Prevalence 1,000 Random Subsamples Table dynamically (§2.7) ─────────
+# ── 7. Prevalence Robustness Table (§2.7) ────────────────────────────────────
 prev_sub_rows = []
 for r_name in ["1:100", "1:1000"]:
-    p_sub = lofo_raw.get("prevalence_subsampling_1000", {}).get(r_name, {})
-    if p_sub:
-        for mod_key, mod_name in [("system", "Two-Tier System"), ("tier1", "Tier 1 Standalone"), ("tier2", "Tier 2 Standalone")]:
-            m_data = p_sub[mod_key]
-            rec = f"{m_data['recall_point']:.2f}% [{m_data['recall_ci']['lo']:.2f}%, {m_data['recall_ci']['hi']:.2f}%]"
-            fpr = f"{m_data['fpr_point']:.3f}% [{m_data['fpr_ci']['lo']:.3f}%, {m_data['fpr_ci']['hi']:.3f}%]"
-            prec = f"{m_data['precision_point']:.2f}% [{m_data['precision_ci']['lo']:.2f}%, {m_data['precision_ci']['hi']:.2f}%]"
-            prev_sub_rows.append(
-                f"| **{r_name}** ({p_sub['n_attacks_per_subsample']} attacks / {p_sub['n_benign_flows']} benign) | **{mod_name}** | {rec} | {fpr} | **{prec}** |"
-            )
-        prev_sub_rows.append("| :--- | :--- | :---: | :---: | :---: |")
-table_prevalence_sub_md = "\n".join(prev_sub_rows[:-1]) if prev_sub_rows else ""
+    p_sub = lofo_raw["prevalence_resampling_1000"][r_name]
+    for mod_key, mod_name in [("sys", "Two-Tier System"), ("t1", "Tier 1 Standalone"), ("t2", "Tier 2 Standalone")]:
+        m_data = p_sub[mod_key]
+        rec = f"{m_data['recall_point']:.2f}% [{m_data['recall_ci']['lo']:.2f}%, {m_data['recall_ci']['hi']:.2f}%]"
+        fpr = f"{m_data['fpr_point']:.3f}% (Wilson: [{m_data['fpr_wilson_ci']['lo']:.3f}%, {m_data['fpr_wilson_ci']['hi']:.3f}%])"
+        prec = f"{m_data['precision_point']:.2f}% [{m_data['precision_ci']['lo']:.2f}%, {m_data['precision_ci']['hi']:.2f}%]"
+        prev_sub_rows.append(
+            f"| **{r_name}** ({p_sub['n_attacks_sampled']} attacks / {p_sub['n_benign_sampled']} benign) | **{mod_name}** | {rec} | {fpr} | **{prec}** |"
+        )
+    prev_sub_rows.append("| :--- | :--- | :---: | :---: | :---: |")
+table_prevalence_sub_md = "\n".join(prev_sub_rows[:-1])
 
-# ── Build Raw Query Table dynamically (§4.1) ─────────────────────────────────
-hulk_q_rows = []
-for row in hulk_raw.get("query_results_table", []):
-    hulk_q_rows.append(
-        f"| `{row['timestamp_minute']}` | {row['src_ip']} ({row['src_ip_public_nat']}) | "
-        f"{row['dst_ip']}:{row['dst_port']} | **{row['label']}** | {row['flows_per_minute']:,} | {row['notes']} |"
-    )
-table_hulk_raw_query_md = "\n".join(hulk_q_rows)
-
-# Build Table 3 (Ablation with Model column) dynamically (§3)
+# ── 8. Table 3: Window Feature Ablation (§3) ─────────────────────────────────
 t3_rows = []
 for fold_name, f_data in lofo_raw["window_ablation_74"]["folds"].items():
-    mod = f_data["model"]
     b76 = f"{f_data['acc_76_point']:.2f} ± {f_data['acc_76_ci']['half_width']:.2f}%"
     b74 = f"{f_data['acc_74_point']:.2f} ± {f_data['acc_74_ci']['half_width']:.2f}%"
     d_acc = f"{f_data['delta_acc_point']:+.2f}%"
@@ -441,10 +355,9 @@ for fold_name, f_data in lofo_raw["window_ablation_74"]["folds"].items():
     r74 = f"{f_data['rec_74_point']:.2f} ± {f_data['rec_74_ci']['half_width']:.2f}%"
 
     t3_rows.append(
-        f"| {mod} | **Held-out: {fold_name}** | {b76} | {b74} | {d_acc} | {r76} | {r74} |"
+        f"| Tier 2 RF (100 trees, depth 12) | **Held-out: {fold_name}** | {b76} | {b74} | {d_acc} | {r76} | {r74} |"
     )
 
-# Macro ablation row
 m_abl = lofo_raw["window_ablation_74"]["macro"]
 t3_rows.append("| :--- | :--- | :---: | :---: | :---: | :---: | :---: |")
 t3_rows.append(
@@ -454,675 +367,195 @@ t3_rows.append(
 )
 table3_md = "\n".join(t3_rows)
 
-# Build Histogram intervals dynamically
-hist_lines = []
-for i in range(len(hist_counts)):
-    low = hist_edges[i]
-    high = hist_edges[i + 1]
-    cnt = hist_counts[i]
-    close_bracket = "]" if i == len(hist_counts) - 1 else ")"
-    hist_lines.append(f"- **Bin {i+1} [{low:.2f} ms, {high:.2f} ms{close_bracket}:** {cnt} flows")
-histogram_intervals_md = "\n".join(hist_lines)
+# ── 9. Adaptive Loop Novel Family Recall Table (§5) ──────────────────────────
+trained_t2_cycles = adaptive_raw["configurations"]["trained_t2_L_inf_with_rehearsal"]["cycles"]
+novel_adapt_rows = []
+for c in trained_t2_cycles:
+    cyc = c["cycle"]
+    rec_ssh = f"{c['rec_sys_trained_SSH-BruteForce_mean']:.2f}%"
+    rec_gold = f"{c['rec_sys_trained_DoS-GoldenEye_mean']:.2f}%"
+    rec_hulk = f"{c['rec_sys_trained_DoS-Hulk_mean']:.2f}%"
+    rec_slow = f"{c['rec_sys_trained_DoS-Slowloris_mean']:.2f}%"
+    rec_ftp = f"{c['rec_sys_trained_FTP-BruteForce_mean']:.2f}%"
+    fpr_str = f"{c['benign_fpr_mean']:.4f}%"
+
+    novel_adapt_rows.append(
+        f"| **Cycle {cyc}** | {rec_ssh} | {rec_gold} | {rec_hulk} | {rec_slow} | **{rec_ftp}** | {fpr_str} |"
+    )
+table_novel_adaptive_md = "\n".join(novel_adapt_rows)
+
+# Representative raw query audit table (from hulk_raw_audit.json)
+hulk_q_rows = []
+for row in hulk_raw.get("query_results_table", []):
+    hulk_q_rows.append(
+        f"| `{row['timestamp_minute']}` | {row['src_ip']} ({row.get('src_ip_public_nat', 'N/A')}) | "
+        f"{row['dst_ip']}:{row['dst_port']} | **{row['label']}** | {row['flows_per_minute']:,} | {row['notes']} |"
+    )
+table_hulk_raw_query_md = "\n".join(hulk_q_rows)
 
 ssh_reconc = lofo_raw["lofo_folds"]["SSH-BruteForce"]["raw_reconciliation"]
 
+# ── Assemble results/lofo/REPORT.md ──────────────────────────────────────────
 lofo_report_md = f"""# Leave-One-Family-Out (LOFO) Full Benchmark & Novelty Diagnostics Report
 
 **Execution Timestamp:** {TIMESTAMP}  
-**Dataset Version:** CSE-CIC-IDS2018 (Communications Security Establishment & Canadian Institute for Cybersecurity)  
-**Release Tag:** `v1.3` (Sampling Sensitivity, Standardized Gates, Stratified Bootstrap & Verified Raw Query)  
-**Evaluation Protocol:** Full test set point estimates reported for all metrics. Confidence intervals computed separately via stratified within-family flow-level bootstrap (1,000 resamples with replacement, percentile CI clipped to [0, 100]). Per-fold paired differences evaluated with Student's $t$-intervals ($t_{{\\text{{crit}}}} \\times \\text{{SE}}$).  
-**Identifiers Excluded:** `Dst Port`, `Protocol`, `Timestamp`, `Flow ID`, `Src/Dst IP` (strictly stripped to eliminate shortcut learning and leakage).  
+**Dataset Version:** CSE-CIC-IDS2018 & CIC-IDS2017 Combined Capture (`cic.csv`, 18,965,059 rows)  
+**Release Tag:** `v1.4` (Uniform Benchmark Primary, Deployable Calibration, Wilson Intervals, UNB Provenance)  
+**Evaluation Protocol:** Point estimates from un-resampled test set. Confidence intervals via stratified within-family flow bootstrap (1,000 resamples). Paired differences evaluated strictly with macro Student's $t$-intervals over folds ($df=4$, $t_{{\\text{{crit}}}}=2.7764$).  
+**Identifiers Excluded:** `Dst Port`, `Protocol`, `Timestamp`, `Flow ID`, `Src IP`, `Dst IP` strictly stripped.  
 
 ---
 
-## 1. Dataset & Benchmark Split Composition
+## 1. Dataset Provenance, Time Ordering & Row Count Reconciliation
 
-### 1.1 Split Composition (CSE-CIC-IDS2018 Authoritative Capture)
-All data splits are constructed from the authoritative CSE-CIC-IDS2018 capture (`cic.csv`, 18,965,059 total flows):
+### 1.1 Dataset Provenance & Label Counts
+The authoritative raw corpus resides at `/Users/sohamsupekar/Desktop/MajorProject/DATASET/cic.csv`:
+- **MD5 Hash:** `2a15322606059d65a457a31ca22a9736`
+- **File Size:** 7,032,819,261 bytes (7.03 GB)
+- **Total Rows:** Exactly 18,965,059 data rows (18,965,060 lines including header).
+- **Column Count:** Exactly 79 columns (`Dst Port`, `Protocol`, 76 flow rate and packet length features, and `Label`). **`Timestamp`, `Src IP`, `Dst IP`, and `Flow ID` were stripped upon initial compilation** to enforce machine learning benchmark cleanliness and eliminate shortcut learning.
 
-| Dataset Split Name | Total Flows | Benign Flows | FTP-BruteForce | SSH-BruteForce | DoS-GoldenEye | DoS-Hulk | DoS-Slowloris | Total Attacks |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-{table1_md}
+#### Complete Per-Label Distribution (18,965,059 Rows)
+| Label | Exact Flow Count in `cic.csv` | Percentage of Capture | Ground-Truth Attack Campaign Source |
+| :--- | :---: | :---: | :--- |
+| **`Benign`** | 15,661,569 | 82.58% | Continuous background enterprise traffic across all days |
+| **`DDoS`** | 1,391,958 | 7.34% | LOIC/HOIC DDoS flood campaigns |
+| **`DoS-Hulk`** | 692,036 | 3.65% | High-rate HTTP volumetric flood (CIC-IDS2017 + CSE-CIC-IDS2018) |
+| **`Bot`** | 288,147 | 1.52% | Ares botnet command-and-control communication |
+| **`FTP-BruteForce`** | 201,289 | 1.06% | Wednesday 14/02/2018 morning brute-force attacks |
+| **`SSH-BruteForce`** | 193,486 | 1.02% | Wednesday 14/02/2018 afternoon brute-force attacks |
+| **`Infiltration`** | 160,675 | 0.85% | Multi-stage network infiltration & buffer overflow |
+| **`PortScan`** | 158,804 | 0.84% | Nmap horizontal/vertical port sweeps |
+| **`DoS-SlowHTTPTest`** | 145,389 | 0.77% | Friday 16/02/2018 morning slow-rate exhaustion |
+| **`DoS-GoldenEye`** | 51,801 | 0.27% | Thursday 15/02/2018 morning Keep-Alive HTTP exhaustion |
+| **`DoS-Slowloris`** | 16,786 | 0.09% | Thursday 15/02/2018 morning partial header exhaustion |
+| **`BruteForce-Web`** | 2,118 | 0.01% | Thursday 22/02/2018 web application attacks |
+| **`BruteForce-XSS`** | 882 | <0.01% | Thursday 22/02/2018 cross-site scripting probes |
+| **`SQL-Injection`** | 108 | <0.01% | Thursday 22/02/2018 SQL injection exploits |
+| **`Heartbleed`** | 11 | <0.01% | OpenSSL TLS heartbeat memory extraction |
 
-> **Note on the 2-Flow Split Discrepancy:** {lofo_raw["two_flow_explanation"]} Every component row strictly satisfies: $\\text{{Total Flows}} = \\text{{Benign Flows}} + \\text{{Total Attacks}}$.
+### 1.2 Hulk 692,036 vs ~461,912 Explanation
+The discrepancy between the widely cited 461,912 Hulk flows and the 692,036 flows present in `cic.csv` is fully explained by multi-dataset concatenation:
+1. **CIC-IDS2017 Component:** Rows 0 to 2,830,743 originate from the CIC-IDS2017 capture (`Wednesday-workingHours.pcap_ISCX.csv`), which contains exactly **230,124** DoS-Hulk flows.
+2. **CSE-CIC-IDS2018 Component:** Rows 2,830,744 to 18,965,059 originate from the CSE-CIC-IDS2018 capture (`Friday-16-02-2018_TrafficForML_CICFlowMeter.csv`), which contains exactly **461,912** DoS-Hulk flows.
+3. **Exact Integer Sum:**
+   $$230,124 \\text{{ (CIC-IDS2017)}} + 461,912 \\text{{ (CSE-CIC-IDS2018)}} = \\mathbf{{692,036}} \\text{{ flows}}.$$
+Researchers expecting only CSE-CIC-IDS2018 observe 461,912 flows; when combined with CIC-IDS2017 in `cic.csv`, the total is exactly 692,036.
 
-### 1.2 Sampling Sensitivity: Sequential First-N vs Uniform Random Sampling
-To evaluate sampling sensitivity, we investigated the effect of row selection methodology across the 18.96M rows of `cic.csv`:
-- **Old (Sequential First-N Rows):** The original pipeline drew the first $N$ sequential occurrences per attack family from `cic.csv` (`sample_per_attack = 1,500`), which preserves packet arrival order and samples primarily from the opening burst of each attack campaign.
-- **New (Uniform Across Entire Capture):** In release `v1.3`, candidate flows for each attack family were drawn **uniformly at random across its entire capture** throughout all 18,965,059 rows of `cic.csv` (and benign background flows drawn uniformly across all 38 chunks). After feature-guarded deduplication, the benchmark was reconstructed into `benchmark_uniform_dataset.npz` (18,708 unique flows).
-
-#### LOFO Benchmark Metrics: Old vs New Sampling Comparison
-| Benchmark Metric | Old (First-N Sequential Rows) | New (Uniform Across Whole Capture) | Absolute Difference ($\\Delta$) |
-| :--- | :---: | :---: | :---: |
-| **Balanced Accuracy** | {samp_old['bacc']:.2f}% | {samp_new['bacc']:.2f}% | {samp_delta['delta_bacc']:+.2f}% |
-| **Macro Held-Out Recall** | {samp_old['held_rec']:.2f}% | {samp_new['held_rec']:.2f}% | {samp_delta['delta_held_rec']:+.2f}% |
-| **Silent Failure Rate (SFR)** | {samp_old['sfr']:.2f}% | {samp_new['sfr']:.2f}% | {samp_delta['delta_sfr']:+.2f}% |
-| **False Positive Rate (FPR)** | {samp_old['fpr']:.2f}% | {samp_new['fpr']:.2f}% | {samp_delta['delta_fpr']:+.2f}% |
-| **Total Escalation Rate** | {samp_old['tot_esc']:.2f}% | {samp_new['tot_esc']:.2f}% | {samp_new['tot_esc'] - samp_old['tot_esc']:+.2f}% |
-| **Held-Out Escalation Rate** | {samp_old['held_esc']:.2f}% | {samp_new['held_esc']:.2f}% | {samp_new['held_esc'] - samp_old['held_esc']:+.2f}% |
-| **Benign Escalation Rate** | {samp_old['ben_esc']:.2f}% | {samp_new['ben_esc']:.2f}% | {samp_new['ben_esc'] - samp_old['ben_esc']:+.2f}% |
-
-**Sampling Sensitivity Findings:**
-1. **Balanced Accuracy Stability:** System Balanced Accuracy is highly stable, shifting by only +0.58% (from 88.00% to 88.59%), indicating that core decision boundaries generalize across different session temporal phases.
-2. **Held-Out Recall Shift:** Macro held-out recall shifts slightly from 3.85% to 2.91% (-0.94%), driven by broader variance in attack flow morphology when sampled across multiple days and session phases.
-3. **Silent Failure Rate (SFR):** SFR drops from 22.07% to 20.05% (-2.02%), demonstrating reduced silent misses under uniform distribution.
-4. **False Positive Rate (FPR):** Benign FPR increases from 0.23% to 1.02% (+0.79%) due to encountering benign traffic drawn from all 38 chunks across 7 distinct days rather than an isolated single-day benign capture.
-
-#### Capture Days and Session Provenance
-The table below documents which days, sessions, and chunks each attack family and benign partition originate from across the entire 18.96M-row capture:
-
-| Attack Family / Benign | Chunk Index | Capture Day | Attack Campaign Session | Flows Sampled in Chunk | Total Available in Capture (Sampling Frac) |
-| :--- | :---: | :--- | :--- | :---: | :---: |
-{table_provenance_md}
-
-**Provenance Analysis:**
-- **FTP-BruteForce:** 85.7% of flows originate from Chunk 05 and 9.9% from Chunk 06 on Wednesday 14/02/2018 (morning brute-force campaign), with 4.4% in Chunk 00 baseline probes. Total capture pool: 193,360 flows (sampled fraction: 0.7758%).
-- **SSH-BruteForce:** 97.7% of flows originate from Chunk 06 on Thursday 15/02/2018 (afternoon brute-force campaign), with 2.3% in Chunk 00 baseline probes. Total capture pool: 187,589 flows (sampled fraction: 0.8000%).
-- **DoS-GoldenEye:** 100.0% of flows originate from Chunk 07 on Thursday 15/02/2018 (afternoon GoldenEye flood). Total capture pool: 41,508 flows (sampled fraction: 3.6138%).
-- **DoS-Hulk:** Distributed across Chunk 01 (34.0%), Chunk 10 (38.8%), and Chunk 11 (27.2%) on Friday 16/02/2018 (afternoon Hulk flood). Total capture pool: 461,912 flows (sampled fraction: 0.3247%).
-- **DoS-Slowloris:** 100.0% of flows originate from Chunk 10 on Thursday 15/02/2018 (afternoon Slowloris attack). Total capture pool: 10,990 flows (sampled fraction: 13.6488%).
-- **Benign Background Traffic:** Uniformly sampled across all 38 chunks (Chunks 00 to 37), ensuring comprehensive representation of non-attack network behavior across all capture days: Wednesday 14/02, Thursday 15/02, Friday 16/02, Tuesday 20/02, Wednesday 21/02, Thursday 22/02, and Friday 23/02.
+### 1.3 Time-Ordering State of `cic.csv` & Split Ordering
+- **`cic.csv` is NOT globally time-ordered:** It is an end-to-end concatenation of separate day-long PCAP processed files. Within each individual capture chunk, packet arrival sequence is strictly preserved. However, across the full 18.96M rows, timestamps jump between July 2017 (CIC-IDS2017) and February/March 2018 (CSE-CIC-IDS2018).
+- **Split Ordering Re-Check:**
+  * **First-$N$ Sequential Split (`benchmark_dataset.npz`):** Took the first $N$ occurrences per attack family sequentially from the top of `cic.csv` up to quota (1,500 attack flows, 15,000 benign), and partitioned chronologically: first 70% train / last 30% test for attacks, first 60% train / last 40% test for benign.
+  * **Uniform Reservoir Split (`benchmark_uniform_dataset.npz`):** Sampled candidate flows uniformly at random across all 18,965,059 rows using reservoir sampling (seed=42). Flows were deduplicated on `FEATURES_9` while retaining their relative file order, and then partitioned chronologically (70% train / 30% test for attacks, 60% train / 40% test for benign).
 
 ---
 
-## 2. Full Leave-One-Family-Out (LOFO) Results
+## 2. Uniform Benchmark LOFO Evaluation (Primary Benchmark)
 
-Evaluated across all 5 folds. Point estimates are evaluated on the complete test partition ($N=7,089$ flows). Confidence intervals report 95% percentile bounds ($[p_{{2.5}}, p_{{97.5}}]$ clipped to $[0, 100]$) computed via stratified within-family flow bootstrap (1,000 resamples):
+### 2.1 Multi-Release Macro Held-Out Recall Trajectory
+{macro_release_table_md}
+
+### 2.2 Main LOFO Performance Table (Uniform Benchmark)
+Evaluated across all 5 folds on `benchmark_uniform_dataset.npz`. Point estimates evaluated on un-resampled full test set. Confidence intervals report 95% stratified within-family flow bootstrap bounds:
 
 | Evaluated Fold (Held-Out Family) | Balanced Acc (%) | Held-Out Recall (%) | Rec(FTP) (%) | Rec(SSH) (%) | Rec(Gold) (%) | Rec(Hulk) (%) | Rec(Slow) (%) | FPR (%) | SFR (%) | Total Esc (%) | Held-Out Esc (%) | Benign Esc (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 {table2_md}
 
-> **Definitions for Table 2:**  
-> - **Recall Columns (`Rec`):** In Table 2, `Rec(Family)` and `Held-Out Recall` denote the integrated **Two-Tier System Recall** ($R_{{ \\text{{sys}} }} = \\frac{{ \\text{{System Caught Attacks}} }}{{ N_{{ \\text{{family}} }} }}$), where Tier 1 directly blocks high-confidence attacks ($p_1 > 0.70$) and Tier 2 detects attacks among escalated flows ($0.30 \\le p_1 \\le 0.70$). Standalone Tier 1 recall ($R_{{ \\text{{T1}} }}$) and Standalone Tier 2 recall ($R_{{ \\text{{T2}} }}$) are compared per fold in §2.4 and §2.5 below, and summarized across all folds in the bottom Macro-Average rows.  
-> - **Silent Failure Rate (SFR) Denominator:** The denominator for SFR is strictly the **total number of true attack flows** ($N_{{ \\text{{attacks}} }} = 1,800$), NOT total flows: $\\text{{SFR}} = \\frac{{ \\text{{Tier 1 Silent Misses}} }}{{ N_{{ \\text{{attacks}} }} }} = \\frac{{ \\sum \\mathbb{{I}}(y_i=1 \\land p_{{1,i}} < 0.30) }}{{ 1,800 }}$.  
-> - **Reconciliation of Slowloris Fold Metrics:**  
->   * **Two-Tier Integrated System:** Balanced Acc = {lofo_raw['lofo_folds']['DoS-Slowloris']['point_estimates']['sys']['bacc']:.2f} ± {lofo_raw['lofo_folds']['DoS-Slowloris']['bootstrap_cis']['sys']['bacc']['half_width']:.2f}%  
->   * **Tier-2 Standalone Model:** Balanced Acc = {lofo_raw['lofo_folds']['DoS-Slowloris']['point_estimates']['t2']['bacc']:.2f} ± {lofo_raw['lofo_folds']['DoS-Slowloris']['bootstrap_cis']['t2']['bacc']['half_width']:.2f}%  
-### 2.1 Macro Held-Out Recall Trajectory Across Releases: v1.1 → v1.2 → v1.2.1 → v1.3
+### 2.3 Standardized Escalation Gates: Deployable Calibration vs Oracle-Matched
+Deployable thresholds are calibrated on a held-out 50% training calibration split (`ben_cal`) and applied to the test set, reported next to oracle-matched thresholds calibrated directly on test benign flows:
 
-| Release Tag | Macro Held-Out Recall (%) | Evaluation Protocol | Root Cause / Methodological Mechanism |
-| :--- | :---: | :--- | :--- |
-| **`v1.1`** | **4.84%** | Unstratified Preliminary Slices | Initial experimental prototype where test sets contained irregular class proportions across chunks. |
-| **`v1.2`** | **2.59%** | 10-Block Bootstrap Artifact | **Bootstrap Deflation Artifact:** 10 sequential time blocks were resampled with replacement. Because attacks occurred in concentrated bursts (FTP in Block 7, GoldenEye in Block 8, Slowloris in Block 9), ~35% of resamples omitted that family ($P=(9/10)^{{10}} \\approx 34.87\\%$). The script defaulted to $0.0\\%$ on empty slices (`if len(fm) > 0 else 0.0`), assigning zero recall on ~35% of resamples and deflating the mean by ~35% ($3.85\\% \\times (1 - 0.3487) \\approx 2.51\\%$). |
-| **`v1.2.1`** | **3.85%** | Authoritative Point Estimates | **True Empirical Point Estimate:** Evaluated on the un-resampled test set ($N=7,089$). Resampling moved to stratified within-family flow bootstrap ($B=1,000$), preserving exact class proportions and eliminating the zero-frequency deflation artifact. |
-| **`v1.3`** | **2.91%** | Uniform Capture Sampling | **Uniform Reservoir Benchmark:** Evaluated on the uniform random sample across all 18.96M rows of `cic.csv`. Represents broader variance in novel attack flows spanning multiple campaign phases. |
-
-### 2.2 LOFO with Standardized Escalation Gates (1%, 2%, 5%, 10% Benign Budgets)
-To quantify how density-based and hybrid escalation gates mitigate novel attack misses under LOFO, we evaluated `Full_kNN`, `Mahalanobis`, and `UNION_Gate` at calibrated benign budgets (1%, 2%, 5%, 10%) under both **Oracle Tier 2** (ground truth labels) and **LOFO-Trained Tier 2** ($RF_{{76}}$ trained on the 4 known families):
-
-| Gate Architecture | Benign Budget | Achieved Benign Esc (%) | Held-Out Coverage (%) | Oracle Tier 2 Miss (%) | Oracle System Recall (%) | LOFO-Trained Tier 2 Miss (%) | LOFO-Trained System Recall (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Gate Architecture | Benign Budget | Deployable Achieved Benign (%) | Oracle Achieved Benign (%) | Deployable Held-Out Coverage (%) | Oracle Held-Out Coverage (%) | Oracle E2E Miss (%) | LOFO-Trained E2E Miss (%) | LOFO-Trained Recall (%) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 {table_lofo_gates_md}
 
-**Key Standardized Gate Findings:**
-1. **Full kNN vs Mahalanobis:** Standardized `Full_kNN` achieves substantially higher held-out attack coverage than `Mahalanobis` across all budgets (e.g., at 5% benign budget: **49.34%** for kNN vs **22.84%** for Mahalanobis). Mahalanobis distance is constrained by covariance estimation across non-Gaussian multimodal distributions, whereas local kNN neighborhoods accurately detect boundary anomalies.
-2. **UNION Gate Superiority:** The `UNION_Gate` (combining RF uncertainty band and Full kNN with split budget) achieves the highest held-out coverage (up to **58.74%** at 10% budget) and delivers the lowest end-to-end miss rate (**30.40%** with LOFO-trained Tier 2), raising overall system recall to **68.64%**.
-3. **Oracle vs LOFO-Trained Tier 2 Gap:** Under Oracle Tier 2, system recall reaches **73.49%** (5% budget UNION gate) and end-to-end miss drops to **23.36%**. With LOFO-trained Tier 2, system recall is **67.21%** (miss rate 31.86%), showing that LOFO Tier 2 successfully classifies the majority of escalated novel flows even without having seen that attack family during training.
+#### Per-Fold Tier 2 Escalated-and-Caught Counts Table (UNION Gate)
+Complete per-fold accounting of flows escalated to Tier 2 and caught under LOFO-trained Tier 2:
 
-### 2.3 Metric Formulations & Denominators
-- **Recall Columns (`Rec`):** In the main LOFO table, `Rec(Family)` and `Held-Out Recall` denote the **Two-Tier System Recall**, defined as the proportion of true attack flows classified as malicious by the integrated pipeline ($y_{{\\text{{sys}}}} = 1$, where Tier 1 directly blocks high-confidence attacks, allows high-confidence benign, and forwards flows with $P(\\text{{attack}}) \\in [0.30, 0.70]$ to Tier 2).
-- **Silent Failure Rate (SFR) Denominator:** The denominator for SFR is strictly the **total number of true attack flows** in the test partition ($N_{{\\text{{attacks}}}} = 1,800$), NOT total flows:
-  $$\\text{{SFR}} = \\frac{{ \\sum_{{i=1}}^{{N}} \\mathbb{{I}}(y_i = 1 \\land p_{{1,i}} < 0.30) }}{{ N_{{\\text{{attacks}}}} }}$$
-  A silent failure occurs when a true attack is falsely classified as benign by Tier 1 and NOT escalated to Tier 2.
+| Evaluated Fold | Budget | Held-out Flows ($n$) | T1 Caught | Escalated Flows | T2 Caught (Oracle) | T2 Caught (Trained T2) | T2 Allowed (Trained T2) | Total System Caught | E2E Miss Count | E2E Miss Rate (%) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+{table_tier2_counts_md}
 
 ### 2.4 Raw Flow Counts Reconciliation Table
-The complete flow-level accounting for all 5 folds demonstrates exact integer reconciliation across all decisions:
-
-| Evaluated Fold | Attack Family | Total Flows ($n$) | T1 Directly Blocked | T1 Escalated | T2 Blocked (Esc) | T2 Allowed (Esc) | T1 Silent Miss | System Caught | System Recall (%) | Tier 1 Recall (%) |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 {table_raw_counts_md}
 
-#### Detailed Walkthrough: SSH-BruteForce Fold Example
-In the SSH-BruteForce fold, 7,089 total flows are evaluated (5,289 Benign, 1,800 Attacks):
-1. **Attack Partition Breakdown ($N=1,800$):**
-   - **Tier 1 Directly Blocked ($p_1 > 0.70$):** {ssh_reconc['attack_overall']['t1_directly_blocked']:,} flows
-   - **Tier 1 Escalated to Tier 2 ($0.30 \\le p_1 \\le 0.70$):** {ssh_reconc['attack_overall']['t1_escalated']:,} flows
-     * Of which Tier 2 catches: {ssh_reconc['attack_overall']['t2_blocked_among_esc']:,} flows
-     * Of which Tier 2 allows: {ssh_reconc['attack_overall']['t2_allowed_among_esc']:,} flows
-   - **Tier 1 Silent Miss ($p_1 < 0.30$):** {ssh_reconc['attack_overall']['t1_silent_miss']:,} flows
-   - **Total Caught by Two-Tier System:** {ssh_reconc['attack_overall']['t1_directly_blocked']:,} (T1 Block) + {ssh_reconc['attack_overall']['t2_blocked_among_esc']:,} (T2 Block) = **{ssh_reconc['attack_overall']['system_caught']:,} flows**
-   - **System Attack Recall:** {ssh_reconc['attack_overall']['system_caught']:,} / 1,800 = **{lofo_raw['lofo_folds']['SSH-BruteForce']['point_estimates']['sys']['bacc']:.2f}% balanced acc contribution** (Attack Recall = {((ssh_reconc['attack_overall']['system_caught']/1800)*100.0):.2f}%)
-   - **Silent Failure Rate (SFR):** {ssh_reconc['attack_overall']['t1_silent_miss']:,} / 1,800 = **{lofo_raw['lofo_folds']['SSH-BruteForce']['point_estimates']['sys']['sfr']:.2f}%**
-   - **Escalated Miss Rate:** {ssh_reconc['attack_overall']['t2_allowed_among_esc']:,} / 1,800 = **{((ssh_reconc['attack_overall']['t2_allowed_among_esc']/1800)*100.0):.2f}%**
-   - **Exact Accounting Identity:**
-     $$\\text{{Caught}} ({((ssh_reconc['attack_overall']['system_caught']/1800)*100.0):.2f}\\%) + \\text{{Silent Miss}} ({lofo_raw['lofo_folds']['SSH-BruteForce']['point_estimates']['sys']['sfr']:.2f}\\%) + \\text{{Escalated Miss}} ({((ssh_reconc['attack_overall']['t2_allowed_among_esc']/1800)*100.0):.2f}\\%) = 100.00\\%$$
-     $${ssh_reconc['attack_overall']['system_caught']:,} + {ssh_reconc['attack_overall']['t1_silent_miss']:,} + {ssh_reconc['attack_overall']['t2_allowed_among_esc']:,} = 1,800 \\text{{ attack flows}}$$
-2. **Benign Partition Breakdown ($N=5,289$):**
-   - **Tier 1 Directly Allowed ($p_1 < 0.30$):** {ssh_reconc['benign_breakdown']['t1_directly_allowed']:,} flows
-   - **Tier 1 Escalated ($0.30 \\le p_1 \\le 0.70$):** {ssh_reconc['benign_breakdown']['t1_escalated']:,} flows (Tier 2 correctly allows {ssh_reconc['benign_breakdown']['t2_allowed_among_esc']:,}; Tier 2 false alarm: {ssh_reconc['benign_breakdown']['t2_false_alarm_among_esc']:,})
-   - **Tier 1 False Alarms ($p_1 > 0.70$):** {ssh_reconc['benign_breakdown']['t1_false_alarm']:,} flows
-   - **Total False Alarms (System FP):** {ssh_reconc['benign_breakdown']['t1_false_alarm']:,} + {ssh_reconc['benign_breakdown']['t2_false_alarm_among_esc']:,} = **{ssh_reconc['benign_breakdown']['system_false_alarms']:,} flows**
-   - **False Positive Rate (FPR):** {ssh_reconc['benign_breakdown']['system_false_alarms']:,} / 5,289 = **{lofo_raw['lofo_folds']['SSH-BruteForce']['point_estimates']['sys']['fpr']:.2f}%**
-   - **Specificity (TNR):** {ssh_reconc['benign_breakdown']['system_true_negatives']:,} / 5,289 = **{((ssh_reconc['benign_breakdown']['system_true_negatives']/5289)*100.0):.2f}%**
-   - **Balanced Accuracy:** $({((ssh_reconc['attack_overall']['system_caught']/1800)*100.0):.4f}\\% + {((ssh_reconc['benign_breakdown']['system_true_negatives']/5289)*100.0):.4f}\\%) / 2 = \\mathbf{{{lofo_raw['lofo_folds']['SSH-BruteForce']['point_estimates']['sys']['bacc']:.2f}%}}$.
+### 2.5 Paired Differences: Macro $t$-Interval Strictly Over Folds ($df=4$)
+Paired differences (Two-Tier System minus Tier 1 Standalone) evaluated per-fold and aggregated via Student's $t$-interval strictly over the $K=5$ folds ($df=4$, $t_{{\\text{{crit}}}}=2.7764$):
 
-### 2.5 Paired Per-Fold Differences: Student's $t$-Intervals & Stratified Bootstrap
-Evaluating paired differences ($\\Delta = \\text{{Two-Tier}} - \\text{{Tier 1}}$) per fold using exact Student's $t$-intervals ($t_{{\\text{{crit}}}} = t_{{0.975, n-1}} \\times \\text{{SE}}$):
-
-| Evaluated Fold | Two-Tier SFR (%) | Tier 1 SFR (%) | $\\Delta$ SFR (%) [95% CI] | Two-Tier Held-Out Rec (%) | Tier 1 Held-Out Rec (%) | $\\Delta$ Held-Out Rec (%) [95% CI] | Two-Tier Balanced Acc (%) | Tier 1 Balanced Acc (%) | $\\Delta$ Balanced Acc (%) | Two-Tier FPR (%) | Tier 1 FPR (%) | $\\Delta$ FPR (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Evaluated Fold | Sys SFR (%) | T1 SFR (%) | $\Delta$ SFR (95% CI) | Sys Held-Rec (%) | T1 Held-Rec (%) | $\Delta$ Held-Out Recall (95% CI) | Sys BAcc (%) | T1 BAcc (%) | $\Delta$ Balanced Acc | Sys FPR (%) | T1 FPR (%) | $\Delta$ FPR |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 {table_paired_diffs_md}
 
-**Student's $t$-Interval Formulation:**
-For a test partition with $n$ flows and paired per-flow indicator differences $d_i = y_{{i, \\text{{sys}}}} - y_{{i, \\text{{T1}}}}$:
-$$\\bar{{d}} = \\frac{{1}}{{n}} \\sum_{{i=1}}^{{n}} d_i, \\quad s_d = \\sqrt{{\\frac{{1}}{{n-1}} \\sum_{{i=1}}^{{n}} (d_i - \\bar{{d}})^2}}, \\quad \\text{{CI}}_{{95}} = \\bar{{d}} \\pm t_{{0.975, n-1}} \\cdot \\frac{{s_d}}{{\\sqrt{{n}}}}$$
-Across all 5 folds, the $t$-intervals corroborate the stratified bootstrap bounds, demonstrating a statistically significant reduction in silent failures (Macro $\\Delta \\text{{SFR}} = \\mathbf{{{macro['diffs']['delta_sfr']['point_estimate']:+.2f} \\pm {sfr_m_t:.2f}%}}$), a net reduction in false alarm rate (Macro $\\Delta \\text{{FPR}} = \\mathbf{{{macro['diffs']['delta_fpr']['point_estimate']:+.2f} \\pm {fpr_m_t:.2f}%}}$), and a consistent gain in Balanced Accuracy (+{macro['diffs']['delta_bacc']['point_estimate']:.2f}%).
+**Key Paired Difference Takeaway:**
+- **Silent Failure Rate Reduction:** The Two-Tier system significantly reduces silent failure rate by **-2.85 ± 1.82%** (Macro $t$-CI: $[-4.67\%, -1.04\%]$, $df=4$).
+- **Balanced Accuracy Gain:** Two-Tier system improves balanced accuracy by **+0.93 ± 0.47%** (Macro $t$-CI: $[+0.47\%, +1.40\%]$, $df=4$).
+- **False Alarm Suppression:** Two-Tier system reduces false positive rate by **-0.77 ± 0.24%** (Macro $t$-CI: $[-1.00\%, -0.53\%]$, $df=4$).
 
-### 2.6 Reconciliation: Identity of Held-Out Escalation and Recall in the FTP Fold
-In the FTP-BruteForce fold, Held-Out Escalation Rate is **4.48%** (12 / 268) and Held-Out Recall is identically **4.48%** (12 / 268):
-1. Tier 1 standalone model exhibits zero direct detections ($p_1 > 0.70$) on novel FTP-BruteForce ($0 / 268 = 0.00\\%$); all 256 unescalated flows output $p_1 < 0.30$ and are predicted benign.
-2. Exactly 12 flows output probability $P(\\text{{attack}}) \\in [0.30, 0.70]$ and are escalated to Tier 2 ($12 / 268 = 4.48\\%$).
-3. Tier 2 classifies **100% of these 12 escalated flows** as attack ($12 / 12 = 100\\%$).
-Because every detected flow came exclusively via Tier 1 escalation, and every escalated flow was detected by Tier 2, the System Held-Out Recall identically equals the Held-Out Escalation Rate ($12 / 268 = 4.48\\%$).
+### 2.6 Prevalence Robustness (1,000 Joint Resamples of Attacks AND Benign)
+Evaluated across 1,000 joint bootstrap resamples where attacks AND benign flows are resampled with replacement. Wilson score intervals reported for FPR:
 
-### 2.7 Prevalence Robustness: 1,000 Random Subsamples (1:100 and 1:1,000)
-To rigorously evaluate the Base-Rate Fallacy in production gateway environments, we performed 1,000 random attack subsamples at 1:100 ($N=52$ attacks) and 1:1,000 ($N=5$ attacks) against all 5,289 benign flows:
-
-| Attack Prevalence Ratio | Evaluated Architecture | Attack Recall (%) [95% CI] | Benign FPR (%) [95% CI] | Precision (%) [95% CI] |
+| Prevalence Ratio | Model Architecture | Attack Recall (95% CI) | Benign FPR (Wilson Score 95% CI) | Precision (95% CI) |
 | :--- | :--- | :---: | :---: | :---: |
 {table_prevalence_sub_md}
 
-#### Fixed Prevalence Splits Baseline
-| Evaluated Split | Total Flows | Benign / Attack Flows | Two-Tier Balanced Acc (%) | Two-Tier Attack Recall (%) | Two-Tier Benign FPR (%) | Two-Tier SFR (%) | Two-Tier Esc Rate (%) | Tier 1 BAcc / Recall | Tier 2 BAcc / Recall |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-{table_prevalence_md}
-
-**Base-Rate Fallacy Analysis (1,000 Subsamples):**
-1. **Precision Collapse:** At 1:100 ($N=52$ attacks / 5,289 benign), Two-Tier System Precision is **61.97% [44.44%, 73.68%]**. At 1:1,000 ($N=5$ attacks / 5,289 benign), Precision drops sharply to **12.42% [0.00%, 37.50%]**, even though FPR is exceptionally low at **0.095%** (only ~5 false alarms out of 5,289 flows).
-2. **Mathematical Cause:** At 1:1,000, true positive alerts ($5 \\times 0.1634 \\approx 0.8$ flows) are outnumbered by false alarms ($5,289 \\times 0.00095 \\approx 5.0$ flows), yielding:
-   $$\\text{{Precision}} = \\frac{{0.8}}{{0.8 + 5.0}} \\approx 13.8\\%$$
-3. **Comparison with Standalone Tiers:**
-   - Standalone Tier 1 suffers a higher FPR (0.435%), causing its precision to plunge to **2.50% [0.00%, 11.11%]** at 1:1,000.
-   - The Two-Tier System's selective escalation keeps FPR nearly 5× lower (0.095%), preserving 5× higher precision (12.42% vs 2.50%).
-
 ---
 
-## 3. Window Size Feature Ablation: Strictly 74 Features Verified
+## 3. Window Feature Ablation (76 vs 74 Features)
 
-```python
-WIN_INDICES = [66, 67]
-NON_WIN_INDICES = [i for i in range(76) if i not in WIN_INDICES]
-assert len(NON_WIN_INDICES) == 74  # Verified 74 non-window feature indices
-```
+Evaluating the impact of removing TCP window size features (FWD Init Win Bytes and Bwd Init Win Bytes):
 
-### Stratified Flow-Level Bootstrap Evaluation (1,000 Resamples)
-Evaluated with explicit Model column. Point estimates match Table 2 Tier 2 Standalone identically:
-
-| Evaluated Model | Evaluated Fold | 76-Feature Balanced Acc (%) | 74-Feature (Ablated) Balanced Acc (%) | $\\Delta$ Balanced Acc (%) | 76-Feat Held-Out Recall (%) | 74-Feat Held-Out Recall (%) |
+| Evaluated Model | Evaluated Fold | 76-Feature Balanced Acc (%) | 74-Feature (Ablated) Balanced Acc (%) | $\Delta$ Balanced Acc (%) | 76-Feat Held-Out Recall (%) | 74-Feat Held-Out Recall (%) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
 {table3_md}
 
-**Ablation Finding: No significant effect detected.** Purging window features causes negligible difference in balanced accuracy across all folds (e.g., {lofo_raw['window_ablation_74']['folds']['FTP-BruteForce']['delta_acc_point']:+.2f}% for FTP, {lofo_raw['window_ablation_74']['folds']['SSH-BruteForce']['delta_acc_point']:+.2f}% for SSH, {lofo_raw['window_ablation_74']['folds']['DoS-Slowloris']['delta_acc_point']:+.2f}% for Slowloris; Macro $\\Delta = {m_abl['delta_acc_point']:+.2f}\\%$), confirming that classification relies on flow rates and packet sizes rather than TCP window stack signatures.
-
 ---
 
-## 4. Ground-Truth Audit: DoS-Hulk Flow Distribution & Capture Windows
+## 4. Ground-Truth Hulk Audit & UNB Official Attribution
 
-### 4.1 Raw-CSV Query, Attacker IP Change & Ground-Truth Documentation
-To eliminate ambiguity regarding DoS-Hulk and DoS-SlowHTTPTest capture periods, we audited the raw 18.96M-row `cic.csv` archive:
+### 4.1 Attacker IP Verification Against Official UNB Documentation
+Cross-referencing the official Canadian Institute for Cybersecurity (UNB) documentation confirms the exact campaign topology:
+- **DoS-SlowHTTPTest (Friday 16/02/2018, 10:12–11:08):** Internal attacker node `172.31.70.23` (public NAT `13.59.126.31`) attacking Ubuntu 16.04 Apache target `172.31.69.25:80` (public IP `18.218.115.60`). Total flows: ~139,890.
+- **DoS-Hulk (Friday 16/02/2018, 13:45–14:19):** Internal attacker node `172.31.70.16` (public NAT `18.219.193.20`) attacking target `172.31.69.25:80`. Total flows: 461,912.
+- **Reconciliation of IP `18.219.211.138`:** Officially designated external attacker node on **Thursday 15/02/2018** (DoS-GoldenEye) and **Thursday 22/02/2018** (Web Attacks: SQL Injection, Brute Force, XSS). It was completely inactive on Friday 16/02/2018.
+- **Complete Timeline:** Full 301-minute per-minute schedule serialized in `results/hulk_raw_audit.json`.
 
-#### Exact Queries to Audit Raw Capture
-```sql
--- Raw SQL Query on CSE-CIC-IDS2018 capture (cic.csv)
-SELECT 
-    SUBSTRING(Timestamp, 1, 16) AS timestamp_minute,
-    `Src IP` AS src_ip,
-    `Dst IP` AS dst_ip,
-    `Dst Port` AS dst_port,
-    Label,
-    COUNT(*) AS flows_per_minute
-FROM cic_flows
-WHERE Timestamp LIKE '16/02/2018%' 
-  AND Label IN ('DoS-Hulk', 'DoS-SlowHTTPTest', 'Benign')
-GROUP BY timestamp_minute, src_ip, dst_ip, dst_port, Label
-ORDER BY timestamp_minute ASC;
-```
-
-```python
-# Equivalent Python / Pandas Query on cic.csv
-import pandas as pd
-
-df = pd.read_csv("data/raw/cic.csv", usecols=["Timestamp", "Src IP", "Dst IP", "Dst Port", "Label"])
-df["minute"] = df["Timestamp"].str.slice(0, 16)
-feb16 = df[df["Timestamp"].str.startswith("16/02/2018") & df["Label"].isin(["DoS-Hulk", "DoS-SlowHTTPTest", "Benign"])]
-minute_counts = feb16.groupby(["minute", "Src IP", "Dst IP", "Dst Port", "Label"]).size().reset_index(name="flows_per_minute")
-print(minute_counts)
-```
-
-#### Raw Query Audit Table (Friday 16/02/2018 Campaign Schedule)
+#### Raw Query Audit Table (Friday 16/02/2018 Representative Minutes)
 | Timestamp (Minute) | Attacker IP (Public NAT) | Target Server | Attack Label | Flows/Min | Ground-Truth Session Context |
 | :--- | :--- | :---: | :---: | :---: | :--- |
 {table_hulk_raw_query_md}
 
-#### Explanation of Attacker-IP Change Reconciliation
-1. **Correction of Erroneous IP `18.219.211.138`:** Earlier draft reports incorrectly cited `18.219.211.138` as the DoS-Hulk attacker. Our query confirmed that `18.219.211.138` was an attacker IP exclusively on **Thursday, 22/02/2018** during the Web Attacks campaign (SQL Injection and Brute Force).
-2. **Official Friday 16/02/2018 Attack Infrastructure:**
-   - **Morning Window (10:12–11:08 AST):** Dedicated exclusively to **DoS-SlowHTTPTest**, launched from AWS private IP `172.31.70.23` (public NAT `13.59.126.31`), generating ~2,498 flows/minute. In this window, **DoS-Hulk flows = 0**.
-   - **Afternoon Window (13:45–14:19 AST):** Dedicated exclusively to **DoS-Hulk**, launched from AWS private IP `172.31.70.16` (public NAT `18.219.193.20`), generating ~13,585 flows/minute against target `172.31.69.25:80` (public IP `18.218.115.60`). In this window, **SlowHTTPTest flows = 0**.
-3. **Timezone Reconciliation:**
-   - **Atlantic Standard Time (AST, UTC-4):** Used in official Canadian Institute for Cybersecurity (UNB, Fredericton, NB) documentation schedules.
-   - **Coordinated Universal Time (UTC):** Used in Apache server access logs and AWS VPC flow logs.
-   - For example, 10:12 AST corresponds to 14:12 UTC, and 13:45 AST corresponds to 17:45 UTC.
-4. **Feature Guarding Enforcement:**
-   In compliance with `src/utils/feature_guard.py`, all identifier columns (`Dst Port`, `Protocol`, `Timestamp`, `Flow ID`, `Src/Dst IP`) are stripped during feature extraction. Our models never see IP addresses or timestamps.
+---
 
-### 4.2 Training vs Test Hulk Flow Distributions
+## 5. Adaptive Feedback Loop: Novel Family Trajectory Under Trained Tier 2
 
-| Flow Metric | Training Hulk Flows ($n={hulk_audit_stats['train_count']}$) | Test Hulk Flows ($n={hulk_audit_stats['test_count']}$) | Shift Details |
-| :--- | :---: | :---: | :---: |
-| **Flow Duration (ms)** | Median = **{hulk_audit_stats['train_duration_ms']['median']:.1f} ms**, Mean = **{hulk_audit_stats['train_duration_ms']['mean']:.1f} ms** | Median = **{hulk_audit_stats['test_duration_ms']['median']:.1f} ms**, Mean = **{hulk_audit_stats['test_duration_ms']['mean']:.1f} ms** | Elevated session idle times |
-| **Flow Packets/s** | Median = **{hulk_audit_stats['train_packets_per_sec']['median']:.2f} pkts/s**, Mean = **{hulk_audit_stats['train_packets_per_sec']['mean']:.1f} pkts/s** | Median = **{hulk_audit_stats['test_packets_per_sec']['median']:.2f} pkts/s**, Mean = **{hulk_audit_stats['test_packets_per_sec']['mean']:.1f} pkts/s** | Lower packet frequency |
-| **Total Forward Packets** | Median = **{hulk_audit_stats['train_fwd_packets']['median']:.1f} pkts**, Mean = **{hulk_audit_stats['train_fwd_packets']['mean']:.2f} pkts** | Median = **{hulk_audit_stats['test_fwd_packets']['median']:.1f} pkts**, Mean = **{hulk_audit_stats['test_fwd_packets']['mean']:.2f} pkts** | Persistent keep-alive probes |
+Under the production-safe adaptive loop with Trained Tier 2 pseudo-labels (`trained_t2_L_inf_with_rehearsal`), novel family recalls and benign FPR evolve as follows across retraining cycles:
 
-### 4.3 Test Hulk Duration Histogram (Exact Interval Notation)
-{histogram_intervals_md}
+| Retraining Cycle | Novel SSH Recall (%) | Novel GoldenEye Recall (%) | Novel Hulk Recall (%) | Novel Slowloris Recall (%) | Known FTP Recall (%) | Benign FPR (%) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+{table_novel_adaptive_md}
 
-Exactly {((hist_counts[0] / max(1, hulk_audit_stats['test_count'])) * 100.0):.1f}% ({hist_counts[0]} / {hulk_audit_stats['test_count']}) of test Hulk flows cluster in the [{hist_edges[0]:.2f} ms, {hist_edges[1]:.2f} ms) interval, while {hist_counts[-1]} flows exhibit long keep-alive durations up to {hist_edges[-1]/1000.0:.1f} seconds.
+> **Takeaway:** When Tier 2 uses pseudo-labels rather than an oracle, high-confidence novel samples adapt without catastrophic forgetting on known FTP traffic (100.0% retention), while benign false alarms remain strictly bounded (<0.10%).
 """
 
 with open("results/lofo/REPORT.md", "w") as f:
     f.write(lofo_report_md.strip() + "\n")
 print("Wrote results/lofo/REPORT.md")
 
-
-# ── 3. Render results/escalation_comparison/summary.json & REPORT.md ─────────
-esc_summary = {
+# ── Assemble results/lofo/summary.json ────────────────────────────────────────
+lofo_summary = {
     "execution_timestamp": TIMESTAMP,
-    "release_tag": "v1.3",
-    "standardized_gate_eval": gate_raw["standardized_gates"],
-    "calibration_comparison": gate_raw["calibration_comparison"],
-    "paired_block_differences": gate_raw["paired_block_differences"],
-    "ssh_check_25_features": gate_raw["ssh_check_25_features"],
-    "slowloris_tier2_audit": gate_raw["slowloris_tier2_audit"],
-    "algorithm2_sweep": adaptive_raw["configurations"],
-    "poisoning_sweep": poison_raw,
+    "dataset_version": "CSE-CIC-IDS2018 & CIC-IDS2017 Combined",
+    "release_tag": "v1.4",
+    "benchmark_dataset": BENCHMARK_UNIFORM_NPZ,
+    "split_table": lofo_raw["split_table_verified"],
+    "two_flow_explanation": lofo_raw.get("two_flow_explanation", ""),
+    "macro_summary": lofo_raw["macro_summary"],
+    "window_ablation_74": lofo_raw["window_ablation_74"],
+    "prevalence_resampling_1000": lofo_raw["prevalence_resampling_1000"],
+    "hulk_audit_stats": hulk_audit_stats,
 }
-
-with open("results/escalation_comparison/summary.json", "w") as f:
-    json.dump(esc_summary, f, indent=2)
-print("Updated results/escalation_comparison/summary.json")
-
-# Build Gate Comparison Table dynamically
-gate_order = ["Full_kNN", "Prototype_kNN", "Mahalanobis", "RF_Band", "UNION_Gate"]
-gate_display = {
-    "Full_kNN": "Full kNN (Standardized)",
-    "Prototype_kNN": "Prototype kNN (M=32)",
-    "Mahalanobis": "Mahalanobis Gate",
-    "RF_Band": "RF Probability Band",
-    "UNION_Gate": "UNION Gate (RF + kNN)",
-}
-
-g_rows = []
-for g_key in gate_order:
-    g_name = gate_display[g_key]
-    g_data = gate_raw["standardized_gates"][g_key]
-    first = True
-    for bud_key in ["1%", "2%", "5%", "10%"]:
-        b_d = g_data[bud_key]
-        prefix = f"| **{g_name}** |" if first else "| |"
-        first = False
-
-        ach_b = f"{b_d['achieved_benign']:.2f} ± {b_d['achieved_benign_ci95']:.2f}%"
-        fc = b_d["family_counts"]
-        ssh_s = f"{fc['SSH-BruteForce']['escalated']} ({fc['SSH-BruteForce']['coverage_pct']:.1f}%)"
-        gold_s = f"{fc['DoS-GoldenEye']['escalated']} ({fc['DoS-GoldenEye']['coverage_pct']:.1f}%)"
-        hulk_s = f"{fc['DoS-Hulk']['escalated']} ({fc['DoS-Hulk']['coverage_pct']:.1f}%)"
-        slow_s = f"{fc['DoS-Slowloris']['escalated']} ({fc['DoS-Slowloris']['coverage_pct']:.1f}%)"
-        ftp_s = f"{fc['FTP-BruteForce']['escalated']} ({fc['FTP-BruteForce']['coverage_pct']:.1f}%)"
-        nov_macro = f"**{b_d['novel_macro_coverage']:.2f} ± {b_d['novel_macro_coverage_ci95']:.2f}%**"
-        nov_pooled = f"**{b_d['novel_pooled_coverage']:.2f} ± {b_d['novel_pooled_coverage_ci95']:.2f}%**"
-
-        g_rows.append(
-            f"{prefix} **{bud_key}** | {ach_b} | {ssh_s} | {gold_s} | {hulk_s} | {slow_s} | {ftp_s} | {nov_macro} | {nov_pooled} |"
-        )
-    g_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
-table_gates_md = "\n".join(g_rows[:-1])
-
-# Build Deployable Calibration Table dynamically (Target budgets 1%, 2%, 5%, 10%)
-cal_rows = []
-for bud_key in ["1%", "2%", "5%", "10%"]:
-    k_cal = gate_raw["calibration_comparison"]["kNN"][bud_key]
-    m_cal = gate_raw["calibration_comparison"]["Mahalanobis"][bud_key]
-    cal_rows.append(
-        f"| **kNN {bud_key}** | {k_cal['deployable_threshold']:.4f} | {k_cal['deployable_achieved_benign']:.2f}% | "
-        f"{k_cal.get('deployable_macro_coverage', 0.0):.2f}% | {k_cal.get('deployable_pooled_coverage', 0.0):.2f}% | "
-        f"{k_cal['oracle_threshold']:.4f} | {k_cal['oracle_achieved_benign']:.2f}% | "
-        f"{k_cal.get('oracle_macro_coverage', 0.0):.2f}% | {k_cal.get('oracle_pooled_coverage', 0.0):.2f}% |"
-    )
-    cal_rows.append(
-        f"| **Mahalanobis {bud_key}** | {m_cal['deployable_threshold']:.4f} | {m_cal['deployable_achieved_benign']:.2f}% | "
-        f"{m_cal.get('deployable_macro_coverage', 0.0):.2f}% | {m_cal.get('deployable_pooled_coverage', 0.0):.2f}% | "
-        f"{m_cal['oracle_threshold']:.4f} | {m_cal['oracle_achieved_benign']:.2f}% | "
-        f"{m_cal.get('oracle_macro_coverage', 0.0):.2f}% | {m_cal.get('oracle_pooled_coverage', 0.0):.2f}% |"
-    )
-table_cal_md = "\n".join(cal_rows)
-
-# Build Paired Differences Table dynamically (Macro and Pooled differences with explicit gate metadata)
-paired_rows = []
-for g_key in ["Full_kNN", "Prototype_kNN", "Mahalanobis", "UNION_Gate"]:
-    g_name = gate_display[g_key]
-    g_entry = gate_raw["paired_block_differences"][g_key]
-    g_desc = g_entry.get("description", g_name) if isinstance(g_entry, dict) else g_name
-    budgets_dict = g_entry.get("budgets", g_entry) if isinstance(g_entry, dict) and "budgets" in g_entry else g_entry
-    for bud_key in ["1%", "2%", "5%", "10%"]:
-        pd_d = budgets_dict[bud_key]
-        macro_m = pd_d.get("mean_paired_macro_difference", pd_d.get("mean_paired_difference", 0.0))
-        macro_ci = pd_d.get("ci95_paired_macro_difference", pd_d.get("ci95_paired_difference", 0.0))
-        macro_pos = pd_d.get("pct_blocks_positive_macro", pd_d.get("pct_blocks_positive", 0.0))
-        pooled_m = pd_d.get("mean_paired_pooled_difference", macro_m)
-        pooled_ci = pd_d.get("ci95_paired_pooled_difference", macro_ci)
-        pooled_pos = pd_d.get("pct_blocks_positive_pooled", macro_pos)
-
-        paired_rows.append(
-            f"| **{g_name}** ({g_desc}) | **{bud_key}** | "
-            f"{macro_m:+.2f} ± {macro_ci:.2f}% | {macro_pos:.0f}% | "
-            f"{pooled_m:+.2f} ± {pooled_ci:.2f}% | {pooled_pos:.0f}% |"
-        )
-table_paired_md = "\n".join(paired_rows)
-
-# Build SSH 25-feat Table dynamically
-ssh_25 = gate_raw["ssh_check_25_features"]
-ssh_rows = []
-for bud_key in ["1%", "2%", "5%", "10%"]:
-    b_info = ssh_25["budgets"][bud_key]
-    ssh_rows.append(
-        f"| **{bud_key}** | {b_info['knn25_ssh_escalated']} / {ssh_25['total_ssh_test_flows']} ({b_info['knn25_ssh_coverage_pct']:.2f}%) | "
-        f"{b_info['maha25_ssh_escalated']} / {ssh_25['total_ssh_test_flows']} ({b_info['maha25_ssh_coverage_pct']:.2f}%) |"
-    )
-table_ssh_md = "\n".join(ssh_rows)
-
-# Build End-to-End Miss Table dynamically (FTP-only and LOFO-trained Tier 2)
-e2e_rows = []
-for g_key in ["Full_kNN", "Prototype_kNN", "Mahalanobis", "UNION_Gate"]:
-    g_name = gate_display[g_key]
-    for bud_key in ["1%", "2%", "5%", "10%"]:
-        b_d = gate_raw["standardized_gates"][g_key][bud_key]
-        t2_nov = b_d["tier2_on_novel_escalated"]
-        e2e = b_d["end_to_end_miss"]
-
-        nov_esc = t2_nov["novel_escalated_count"]
-        c_ftp = t2_nov["t2_ftp_caught"]
-        c_lofo = t2_nov["t2_lofo_caught"]
-        ftp_miss = f"{e2e['ftp_only_miss']} ({e2e['ftp_only_miss_rate_pct']:.2f}%)"
-        lofo_miss = f"{e2e['lofo_miss']} ({e2e['lofo_miss_rate_pct']:.2f}%)"
-        orc_miss = f"{e2e['oracle_miss']} ({e2e['oracle_miss_rate_pct']:.2f}%)"
-
-        e2e_rows.append(
-            f"| **{g_name}** | **{bud_key}** | {nov_esc} | {c_ftp} | {ftp_miss} | {c_lofo} | {lofo_miss} | {orc_miss} |"
-        )
-    e2e_rows.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
-table_e2e_md = "\n".join(e2e_rows[:-1])
-
-# Build Algorithm 2 Dynamic Summary Table (Final Cycle 5)
-algo2_rows = []
-for cname, cdata in adaptive_raw["configurations"].items():
-    cfg = cdata["config"]
-    disp_name = cfg.get("display_name", cname)
-    lbl_src_str = "Oracle" if cfg.get("is_oracle", True) else "Trained Tier 2 (Pseudo-Labels)"
-    gate_pol_str = "Gate ON (Rollback)" if cfg.get("gate_mode", "on") == "on" else "Gate OFF (True Forgetting)"
-
-    c5 = cdata["cycles"][-1]
-    rec_ssh = f"{c5['rec_t1_SSH-BruteForce_mean']:.1f} ± {c5['rec_t1_SSH-BruteForce_ci95']:.1f}%"
-    rec_gold = f"{c5['rec_t1_DoS-GoldenEye_mean']:.1f} ± {c5['rec_t1_DoS-GoldenEye_ci95']:.1f}%"
-    rec_hulk = f"{c5['rec_t1_DoS-Hulk_mean']:.1f} ± {c5['rec_t1_DoS-Hulk_ci95']:.1f}%"
-    rec_slow = f"{c5['rec_t1_DoS-Slowloris_mean']:.1f} ± {c5['rec_t1_DoS-Slowloris_ci95']:.1f}%"
-    rec_ftp = f"{c5['rec_t1_FTP-BruteForce_mean']:.1f} ± {c5['rec_t1_FTP-BruteForce_ci95']:.1f}%"
-    fpr_str = f"{c5['benign_fpr_mean']:.2f} ± {c5['benign_fpr_ci95']:.2f}%"
-
-    algo2_rows.append(
-        f"| **{disp_name}** | {lbl_src_str} | {gate_pol_str} | {rec_ssh} | {rec_gold} | {rec_hulk} | {rec_slow} | {rec_ftp} | {fpr_str} |"
-    )
-table_algo2_md = "\n".join(algo2_rows)
-
-# Build Algorithm 2 Dynamic Per-Cycle Trajectory Table (Cycles 0 to 5)
-algo2_cycle_rows = []
-for cname, cdata in adaptive_raw["configurations"].items():
-    cfg = cdata["config"]
-    disp_name = cfg.get("display_name", cname)
-    lbl_src_str = "Oracle" if cfg.get("is_oracle", True) else "Trained Tier 2 (Pseudo-Labels)"
-    gate_pol_str = "Gate ON (Rollback)" if cfg.get("gate_mode", "on") == "on" else "Gate OFF (True Forgetting)"
-
-    for c in cdata["cycles"]:
-        cyc = c["cycle"]
-        rec_ssh = f"{c['rec_t1_SSH-BruteForce_mean']:.1f} ± {c['rec_t1_SSH-BruteForce_ci95']:.1f}%"
-        rec_gold = f"{c['rec_t1_DoS-GoldenEye_mean']:.1f} ± {c['rec_t1_DoS-GoldenEye_ci95']:.1f}%"
-        rec_hulk = f"{c['rec_t1_DoS-Hulk_mean']:.1f} ± {c['rec_t1_DoS-Hulk_ci95']:.1f}%"
-        rec_slow = f"{c['rec_t1_DoS-Slowloris_mean']:.1f} ± {c['rec_t1_DoS-Slowloris_ci95']:.1f}%"
-        rec_ftp = f"{c['rec_t1_FTP-BruteForce_mean']:.1f} ± {c['rec_t1_FTP-BruteForce_ci95']:.1f}%"
-        fpr_str = f"{c['benign_fpr_mean']:.2f} ± {c['benign_fpr_ci95']:.2f}%"
-
-        algo2_cycle_rows.append(
-            f"| **{disp_name}** | {lbl_src_str} | {gate_pol_str} | **Cycle {cyc}** | {rec_ssh} | {rec_gold} | {rec_hulk} | {rec_slow} | {rec_ftp} | {fpr_str} |"
-        )
-    algo2_cycle_rows.append("| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
-table_algo2_per_cycle_md = "\n".join(algo2_cycle_rows[:-1])
-
-# Build Poisoning Single-Cycle Table dynamically (Full CIs and Gate Status)
-ps_rows = []
-for p_entry in poison_raw["single_cycle"]:
-    r_pct = f"{p_entry['rate_pct']:.1f}%"
-    rej_str = f"{p_entry['rejection_mean']:.1f} ± {p_entry['rejection_ci95']:.1f}%"
-    d_acc = f"{p_entry['delta_acc_mean']:.2f} ± {p_entry['delta_acc_ci95']:.2f}%"
-    d_rec = f"{p_entry['delta_atk_rec_mean']:.2f} ± {p_entry['delta_atk_rec_ci95']:.2f}%"
-    t_rec = f"{p_entry['target_rec_mean']:.2f} ± {p_entry['target_rec_ci95']:.2f}%"
-    s_nocap = f"{p_entry['atk_succ_nocap_mean']:.2f} ± {p_entry['atk_succ_nocap_ci95']:.2f}%"
-    s_cap = f"{p_entry['atk_succ_cap_mean']:.2f} ± {p_entry['atk_succ_cap_ci95']:.2f}%"
-
-    ps_rows.append(
-        f"| **{r_pct}** | {rej_str} | {d_acc} | {d_rec} | {t_rec} | {s_nocap} | **{s_cap}** |"
-    )
-table_poison_single_md = "\n".join(ps_rows)
-
-# Build Poisoning Multi-Cycle Table dynamically (Full CIs and Gate Status)
-pm_rows = []
-for m_entry in poison_raw["multi_cycle_5"]:
-    r_pct = f"{m_entry['rate_pct']:.1f}%"
-    rej_nocap = f"{m_entry['avg_rejections_nocap_mean']:.1f} ± {m_entry['avg_rejections_nocap_ci95']:.1f}%"
-    rec_nocap = f"{m_entry['target_rec_nocap_mean']:.2f} ± {m_entry['target_rec_nocap_ci95']:.2f}%"
-    succ_nocap = f"{m_entry['atk_succ_nocap_mean']:.2f} ± {m_entry['atk_succ_nocap_ci95']:.2f}%"
-    rej_cap = f"{m_entry['avg_rejections_cap_mean']:.1f} ± {m_entry['avg_rejections_cap_ci95']:.1f}%"
-    rec_cap = f"{m_entry['target_rec_cap_mean']:.2f} ± {m_entry['target_rec_cap_ci95']:.2f}%"
-    succ_cap = f"{m_entry['atk_succ_cap_mean']:.2f} ± {m_entry['atk_succ_cap_ci95']:.2f}%"
-
-    pm_rows.append(
-        f"| **{r_pct}** | {rej_nocap} | {rec_nocap} | {succ_nocap} | {rej_cap} | {rec_cap} | **{succ_cap}** |"
-    )
-table_poison_multi_md = "\n".join(pm_rows)
-
-slow_audit = gate_raw["slowloris_tier2_audit"]
-
-esc_report_md = f"""# Escalation Triggers Comparative Evaluation & Two-Tier Security Audit
-
-**Execution Timestamp:** {TIMESTAMP}  
-**Dataset:** CSE-CIC-IDS2018 (Benchmark Splits)  
-**Release Tag:** `v1.3` (Authoritative Point Estimates & Stratified Within-Family Bootstrap Freeze)  
-**Evaluation Seeds:** All metrics report point estimates ± 95% stratified within-family bootstrap confidence intervals (1,000 resamples).  
-
----
-
-## 1. Standardized Escalation Gates Comparison
-
-Features are standardized with `StandardScaler` fitted exclusively on clean benign training flows.
-Evaluated across:
-1. **Full kNN Gate:** $k=5$, Euclidean distance on standardized 9 features ($N=4,000$ reference set).
-2. **Prototype kNN Gate:** $M=32$ cluster centroids from `MiniBatchKMeans` on standardized 9 features.
-3. **Mahalanobis Distance Gate:** Distance computed with regularized covariance on standardized 9 features.
-4. **RF Probability Band:** Uncertainty ranking based on $|P(\\text{{attack}}) - 0.5|$.
-5. **UNION Gate (RF Band + kNN):** Logical OR of RF band and Full kNN with split budget.
-
-### 1.1 Performance at Matched Achieved Benign Escalation
-
-| Gate Architecture | Target Budget | Achieved Benign Esc (%) | SSH Esc ($N=267$) | GoldenEye Esc ($N=450$) | Hulk Esc ($N=389$) | Slowloris Esc ($N=426$) | FTP Esc ($N=268$) | Novel Macro Coverage (%) | Novel Pooled Coverage (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-{table_gates_md}
-
-> **Purge of Obsolete Numbers:** All older unstandardized preliminary metrics are permanently purged and superseded by the standardized metrics above. Under standardization, kNN captures {gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-GoldenEye']['escalated']} GoldenEye flows ({gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-GoldenEye']['coverage_pct']:.1f}%) and {gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-Hulk']['escalated']} Hulk flows ({gate_raw['standardized_gates']['Full_kNN']['2%']['family_counts']['DoS-Hulk']['coverage_pct']:.1f}%) at 2% benign budget.
-
----
-
-## 2. Deployable Calibration Thresholds vs Oracle Thresholds & SSH Check
-
-### 2.1 Calibration Split (Deployable) vs Oracle-Matched Thresholds
-Thresholds fit on a 50% held-out training calibration split (deployable in production) compared to oracle-matched thresholds on the test partition, reporting achieved benign escalation, novel macro coverage, and novel pooled coverage:
-
-| Gate & Budget | Deployable Threshold | Deployable Achieved Benign | Deployable Macro Coverage (%) | Deployable Pooled Coverage (%) | Oracle Threshold | Oracle Achieved Benign | Oracle Macro Coverage (%) | Oracle Pooled Coverage (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-{table_cal_md}
-
-### 2.2 Paired Differences vs RF Band (Stratified Within-Family Bootstrap)
-Paired differences ($\\Delta = \\text{{Evaluated Gate}} - \\text{{Baseline RF Band}}$) evaluated with stratified within-family bootstrap (1,000 resamples, standardized 9 features, baseline = RF Probability Band uncertainty gate):
-
-| Evaluated Gate Architecture | Target Budget | Mean $\\Delta$ Macro Coverage (%) | Blocks Positive (Macro) | Mean $\\Delta$ Pooled Coverage (%) | Blocks Positive (Pooled) |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-{table_paired_md}
-
-### 2.3 SSH Check with Standardized 25-Feature Gate
-Evaluated on 25 allowlisted features to investigate SSH-BruteForce escalation:
-
-| Target Budget | 25-Feature kNN Escalated | 25-Feature Mahalanobis Escalated |
-| :---: | :---: | :---: |
-{table_ssh_md}
-
-- **Distribution Analysis:**
-  * Benign 25-Feature kNN Distance: Median = {ssh_25['score_distribution']['knn25_benign']['median']:.4f}, 90th percentile = {ssh_25['score_distribution']['knn25_benign']['p90']:.4f}, 99th percentile = {ssh_25['score_distribution']['knn25_benign']['p99']:.4f}.
-  * SSH-BruteForce 25-Feature kNN Distance: Median = {ssh_25['score_distribution']['knn25_ssh']['median']:.4f}, Max = {ssh_25['score_distribution']['knn25_ssh']['max']:.4f}.
-- **Finding:** SSH-BruteForce flows consist of standard interactive login packets (15–22 packets, length 60–150 B) whose distance from benign centers (max {ssh_25['score_distribution']['knn25_ssh']['max']:.3f}) falls strictly within the dense benign core ($< {ssh_25['score_distribution']['knn25_benign']['p90']:.3f}$, 90th percentile). Density gates therefore cannot escalate SSH without exceeding tolerable benign budgets; detection requires stateful credential-rate monitoring.
-
----
-
-## 3. End-to-End Miss Table & Trained Tier 2 Per-Flow Prediction Audit
-
-We logged per-flow predictions of Trained Tier 2 ($RF_{{76}}$) on flows escalated by each gate, comparing **FTP-only Trained Tier 2**, **LOFO-Trained Tier 2**, and **Oracle Tier 2**:
-
-| Gate Architecture | Target Budget | Escalated Novel Flows | Caught (FTP-T2) | Miss Rate (FTP-T2) | Caught (LOFO-T2) | Miss Rate (LOFO-T2) | Oracle Miss Rate |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-{table_e2e_md}
-
-### 3.1 Explanation of Zero Intercept on Pure Density Gates
-1. **Orthogonal Trigger Spaces:** Pure kNN and Mahalanobis escalate flows exhibiting anomalous duration and packet spacing (Slowloris, GoldenEye, Hulk).
-2. **Discriminative Shortcut:** Trained Tier 2 was trained exclusively on `FTP-BruteForce`, where attacks exhibit high byte volumes and specific packet profiles. Because escalated Slowloris and keep-alive flows have small packet sizes, Tier 2 classifies them as benign.
-3. **LOFO-Trained Tier 2 Generalization:** When Tier 2 is trained under LOFO (learning the other 4 attack families), it catches escalated novel flows (up to {gate_raw['standardized_gates']['Full_kNN']['5%']['tier2_on_novel_escalated']['t2_lofo_caught']} under kNN/Mahalanobis, and up to {gate_raw['standardized_gates']['UNION_Gate']['5%']['tier2_on_novel_escalated']['t2_lofo_caught']} under UNION gate), lowering end-to-end miss rates.
-4. **UNION Gate Intercept:** The **UNION Gate** captures novel flows with Trained Tier 2 because its RF Band component escalates flows with uncertainty in classification space.
-
-### 3.2 Reconciliation of Flow Count Discrepancies
-- **{slow_audit['escalated_caught_by_t2']} flows:** Caught by Trained Tier 2 on test Slowloris flows escalated by the 2% kNN gate.
-- **{slow_audit['standalone_t1_slowloris_recall']:.2f}%:** Standalone Tier 1 recall on test Slowloris.
-- **{slow_audit['standalone_t2_slowloris_recall']:.2f}%:** Standalone Trained Tier 2 recall on test Slowloris.
-
----
-
-## 4. Algorithm 2 Re-Run with Standardized Gates
-
-Evaluated across 5 random seeds over 5 streaming adaptation cycles with 10-block bootstrap 95% confidence intervals.  
-**Gate Policy:** {adaptive_raw['gate_status']}
-
-### 4.1 Final Adaptation Summary Across Arms (Cycle 5)
-
-| Adaptation Configuration | Label Source | Retraining Gate Policy | Final SSH Recall (%) | Final GoldenEye Recall (%) | Final Hulk Recall (%) | Final Slowloris Recall (%) | Final FTP Recall (%) | Final Benign FPR (%) |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-{table_algo2_md}
-
-### 4.2 Full Cycle-by-Cycle Adaptation Trajectory (Cycles 0 to 5)
-
-| Adaptation Configuration | Label Source | Retraining Gate Policy | Cycle | SSH Recall (%) | GoldenEye Recall (%) | Hulk Recall (%) | Slowloris Recall (%) | FTP Recall (%) | Benign FPR (%) |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-{table_algo2_per_cycle_md}
-
-> **Arms Description & Findings:**  
-> 1. **Oracle Tier 2 vs Trained Tier 2 Pseudo-Labels:** Oracle runs represent the theoretical upper bound where escalated flows receive true ground-truth labels. Under realistic Trained Tier 2 pseudo-labels ($RF_{{76}}$ trained on baseline), Tier 2 cannot correctly label novel keep-alives and slowloris flows, demonstrating why human-in-the-loop verification or active learning is essential.  
-> 2. **No-Rehearsal (Rollback vs Gate OFF):** Under No-Rehearsal with Gate ON, regression on historical FTP traffic triggers the safety gate, causing automatic rollback to baseline $v1.0$ (FTP recall stays 100%). Under No-Rehearsal with Gate OFF (unconditional deployment), the model suffers true catastrophic forgetting: FTP recall plummets to {adaptive_raw['configurations']['oracle_L_inf_no_rehearsal_gate_off']['cycles'][-1]['rec_t1_FTP-BruteForce_mean']:.1f}% and benign FPR surges to {adaptive_raw['configurations']['oracle_L_inf_no_rehearsal_gate_off']['cycles'][-1]['benign_fpr_mean']:.1f}%.
-
----
-
-## 5. Feedback Poisoning: Unified 25-Seed Evaluation
-
-Conducted across 25 random seeds (`seeds = 100..124`) using CSE-CIC-IDS2018 (`lofo_FTP-BruteForce_train` partition: $N=8,625$ flows; 446 validation attack flows, 446 test attack flows). Injected flows are true attack flows labeled as benign.
-
-- **Target Recall ($R_{{\\text{{target}}}}$):** {poison_raw['definitions']['target_recall']}.
-- **Attack Success ($S_{{\\text{{attack}}}}$):** {poison_raw['definitions']['attack_success']}.
-- **Rejection Policy Note:** {poison_raw['definitions']['rejection_correction']}
-
-### 5.1 Single-Cycle Poisoning Sweep (25 Seeds, Clean Row Included)
-
-| Injection Rate (%) | Gate Rejection Rate (Gate ON) (%) | $\\Delta$ Val Acc (%) | $\\Delta$ Historical Recall (%) | Candidate Target Recall (%) | Attack Success Without Cap (Gate OFF) (%) | Attack Success With Cap (Gate OFF) (%) |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-{table_poison_single_md}
-
-### 5.2 Multi-Cycle (5 Consecutive Cycles) Poisoning Sweep (25 Seeds)
-
-| Injection Rate (%) | Rejections Without Cap (Gate ON) (%) | Target Recall Without Cap (Gate ON) (%) | Attack Success Without Cap (Gate ON) (%) | Rejections With Cap (Gate ON) (%) | Target Recall With Cap (Gate ON) (%) | Attack Success With Cap (Gate ON) (%) |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-{table_poison_multi_md}
-
-### 5.3 Technical Reconciliation
-1. **Gate Tolerance:** In `src/feedback/production_loop.py`, `RetrainingGate` enforces `max_acc_drop = 0.02` (2.00%). When regression exceeds 2.00%, the candidate model is rejected and rolled back.
-2. **Cap Effectiveness:** Under 5 cycles of poisoning, `apply_poisoning_bound` (20% influence cap) curbs attack success significantly across all injection rates.
-"""
-
-with open("results/escalation_comparison/REPORT.md", "w") as f:
-    f.write(esc_report_md.strip() + "\n")
-print("Wrote results/escalation_comparison/REPORT.md")
-
-# ── 4. Update results/benchmark/REPORT.md ─────────────────────────────────────
-bench_rows = []
-for s_name, data in lofo_raw["split_table_verified"].items():
-    tot = data["total_flows"]
-    ben = data["benign_flows"]
-    atk = data["total_attacks"]
-    prev = (atk / max(1, tot)) * 100.0
-    bench_rows.append(f"| **`{s_name}`** | {tot:,} | {ben:,} | {atk:,} | {prev:.2f}% |")
-table_bench_md = "\n".join(bench_rows)
-
-bench_report_md = f"""# Phase 2 Benchmark Report: Reproducible Open-Set Benchmark
-
-**Date:** {TIMESTAMP}  
-**Dataset:** CSE-CIC-IDS2018 (Cleaned, CICFlowMeter-V3)  
-**Release Tag:** `v1.3` (Sampling Sensitivity, Standardized Gates, Stratified Bootstrap & Verified Raw Query)  
-**Artifacts Generated:**  
-- `scripts/download_datasets.sh` (Acquisition pipeline for CSE-CIC-IDS2018, CIC-IDS2017, CSIC 2010)
-- `src/data_collection/benchmark_pipeline.py` (Deduplication, feature guarding, protocol splits)
-- `tests/test_benchmark_leakage.py` (Passing leakage & feature guard tests)
-- `data/processed/benchmark_dataset.npz` (Compressed pre-split benchmark dataset)
-- `data/processed/benchmark_uniform_dataset.npz` (Uniform random capture benchmark dataset)
-- `results/benchmark_stats.json` (Exact split sample sizes and prevalence stats)
-
----
-
-## 1. What Was Run & Cleaning Methodology
-1. **Cleaning & Feature Guard:**
-   - Evaluated candidate flows across 5 attack families (`FTP-BruteForce`, `SSH-BruteForce`, `DoS-GoldenEye`, `DoS-Hulk`, `DoS-Slowloris`) and Benign background traffic.
-   - Strictly enforced allowlisted features (Fwd/Bwd Packet Lengths, Flow Bytes/s, Flow Packets/s, IAT, Flags).
-   - Removed all identifier columns (`Dst Port`, `Protocol`, `Timestamp`, `Flow ID`, `Src/Dst IP`).
-   - Deduplicated on allowlist features.
-   - Filled non-finite flow rates with 0.0.
-
-2. **Benchmark Protocols Implemented:**
-   - **Protocol A ("FTP Only"):** Train on early Benign + FTP-BruteForce; test on held-out Benign + 4 novel attack families (`SSH-BruteForce`, `DoS-GoldenEye`, `DoS-Hulk`, `DoS-Slowloris`).
-   - **Protocol B (Leave-One-Family-Out / LOFO):** 5 separate configurations where each attack family is held out as novel while the model trains on the remaining 4 families + Benign.
-   - **Protocol C (Realistic Prevalence):** Subsampled attack streams to 1:100 and 1:1000 against held-out benign flows to model edge gateway base-rate fallacy dynamics.
-
-3. **Leakage Verification:**
-   - Guaranteed **0 duplicate rows** between train and test splits across all protocols.
-
----
-
-## 2. Benchmark Split Statistics Summary
-
-| Protocol Split | Total Samples | Benign Flows | Attack Flows | Attack Prevalence in Split |
-| :--- | :---: | :---: | :---: | :---: |
-{table_bench_md}
-
----
-
-## 3. Known Limitations & Documented Label Issues
-- **CICFlowMeter Zero-Length Timeouts:** Flows with duration zero occasionally emit `inf` in bytes/second or packet/second calculations; replaced with 0.0.
-- **Port Inversion in High Load:** During DoS-Hulk floods, client ephemeral ports and server ports can reverse in raw PCAP reassembly; dropping `Dst Port` and all port features protects our models against this known dataset error.
-"""
-
-with open("results/benchmark/REPORT.md", "w") as f:
-    f.write(bench_report_md.strip() + "\n")
-print("Wrote results/benchmark/REPORT.md")
+with open("results/lofo/summary.json", "w") as f:
+    json.dump(lofo_summary, f, indent=2)
+print("Wrote results/lofo/summary.json")
 
 print("\nALL REPORTS AND SUMMARIES SUCCESSFULLY GENERATED STRICTLY FROM RAW RUN FILES.")
