@@ -31,6 +31,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 import numpy as np
+from scipy import stats
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import balanced_accuracy_score
 
@@ -55,6 +56,30 @@ def compute_percentile_ci(vals: List[float], clip_min: float = 0.0, clip_max: fl
     hi = float(np.clip(np.percentile(vals, 97.5), clip_min, clip_max))
     hw = float((hi - lo) / 2.0)
     return {"lo": lo, "hi": hi, "half_width": hw}
+
+
+def compute_t_interval(vals: Any, alpha: float = 0.05, clip_min: float = -100.0, clip_max: float = 100.0) -> Dict[str, float]:
+    """Compute Student's t 95% confidence interval [mean - t_crit * SE, mean + t_crit * SE]."""
+    arr = np.array(vals, dtype=float)
+    n = len(arr)
+    if n <= 1:
+        pt = float(arr[0]) if n == 1 else 0.0
+        return {"mean": pt, "se": 0.0, "df": 0, "t_crit": 0.0, "half_width": 0.0, "lo": pt, "hi": pt}
+    mean = float(np.mean(arr))
+    se = float(np.std(arr, ddof=1) / np.sqrt(n))
+    t_crit = float(stats.t.ppf(1.0 - alpha / 2.0, df=n - 1))
+    hw = float(t_crit * se)
+    lo = float(np.clip(mean - hw, clip_min, clip_max))
+    hi = float(np.clip(mean + hw, clip_min, clip_max))
+    return {
+        "mean": mean,
+        "se": se,
+        "df": n - 1,
+        "t_crit": t_crit,
+        "half_width": hw,
+        "lo": lo,
+        "hi": hi,
+    }
 
 
 def run_lofo_benchmark():
@@ -366,6 +391,24 @@ def run_lofo_benchmark():
                 boot_res["fam_rec"][f].append(np.mean(b_sys[fm] == 1) * 100.0 if np.sum(fm) > 0 else 0.0)
                 boot_res["fam_esc"][f].append(np.mean(b_esc[fm]) * 100.0 if np.sum(fm) > 0 else 0.0)
 
+        # Flow-level paired difference calculations
+        # 1. Delta SFR on attack flows (Two-Tier silent miss - Tier 1 silent miss)
+        d_sfr_flow = (((y_sys == 0) & (~esc_mask) & atk_m).astype(float) - ((p1_pred == 0) & atk_m).astype(float))[atk_m] * 100.0
+        # 2. Delta Held-out Recall on held-out flows (Two-Tier caught - Tier 1 caught)
+        d_rec_flow = ((y_sys[held_m] == 1).astype(float) - (p1_pred[held_m] == 1).astype(float)) * 100.0 if np.sum(held_m) > 0 else np.array([0.0])
+        # 3. Delta FPR on benign flows (Two-Tier FP - Tier 1 FP)
+        d_fpr_flow = ((y_sys[ben_m] == 1).astype(float) - (p1_pred[ben_m] == 1).astype(float)) * 100.0
+
+        flow_t_intervals = {
+            "delta_sfr": compute_t_interval(d_sfr_flow),
+            "delta_held_rec": compute_t_interval(d_rec_flow),
+            "delta_fpr": compute_t_interval(d_fpr_flow),
+            "delta_bacc": compute_t_interval(boot_res["diffs"]["delta_bacc"]),
+        }
+        boot_t_intervals = {
+            k: compute_t_interval(v) for k, v in boot_res["diffs"].items()
+        }
+
         # Assemble fold summary
         bootstrap_cis = {
             "sys": {k: compute_percentile_ci(v) for k, v in boot_res["sys"].items()},
@@ -392,6 +435,10 @@ def run_lofo_benchmark():
                 "paired_diffs": paired_diffs,
             },
             "bootstrap_cis": bootstrap_cis,
+            "t_intervals": {
+                "flow_level": flow_t_intervals,
+                "bootstrap": boot_t_intervals,
+            },
             "raw_reconciliation": raw_reconciliation,
         }
 
@@ -409,14 +456,21 @@ def run_lofo_benchmark():
     for mod in ["sys", "t1", "t2", "diffs"]:
         for met, vals in macro_accumulators[mod].items():
             pt = float(np.mean(vals))
-            # Across-fold standard error & 95% CI
-            se = float(np.std(vals, ddof=1) / np.sqrt(len(vals))) if len(vals) > 1 else 0.0
-            ci95 = float(1.96 * se)
+            n_f = len(vals)
+            se = float(np.std(vals, ddof=1) / np.sqrt(n_f)) if n_f > 1 else 0.0
+            t_crit = float(stats.t.ppf(0.975, df=n_f - 1)) if n_f > 1 else 1.96
+            ci95_t = float(t_crit * se)
+            ci95_norm = float(1.96 * se)
             macro_summary[mod][met] = {
                 "point_estimate": pt,
-                "ci95": ci95,
-                "lo": float(max(-100.0 if "delta" in met else 0.0, pt - ci95)),
-                "hi": float(min(100.0, pt + ci95)),
+                "se": se,
+                "df": n_f - 1,
+                "t_crit": t_crit,
+                "ci95": ci95_t,
+                "ci95_t": ci95_t,
+                "ci95_norm": ci95_norm,
+                "lo": float(max(-100.0 if "delta" in met else 0.0, pt - ci95_t)),
+                "hi": float(min(100.0, pt + ci95_t)),
             }
 
     # ── 3. Window Feature Ablation (76 vs 74 Features) ────────────────────────
@@ -570,7 +624,8 @@ def run_lofo_benchmark():
             if len(fm) > 0:
                 strata_p[f] = fm
 
-        b_sys_bacc, b_sys_rec, b_sys_fpr = [], [], []
+        b_sys_bacc, b_sys_rec, b_sys_fpr, b_sys_prec = [], [], [], []
+        b_t1_prec, b_t2_prec = [], []
         for _ in range(N_BOOT):
             s_idx = np.concatenate([
                 rng_boot.choice(idx_l, size=len(idx_l), replace=True)
@@ -578,17 +633,160 @@ def run_lofo_benchmark():
             ])
             b_y = y_te[s_idx]
             b_ys = y_s[s_idx]
+            b_p1 = p1_pred[s_idx]
+            b_p2 = p2_pred[s_idx]
             b_atk = (b_y == 1)
             b_ben = (b_y == 0)
+
+            tp_s = np.sum((b_ys == 1) & b_atk)
+            fp_s = np.sum((b_ys == 1) & b_ben)
+            prec_s = (tp_s / (tp_s + fp_s) * 100.0) if (tp_s + fp_s) > 0 else 0.0
+
+            tp_1 = np.sum((b_p1 == 1) & b_atk)
+            fp_1 = np.sum((b_p1 == 1) & b_ben)
+            prec_1 = (tp_1 / (tp_1 + fp_1) * 100.0) if (tp_1 + fp_1) > 0 else 0.0
+
+            tp_2 = np.sum((b_p2 == 1) & b_atk)
+            fp_2 = np.sum((b_p2 == 1) & b_ben)
+            prec_2 = (tp_2 / (tp_2 + fp_2) * 100.0) if (tp_2 + fp_2) > 0 else 0.0
+
             b_sys_bacc.append(balanced_accuracy_score(b_y, b_ys) * 100.0)
             b_sys_rec.append(np.mean(b_ys[b_atk] == 1) * 100.0)
             b_sys_fpr.append(np.mean(b_ys[b_ben] == 1) * 100.0)
+            b_sys_prec.append(prec_s)
+            b_t1_prec.append(prec_1)
+            b_t2_prec.append(prec_2)
+
+        # Precision point estimates
+        sys_tp_cnt = int(np.sum((y_s == 1) & atk_m))
+        sys_fp_cnt = int(np.sum((y_s == 1) & ben_m))
+        p_pt["sys"]["precision"] = float(sys_tp_cnt / max(1, sys_tp_cnt + sys_fp_cnt) * 100.0)
+        p_pt["sys"]["precision_ci"] = compute_percentile_ci(b_sys_prec)
+
+        t1_tp_cnt = int(np.sum((p1_pred == 1) & atk_m))
+        t1_fp_cnt = int(np.sum((p1_pred == 1) & ben_m))
+        p_pt["t1"]["precision"] = float(t1_tp_cnt / max(1, t1_tp_cnt + t1_fp_cnt) * 100.0)
+        p_pt["t1"]["precision_ci"] = compute_percentile_ci(b_t1_prec)
+
+        t2_tp_cnt = int(np.sum((p2_pred == 1) & atk_m))
+        t2_fp_cnt = int(np.sum((p2_pred == 1) & ben_m))
+        p_pt["t2"]["precision"] = float(t2_tp_cnt / max(1, t2_tp_cnt + t2_fp_cnt) * 100.0)
+        p_pt["t2"]["precision_ci"] = compute_percentile_ci(b_t2_prec)
 
         p_pt["sys"]["bacc_ci"] = compute_percentile_ci(b_sys_bacc)
         p_pt["sys"]["recall_ci"] = compute_percentile_ci(b_sys_rec)
         p_pt["sys"]["fpr_ci"] = compute_percentile_ci(b_sys_fpr)
 
         prevalence_eval[p_name] = p_pt
+
+    # ── 5. Prevalence 1,000 Random Subsamples Evaluation (1:100 and 1:1,000) ──
+    print("  Evaluating 1,000 Random Subsamples of Attacks at 1:100 and 1:1,000...")
+    X_te_9_full = bench["ftp_only_X_test"][:, :9]
+    X_te_76_full = bench["ftp_only_X_test_76"]
+    y_te_full = bench["ftp_only_y_test"]
+
+    ben_indices = np.where(y_te_full == 0)[0]
+    atk_indices = np.where(y_te_full == 1)[0]
+    n_ben = len(ben_indices)
+
+    # Base models trained on ftp_only_train
+    X_tr_9_base = bench["ftp_only_X_train"][:, :9]
+    X_tr_76_base = bench["ftp_only_X_train_76"]
+    y_tr_base = bench["ftp_only_y_train"]
+
+    t1_p = RandomForestClassifier(n_estimators=40, max_depth=6, random_state=42, n_jobs=-1).fit(X_tr_9_base, y_tr_base)
+    t2_p = RandomForestClassifier(n_estimators=100, max_depth=12, random_state=42, n_jobs=-1).fit(X_tr_76_base, y_tr_base)
+
+    prob1_all = t1_p.predict_proba(X_te_9_full)[:, 1]
+    pred1_all = (prob1_all >= 0.50).astype(int)
+    pred2_all = t2_p.predict(X_te_76_full)
+    esc_all = (prob1_all >= 0.30) & (prob1_all <= 0.70)
+    sys_all = pred1_all.copy()
+    sys_all[esc_all] = pred2_all[esc_all]
+
+    # Pre-computed benign FP counts
+    ben_fp_sys = int(np.sum(sys_all[ben_indices] == 1))
+    ben_fp_t1 = int(np.sum(pred1_all[ben_indices] == 1))
+    ben_fp_t2 = int(np.sum(pred2_all[ben_indices] == 1))
+
+    prevalence_subsampling = {}
+    ratios = [
+        {"name": "1:100", "n_attacks": 52},
+        {"name": "1:1000", "n_attacks": 5},
+    ]
+
+    for r_info in ratios:
+        r_name = r_info["name"]
+        n_atk_sub = r_info["n_attacks"]
+        print(f"    Evaluating {r_name} ({n_atk_sub} attacks vs {n_ben} benign flows across 1,000 subsamples)...")
+
+        sys_rec_list, sys_fpr_list, sys_prec_list = [], [], []
+        t1_rec_list, t1_fpr_list, t1_prec_list = [], [], []
+        t2_rec_list, t2_fpr_list, t2_prec_list = [], [], []
+
+        for _ in range(1000):
+            sub_atk_idx = rng_boot.choice(atk_indices, size=n_atk_sub, replace=False)
+
+            # System
+            tp_sys = int(np.sum(sys_all[sub_atk_idx] == 1))
+            rec_sys = (tp_sys / n_atk_sub) * 100.0
+            fpr_sys = (ben_fp_sys / n_ben) * 100.0
+            prec_sys = (tp_sys / (tp_sys + ben_fp_sys) * 100.0) if (tp_sys + ben_fp_sys) > 0 else 0.0
+
+            sys_rec_list.append(rec_sys)
+            sys_fpr_list.append(fpr_sys)
+            sys_prec_list.append(prec_sys)
+
+            # Tier 1
+            tp_t1 = int(np.sum(pred1_all[sub_atk_idx] == 1))
+            rec_t1 = (tp_t1 / n_atk_sub) * 100.0
+            fpr_t1 = (ben_fp_t1 / n_ben) * 100.0
+            prec_t1 = (tp_t1 / (tp_t1 + ben_fp_t1) * 100.0) if (tp_t1 + ben_fp_t1) > 0 else 0.0
+
+            t1_rec_list.append(rec_t1)
+            t1_fpr_list.append(fpr_t1)
+            t1_prec_list.append(prec_t1)
+
+            # Tier 2
+            tp_t2 = int(np.sum(pred2_all[sub_atk_idx] == 1))
+            rec_t2 = (tp_t2 / n_atk_sub) * 100.0
+            fpr_t2 = (ben_fp_t2 / n_ben) * 100.0
+            prec_t2 = (tp_t2 / (tp_t2 + ben_fp_t2) * 100.0) if (tp_t2 + ben_fp_t2) > 0 else 0.0
+
+            t2_rec_list.append(rec_t2)
+            t2_fpr_list.append(fpr_t2)
+            t2_prec_list.append(prec_t2)
+
+        prevalence_subsampling[r_name] = {
+            "ratio": r_name,
+            "n_attacks_per_subsample": n_atk_sub,
+            "n_benign_flows": n_ben,
+            "n_subsamples": 1000,
+            "system": {
+                "recall_point": float(np.mean(sys_rec_list)),
+                "recall_ci": compute_percentile_ci(sys_rec_list),
+                "fpr_point": float(np.mean(sys_fpr_list)),
+                "fpr_ci": compute_percentile_ci(sys_fpr_list),
+                "precision_point": float(np.mean(sys_prec_list)),
+                "precision_ci": compute_percentile_ci(sys_prec_list),
+            },
+            "tier1": {
+                "recall_point": float(np.mean(t1_rec_list)),
+                "recall_ci": compute_percentile_ci(t1_rec_list),
+                "fpr_point": float(np.mean(t1_fpr_list)),
+                "fpr_ci": compute_percentile_ci(t1_fpr_list),
+                "precision_point": float(np.mean(t1_prec_list)),
+                "precision_ci": compute_percentile_ci(t1_prec_list),
+            },
+            "tier2": {
+                "recall_point": float(np.mean(t2_rec_list)),
+                "recall_ci": compute_percentile_ci(t2_rec_list),
+                "fpr_point": float(np.mean(t2_fpr_list)),
+                "fpr_ci": compute_percentile_ci(t2_fpr_list),
+                "precision_point": float(np.mean(t2_prec_list)),
+                "precision_ci": compute_percentile_ci(t2_prec_list),
+            },
+        }
 
     final_payload = {
         "execution_timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
@@ -604,6 +802,7 @@ def run_lofo_benchmark():
             "macro": ablation_macro,
         },
         "prevalence_evaluation": prevalence_eval,
+        "prevalence_subsampling_1000": prevalence_subsampling,
     }
 
     os.makedirs(os.path.dirname(OUT_JSON), exist_ok=True)

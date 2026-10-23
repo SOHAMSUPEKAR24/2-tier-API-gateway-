@@ -1,9 +1,9 @@
 # Escalation Triggers Comparative Evaluation & Two-Tier Security Audit
 
-**Execution Timestamp:** 2026-10-22 17:34:08 UTC  
+**Execution Timestamp:** 2026-10-23 05:13:06 UTC  
 **Dataset:** CSE-CIC-IDS2018 (Benchmark Splits)  
-**Release Tag:** `v1.2.1` (Authoritative Point Estimates & Reconciled Diagnostics Freeze)  
-**Evaluation Seeds:** All metrics report mean ± 95% block-bootstrap confidence intervals over 10 chronological time blocks (1,000 resamples).  
+**Release Tag:** `v1.3` (Authoritative Point Estimates & Stratified Within-Family Bootstrap Freeze)  
+**Evaluation Seeds:** All metrics report point estimates ± 95% stratified within-family bootstrap confidence intervals (1,000 resamples).  
 
 ---
 
@@ -20,31 +20,31 @@ Evaluated across:
 ### 1.1 Performance at Matched Achieved Benign Escalation
 
 | Gate Architecture | Target Budget | Achieved Benign Esc (%) | SSH Esc ($N=267$) | GoldenEye Esc ($N=450$) | Hulk Esc ($N=389$) | Slowloris Esc ($N=426$) | FTP Esc ($N=268$) | Novel Macro Coverage (%) | Novel Pooled Coverage (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Full kNN (Standardized)** | **1%** | 1.00 ± 0.44% | 0 (0.0%) | 63 (14.0%) | 100 (25.7%) | 277 (65.0%) | 0 (0.0%) | **26.18 ± 26.65%** | **28.72 ± 32.26%** |
-| | **2%** | 2.00 ± 0.56% | 0 (0.0%) | 187 (41.6%) | 269 (69.2%) | 277 (65.0%) | 0 (0.0%) | **43.93 ± 29.93%** | **47.85 ± 34.97%** |
-| | **5%** | 5.01 ± 0.85% | 0 (0.0%) | 255 (56.7%) | 288 (74.0%) | 277 (65.0%) | 0 (0.0%) | **48.93 ± 33.53%** | **53.52 ± 38.24%** |
-| | **10%** | 10.00 ± 2.54% | 0 (0.0%) | 266 (59.1%) | 306 (78.7%) | 277 (65.0%) | 0 (0.0%) | **50.70 ± 34.32%** | **55.42 ± 38.36%** |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Full kNN (Standardized)** | **1%** | 1.00 ± 0.27% | 0 (0.0%) | 63 (14.0%) | 100 (25.7%) | 277 (65.0%) | 0 (0.0%) | **26.18 ± 1.78%** | **28.72 ± 1.95%** |
+| | **2%** | 2.00 ± 0.38% | 0 (0.0%) | 187 (41.6%) | 269 (69.2%) | 277 (65.0%) | 0 (0.0%) | **43.93 ± 2.00%** | **47.85 ± 2.20%** |
+| | **5%** | 5.01 ± 0.59% | 0 (0.0%) | 255 (56.7%) | 288 (74.0%) | 277 (65.0%) | 0 (0.0%) | **48.93 ± 2.02%** | **53.52 ± 2.24%** |
+| | **10%** | 10.00 ± 0.79% | 0 (0.0%) | 266 (59.1%) | 306 (78.7%) | 277 (65.0%) | 0 (0.0%) | **50.70 ± 1.90%** | **55.42 ± 2.11%** |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Prototype kNN (M=32)** | **1%** | 1.00 ± 0.51% | 0 (0.0%) | 125 (27.8%) | 124 (31.9%) | 278 (65.3%) | 0 (0.0%) | **31.23 ± 26.88%** | **34.40 ± 32.02%** |
-| | **2%** | 2.00 ± 0.82% | 0 (0.0%) | 125 (27.8%) | 148 (38.0%) | 279 (65.5%) | 1 (0.4%) | **32.83 ± 24.85%** | **36.03 ± 30.28%** |
-| | **5%** | 5.01 ± 1.31% | 0 (0.0%) | 255 (56.7%) | 289 (74.3%) | 279 (65.5%) | 1 (0.4%) | **49.11 ± 31.66%** | **53.72 ± 36.31%** |
-| | **10%** | 10.00 ± 1.98% | 0 (0.0%) | 270 (60.0%) | 314 (80.7%) | 280 (65.7%) | 1 (0.4%) | **51.61 ± 31.63%** | **56.40 ± 35.85%** |
+| **Prototype kNN (M=32)** | **1%** | 1.00 ± 0.27% | 0 (0.0%) | 125 (27.8%) | 124 (31.9%) | 278 (65.3%) | 0 (0.0%) | **31.23 ± 1.94%** | **34.40 ± 2.12%** |
+| | **2%** | 2.00 ± 0.36% | 0 (0.0%) | 125 (27.8%) | 148 (38.0%) | 279 (65.5%) | 1 (0.4%) | **32.83 ± 2.01%** | **36.03 ± 2.20%** |
+| | **5%** | 5.01 ± 0.58% | 0 (0.0%) | 255 (56.7%) | 289 (74.3%) | 279 (65.5%) | 1 (0.4%) | **49.11 ± 1.97%** | **53.72 ± 2.18%** |
+| | **10%** | 10.00 ± 0.79% | 0 (0.0%) | 270 (60.0%) | 314 (80.7%) | 280 (65.7%) | 1 (0.4%) | **51.61 ± 1.96%** | **56.40 ± 2.18%** |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Mahalanobis Gate** | **1%** | 1.00 ± 0.51% | 0 (0.0%) | 17 (3.8%) | 20 (5.1%) | 0 (0.0%) | 0 (0.0%) | **2.23 ± 1.65%** | **2.42 ± 1.46%** |
-| | **2%** | 2.00 ± 0.88% | 0 (0.0%) | 124 (27.6%) | 116 (29.8%) | 184 (43.2%) | 0 (0.0%) | **25.14 ± 19.37%** | **27.68 ± 22.18%** |
-| | **5%** | 5.01 ± 0.86% | 0 (0.0%) | 250 (55.6%) | 330 (84.8%) | 277 (65.0%) | 0 (0.0%) | **51.35 ± 33.65%** | **55.94 ± 37.72%** |
-| | **10%** | 10.00 ± 1.87% | 0 (0.0%) | 310 (68.9%) | 382 (98.2%) | 277 (65.0%) | 0 (0.0%) | **58.03 ± 37.17%** | **63.25 ± 40.65%** |
+| **Mahalanobis Gate** | **1%** | 1.00 ± 0.27% | 0 (0.0%) | 17 (3.8%) | 20 (5.1%) | 0 (0.0%) | 0 (0.0%) | **2.23 ± 0.69%** | **2.42 ± 0.74%** |
+| | **2%** | 2.00 ± 0.38% | 0 (0.0%) | 124 (27.6%) | 116 (29.8%) | 184 (43.2%) | 0 (0.0%) | **25.14 ± 1.90%** | **27.68 ± 2.09%** |
+| | **5%** | 5.01 ± 0.58% | 0 (0.0%) | 250 (55.6%) | 330 (84.8%) | 277 (65.0%) | 0 (0.0%) | **51.35 ± 1.91%** | **55.94 ± 2.13%** |
+| | **10%** | 10.00 ± 0.79% | 0 (0.0%) | 310 (68.9%) | 382 (98.2%) | 277 (65.0%) | 0 (0.0%) | **58.03 ± 1.63%** | **63.25 ± 1.85%** |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **RF Probability Band** | **1%** | 1.19 ± 0.41% | 3 (1.1%) | 0 (0.0%) | 4 (1.0%) | 332 (77.9%) | 23 (8.6%) | **20.02 ± 23.73%** | **22.13 ± 31.89%** |
-| | **2%** | 2.33 ± 0.68% | 7 (2.6%) | 0 (0.0%) | 4 (1.0%) | 332 (77.9%) | 23 (8.6%) | **20.40 ± 23.11%** | **22.39 ± 31.63%** |
-| | **5%** | 8.49 ± 1.57% | 7 (2.6%) | 0 (0.0%) | 4 (1.0%) | 426 (100.0%) | 26 (9.7%) | **25.91 ± 30.19%** | **28.52 ± 40.23%** |
-| | **10%** | 15.94 ± 3.79% | 7 (2.6%) | 21 (4.7%) | 4 (1.0%) | 426 (100.0%) | 29 (10.8%) | **27.08 ± 30.15%** | **29.90 ± 39.79%** |
+| **RF Probability Band** | **1%** | 1.19 ± 0.28% | 3 (1.1%) | 0 (0.0%) | 4 (1.0%) | 332 (77.9%) | 23 (8.6%) | **20.02 ± 1.05%** | **22.13 ± 1.13%** |
+| | **2%** | 2.33 ± 0.41% | 7 (2.6%) | 0 (0.0%) | 4 (1.0%) | 332 (77.9%) | 23 (8.6%) | **20.40 ± 1.08%** | **22.39 ± 1.13%** |
+| | **5%** | 8.49 ± 0.79% | 7 (2.6%) | 0 (0.0%) | 4 (1.0%) | 426 (100.0%) | 26 (9.7%) | **25.91 ± 0.55%** | **28.52 ± 0.43%** |
+| | **10%** | 15.94 ± 1.01% | 7 (2.6%) | 21 (4.7%) | 4 (1.0%) | 426 (100.0%) | 29 (10.8%) | **27.08 ± 0.72%** | **29.90 ± 0.70%** |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **UNION Gate (RF + kNN)** | **1%** | 1.04 ± 0.61% | 2 (0.7%) | 51 (11.3%) | 75 (19.3%) | 332 (77.9%) | 4 (1.5%) | **27.32 ± 29.15%** | **30.03 ± 35.61%** |
-| | **2%** | 2.06 ± 0.80% | 3 (1.1%) | 63 (14.0%) | 104 (26.7%) | 332 (77.9%) | 23 (8.6%) | **29.95 ± 31.58%** | **32.77 ± 37.98%** |
-| | **5%** | 5.82 ± 1.20% | 7 (2.6%) | 247 (54.9%) | 277 (71.2%) | 426 (100.0%) | 26 (9.7%) | **57.18 ± 40.96%** | **62.47 ± 47.75%** |
-| | **10%** | 13.31 ± 1.61% | 7 (2.6%) | 255 (56.7%) | 292 (75.1%) | 426 (100.0%) | 26 (9.7%) | **58.59 ± 38.84%** | **63.97 ± 46.58%** |
+| **UNION Gate (RF + kNN)** | **1%** | 1.04 ± 0.27% | 2 (0.7%) | 51 (11.3%) | 75 (19.3%) | 332 (77.9%) | 4 (1.5%) | **27.32 ± 1.63%** | **30.03 ± 1.76%** |
+| | **2%** | 2.06 ± 0.38% | 3 (1.1%) | 63 (14.0%) | 104 (26.7%) | 332 (77.9%) | 23 (8.6%) | **29.95 ± 1.68%** | **32.77 ± 1.81%** |
+| | **5%** | 5.82 ± 0.63% | 7 (2.6%) | 247 (54.9%) | 277 (71.2%) | 426 (100.0%) | 26 (9.7%) | **57.18 ± 1.68%** | **62.47 ± 1.80%** |
+| | **10%** | 13.31 ± 0.91% | 7 (2.6%) | 255 (56.7%) | 292 (75.1%) | 426 (100.0%) | 26 (9.7%) | **58.59 ± 1.66%** | **63.97 ± 1.79%** |
 
 > **Purge of Obsolete Numbers:** All older unstandardized preliminary metrics are permanently purged and superseded by the standardized metrics above. Under standardization, kNN captures 187 GoldenEye flows (41.6%) and 269 Hulk flows (69.2%) at 2% benign budget.
 
@@ -56,7 +56,7 @@ Evaluated across:
 Thresholds fit on a 50% held-out training calibration split (deployable in production) compared to oracle-matched thresholds on the test partition, reporting achieved benign escalation, novel macro coverage, and novel pooled coverage:
 
 | Gate & Budget | Deployable Threshold | Deployable Achieved Benign | Deployable Macro Coverage (%) | Deployable Pooled Coverage (%) | Oracle Threshold | Oracle Achieved Benign | Oracle Macro Coverage (%) | Oracle Pooled Coverage (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **kNN 1%** | 2.0827 | 1.04% | 31.30% | 34.46% | 1.6768 | 1.00% | 26.18% | 28.72% |
 | **Mahalanobis 1%** | 11.8536 | 1.06% | 9.62% | 10.64% | 11.4368 | 1.00% | 2.23% | 2.42% |
 | **kNN 2%** | 1.0962 | 2.48% | 48.48% | 53.00% | 1.2934 | 2.00% | 43.93% | 47.85% |
@@ -66,27 +66,27 @@ Thresholds fit on a 50% held-out training calibration split (deployable in produ
 | **kNN 10%** | 0.3471 | 13.16% | 56.22% | 61.62% | 0.5347 | 10.00% | 50.70% | 55.42% |
 | **Mahalanobis 10%** | 3.7012 | 11.33% | 58.19% | 63.45% | 3.7651 | 10.00% | 58.03% | 63.25% |
 
-### 2.2 Paired Per-Block Differences vs RF Band (10 Chronological Time Blocks)
-Paired block differences ($\Delta = \text{Evaluated Gate} - \text{Baseline RF Band}$) evaluated across 10 chronological blocks (standardized 9 features, baseline = RF Probability Band uncertainty gate):
+### 2.2 Paired Differences vs RF Band (Stratified Within-Family Bootstrap)
+Paired differences ($\Delta = \text{Evaluated Gate} - \text{Baseline RF Band}$) evaluated with stratified within-family bootstrap (1,000 resamples, standardized 9 features, baseline = RF Probability Band uncertainty gate):
 
 | Evaluated Gate Architecture | Target Budget | Mean $\Delta$ Macro Coverage (%) | Blocks Positive (Macro) | Mean $\Delta$ Pooled Coverage (%) | Blocks Positive (Pooled) |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Full kNN (Standardized)** (Full kNN Gate (Standardized, k=5, 9 features, N=4000 reference)) | **1%** | +1.40 ± 2.06% | 20% | +1.26 ± 2.02% | 20% |
-| **Full kNN (Standardized)** (Full kNN Gate (Standardized, k=5, 9 features, N=4000 reference)) | **2%** | +5.66 ± 7.79% | 20% | +5.08 ± 7.25% | 20% |
-| **Full kNN (Standardized)** (Full kNN Gate (Standardized, k=5, 9 features, N=4000 reference)) | **5%** | +5.59 ± 8.18% | 20% | +5.00 ± 8.49% | 20% |
-| **Full kNN (Standardized)** (Full kNN Gate (Standardized, k=5, 9 features, N=4000 reference)) | **10%** | +6.01 ± 8.75% | 20% | +5.11 ± 8.53% | 20% |
-| **Prototype kNN (M=32)** (Prototype kNN Gate (M=32 cluster centroids, 9 features)) | **1%** | +2.42 ± 3.33% | 20% | +2.49 ± 3.83% | 20% |
-| **Prototype kNN (M=32)** (Prototype kNN Gate (M=32 cluster centroids, 9 features)) | **2%** | +2.77 ± 4.32% | 20% | +2.54 ± 4.37% | 20% |
-| **Prototype kNN (M=32)** (Prototype kNN Gate (M=32 cluster centroids, 9 features)) | **5%** | +5.65 ± 8.25% | 20% | +5.04 ± 8.52% | 20% |
-| **Prototype kNN (M=32)** (Prototype kNN Gate (M=32 cluster centroids, 9 features)) | **10%** | +6.24 ± 9.01% | 20% | +5.32 ± 8.72% | 20% |
-| **Mahalanobis Gate** (Mahalanobis Distance Gate (Regularized covariance, 9 features)) | **1%** | -3.70 ± 6.73% | 10% | -4.37 ± 8.22% | 10% |
-| **Mahalanobis Gate** (Mahalanobis Distance Gate (Regularized covariance, 9 features)) | **2%** | +0.87 ± 2.89% | 10% | +0.76 ± 4.15% | 10% |
-| **Mahalanobis Gate** (Mahalanobis Distance Gate (Regularized covariance, 9 features)) | **5%** | +6.51 ± 9.24% | 20% | +5.52 ± 8.83% | 20% |
-| **Mahalanobis Gate** (Mahalanobis Distance Gate (Regularized covariance, 9 features)) | **10%** | +8.01 ± 11.16% | 20% | +6.80 ± 10.45% | 20% |
-| **UNION Gate (RF + kNN)** (UNION Gate (RF Band + Full kNN, split budget, 9 features)) | **1%** | +1.57 ± 2.28% | 20% | +1.62 ± 2.17% | 20% |
-| **UNION Gate (RF + kNN)** (UNION Gate (RF Band + Full kNN, split budget, 9 features)) | **2%** | +2.02 ± 3.21% | 20% | +1.99 ± 2.98% | 20% |
-| **UNION Gate (RF + kNN)** (UNION Gate (RF Band + Full kNN, split budget, 9 features)) | **5%** | +7.40 ± 9.17% | 20% | +7.31 ± 9.19% | 20% |
-| **UNION Gate (RF + kNN)** (UNION Gate (RF Band + Full kNN, split budget, 9 features)) | **10%** | +7.76 ± 9.62% | 20% | +7.33 ± 9.21% | 20% |
+| **Full kNN (Standardized)** (Full kNN Gate (Standardized, k=5, 9 features, N=4000 reference)) | **1%** | +6.10 ± 1.64% | 100% | +6.53 ± 1.75% | 100% |
+| **Full kNN (Standardized)** (Full kNN Gate (Standardized, k=5, 9 features, N=4000 reference)) | **2%** | +23.50 ± 1.95% | 100% | +25.42 ± 2.12% | 100% |
+| **Full kNN (Standardized)** (Full kNN Gate (Standardized, k=5, 9 features, N=4000 reference)) | **5%** | +23.05 ± 1.96% | 100% | +25.04 ± 2.13% | 100% |
+| **Full kNN (Standardized)** (Full kNN Gate (Standardized, k=5, 9 features, N=4000 reference)) | **10%** | +23.59 ± 2.09% | 100% | +25.49 ± 2.28% | 100% |
+| **Prototype kNN (M=32)** (Prototype kNN Gate (M=32 cluster centroids, 9 features)) | **1%** | +11.23 ± 1.86% | 100% | +12.30 ± 2.02% | 100% |
+| **Prototype kNN (M=32)** (Prototype kNN Gate (M=32 cluster centroids, 9 features)) | **2%** | +12.43 ± 1.87% | 100% | +13.63 ± 2.01% | 100% |
+| **Prototype kNN (M=32)** (Prototype kNN Gate (M=32 cluster centroids, 9 features)) | **5%** | +23.22 ± 2.01% | 100% | +25.22 ± 2.18% | 100% |
+| **Prototype kNN (M=32)** (Prototype kNN Gate (M=32 cluster centroids, 9 features)) | **10%** | +24.53 ± 2.09% | 100% | +26.50 ± 2.29% | 100% |
+| **Mahalanobis Gate** (Mahalanobis Distance Gate (Regularized covariance, 9 features)) | **1%** | -17.76 ± 1.29% | 0% | -19.68 ± 1.39% | 0% |
+| **Mahalanobis Gate** (Mahalanobis Distance Gate (Regularized covariance, 9 features)) | **2%** | +4.73 ± 2.04% | 100% | +5.27 ± 2.20% | 100% |
+| **Mahalanobis Gate** (Mahalanobis Distance Gate (Regularized covariance, 9 features)) | **5%** | +25.41 ± 1.99% | 100% | +27.39 ± 2.17% | 100% |
+| **Mahalanobis Gate** (Mahalanobis Distance Gate (Regularized covariance, 9 features)) | **10%** | +30.97 ± 1.83% | 100% | +33.38 ± 2.06% | 100% |
+| **UNION Gate (RF + kNN)** (UNION Gate (RF Band + Full kNN, split budget, 9 features)) | **1%** | +7.30 ± 1.21% | 100% | +7.89 ± 1.30% | 100% |
+| **UNION Gate (RF + kNN)** (UNION Gate (RF Band + Full kNN, split budget, 9 features)) | **2%** | +9.54 ± 1.42% | 100% | +10.36 ± 1.50% | 100% |
+| **UNION Gate (RF + kNN)** (UNION Gate (RF Band + Full kNN, split budget, 9 features)) | **5%** | +31.26 ± 1.59% | 100% | +33.94 ± 1.76% | 100% |
+| **UNION Gate (RF + kNN)** (UNION Gate (RF Band + Full kNN, split budget, 9 features)) | **10%** | +31.47 ± 1.68% | 100% | +34.03 ± 1.87% | 100% |
 
 ### 2.3 SSH Check with Standardized 25-Feature Gate
 Evaluated on 25 allowlisted features to investigate SSH-BruteForce escalation:
@@ -152,7 +152,7 @@ Evaluated across 5 random seeds over 5 streaming adaptation cycles with 10-block
 ### 4.1 Final Adaptation Summary Across Arms (Cycle 5)
 
 | Adaptation Configuration | Label Source | Retraining Gate Policy | Final SSH Recall (%) | Final GoldenEye Recall (%) | Final Hulk Recall (%) | Final Slowloris Recall (%) | Final FTP Recall (%) | Final Benign FPR (%) |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Oracle Tier 2, L=inf, With Rehearsal** | Oracle | Gate ON (Rollback) | 0.0 ± 0.0% | 54.9 ± 0.0% | 72.6 ± 6.2% | 77.6 ± 0.0% | 100.0 ± 0.0% | 0.01 ± 0.01% |
 | **Oracle Tier 2, L=inf, No Rehearsal (Rollback)** | Oracle | Gate ON (Rollback) | 0.0 ± 0.0% | 0.0 ± 0.0% | 0.0 ± 0.0% | 2.9 ± 0.0% | 100.0 ± 0.0% | 0.09 ± 0.13% |
 | **Oracle Tier 2, L=inf, No Rehearsal (Gate OFF: True Forgetting)** | Oracle | Gate OFF (True Forgetting) | 54.2 ± 1.2% | 95.6 ± 0.0% | 98.9 ± 0.7% | 87.1 ± 0.0% | 36.7 ± 0.0% | 34.58 ± 2.62% |
@@ -164,7 +164,7 @@ Evaluated across 5 random seeds over 5 streaming adaptation cycles with 10-block
 ### 4.2 Full Cycle-by-Cycle Adaptation Trajectory (Cycles 0 to 5)
 
 | Adaptation Configuration | Label Source | Retraining Gate Policy | Cycle | SSH Recall (%) | GoldenEye Recall (%) | Hulk Recall (%) | Slowloris Recall (%) | FTP Recall (%) | Benign FPR (%) |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Oracle Tier 2, L=inf, With Rehearsal** | Oracle | Gate ON (Rollback) | **Cycle 0** | 0.0 ± 0.0% | 0.0 ± 0.0% | 0.0 ± 0.0% | 2.9 ± 0.0% | 100.0 ± 0.0% | 0.09 ± 0.13% |
 | **Oracle Tier 2, L=inf, With Rehearsal** | Oracle | Gate ON (Rollback) | **Cycle 1** | 0.0 ± 0.0% | 54.9 ± 0.0% | 66.3 ± 9.7% | 73.3 ± 0.0% | 100.0 ± 0.0% | 0.08 ± 0.06% |
 | **Oracle Tier 2, L=inf, With Rehearsal** | Oracle | Gate ON (Rollback) | **Cycle 2** | 0.0 ± 0.0% | 54.9 ± 0.0% | 69.0 ± 8.2% | 75.4 ± 0.0% | 100.0 ± 0.0% | 0.06 ± 0.06% |

@@ -1,0 +1,800 @@
+{
+  "execution_timestamp": "2026-10-23 04:49:39 UTC",
+  "provenance_and_sessions": {
+    "sampling_method": "Uniform reservoir sampling across all 18,965,059 rows (seed=42)",
+    "total_rows_scanned": 18965059,
+    "seen_population": {
+      "FTP-BruteForce": 201289,
+      "SSH-BruteForce": 193486,
+      "DoS-GoldenEye": 51801,
+      "DoS-Hulk": 692036,
+      "DoS-Slowloris": 16786,
+      "Benign": 15661569
+    },
+    "family_origins": {
+      "FTP-BruteForce": {
+        "total_sampled": 1500,
+        "total_available_in_file": 201289,
+        "sampling_fraction": 0.007451972040200905,
+        "chunk_distribution": [
+          {
+            "chunk_idx": 0,
+            "flows_sampled": 66,
+            "pct_of_sample": 4.3999999999999995,
+            "day": "14/02/2018 (Wed)",
+            "session": "Morning (Early Benign, FTP, SSH, Slowloris bursts)"
+          },
+          {
+            "chunk_idx": 5,
+            "flows_sampled": 1286,
+            "pct_of_sample": 85.73333333333333,
+            "day": "14/02/2018 (Wed)",
+            "session": "Afternoon Main FTP-BruteForce Flood (172k flows)"
+          },
+          {
+            "chunk_idx": 6,
+            "flows_sampled": 148,
+            "pct_of_sample": 9.866666666666667,
+            "day": "14/02/2018 (Wed)",
+            "session": "Afternoon/Evening Main SSH-BruteForce Flood (187k flows)"
+          }
+        ]
+      },
+      "SSH-BruteForce": {
+        "total_sampled": 1500,
+        "total_available_in_file": 193486,
+        "sampling_fraction": 0.007752498888808493,
+        "chunk_distribution": [
+          {
+            "chunk_idx": 0,
+            "flows_sampled": 35,
+            "pct_of_sample": 2.3333333333333335,
+            "day": "14/02/2018 (Wed)",
+            "session": "Morning (Early Benign, FTP, SSH, Slowloris bursts)"
+          },
+          {
+            "chunk_idx": 6,
+            "flows_sampled": 1465,
+            "pct_of_sample": 97.66666666666667,
+            "day": "14/02/2018 (Wed)",
+            "session": "Afternoon/Evening Main SSH-BruteForce Flood (187k flows)"
+          }
+        ]
+      },
+      "DoS-GoldenEye": {
+        "total_sampled": 1500,
+        "total_available_in_file": 51801,
+        "sampling_fraction": 0.0289569699426652,
+        "chunk_distribution": [
+          {
+            "chunk_idx": 1,
+            "flows_sampled": 92,
+            "pct_of_sample": 6.133333333333333,
+            "day": "15/02/2018 (Thu)",
+            "session": "Morning (Early GoldenEye, Slowloris, early Hulk flood)"
+          },
+          {
+            "chunk_idx": 2,
+            "flows_sampled": 195,
+            "pct_of_sample": 13.0,
+            "day": "15/02/2018 (Thu)",
+            "session": "Midday (GoldenEye continuation, Heartbleed)"
+          },
+          {
+            "chunk_idx": 7,
+            "flows_sampled": 1213,
+            "pct_of_sample": 80.86666666666666,
+            "day": "15/02/2018 (Thu)",
+            "session": "Afternoon Main DoS-GoldenEye (41k) & Slowloris (11k)"
+          }
+        ]
+      },
+      "DoS-Hulk": {
+        "total_sampled": 1500,
+        "total_available_in_file": 692036,
+        "sampling_fraction": 0.0021675172967880285,
+        "chunk_distribution": [
+          {
+            "chunk_idx": 1,
+            "flows_sampled": 510,
+            "pct_of_sample": 34.0,
+            "day": "15/02/2018 (Thu)",
+            "session": "Morning (Early GoldenEye, Slowloris, early Hulk flood)"
+          },
+          {
+            "chunk_idx": 10,
+            "flows_sampled": 582,
+            "pct_of_sample": 38.800000000000004,
+            "day": "16/02/2018 (Fri)",
+            "session": "Afternoon DoS-Hulk Primary Flood (257k flows)"
+          },
+          {
+            "chunk_idx": 11,
+            "flows_sampled": 408,
+            "pct_of_sample": 27.200000000000003,
+            "day": "16/02/2018 (Fri)",
+            "session": "Afternoon DoS-Hulk Secondary Flood (204k flows)"
+          }
+        ]
+      },
+      "DoS-Slowloris": {
+        "total_sampled": 1500,
+        "total_available_in_file": 16786,
+        "sampling_fraction": 0.08936018110330037,
+        "chunk_distribution": [
+          {
+            "chunk_idx": 0,
+            "flows_sampled": 309,
+            "pct_of_sample": 20.599999999999998,
+            "day": "14/02/2018 (Wed)",
+            "session": "Morning (Early Benign, FTP, SSH, Slowloris bursts)"
+          },
+          {
+            "chunk_idx": 1,
+            "flows_sampled": 220,
+            "pct_of_sample": 14.666666666666666,
+            "day": "15/02/2018 (Thu)",
+            "session": "Morning (Early GoldenEye, Slowloris, early Hulk flood)"
+          },
+          {
+            "chunk_idx": 7,
+            "flows_sampled": 971,
+            "pct_of_sample": 64.73333333333333,
+            "day": "15/02/2018 (Thu)",
+            "session": "Afternoon Main DoS-GoldenEye (41k) & Slowloris (11k)"
+          }
+        ]
+      },
+      "Benign": {
+        "total_sampled": 15000,
+        "total_available_in_file": 15661569,
+        "sampling_fraction": 0.0009577584468069578,
+        "chunk_distribution": [
+          {
+            "chunk_idx": 0,
+            "flows_sampled": 409,
+            "pct_of_sample": 2.726666666666667,
+            "day": "14/02/2018 (Wed)",
+            "session": "Morning (Early Benign, FTP, SSH, Slowloris bursts)"
+          },
+          {
+            "chunk_idx": 1,
+            "flows_sampled": 266,
+            "pct_of_sample": 1.7733333333333334,
+            "day": "15/02/2018 (Thu)",
+            "session": "Morning (Early GoldenEye, Slowloris, early Hulk flood)"
+          },
+          {
+            "chunk_idx": 2,
+            "flows_sampled": 459,
+            "pct_of_sample": 3.06,
+            "day": "15/02/2018 (Thu)",
+            "session": "Midday (GoldenEye continuation, Heartbleed)"
+          },
+          {
+            "chunk_idx": 3,
+            "flows_sampled": 357,
+            "pct_of_sample": 2.3800000000000003,
+            "day": "15/02/2018 (Thu) - 16/02/2018",
+            "session": "DDoS and Web Attacks"
+          },
+          {
+            "chunk_idx": 4,
+            "flows_sampled": 316,
+            "pct_of_sample": 2.106666666666667,
+            "day": "16/02/2018 (Fri)",
+            "session": "PortScan and background DDoS"
+          },
+          {
+            "chunk_idx": 5,
+            "flows_sampled": 293,
+            "pct_of_sample": 1.9533333333333334,
+            "day": "14/02/2018 (Wed)",
+            "session": "Afternoon Main FTP-BruteForce Flood (172k flows)"
+          },
+          {
+            "chunk_idx": 6,
+            "flows_sampled": 279,
+            "pct_of_sample": 1.8599999999999999,
+            "day": "14/02/2018 (Wed)",
+            "session": "Afternoon/Evening Main SSH-BruteForce Flood (187k flows)"
+          },
+          {
+            "chunk_idx": 7,
+            "flows_sampled": 439,
+            "pct_of_sample": 2.9266666666666667,
+            "day": "15/02/2018 (Thu)",
+            "session": "Afternoon Main DoS-GoldenEye (41k) & Slowloris (11k)"
+          },
+          {
+            "chunk_idx": 8,
+            "flows_sampled": 473,
+            "pct_of_sample": 3.153333333333333,
+            "day": "15/02/2018 (Thu)",
+            "session": "Benign background transit"
+          },
+          {
+            "chunk_idx": 9,
+            "flows_sampled": 411,
+            "pct_of_sample": 2.74,
+            "day": "16/02/2018 (Fri)",
+            "session": "Morning DoS-SlowHTTPTest (86k flows)"
+          },
+          {
+            "chunk_idx": 10,
+            "flows_sampled": 228,
+            "pct_of_sample": 1.52,
+            "day": "16/02/2018 (Fri)",
+            "session": "Afternoon DoS-Hulk Primary Flood (257k flows)"
+          },
+          {
+            "chunk_idx": 11,
+            "flows_sampled": 192,
+            "pct_of_sample": 1.28,
+            "day": "16/02/2018 (Fri)",
+            "session": "Afternoon DoS-Hulk Secondary Flood (204k flows)"
+          },
+          {
+            "chunk_idx": 12,
+            "flows_sampled": 1,
+            "pct_of_sample": 0.006666666666666667,
+            "day": "Other/Transit",
+            "session": "Chunk 12 background"
+          },
+          {
+            "chunk_idx": 13,
+            "flows_sampled": 461,
+            "pct_of_sample": 3.0733333333333333,
+            "day": "Other/Transit",
+            "session": "Chunk 13 background"
+          },
+          {
+            "chunk_idx": 14,
+            "flows_sampled": 462,
+            "pct_of_sample": 3.08,
+            "day": "Other/Transit",
+            "session": "Chunk 14 background"
+          },
+          {
+            "chunk_idx": 15,
+            "flows_sampled": 448,
+            "pct_of_sample": 2.986666666666667,
+            "day": "Other/Transit",
+            "session": "Chunk 15 background"
+          },
+          {
+            "chunk_idx": 16,
+            "flows_sampled": 453,
+            "pct_of_sample": 3.02,
+            "day": "Other/Transit",
+            "session": "Chunk 16 background"
+          },
+          {
+            "chunk_idx": 17,
+            "flows_sampled": 471,
+            "pct_of_sample": 3.1399999999999997,
+            "day": "Other/Transit",
+            "session": "Chunk 17 background"
+          },
+          {
+            "chunk_idx": 18,
+            "flows_sampled": 464,
+            "pct_of_sample": 3.0933333333333333,
+            "day": "Other/Transit",
+            "session": "Chunk 18 background"
+          },
+          {
+            "chunk_idx": 19,
+            "flows_sampled": 473,
+            "pct_of_sample": 3.153333333333333,
+            "day": "Other/Transit",
+            "session": "Chunk 19 background"
+          },
+          {
+            "chunk_idx": 20,
+            "flows_sampled": 477,
+            "pct_of_sample": 3.18,
+            "day": "Other/Transit",
+            "session": "Chunk 20 background"
+          },
+          {
+            "chunk_idx": 21,
+            "flows_sampled": 512,
+            "pct_of_sample": 3.4133333333333336,
+            "day": "Other/Transit",
+            "session": "Chunk 21 background"
+          },
+          {
+            "chunk_idx": 22,
+            "flows_sampled": 483,
+            "pct_of_sample": 3.2199999999999998,
+            "day": "Other/Transit",
+            "session": "Chunk 22 background"
+          },
+          {
+            "chunk_idx": 23,
+            "flows_sampled": 498,
+            "pct_of_sample": 3.32,
+            "day": "Other/Transit",
+            "session": "Chunk 23 background"
+          },
+          {
+            "chunk_idx": 24,
+            "flows_sampled": 487,
+            "pct_of_sample": 3.2466666666666666,
+            "day": "Other/Transit",
+            "session": "Chunk 24 background"
+          },
+          {
+            "chunk_idx": 25,
+            "flows_sampled": 500,
+            "pct_of_sample": 3.3333333333333335,
+            "day": "Other/Transit",
+            "session": "Chunk 25 background"
+          },
+          {
+            "chunk_idx": 26,
+            "flows_sampled": 516,
+            "pct_of_sample": 3.44,
+            "day": "Other/Transit",
+            "session": "Chunk 26 background"
+          },
+          {
+            "chunk_idx": 27,
+            "flows_sampled": 349,
+            "pct_of_sample": 2.3266666666666667,
+            "day": "Other/Transit",
+            "session": "Chunk 27 background"
+          },
+          {
+            "chunk_idx": 28,
+            "flows_sampled": 156,
+            "pct_of_sample": 1.04,
+            "day": "Other/Transit",
+            "session": "Chunk 28 background"
+          },
+          {
+            "chunk_idx": 29,
+            "flows_sampled": 285,
+            "pct_of_sample": 1.9,
+            "day": "Other/Transit",
+            "session": "Chunk 29 background"
+          },
+          {
+            "chunk_idx": 30,
+            "flows_sampled": 453,
+            "pct_of_sample": 3.02,
+            "day": "Other/Transit",
+            "session": "Chunk 30 background"
+          },
+          {
+            "chunk_idx": 31,
+            "flows_sampled": 479,
+            "pct_of_sample": 3.1933333333333334,
+            "day": "Other/Transit",
+            "session": "Chunk 31 background"
+          },
+          {
+            "chunk_idx": 32,
+            "flows_sampled": 481,
+            "pct_of_sample": 3.2066666666666666,
+            "day": "Other/Transit",
+            "session": "Chunk 32 background"
+          },
+          {
+            "chunk_idx": 33,
+            "flows_sampled": 451,
+            "pct_of_sample": 3.0066666666666664,
+            "day": "Other/Transit",
+            "session": "Chunk 33 background"
+          },
+          {
+            "chunk_idx": 34,
+            "flows_sampled": 445,
+            "pct_of_sample": 2.966666666666667,
+            "day": "Other/Transit",
+            "session": "Chunk 34 background"
+          },
+          {
+            "chunk_idx": 35,
+            "flows_sampled": 337,
+            "pct_of_sample": 2.2466666666666666,
+            "day": "Other/Transit",
+            "session": "Chunk 35 background"
+          },
+          {
+            "chunk_idx": 36,
+            "flows_sampled": 279,
+            "pct_of_sample": 1.8599999999999999,
+            "day": "Other/Transit",
+            "session": "Chunk 36 background"
+          },
+          {
+            "chunk_idx": 37,
+            "flows_sampled": 457,
+            "pct_of_sample": 3.0466666666666664,
+            "day": "Other/Transit",
+            "session": "Chunk 37 background"
+          }
+        ]
+      }
+    },
+    "unique_flows_after_dedup": 18708
+  },
+  "lofo_comparison": {
+    "old_first_n": {
+      "folds": {
+        "FTP-BruteForce": {
+          "bacc": 91.20985378458435,
+          "held_rec": 4.477611940298507,
+          "fpr": 0.3025146530535073,
+          "sfr": 17.166666666666668,
+          "tot_esc": 3.0751869092960926,
+          "held_esc": 4.477611940298507,
+          "ben_esc": 1.9285309132161088,
+          "family_recalls": {
+            "FTP-BruteForce": 4.477611940298507,
+            "SSH-BruteForce": 99.25093632958801,
+            "DoS-GoldenEye": 90.66666666666666,
+            "DoS-Hulk": 97.68637532133675,
+            "DoS-Slowloris": 99.53051643192488
+          }
+        },
+        "SSH-BruteForce": {
+          "bacc": 91.05264070082562,
+          "held_rec": 0.0,
+          "fpr": 0.28360748723766305,
+          "sfr": 17.38888888888889,
+          "tot_esc": 4.612780363944139,
+          "held_esc": 0.0,
+          "ben_esc": 1.588201928530913,
+          "family_recalls": {
+            "FTP-BruteForce": 100.0,
+            "SSH-BruteForce": 0.0,
+            "DoS-GoldenEye": 94.0,
+            "DoS-Hulk": 94.08740359897172,
+            "DoS-Slowloris": 100.0
+          }
+        },
+        "DoS-GoldenEye": {
+          "bacc": 81.03548244784773,
+          "held_rec": 0.0,
+          "fpr": 0.15125732652675364,
+          "sfr": 37.22222222222222,
+          "tot_esc": 2.369868810833686,
+          "held_esc": 1.3333333333333335,
+          "ben_esc": 0.3214218188693515,
+          "family_recalls": {
+            "FTP-BruteForce": 100.0,
+            "SSH-BruteForce": 98.50187265917603,
+            "DoS-GoldenEye": 0.0,
+            "DoS-Hulk": 41.90231362467866,
+            "DoS-Slowloris": 100.0
+          }
+        },
+        "DoS-Hulk": {
+          "bacc": 88.55380664271759,
+          "held_rec": 2.313624678663239,
+          "fpr": 0.17016449234259784,
+          "sfr": 15.5,
+          "tot_esc": 3.822824093666243,
+          "held_esc": 35.2185089974293,
+          "ben_esc": 1.210058612214029,
+          "family_recalls": {
+            "FTP-BruteForce": 100.0,
+            "SSH-BruteForce": 99.25093632958801,
+            "DoS-GoldenEye": 94.44444444444444,
+            "DoS-Hulk": 2.313624678663239,
+            "DoS-Slowloris": 99.53051643192488
+          }
+        },
+        "DoS-Slowloris": {
+          "bacc": 88.16433478288272,
+          "held_rec": 12.44131455399061,
+          "fpr": 0.22688598979013047,
+          "sfr": 23.055555555555557,
+          "tot_esc": 4.401184934405417,
+          "held_esc": 1.4084507042253522,
+          "ben_esc": 2.1932312346379277,
+          "family_recalls": {
+            "FTP-BruteForce": 100.0,
+            "SSH-BruteForce": 99.25093632958801,
+            "DoS-GoldenEye": 94.22222222222221,
+            "DoS-Hulk": 94.60154241645245,
+            "DoS-Slowloris": 12.44131455399061
+          }
+        }
+      },
+      "macro": {
+        "bacc": 88.0032236717716,
+        "held_rec": 3.846510234590471,
+        "fpr": 0.22688598979013044,
+        "sfr": 22.066666666666666,
+        "tot_esc": 3.656369022429115,
+        "held_esc": 8.487580995057298,
+        "ben_esc": 1.448288901493666
+      }
+    },
+    "new_uniform": {
+      "folds": {
+        "FTP-BruteForce": {
+          "bacc": 97.62987103446518,
+          "held_rec": 3.7037037037037033,
+          "fpr": 1.383253412025083,
+          "sfr": 2.775984506132989,
+          "tot_esc": 9.553866016353464,
+          "held_esc": 29.629629629629626,
+          "ben_esc": 8.041313168572483,
+          "family_recalls": {
+            "FTP-BruteForce": 3.7037037037037033,
+            "SSH-BruteForce": 96.62447257383965,
+            "DoS-GoldenEye": 98.66666666666667,
+            "DoS-Hulk": 97.09443099273608,
+            "DoS-Slowloris": 100.0
+          }
+        },
+        "SSH-BruteForce": {
+          "bacc": 89.6892522847048,
+          "held_rec": 0.0,
+          "fpr": 1.1250461084470675,
+          "sfr": 19.367333763718527,
+          "tot_esc": 9.596901448859562,
+          "held_esc": 0.0,
+          "ben_esc": 7.67244559203246,
+          "family_recalls": {
+            "FTP-BruteForce": 100.0,
+            "SSH-BruteForce": 0.0,
+            "DoS-GoldenEye": 90.66666666666666,
+            "DoS-Hulk": 94.43099273607749,
+            "DoS-Slowloris": 100.0
+          }
+        },
+        "DoS-GoldenEye": {
+          "bacc": 84.5200161263475,
+          "held_rec": 5.777777777777778,
+          "fpr": 1.069715971966064,
+          "sfr": 24.9838605551969,
+          "tot_esc": 7.172572084349447,
+          "held_esc": 22.22222222222222,
+          "ben_esc": 4.112873478421246,
+          "family_recalls": {
+            "FTP-BruteForce": 100.0,
+            "SSH-BruteForce": 94.9367088607595,
+            "DoS-GoldenEye": 5.777777777777778,
+            "DoS-Hulk": 93.46246973365618,
+            "DoS-Slowloris": 100.0
+          }
+        },
+        "DoS-Hulk": {
+          "bacc": 86.26764831322264,
+          "held_rec": 3.389830508474576,
+          "fpr": 0.22132054592401326,
+          "sfr": 25.500322788896064,
+          "tot_esc": 5.336393630755989,
+          "held_esc": 9.927360774818402,
+          "ben_esc": 3.098487642936186,
+          "family_recalls": {
+            "FTP-BruteForce": 88.88888888888889,
+            "SSH-BruteForce": 96.62447257383965,
+            "DoS-GoldenEye": 97.33333333333334,
+            "DoS-Hulk": 3.389830508474576,
+            "DoS-Slowloris": 100.0
+          }
+        },
+        "DoS-Slowloris": {
+          "bacc": 84.82898141826607,
+          "held_rec": 1.6587677725118484,
+          "fpr": 1.2910365178900773,
+          "sfr": 27.630729502905098,
+          "tot_esc": 5.164251900731602,
+          "held_esc": 6.398104265402843,
+          "ben_esc": 2.5820730357801547,
+          "family_recalls": {
+            "FTP-BruteForce": 92.5925925925926,
+            "SSH-BruteForce": 96.62447257383965,
+            "DoS-GoldenEye": 98.22222222222223,
+            "DoS-Hulk": 95.88377723970945,
+            "DoS-Slowloris": 1.6587677725118484
+          }
+        }
+      },
+      "macro": {
+        "bacc": 88.58715383540125,
+        "held_rec": 2.9060159524935814,
+        "fpr": 1.018074511250461,
+        "sfr": 20.051646223369914,
+        "tot_esc": 7.364797016210012,
+        "held_esc": 13.635463378414618,
+        "ben_esc": 5.101438583548505
+      }
+    },
+    "macro_differences": {
+      "delta_bacc": 0.5839301636296597,
+      "delta_held_rec": -0.9404942820968896,
+      "delta_sfr": -2.015020443296752,
+      "delta_fpr": 0.7911885214603306
+    }
+  },
+  "gates_comparison": {
+    "old_first_n": {
+      "Full_kNN": {
+        "1%": {
+          "achieved_benign": 1.002079788239743,
+          "novel_macro_coverage": 26.889544637145924,
+          "novel_pooled_coverage": 29.43864229765013
+        },
+        "2%": {
+          "achieved_benign": 2.004159576479486,
+          "novel_macro_coverage": 42.07863346890828,
+          "novel_pooled_coverage": 45.626631853785895
+        },
+        "5%": {
+          "achieved_benign": 5.010398941198714,
+          "novel_macro_coverage": 49.60362632809137,
+          "novel_pooled_coverage": 54.24281984334204
+        },
+        "10%": {
+          "achieved_benign": 10.001890716581583,
+          "novel_macro_coverage": 51.30728242634901,
+          "novel_pooled_coverage": 56.070496083550914
+        }
+      },
+      "Mahalanobis": {
+        "1%": {
+          "achieved_benign": 1.002079788239743,
+          "novel_macro_coverage": 2.229791488146244,
+          "novel_pooled_coverage": 2.415143603133159
+        },
+        "2%": {
+          "achieved_benign": 2.004159576479486,
+          "novel_macro_coverage": 25.142023808087025,
+          "novel_pooled_coverage": 27.676240208877285
+        },
+        "5%": {
+          "achieved_benign": 5.010398941198714,
+          "novel_macro_coverage": 51.35298365456952,
+          "novel_pooled_coverage": 55.93994778067886
+        },
+        "10%": {
+          "achieved_benign": 10.001890716581583,
+          "novel_macro_coverage": 58.02821930152753,
+          "novel_pooled_coverage": 63.25065274151436
+        }
+      },
+      "RF_Band": {
+        "1%": {
+          "achieved_benign": 1.191151446398185,
+          "novel_macro_coverage": 20.021536360262225,
+          "novel_pooled_coverage": 22.12793733681462
+        },
+        "2%": {
+          "achieved_benign": 2.3255813953488373,
+          "novel_macro_coverage": 20.396068195468217,
+          "novel_pooled_coverage": 22.389033942558747
+        },
+        "5%": {
+          "achieved_benign": 8.489317451314047,
+          "novel_macro_coverage": 25.912500120350845,
+          "novel_pooled_coverage": 28.524804177545693
+        },
+        "10%": {
+          "achieved_benign": 15.938740782756664,
+          "novel_macro_coverage": 27.079166787017513,
+          "novel_pooled_coverage": 29.89556135770235
+        }
+      },
+      "UNION_Gate": {
+        "1%": {
+          "achieved_benign": 0.9453582907922102,
+          "novel_macro_coverage": 26.74581257026964,
+          "novel_pooled_coverage": 29.43864229765013
+        },
+        "2%": {
+          "achieved_benign": 2.0797882397428626,
+          "novel_macro_coverage": 30.655212452807213,
+          "novel_pooled_coverage": 33.485639686684074
+        },
+        "5%": {
+          "achieved_benign": 5.823407071280015,
+          "novel_macro_coverage": 58.04460523317576,
+          "novel_pooled_coverage": 63.38120104438643
+        },
+        "10%": {
+          "achieved_benign": 13.310644734354321,
+          "novel_macro_coverage": 59.26025790384128,
+          "novel_pooled_coverage": 64.68668407310705
+        }
+      }
+    },
+    "new_uniform": {
+      "Full_kNN": {
+        "1%": {
+          "achieved_benign": 1.014385835485061,
+          "novel_macro_coverage": 25.638177733406266,
+          "novel_pooled_coverage": 28.51511169513798
+        },
+        "2%": {
+          "achieved_benign": 2.0103282921431207,
+          "novel_macro_coverage": 27.81122280491708,
+          "novel_pooled_coverage": 31.011826544021027
+        },
+        "5%": {
+          "achieved_benign": 5.016599040944301,
+          "novel_macro_coverage": 37.71367560599627,
+          "novel_pooled_coverage": 42.64126149802891
+        },
+        "10%": {
+          "achieved_benign": 10.014754703061602,
+          "novel_macro_coverage": 70.55039791604317,
+          "novel_pooled_coverage": 67.8712220762155
+        }
+      },
+      "Mahalanobis": {
+        "1%": {
+          "achieved_benign": 1.014385835485061,
+          "novel_macro_coverage": 23.628673559551544,
+          "novel_pooled_coverage": 26.215505913272008
+        },
+        "2%": {
+          "achieved_benign": 2.0103282921431207,
+          "novel_macro_coverage": 27.43586403956715,
+          "novel_pooled_coverage": 30.617608409986858
+        },
+        "5%": {
+          "achieved_benign": 5.016599040944301,
+          "novel_macro_coverage": 28.187575466634026,
+          "novel_pooled_coverage": 31.47174770039422
+        },
+        "10%": {
+          "achieved_benign": 10.014754703061602,
+          "novel_macro_coverage": 30.418571262815778,
+          "novel_pooled_coverage": 34.03416557161629
+        }
+      },
+      "RF_Band": {
+        "1%": {
+          "achieved_benign": 1.069715971966064,
+          "novel_macro_coverage": 7.819905213270142,
+          "novel_pooled_coverage": 8.672798948751643
+        },
+        "2%": {
+          "achieved_benign": 2.1209885651051272,
+          "novel_macro_coverage": 18.756083139482342,
+          "novel_pooled_coverage": 20.49934296977661
+        },
+        "5%": {
+          "achieved_benign": 6.805606787163408,
+          "novel_macro_coverage": 24.193321926052228,
+          "novel_pooled_coverage": 26.47831800262812
+        },
+        "10%": {
+          "achieved_benign": 10.272962006639617,
+          "novel_macro_coverage": 24.298807158119736,
+          "novel_pooled_coverage": 26.544021024967147
+        }
+      },
+      "UNION_Gate": {
+        "1%": {
+          "achieved_benign": 1.0881593507930654,
+          "novel_macro_coverage": 24.074876288909543,
+          "novel_pooled_coverage": 26.675427069645202
+        },
+        "2%": {
+          "achieved_benign": 2.0656584286241237,
+          "novel_macro_coverage": 26.823011856629016,
+          "novel_pooled_coverage": 29.82917214191853
+        },
+        "5%": {
+          "achieved_benign": 4.942825525636296,
+          "novel_macro_coverage": 30.53647475632669,
+          "novel_pooled_coverage": 33.77135348226019
+        },
+        "10%": {
+          "achieved_benign": 11.453338251567686,
+          "novel_macro_coverage": 45.0291925958453,
+          "novel_pooled_coverage": 50.39421813403416
+        }
+      }
+    }
+  }
+}

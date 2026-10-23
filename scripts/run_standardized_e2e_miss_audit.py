@@ -182,14 +182,20 @@ def run_standardized_eval():
             nov_esc_count = int(np.sum(nov_esc))
             novel_pooled_cov = float((nov_esc_count / max(1, total_novel)) * 100.0)
 
-            # Block bootstrap over 10 time blocks
+            # Stratified within-family flow bootstrap (1,000 resamples)
             boot_benign, boot_macro, boot_pooled = [], [], []
-            for _ in range(500):
-                sampled_b = rng_boot.choice(N_BLOCKS, size=N_BLOCKS, replace=True)
-                idx = np.concatenate([blocks[b_i] for b_i in sampled_b])
-                b_esc = esc_mask[idx]
-                b_y = y_te[idx]
-                b_fam = y_fam[idx]
+            gate_strata = {"Benign": np.where(benign_te_mask)[0]}
+            for f_name in ALL_FAMILIES:
+                gate_strata[f_name] = np.where(y_fam == f_name)[0]
+
+            for _ in range(1000):
+                s_idx = np.concatenate([
+                    rng_boot.choice(idx_list, size=len(idx_list), replace=True)
+                    for idx_list in gate_strata.values()
+                ])
+                b_esc = esc_mask[s_idx]
+                b_y = y_te[s_idx]
+                b_fam = y_fam[s_idx]
                 boot_benign.append(float(np.mean(b_esc[b_y == 0]) * 100.0))
                 covs = [
                     np.mean(b_esc[b_fam == fam]) * 100.0
@@ -377,34 +383,42 @@ def run_standardized_eval():
 
             macro_diffs = []
             pooled_diffs = []
-            for b_idx in blocks:
-                # RF coverage in this block
+            strata_diff = {"Benign": np.where(benign_te_mask)[0]}
+            for f_name in ALL_FAMILIES:
+                strata_diff[f_name] = np.where(y_fam == f_name)[0]
+
+            for _ in range(1000):
+                s_idx = np.concatenate([
+                    rng_boot.choice(idx_list, size=len(idx_list), replace=True)
+                    for idx_list in strata_diff.values()
+                ])
+                # RF coverage in this resample
                 rf_covs = [
-                    np.mean(rf_score_all[b_idx][y_fam[b_idx] == fam] >= th_rf) * 100.0
+                    np.mean(rf_score_all[s_idx][y_fam[s_idx] == fam] >= th_rf) * 100.0
                     for fam in NOVEL_FAMILIES
-                    if np.sum(y_fam[b_idx] == fam) > 0
+                    if np.sum(y_fam[s_idx] == fam) > 0
                 ]
                 rf_macro = float(np.mean(rf_covs) if rf_covs else 0.0)
-                b_nov = novel_te_mask[b_idx]
-                rf_pooled = float(np.mean(rf_score_all[b_idx][b_nov] >= th_rf) * 100.0) if np.sum(b_nov) > 0 else 0.0
+                s_nov = novel_te_mask[s_idx]
+                rf_pooled = float(np.mean(rf_score_all[s_idx][s_nov] >= th_rf) * 100.0) if np.sum(s_nov) > 0 else 0.0
 
                 if gate_name == "UNION_Gate":
-                    u_esc = (rf_score_all[b_idx] >= th_u_rf) | (knn_score_all[b_idx] >= th_u_knn)
+                    u_esc = (rf_score_all[s_idx] >= th_u_rf) | (knn_score_all[s_idx] >= th_u_knn)
                     g_covs = [
-                        np.mean(u_esc[y_fam[b_idx] == fam]) * 100.0
+                        np.mean(u_esc[y_fam[s_idx] == fam]) * 100.0
                         for fam in NOVEL_FAMILIES
-                        if np.sum(y_fam[b_idx] == fam) > 0
+                        if np.sum(y_fam[s_idx] == fam) > 0
                     ]
                     g_macro = float(np.mean(g_covs) if g_covs else 0.0)
-                    g_pooled = float(np.mean(u_esc[b_nov]) * 100.0) if np.sum(b_nov) > 0 else 0.0
+                    g_pooled = float(np.mean(u_esc[s_nov]) * 100.0) if np.sum(s_nov) > 0 else 0.0
                 else:
                     g_covs = [
-                        np.mean(s_g[b_idx][y_fam[b_idx] == fam] >= th_g) * 100.0
+                        np.mean(s_g[s_idx][y_fam[s_idx] == fam] >= th_g) * 100.0
                         for fam in NOVEL_FAMILIES
-                        if np.sum(y_fam[b_idx] == fam) > 0
+                        if np.sum(y_fam[s_idx] == fam) > 0
                     ]
                     g_macro = float(np.mean(g_covs) if g_covs else 0.0)
-                    g_pooled = float(np.mean(s_g[b_idx][b_nov] >= th_g) * 100.0) if np.sum(b_nov) > 0 else 0.0
+                    g_pooled = float(np.mean(s_g[s_idx][s_nov] >= th_g) * 100.0) if np.sum(s_nov) > 0 else 0.0
 
                 macro_diffs.append(g_macro - rf_macro)
                 pooled_diffs.append(g_pooled - rf_pooled)
@@ -414,14 +428,17 @@ def run_standardized_eval():
 
             paired_diffs[gate_name]["budgets"][b_key] = {
                 "mean_paired_difference": float(np.mean(macro_arr)),
-                "ci95_paired_difference": float(1.96 * np.std(macro_arr) / np.sqrt(len(macro_arr))),
+                "ci95_paired_difference": float(1.96 * np.std(macro_arr)),
                 "pct_blocks_positive": float(np.mean(macro_arr > 0) * 100.0),
+                "pct_resamples_positive_macro": float(np.mean(macro_arr > 0) * 100.0),
+                "percentile_ci_macro": [float(np.percentile(macro_arr, 2.5)), float(np.percentile(macro_arr, 97.5))],
                 "mean_paired_macro_difference": float(np.mean(macro_arr)),
-                "ci95_paired_macro_difference": float(1.96 * np.std(macro_arr) / np.sqrt(len(macro_arr))),
-                "pct_blocks_positive_macro": float(np.mean(macro_arr > 0) * 100.0),
+                "ci95_paired_macro_difference": float(1.96 * np.std(macro_arr)),
                 "mean_paired_pooled_difference": float(np.mean(pooled_arr)),
-                "ci95_paired_pooled_difference": float(1.96 * np.std(pooled_arr) / np.sqrt(len(pooled_arr))),
+                "ci95_paired_pooled_difference": float(1.96 * np.std(pooled_arr)),
                 "pct_blocks_positive_pooled": float(np.mean(pooled_arr > 0) * 100.0),
+                "pct_resamples_positive_pooled": float(np.mean(pooled_arr > 0) * 100.0),
+                "percentile_ci_pooled": [float(np.percentile(pooled_arr, 2.5)), float(np.percentile(pooled_arr, 97.5))],
             }
 
     # ── 6. SSH Check on Standardized 25-Feature Gate ─────────────────────────
